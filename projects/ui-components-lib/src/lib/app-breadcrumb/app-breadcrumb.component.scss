@@ -1,0 +1,8 @@
+.p-breadcrumb-list {
+  li:first-child a {
+    @apply text-secondary;
+  }
+  .p-breadcrumb-separator {
+    transform: scale(0.7);
+  }
+}

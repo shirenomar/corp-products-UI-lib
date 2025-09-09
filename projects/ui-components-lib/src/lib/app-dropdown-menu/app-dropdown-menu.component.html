@@ -1,0 +1,25 @@
+@if (showMenu) {
+  <app-button (click)="op.toggle($event)" [class]="buttonClass"
+              [iconPos]="buttonIconPosition"
+              [icon]="buttonIcon" [title]="buttonTitle"
+              [style]="buttonStyle"/>
+}
+<p-popover #op [styleClass]="popupMenuStyle === 'white' ? 'white-menu' : 'purple-menu'">
+  <div class="flex flex-col gap-4 text-sm md:text-xs">
+    <ul>
+      @for (item of menuItems; track $index) {
+        @if (item.show) {
+          <li
+            [ngClass]="{'flex-row-reverse': item.iconPosition === 'right'}"
+            [class]="'flex justify-between min-w-[130px] gap-3 items-center cursor-pointer text-sm ' + (item.textColor | popupTextColorClass)"
+            (click)="onMenuItemClick(item)">
+            {{ item.title | translate }}
+            @if (item.icon) {
+              <i [class]="item.icon"></i>
+            }
+          </li>
+        }
+      }
+    </ul>
+  </div>
+</p-popover>

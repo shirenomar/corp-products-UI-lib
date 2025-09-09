@@ -1,0 +1,59 @@
+<div class="field flex flex-col gap-2 my-3 relative">
+  @if (label) {
+    <label [for]="inputId">
+      {{ label }}
+      @if (required) {
+        <span [class.text-red-700]="isInvalid">*</span>
+      }
+    </label>
+  }
+  @if (!required && !hideOptionalLabel) {
+    <span class="absolute top-[6px] left-0 text-[10px] text-gray-400">{{'forms.config.optional' | translate}}</span>
+  }
+
+  <!-- input text align will be handled according to lang when implemented -->
+
+  @if (type !== 'textarea') {
+    <input
+      [id]="inputId"
+      [type]="contentType"
+      [formControl]="control"
+      [placeholder]="placeholder"
+      [readonly]="readonly"
+      [disabled]="disabled"
+      [name]="name"
+      pInputText
+      [ngStyle]="{'direction': inputDirection || 'inherit', 'text-align': 'right'}"
+      [ngClass]="{ 'p-invalid ng-dirty ng-invalid': isInvalid, 'basic-style': basicInput, 'no-style':noStyle}"
+    />
+    @if (prefix) {
+      <span class="absolute top-[40px] font-bold text-[16px] left-[25px]">
+       {{ prefix }}
+    </span>
+    }
+  } @else {
+    <textarea
+      [name]="name"
+      [id]="inputId"
+      [formControl]="control"
+      [placeholder]="placeholder"
+      [readonly]="readonly"
+      [disabled]="disabled"
+      pTextarea
+      [rows]="rows"
+      [cols]="cols"
+      [autoResize]="autoResize"
+      [ngClass]="{'ng-invalid ng-dirty': control.invalid && (control.dirty || control.touched), 'basic-style': basicInput, 'no-style':noStyle}"
+    ></textarea>
+  }
+  @if (hint) {
+    <small class="p-mt-1">{{ hint }}</small>
+  }
+  @if (isInvalid && (control.dirty || control.touched)) {
+    <small class="p-error text-red-700">
+      @for (error of control.errors | validationErrors; track error) {
+        {{ error }}<br>
+      }
+    </small>
+  }
+</div>

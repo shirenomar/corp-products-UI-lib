@@ -1,0 +1,17 @@
+<p [class]="styleClass">
+  {{ isExpanded ? text : (text | slice : 0 : maxCharacters) }}
+  @if (text.length > maxCharacters && !isExpanded) {
+    <span>...</span>
+  }
+  @if (isExpanded) {
+    <span>
+    {{ text | slice : maxCharacters + 1 : text.length }}
+  </span>
+  }
+  <br>
+  @if (text.length > maxCharacters) {
+    <span class="text-primary_light cursor-pointer" (click)="toggleReadMore()">
+     {{ isExpanded ? ('less' | translate) : ('more' | translate) }}
+    </span>
+  }
+</p>

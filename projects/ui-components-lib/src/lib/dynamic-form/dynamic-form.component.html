@@ -1,0 +1,39 @@
+<div class="border-t mx-4 py-2">
+  <form [formGroup]="formGroup">
+    <div class="grid grid-cols-12 gap-x-2">
+      @for (inputName of inputsNames; track $index) {
+        <div
+          [ngClass]="inputsMap[inputName].rowSize === 'half' ? 'col-span-6 md:col-span-6': 'col-span-12 md:col-span-12'">
+          @switch (inputsMap[inputName].fieldType) {
+            @case (fieldType.DATE_PICKER) {
+              <stc-date-picker
+                [minDate]="inputsMap[inputName]?.dateRange?.min"
+                [id]="inputsMap[inputName].inputId"
+                [control]="getFormControl(inputName, formGroup)"
+                [name]="inputName"
+                [label]="inputsMap[inputName].label"
+                [showIcon]="inputsMap[inputName].showIcon || true"
+                [isTimeOnly]="inputsMap[inputName].isTimeOnly || false"/>
+            }
+            @case (fieldType.SELECT_BUTTON) {
+              <stc-select-button
+                [control]="getFormControl(inputName, formGroup)"
+                [id]="inputsMap[inputName].inputId"
+                [name]="inputName"
+                [label]="inputsMap[inputName].label"
+                [options]="inputsMap[inputName].selectButtonOptions || []"/>
+            }
+          }
+        </div>
+      }
+    </div>
+    <div class="col-span-12">
+      <small class="p-error text-red-700">
+        @for (error of formGroup.errors | validationErrors: dynamicFormData.formValidationErrorsKeys;
+          track error) {
+          {{ error }}
+        }
+      </small>
+    </div>
+  </form>
+</div>

@@ -1,0 +1,35 @@
+@if (tabs && tabs.items.length) {
+  <div [class]="tabsStyle + (responsive ? ' full-width' : '') + ' tabs-container'">
+    <p-tabs [value]="activeTabIndex" scrollable>
+      <p-tablist>
+
+        @for (tab of tabs.items; let i = $index; track i) {
+          <p-tab [value]="i" [routerLink]="tabs.isRouted ? $any(tab).link : null" [disabled]="tab.disabled"
+                 (click)="onTabChange(i)">
+            @if (tab.iconName) {
+              <app-ico-moon-card [iconClass]="'text-[17px]'" [iconName]="tab.iconName"
+                                 [iconPathCount]="tab.iconPathCount || 0"/>
+            }
+            <span>{{ tab.title | translate }} @if (tab.count) {
+              <span>({{ tab.count }})</span>
+            } </span>
+          </p-tab>
+        }
+
+      </p-tablist>
+
+      <p-tabpanels>
+        @if (tabs.isRouted) {
+          <router-outlet></router-outlet>
+        } @else {
+          @for (tab of tabs.items; let i = $index; track i) {
+            <p-tabpanel [value]="i">
+              <ng-container [ngTemplateOutlet]="tab.contentTemplate"></ng-container>
+            </p-tabpanel>
+          }
+        }
+
+      </p-tabpanels>
+    </p-tabs>
+  </div>
+}

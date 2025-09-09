@@ -1,0 +1,51 @@
+<p-drawer
+  (onHide)="dynamicSidebarService.close()"
+  [(visible)]="sidebarConfig.visible"
+  [closable]="sidebarConfig.closable"
+  [closeOnEscape]="sidebarConfig.closeOnEscape"
+  [dismissible]="sidebarConfig.dismissible"
+  [ngClass]="{ show: sidebarConfig.show }"
+  [position]="'left'"
+  appendTo="body"
+  id="main-drawer"
+  styleClass="p-drawer-{{ sidebarConfig.sidebarSize }} custom-content bg-white {{ sidebarConfig.styleClass }}">
+  <ng-template pTemplate="header">{{ sidebarConfig.title }}</ng-template>
+  <ng-template pTemplate="content">
+    <ng-container
+      [ngComponentOutletInjector]="dynamicSidebarService.contentComponentData | dataInjector"
+      [ngComponentOutlet]="dynamicSidebarService.contentComponentRef"></ng-container>
+  </ng-template>
+  @if (sidebarConfig.showSaveBtn || sidebarConfig.showSaveAndMoreBtn || sidebarConfig.showCancelBtn) {
+    <ng-template pTemplate="footer">
+      <section class="flex justify-between bg-gray-200 py-4" id="sidebar-footer">
+        <div class="flex gap-2">
+          @if (sidebarConfig.showSaveBtn) {
+            <app-button (clickEmitter)="dynamicSidebarService.submit(true)"
+                        [disabled]="dynamicSidebarService.isButtonDisabled()"
+                        [icon]="sidebarConfig!.actions!.save!.icon || 'font-icon-plus'"
+                        [iconPos]="sidebarConfig!.actions!.save!.iconPos || 'right'"
+                        [style]="sidebarConfig!.actions!.save!.style || 'danger'"
+                        [title]="sidebarConfig!.actions!.save!.title || ('actions.save' | translate)"
+                        [variant]="sidebarConfig!.actions!.save!.variant"/>
+          }
+          @if (sidebarConfig.showSaveAndMoreBtn) {
+            <app-button (clickEmitter)="dynamicSidebarService.submit()"
+                        [disabled]="dynamicSidebarService.isButtonDisabled()"
+                        [icon]="sidebarConfig!.actions!.saveAndMore!.icon || 'font-icon-plus'"
+                        [iconPos]="sidebarConfig!.actions!.saveAndMore!.iconPos || 'right'"
+                        [style]="sidebarConfig!.actions!.saveAndMore!.style || 'danger'"
+                        [title]="sidebarConfig!.actions!.saveAndMore!.title || ('actions.save_and_and_more' | translate)"
+                        [variant]="sidebarConfig!.actions!.saveAndMore!.variant"/>
+
+          }
+        </div>
+        @if (sidebarConfig.showCancelBtn) {
+          <app-button
+            (clickEmitter)="dynamicSidebarService.cancel()"
+            [style]="'secondary'"
+            [title]="'actions.cancel' | translate"/>
+        }
+      </section>
+    </ng-template>
+  }
+</p-drawer>

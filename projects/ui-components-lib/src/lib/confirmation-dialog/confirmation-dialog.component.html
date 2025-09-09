@@ -1,0 +1,54 @@
+@if (dynamicDialogConfig.data) {
+  <div>
+    <div class="bg-gray-150 p-4 flex items-center">
+      <div class="flex-grow flex gap-2">
+        @if (dynamicDialogConfig.data.headerIcon) {
+          <i [class]="dynamicDialogConfig.data.headerIcon"></i>
+        }
+
+        <h3 class="m-0 font-bold text-[16px]">
+          {{ dynamicDialogConfig.data.header }}
+        </h3>
+      </div>
+
+      <app-button (click)="close()" icon="font-icon-close" [style]="'secondary'" variant="text"/>
+    </div>
+
+    @if (dynamicDialogConfig.data) {
+      <div class="p-4">
+        @if (dynamicDialogConfig.data.dialogIcon) {
+          <em [class]="dynamicDialogConfig.data.dialogIcon"></em>
+        }
+        <div>
+          {{ dynamicDialogConfig.data.message }}
+        </div>
+        @if (dynamicDialogConfig.data.hint) {
+          <div class="font-bold text-[14px] mt-2">
+            {{ dynamicDialogConfig.data.hint }}
+          </div>
+        }
+      </div>
+    }
+
+    @if (dynamicDialogConfig.data.inputForm) {
+      <app-dynamic-form [dynamicFormData]="dialogFormData"></app-dynamic-form>
+    }
+
+    <div class="p-4 flex gap-3">
+      <app-button
+        [title]="dynamicDialogConfig.data?.confirmLabel || ('actions.confirm' | translate)" class="w-[50%]"
+        [disabled]="!!(dialogFormData && dialogFormData.formGroup?.invalid)"
+        [icon]="dynamicDialogConfig.data.confirmBtnIcon || ''"
+        [iconPos]="dynamicDialogConfig.data.confirmBtnPosition || 'left'"
+        [style]="dynamicDialogConfig.data.confirmBtnStyle ||'primary'"
+        (click)="submit()"/>
+
+      <app-button
+        [title]="dynamicDialogConfig.data?.closeLabel ||  ('actions.cancel' | translate)"
+        class="w-[50%]"
+        [style]="'secondary'"
+        [variant]="'outlined'"
+        (click)="close()"/>
+    </div>
+  </div>
+}

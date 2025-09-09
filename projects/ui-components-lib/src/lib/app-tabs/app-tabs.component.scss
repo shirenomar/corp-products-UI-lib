@@ -1,0 +1,103 @@
+.tabs-container {
+  &.full-width {
+    .p-tabs .p-tablist-tab-list .p-tab {
+      @apply flex-grow flex justify-center max-w-[50%];
+    }
+  }
+
+  .p-tabs {
+    .p-tablist-tab-list {
+      @apply relative;
+
+      &:after {
+        @apply content-[''] w-full h-[3px] bg-purple-800/5 absolute bottom-0 right-0 z-[1];
+      }
+
+      .p-tab {
+        @apply text-sm text-gray-400 font-normal text-[16px] border-b-[4px] border-transparent z-[2];
+
+        &:not(.p-tab-active) {
+          app-ico-moon-card {
+            @apply grayscale;
+          }
+
+        }
+      }
+    }
+
+    .p-tablist-active-bar {
+      @apply hidden;
+    }
+
+    .p-tabpanels.p-component {
+      @apply mt-5 rounded-lg;
+    }
+  }
+
+  &.basic {
+    .p-tabs {
+      .p-tablist-tab-list {
+        @apply bg-transparent;
+
+        .p-tab {
+          &.p-tab-active {
+            @apply text-primary border-primary;
+          }
+        }
+      }
+    }
+  }
+
+  &.primary_light {
+    .p-tabs {
+      .p-tablist-tab-list {
+        .p-tab {
+          @apply rounded-t-lg text-[14px];
+
+          &.p-tab-active {
+            @apply bg-purple-800/5 font-semibold text-primary border-primary;
+          }
+        }
+      }
+    }
+  }
+
+  &.primary {
+    .p-tabs {
+      .p-tablist-tab-list {
+        &:after {
+          @apply bg-purple-800/5;
+        }
+
+        .p-tab {
+          @apply rounded-t-lg text-[14px];
+
+          &.p-tab-active {
+            @apply bg-primary font-semibold text-white border-secondary;
+          }
+        }
+      }
+    }
+  }
+}
+
+[dir='rtl'] {
+  .p-tabs .p-tablist{
+    .p-iconwrapper {
+      @apply rotate-180deg;
+    }
+
+    .p-tablist-next-button {
+      @apply right-auto left-0;
+    }
+
+    .p-tablist-prev-button {
+      @apply right-0 left-auto;
+    }
+  }
+}
+
+// TODO : CHECK
+// .p-tabpanels.p-component {
+//   @apply mt-5 rounded-[1.5rem];
+// }

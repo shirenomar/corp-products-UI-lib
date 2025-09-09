@@ -1,0 +1,22 @@
+{
+  "name": "@corp-products/ui-components",
+  "version": "2.0.2",
+  "author": "shireen Omar",
+  "description": "shared UI components across our apps",
+  "peerDependencies": {
+    "@angular/common": ">=17.0.0 <21.0.0",
+    "@angular/core": ">=17.0.0 <21.0.0",
+    "@angular/animations": ">=17.0.0 <21.0.0",
+    "primeng": ">=17.0.0 <21.0.0",
+    "@ngx-translate/core": "^15.0.0"
+  },
+  "keywords": [
+    "angular",
+    "library"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "license": "MIT",
+  "sideEffects": false
+}

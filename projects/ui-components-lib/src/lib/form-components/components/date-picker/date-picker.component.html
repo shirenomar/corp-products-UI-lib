@@ -1,0 +1,53 @@
+<div class="field flex flex-col gap-2 my-3 relative"  >
+  @if (label) {
+  <label [for]="inputId">
+    {{ label }}
+    @if (required) {
+    <span [class.text-red-700]="isInvalid">*</span>
+    }
+  </label>
+  }
+  @if (!required) {
+  <span class="absolute top-[6px] left-0 text-[10px] text-gray-400">{{'forms.config.optional' | translate}}</span>
+  }
+  <p-datepicker
+    [selectionMode]="selectionMode"
+    [disabled]="disabled"
+    [formControl]="control"
+    [iconDisplay]="'input'"
+    [showClear]="showClear"
+    (onClear)="afterClearDate()"
+    [id]="inputId"
+    [inputStyleClass]="'reset-default-styles ' + (basicInput ? 'basic-style' : '')"
+    [ngClass]="{ 'p-invalid ng-dirty ng-invalid': isInvalid }"
+    [placeholder]="placeholder"
+    [showIcon]="showIcon" [styleClass]="'w-full'"
+    appendTo="body"
+    [timeOnly]="isTimeOnly"
+    [hourFormat]="hourFormat"
+    [minDate]="minDate"
+    [maxDate]="maxDate">
+    @if (isTimeOnly) {
+      <ng-template #inputicon let-clickCallBack="clickCallBack">
+        <i class="text-[18px] font-icon-time-clock" (click)="clickCallBack($event)"></i>
+      </ng-template>
+      <ng-template pTemplate="footer">
+        <div class="p-datepicker-buttonbar">
+          <button pButton type="button" class="p-button-text" (click)="selectCurrentTime($event)">الان
+          </button>
+          <button pButton type="button" class="p-button-text" (click)="clearButtonClick($event)"> الغاء</button>
+        </div>
+      </ng-template>
+    }
+  </p-datepicker>
+  @if (hint) {
+  <small class="p-mt-1">{{ hint }}</small>
+  }
+  @if (isInvalid && (control.dirty || control.touched)) {
+  <small class="p-error text-red-700">
+    @for (error of control.errors | validationErrors; track error) {
+    {{ error }}<br>
+    }
+  </small>
+  }
+</div>

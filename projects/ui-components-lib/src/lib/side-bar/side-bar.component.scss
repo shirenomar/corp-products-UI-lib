@@ -1,0 +1,5 @@
+.sidebar {
+  &.show {
+    @apply min-w-[550px];
+  }
+}

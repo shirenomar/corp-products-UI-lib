@@ -1,0 +1,26 @@
+<div class="px-10 flex justify-between items-center bg-white shadow-md py-3 h-16">
+  <div class="d-flex md:hidden w-fit">
+    <!-- Burger Icon for Mobile -->
+    <app-button icon="font-icon-burger-icon text-[25px]" size="large" variant="text"
+                (clickEmitter)="toggleMenu.emit()"/>
+  </div>
+  <div class="d-flex items-center justify-content-between gap-1">
+    <app-button
+      *hasPermissions="[PermissionsActions.CREATE];key: UserPermissionsEnum.BOD"
+      iconPos="right" icon="font-icon-plus" (clickEmitter)="createButtonClicked.emit()"
+                [title]="'actions.create' | translate"/>
+  </div>
+
+  <div class="flex items-center gap-1">
+    @if (userInfo) {
+      <div class="flex flex-col items-end justify-center">
+        <p class="text-sm">{{ userInfo.userName }}</p>
+        <p class="text-gray-500 mb-0 text-[10px]">{{ userInfo.email }}</p>
+      </div>
+
+      <img src="assets/images/user-placeholder.jpg" class="w-9 h-9 object-cover rounded-full" alt=""/>
+    }
+    <p-menu #menu [model]="items" [popup]="true"></p-menu>
+    <button (click)="menu.toggle($event)" class="mb-2"><i class="font-icon-Vector text-[6px]"></i></button>
+  </div>
+</div>

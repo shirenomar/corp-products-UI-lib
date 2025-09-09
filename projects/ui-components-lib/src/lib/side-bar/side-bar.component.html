@@ -1,0 +1,25 @@
+<!-- TODO refactor position sidebar based on html dir-->
+<p-drawer
+  (onHide)="hideSidebar()"
+  (onShow)="onShow.emit($event)"
+  [(visible)]="show"
+  [closable]="closable"
+  [closeOnEscape]="closeOnEscape"
+  [dismissible]="dismissible"
+  [ngClass]="{ show: show }"
+  [position]="'left'"
+  appendTo="body"
+  styleClass="p-drawer-{{ sidebarSize }} custom-content bg-white {{ styleClass }}">
+  <ng-template pTemplate="header">{{ title }}</ng-template>
+  @if (contentTemplate) {
+    <ng-template pTemplate="content">
+      <ng-container *ngTemplateOutlet="contentTemplate"></ng-container>
+    </ng-template>
+    <ng-template pTemplate="footer">
+      <ng-container *ngTemplateOutlet="footerTemplate"></ng-container>
+    </ng-template>
+  }
+  <ng-template pTemplate="content">
+    <ng-content id="side-content"></ng-content>
+  </ng-template>
+</p-drawer>

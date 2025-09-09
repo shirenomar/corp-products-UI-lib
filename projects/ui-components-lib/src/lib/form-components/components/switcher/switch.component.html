@@ -1,0 +1,5 @@
+<div class="flex items-center mr-2">
+    <p-toggleswitch [(ngModel)]="checked" [inputId]="key" (onChange)="sendUpdatedValue($event)" class="flex">
+    </p-toggleswitch>
+    <label [for]="key" class="text-[12px] mx-2">{{label}}</label>
+</div>

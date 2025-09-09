@@ -1,0 +1,20 @@
+<nav
+  [ngClass]="{ 'max-w-0 md:max-w-[500px]': !isOpen, 'max-w-[500px]': isOpen  }"
+  class="md:flex h-100 bg-primary flex text-white flex-col py-2 text-center gap-y-10 transition-all w-24 hover:md:w-48 duration-500">
+  <a [routerLink]="'/'"><i class="font-icon-STC-Logo text-[20px] pt-4 block px-4"></i></a>
+  <ul class="flex flex-col flex-grow">
+    @for (item of filteredMenu; track $index) {
+      <li>
+        <a
+          [routerLinkActive]="'bg-primary_dark border-secondary'"
+          [routerLink]="item.link"
+          class="flex flex-col py-3 px-4 border-r-2 border-primary transition-all hover:bg-primary_dark hover:border-secondary">
+          <i [class]="item.icon + ' text-[17px] mb-1'"></i>
+          <span class="text-[10px] truncate">{{ item.label }}</span>
+        </a>
+      </li>
+    }
+  </ul>
+
+  <a href="#"><i class="font-icon-setting text-[20px] pb-4 block px-4"></i></a>
+</nav>

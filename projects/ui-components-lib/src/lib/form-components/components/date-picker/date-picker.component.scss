@@ -1,0 +1,4 @@
+.p-datepicker-clear-icon {
+    @apply cursor-pointer absolute top-[50%] left-[13px] -translate-y-1/2 text-[var(--p-datepicker-input-icon-color)] ml-[calc(var(--p-icon-size))] leading-none;
+}
+

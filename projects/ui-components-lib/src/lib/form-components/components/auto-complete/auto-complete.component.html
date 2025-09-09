@@ -1,0 +1,48 @@
+<div class="field flex flex-col gap-2 my-3 relative">
+  @if (label) {
+    <label [for]="inputId">
+      {{ label }}
+      @if (required) {
+        <span [class.text-red-700]="isInvalid">*</span>
+      }
+    </label>
+  }
+  @if (!required) {
+    <span class="absolute top-[6px] left-0 text-[10px] text-gray-400">{{'forms.config.optional' | translate}}</span>
+  }
+  <p-auto-complete
+    (completeMethod)="search($event)"
+    (onSelect)="onSelect($event)"
+    [delay]="delay"
+    [disabled]="disabled"
+    [formControl]="control"
+    [id]="inputId"
+    [inputStyleClass]="'reset-default-styles w-full' + (basicInput ? ' basic-style': ' ')"
+    [minLength]="minLengthToSearch"
+    [name]="name"
+    [ngClass]="{ 'p-invalid ng-dirty ng-invalid': isInvalid}"
+    [placeholder]="placeholder"
+    [styleClass]="'w-full'"
+    [suggestions]="items">
+    <ng-template let-item pTemplate="item">
+      @if (selectedItemTemplate) {
+        <ng-container
+          [ngTemplateOutletContext]="{ $implicit: item }"
+          [ngTemplateOutlet]="selectedItemTemplate"
+        />
+      }
+    </ng-template>
+  </p-auto-complete>
+
+  @if (hint) {
+    <small class="p-mt-1">{{ hint }}</small>
+  }
+  @if (isInvalid && (control.dirty || control.touched)) {
+    <small class="p-error text-red-700">
+      @for (error of control.errors | validationErrors; track error) {
+        {{ error }}<br>
+      }
+    </small>
+  }
+
+</div>

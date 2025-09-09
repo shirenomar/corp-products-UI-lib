@@ -1,0 +1,15 @@
+<p-accordion value="0">
+  <p-accordion-panel value="0" [class.!border-0]="!accordionPanelBorder">
+    <p-accordion-header>
+            <span class="flex items-center gap-2 w-full">
+                <app-ico-moon-card [iconClass]="'text-[24px] text-secondary'" [iconName]="'font-icon-'+iconName" />
+                <span class="font-bold whitespace-nowrap">{{title}}</span>
+            </span>
+    </p-accordion-header>
+    <p-accordion-content>
+      <div [ngClass]="{'border-t-2 border-gray-light pt-2': contentBorderTop, }">
+        <ng-content></ng-content>
+      </div>
+    </p-accordion-content>
+  </p-accordion-panel>
+</p-accordion>

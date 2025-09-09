@@ -1,0 +1,90 @@
+<div class="field flex flex-col gap-2 my-3 relative">
+  @if (label) {
+  <label [for]="inputId">
+    {{ label }}
+    @if (required) {
+    <span [class.text-red-700]="isInvalid">*</span>
+    }
+  </label>
+  } @if (!required) {
+  <span class="absolute top-[6px] left-0 text-[10px] text-gray-400">{{'forms.config.optional' | translate}}</span>
+  }
+
+
+  @if(multiple) {
+
+
+    <p-multiselect
+    [disabled]="disabled"
+    [filterBy]="filterBy"
+    [filter]="filter"
+    [formControl]="control"
+    [id]="inputId"
+    [name]="name"
+    [ngClass]="{ 'p-invalid ng-dirty ng-invalid': isInvalid }"
+    [optionLabel]="optionLabel"
+    [options]="options"
+    [placeholder]="placeholder"
+    [readonly]="readonly"
+    [showClear]="showClear"
+    class="w-full"
+    [selectedItemsLabel]="selectedItemsLabel"
+    (onChange)="onChange($event)"
+    [ngClass]="{ 'basic-style': basicInput }"
+     >
+
+
+     @if(optionTemplate){
+      <ng-template let-item #item>
+        <ng-container [ngTemplateOutletContext]="{ $implicit: item }" [ngTemplateOutlet]="optionTemplate" />
+      </ng-template>
+     }
+
+
+  <ng-template #dropdownicon>
+      <i class="pi pi-map"></i>
+  </ng-template>
+
+
+    </p-multiselect>
+
+  } @else {
+    <p-select
+      [checkmark]="checkmark"
+      [disabled]="disabled"
+      [editable]="editable"
+      [filterBy]="filterBy"
+      [filter]="filter"
+      [formControl]="control"
+      [id]="inputId"
+      [name]="name"
+      [ngClass]="{ 'p-invalid ng-dirty ng-invalid': isInvalid }"
+      [optionLabel]="optionLabel"
+      [options]="options"
+      [placeholder]="placeholder"
+      [readonly]="readonly"
+      [showClear]="showClear"
+      class="w-full"
+      (onChange)="onChange($event)"
+      [ngClass]="{ 'basic-style': basicInput }"
+    >
+
+
+    @if (selectedItemTemplate) {
+      <ng-template let-item pTemplate="item">
+        <ng-container [ngTemplateOutletContext]="{ $implicit: item }" [ngTemplateOutlet]="selectedItemTemplate" />
+      </ng-template>
+    }
+  </p-select>
+}
+
+  @if (hint) {
+  <small class="p-mt-1">{{ hint }}</small>
+  } @if (isInvalid && (control.dirty || control.touched)) {
+  <small class="p-error text-red-700">
+    @for (error of control.errors | validationErrors; track error) {
+    {{ error }}<br />
+    }
+  </small>
+  }
+</div>

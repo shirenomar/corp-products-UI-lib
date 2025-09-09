@@ -3,5 +3,31 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
+    "ui-components-lib": {
+      "projectType": "library",
+      "root": "projects/ui-components-lib",
+      "sourceRoot": "projects/ui-components-lib/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular/build:ng-packagr",
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/ui-components-lib/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/ui-components-lib/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular/build:karma",
+          "options": {
+            "tsConfig": "projects/ui-components-lib/tsconfig.spec.json"
+          }
+        }
+      }
+    }
   }
 }
