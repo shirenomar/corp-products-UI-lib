@@ -11,3 +11,4 @@ export * from './lib/dynamic-form/dynamic-form.interface';
 export * from './lib/dynamic-form/dynamic-form.component';
 export * from './lib/form-components';
 export * from './lib/user-autocomplete-card/user-autocomplete-card.component';
+export * from './lib/app-breadcrumb/app-breadcrumb.component';
