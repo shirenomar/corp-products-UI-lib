@@ -16,7 +16,10 @@
     "target": "ES2022",
     "module": "preserve",
     "paths": {
-      "ui-components-lib": ["./dist/ui-components-lib"]
+      "ui-components-lib": ["./dist/ui-components-lib"],
+      "@corp-products/ui-components": [
+        "./projects/ui-components-lib/src/public-api.ts"
+      ]
     }
   },
   "angularCompilerOptions": {
@@ -33,6 +36,12 @@
     },
     {
       "path": "./projects/ui-components-lib/tsconfig.spec.json"
+    },
+    {
+      "path": "./projects/demo-app/tsconfig.app.json"
+    },
+    {
+      "path": "./projects/demo-app/tsconfig.spec.json"
     }
   ]
 }

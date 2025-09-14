@@ -1,5 +1,5 @@
 import {CommonModule} from '@angular/common';
-import {Component, OnInit, ViewEncapsulation} from '@angular/core';
+import {Component, Input, OnInit, ViewEncapsulation} from '@angular/core';
 import {ActivatedRoute, NavigationEnd, Router, RouterModule} from '@angular/router';
 import {MenuItem} from 'primeng/api';
 import {Breadcrumb} from 'primeng/breadcrumb';
@@ -15,13 +15,17 @@ import {BreadCrumbExtraData, BreadcrumbItem} from './app-breadcrumb.interface';
   encapsulation: ViewEncapsulation.None,
 })
 export class AppBreadcrumbComponent implements OnInit {
-  items: BreadcrumbItem[] | undefined;
+  @Input() items: BreadcrumbItem[] | undefined;
   isShownBreadcrumb: boolean;
 
   constructor(private activatedRoute: ActivatedRoute, private router: Router) {
   }
 
   ngOnInit(): void {
+    if(this.items){
+      this.isShownBreadcrumb = true;
+      return;
+    }
     this.router.events
       .pipe(filter(event => event instanceof NavigationEnd))
       .subscribe((e) => {
