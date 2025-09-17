@@ -77,7 +77,9 @@ export class App {
       {
         ...this.sideBarData,
         title: 'Activity Log',
-        showSaveAndMoreBtn: true
+        showSaveAndMoreBtn: false,
+        showSaveBtn : false,
+        showCancelBtn : false
       },
 
     );

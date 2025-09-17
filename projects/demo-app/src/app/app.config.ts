@@ -6,6 +6,9 @@ import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { providePrimeNG } from 'primeng/config';
 import Aura from '@primeuix/themes/aura';
+import { provideTranslateService } from '@ngx-translate/core';
+import { provideHttpClient } from '@angular/common/http';
+import { provideLocalizationLoader } from './http-loader.factory';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -21,6 +24,12 @@ export const appConfig: ApplicationConfig = {
           darkModeSelector: false,
         }
       }
+    }),
+    provideHttpClient(),
+    provideTranslateService({
+      lang: 'ar',
+      fallbackLang: 'ar',
+      loader: provideLocalizationLoader()
     }),
   ]
 };
