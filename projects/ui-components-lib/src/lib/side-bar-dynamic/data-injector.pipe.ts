@@ -1,5 +1,5 @@
 import {inject, Injector, Pipe, PipeTransform} from '@angular/core';
-import {createCustomInjector, SIDEBAR_DATA} from "libs/ui-components/src/lib/side-bar-dynamic/side-bar-utils";
+import { createCustomInjector, SIDEBAR_DATA } from './side-bar-utils';
 
 @Pipe({
   name: 'dataInjector',

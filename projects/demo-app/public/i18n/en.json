@@ -1,0 +1,8 @@
+{
+  "HELLO": "Hello",
+  "WELCOME": "Welcome",
+  "actions": {
+    "save" : "Save",
+    "cancel" : "Cancel"
+  }
+}

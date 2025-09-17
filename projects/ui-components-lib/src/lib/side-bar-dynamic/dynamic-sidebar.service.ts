@@ -1,9 +1,9 @@
 import { ApplicationRef, ComponentRef, createComponent, EmbeddedViewRef, EnvironmentInjector, Injectable, Type } from "@angular/core";
 import { AbstractControl } from "@angular/forms";
-import { SideBarDynamicComponent } from "libs/ui-components/src/lib/side-bar-dynamic/side-bar-dynamic.component";
-import { SidebarActionEvent, SidebarActionType } from "libs/ui-components/src/lib/side-bar-dynamic/side-bar-utils";
-import { SidebarConfig, SidebarConfigDefaults } from "libs/ui-components/src/lib/side-bar-dynamic/sidebar-config";
 import { BehaviorSubject, Subject } from "rxjs";
+import { SideBarDynamicComponent } from "./side-bar-dynamic.component";
+import { SidebarConfig, SidebarConfigDefaults } from "./sidebar-config";
+import { SidebarActionEvent, SidebarActionType } from "./side-bar-utils";
 
 @Injectable({
   providedIn: "root"

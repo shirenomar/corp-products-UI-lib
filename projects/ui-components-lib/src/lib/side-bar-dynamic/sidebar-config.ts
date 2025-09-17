@@ -1,4 +1,4 @@
-import { AppButtonIconPos, AppButtonSeverity, AppButtonSize, AppButtonVariant } from "@ui-components";
+import { AppButtonIconPos, AppButtonSeverity, AppButtonSize, AppButtonVariant } from "../app-button";
 
 export interface SidebarActionConfig {
   title?: string;
