@@ -25,7 +25,7 @@
                         [icon]="sidebarConfig!.actions!.save!.icon || 'font-icon-plus'"
                         [iconPos]="sidebarConfig!.actions!.save!.iconPos || 'right'"
                         [style]="sidebarConfig!.actions!.save!.style || 'danger'"
-                        [title]="sidebarConfig!.actions!.save!.title || ('actions.save' | translate)"
+                        [title]="sidebarConfig!.actions!.save!.title || ('actions.save')"
                         [variant]="sidebarConfig!.actions!.save!.variant"/>
           }
           @if (sidebarConfig.showSaveAndMoreBtn) {
@@ -34,7 +34,7 @@
                         [icon]="sidebarConfig!.actions!.saveAndMore!.icon || 'font-icon-plus'"
                         [iconPos]="sidebarConfig!.actions!.saveAndMore!.iconPos || 'right'"
                         [style]="sidebarConfig!.actions!.saveAndMore!.style || 'danger'"
-                        [title]="sidebarConfig!.actions!.saveAndMore!.title || ('actions.save_and_and_more' | translate)"
+                        [title]="sidebarConfig!.actions!.saveAndMore!.title || ('actions.save_and_and_more')"
                         [variant]="sidebarConfig!.actions!.saveAndMore!.variant"/>
 
           }
@@ -43,7 +43,7 @@
           <app-button
             (clickEmitter)="dynamicSidebarService.cancel()"
             [style]="'secondary'"
-            [title]="'actions.cancel' | translate"/>
+            [title]="'actions.cancel'"/>
         }
       </section>
     </ng-template>

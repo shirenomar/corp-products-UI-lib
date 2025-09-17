@@ -1,8 +1,10 @@
-import { Component, signal } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 
-import { AppBreadcrumbComponent } from '@corp-products/ui-components';
+import { AppBreadcrumbComponent, DynamicSidebarService } from '@corp-products/ui-components';
 import { BreadcrumbItem } from '../../../ui-components-lib/src/lib/app-breadcrumb/app-breadcrumb.interface';
+import { SideBar } from './side-bar/side-bar';
+import { SidebarConfig, SidebarConfigDefaults } from '../../../ui-components-lib/src/lib/side-bar-dynamic/sidebar-config';
 
 
 @Component({
@@ -63,6 +65,22 @@ export class App {
   },
 ];
 
+  sidebarDynamicService = inject(DynamicSidebarService);
 
+  sideBarData: SidebarConfig = SidebarConfigDefaults;
+
+
+
+  openSideBar() {
+    this.sidebarDynamicService.open(
+      SideBar,
+      {
+        ...this.sideBarData,
+        title: 'Activity Log',
+        showSaveAndMoreBtn: true
+      },
+
+    );
+  }
 
 }
