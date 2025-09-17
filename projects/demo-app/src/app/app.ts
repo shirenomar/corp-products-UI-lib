@@ -1,7 +1,7 @@
 import { Component, inject, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 
-import { AppBreadcrumbComponent, DynamicSidebarService } from '@corp-products/ui-components';
+import { AppBreadcrumbComponent, AppButtonComponent, DynamicSidebarService } from '@corp-products/ui-components';
 import { BreadcrumbItem } from '../../../ui-components-lib/src/lib/app-breadcrumb/app-breadcrumb.interface';
 import { SideBar } from './side-bar/side-bar';
 import { SidebarConfig, SidebarConfigDefaults } from '../../../ui-components-lib/src/lib/side-bar-dynamic/sidebar-config';
@@ -9,7 +9,7 @@ import { SidebarConfig, SidebarConfigDefaults } from '../../../ui-components-lib
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet , AppBreadcrumbComponent],
+  imports: [RouterOutlet , AppBreadcrumbComponent , AppButtonComponent],
   templateUrl: './app.html',
   styleUrl: './app.scss'
 })
