@@ -15,3 +15,4 @@ export * from './lib/user-autocomplete-card/user-autocomplete-card.component';
 export * from './lib/app-breadcrumb/app-breadcrumb.component';
 export * from './lib/app-breadcrumb/app-breadcrumb.interface';
 export * from './lib/side-bar-dynamic/dynamic-sidebar.service';
+export * from './lib/side-bar-dynamic/sidebar-config';
