@@ -9,6 +9,7 @@ import Aura from '@primeuix/themes/aura';
 import { provideTranslateService } from '@ngx-translate/core';
 import { provideHttpClient } from '@angular/common/http';
 import { provideLocalizationLoader } from './http-loader.factory';
+import { DialogService } from 'primeng/dynamicdialog';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -31,5 +32,6 @@ export const appConfig: ApplicationConfig = {
       fallbackLang: 'ar',
       loader: provideLocalizationLoader()
     }),
+    DialogService
   ]
 };

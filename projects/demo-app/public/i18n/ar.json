@@ -3,6 +3,7 @@
   "WELCOME": "أهلا",
   "actions": {
     "save" : "حفظ",
-    "cancel" : "الغاء"
+    "cancel" : "الغاء",
+    "confirm" : "تأكيد"
   }
 }

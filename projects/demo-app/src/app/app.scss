@@ -1,0 +1,37 @@
+.app-container {
+  display: flex;
+  gap: 20px;
+  height: 100vh;
+  .items{
+    height: 100%;
+    .menu {
+      width: 200px;
+      background: #f5f5f5;
+      padding: 10px;
+      height: 100%;
+    }
+
+    .menu a {
+      display: block;
+      padding: 10px;
+      margin-bottom: 5px;
+      text-decoration: none;
+      color: #333;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .menu a:hover {
+      background: #e0e0e0;
+    }
+
+    .menu a.active {
+      background: #007bff;
+      color: white;
+      font-weight: bold;
+    }
+  }
+  .content {
+    padding: 20px;
+  }
+}

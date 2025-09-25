@@ -3,6 +3,7 @@
   "WELCOME": "Welcome",
   "actions": {
     "save" : "Save",
-    "cancel" : "Cancel"
+    "cancel" : "Cancel",
+    "confirm" : "Confirm"
   }
 }

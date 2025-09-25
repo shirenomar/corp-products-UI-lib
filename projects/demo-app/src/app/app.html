@@ -1,6 +1,14 @@
-<!-- <app-breadcrumb
-      [items]="items">
-</app-breadcrumb> -->
+<div class="app-container">
+  <div class="items">
+     <nav class="menu">
+      <a [routerLink]="'breadcrumb'" routerLinkActive="active">Breadcrumb</a>
+      <a [routerLink]="'confirmationDialog'" routerLinkActive="active">Confirmation Dialog</a>
+      <a [routerLink]="'sideBar'" routerLinkActive="active">Sidebar</a>
+    </nav>
+  </div>
+  <div class="content">
+    <router-outlet></router-outlet>
+  </div>
+</div>
 
-
-<button (click)="openSideBar()">test sideBar</button>
+ <app-button title="إضافة جهة"  severity="danger" iconPos="left" icon="pi pi-plus"></app-button>
