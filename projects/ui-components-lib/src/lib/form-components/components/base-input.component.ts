@@ -1,15 +1,14 @@
-import { Component, Input, OnDestroy, OnInit } from "@angular/core";
-import { FormControl, Validators } from "@angular/forms";
-import { Subject, takeUntil } from "rxjs";
-
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { FormControl, Validators } from '@angular/forms';
+import { Subject, takeUntil } from 'rxjs';
 @Component({
-  template: ""
+  template: '',
 })
 export abstract class BaseInputComponent implements OnInit, OnDestroy {
   @Input({ required: true }) control!: FormControl;
-  @Input() name: string = "";
+  @Input() name: string = '';
   @Input() label?: string;
-  @Input() placeholder: string = "";
+  @Input() placeholder: string = '';
   @Input() inputId!: string;
   @Input() readonly: boolean = false;
   @Input() disabled: boolean = false;
@@ -26,7 +25,7 @@ export abstract class BaseInputComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.inputId = `input-${this.name + "-" + Math.random().toString(36).substring(7)}`;
+    this.inputId = `input-${this.name + '-' + Math.random().toString(36).substring(7)}`;
     this.control.valueChanges.pipe(takeUntil(this.destroy$)).subscribe((v) => {
       if (v) {
         this.control.markAsTouched();

@@ -3,4 +3,15 @@
 </app-breadcrumb> -->
 
 
+<!-- input component test input with float label and textarea -->
+<form [formGroup]="form">
+  <stc-input [variant]="'in'" [contentType]="'text'" [label]="'Label'" [type]="'text-floating'"
+    [hideOptionalLabel]="true" id="id" [control]="inputControl">
+  </stc-input>
+  <stc-input [variant]="'in'" [contentType]="'text'" [type]="'textarea'" [hideOptionalLabel]="true" id="id"
+    [control]="inputControl">
+  </stc-input>
+</form>
+<!-- input component test input with float label and textarea -->
+
 <button (click)="openSideBar()">test sideBar</button>
