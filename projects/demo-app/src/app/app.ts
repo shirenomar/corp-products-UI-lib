@@ -37,16 +37,16 @@ export class App {
 
   items: BreadcrumbItem[] = [
     {
-      notClickableBreadcrumb: false,
+      notClickable: false,
       label: 'Home',
       routerLink: '/home',
-      isShownBreadcrumb: true,
+      isShown: true,
     },
     {
-      notClickableBreadcrumb: false,
+      notClickable: false,
       label: 'Products',
       routerLink: '/products',
-      isShownBreadcrumb: true,
+      isShown: true,
       extraBreadcrumbs: [
         {
           label: 'New Arrivals',
@@ -57,16 +57,16 @@ export class App {
       ],
     },
     {
-      notClickableBreadcrumb: true,
+      notClickable: true,
       label: 'Electronics',
       routerLink: '/products/electronics',
-      isShownBreadcrumb: true,
+      isShown: true,
     },
     {
-      notClickableBreadcrumb: false,
+      notClickable: false,
       label: 'Laptops',
       routerLink: '/products/electronics/laptops',
-      isShownBreadcrumb: true,
+      isShown: true,
       extraBreadcrumbs: [
         {
           label: 'On Sale',
@@ -77,10 +77,10 @@ export class App {
       ],
     },
     {
-      notClickableBreadcrumb: false,
+      notClickable: false,
       label: 'Gaming Laptop',
       routerLink: '/products/electronics/laptops/gaming',
-      isShownBreadcrumb: true,
+      isShown: true,
     },
   ];
 

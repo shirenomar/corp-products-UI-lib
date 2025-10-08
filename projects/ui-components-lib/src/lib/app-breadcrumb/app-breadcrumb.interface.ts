@@ -1,15 +1,15 @@
-import {MenuItem} from "primeng/api";
+import { MenuItem } from 'primeng/api';
 
 export interface BreadcrumbItem {
-  notClickableBreadcrumb: boolean;
+  notClickable: boolean;
   label: string;
   routerLink: string;
-  isShownBreadcrumb: boolean;
+  isShown: boolean;
   extraBreadcrumbs?: BreadCrumbExtraData[];
 }
 
 export interface BreadCrumbPosition {
-  position: 'before' | 'after'
+  position: 'before' | 'after';
 }
 
 export type BreadCrumbExtraData = MenuItem & BreadCrumbPosition;
