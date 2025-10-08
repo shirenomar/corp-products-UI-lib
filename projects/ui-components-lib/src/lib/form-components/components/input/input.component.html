@@ -23,8 +23,7 @@
   <p-floatlabel [variant]="variant">
     <!-- <input pInputText id="value2" [(ngModel)]="value2" [invalid]="!value2" autocomplete="off" /> -->
     <input [id]="inputId" [type]="'text-float-label'" [formControl]="control" [readonly]="readonly"
-      [disabled]="disabled" [name]="name" pInputText
-      [ngStyle]="{'direction': inputDirection || 'inherit', 'text-align': 'right'}"
+      [disabled]="disabled" [name]="name" pInputText [ngStyle]="{'direction': inputDirection || 'inherit'}"
       [ngClass]="{ 'p-invalid ng-dirty ng-invalid': isInvalid, 'basic-style': basicInput, 'no-style':noStyle}" />
     <label [for]="inputId">{{ label }}</label>
   </p-floatlabel>
