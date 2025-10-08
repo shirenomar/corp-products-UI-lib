@@ -6,10 +6,9 @@ import {
   AppBreadcrumbComponent,
   AppButtonComponent,
   DatePickerComponent,
-  DatePickerFloatComponent,
   DynamicSidebarService,
   InputComponent,
-  SelectFloatLabelComponent,
+  SelectComponent,
 } from '@corp-products/ui-components';
 import { FloatLabelModule } from 'primeng/floatlabel';
 import { InputText } from 'primeng/inputtext';
@@ -32,8 +31,7 @@ import { SideBar } from './side-bar/side-bar';
     InputText,
     FormsModule,
     DatePickerComponent,
-    DatePickerFloatComponent,
-    SelectFloatLabelComponent,
+    SelectComponent,
   ],
   templateUrl: './app.html',
   styleUrl: './app.scss',
@@ -108,6 +106,13 @@ export class App {
     { name: 'Option 3', code: '3' },
     { name: 'Option 4', code: '4' },
     { name: 'Option 5', code: '5' },
+  ];
+  selectItems = [
+    { name: 'Item 1', code: '1' },
+    { name: 'Item 2', code: '2' },
+    { name: 'Item 3', code: '3' },
+    { name: 'Item 4', code: '4' },
+    { name: 'Item 5', code: '5' },
   ];
 
   openSideBar() {
