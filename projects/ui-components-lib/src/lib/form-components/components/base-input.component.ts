@@ -24,6 +24,10 @@ export abstract class BaseInputComponent implements OnInit, OnDestroy {
     return this.control.invalid && this.control.touched;
   }
 
+  get isRequired(): boolean {
+    return this.control.hasValidator(Validators.required);
+  }
+
   ngOnInit() {
     this.inputId = `input-${this.name + '-' + Math.random().toString(36).substring(7)}`;
     this.control.valueChanges.pipe(takeUntil(this.destroy$)).subscribe((v) => {

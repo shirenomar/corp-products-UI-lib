@@ -5,8 +5,11 @@ import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angul
 import {
   AppBreadcrumbComponent,
   AppButtonComponent,
+  DatePickerComponent,
+  DatePickerFloatComponent,
   DynamicSidebarService,
   InputComponent,
+  SelectFloatLabelComponent,
 } from '@corp-products/ui-components';
 import { FloatLabelModule } from 'primeng/floatlabel';
 import { InputText } from 'primeng/inputtext';
@@ -28,6 +31,9 @@ import { SideBar } from './side-bar/side-bar';
     FloatLabelModule,
     InputText,
     FormsModule,
+    DatePickerComponent,
+    DatePickerFloatComponent,
+    SelectFloatLabelComponent,
   ],
   templateUrl: './app.html',
   styleUrl: './app.scss',
@@ -87,11 +93,22 @@ export class App {
   sidebarDynamicService = inject(DynamicSidebarService);
 
   sideBarData: SidebarConfig = SidebarConfigDefaults;
+  dateControl: FormControl<any> = new FormControl({ value: null, disabled: false }, []);
   inputControl: FormControl<any> = new FormControl();
+  selectControl: FormControl<any> = new FormControl(null, []);
   form: FormGroup = new FormGroup({
     inputControl: this.inputControl,
+    dateControl: this.dateControl,
+    selectControl: this.selectControl,
   });
   value2: any;
+  options = [
+    { name: 'Option 1', code: '1' },
+    { name: 'Option 2', code: '2' },
+    { name: 'Option 3', code: '3' },
+    { name: 'Option 4', code: '4' },
+    { name: 'Option 5', code: '5' },
+  ];
 
   openSideBar() {
     this.sidebarDynamicService.open(SideBar, {

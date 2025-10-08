@@ -5,12 +5,20 @@
 
 <!-- input component test input with float label and textarea -->
 <form [formGroup]="form">
-  <stc-input [variant]="'in'" [contentType]="'text'" [label]="'Label'" [type]="'text-floating'"
-    [hideOptionalLabel]="true" id="id" [control]="inputControl">
+  <stc-input [variant]="'in'" [contentType]="'text'" [floatLabel]="'Label'" [hideOptionalLabel]="true"
+    [type]="'text-floating'" id="id" [control]="inputControl">
   </stc-input>
   <stc-input [variant]="'in'" [contentType]="'text'" [type]="'textarea'" [hideOptionalLabel]="true" id="id"
     [control]="inputControl">
   </stc-input>
+
+  <stc-date-picker-floating [variant]="'in'" [floatLabel]="'Select Date'" id="dateId" [control]="dateControl"
+    [selectionMode]="'single'" [showIcon]="true">
+  </stc-date-picker-floating>
+
+  <stc-select-float-label [variant]="'in'" [floatLabel]="'Select Option'" [control]="selectControl" [options]="options"
+    [multiple]="true" [optionLabel]="'name'">
+  </stc-select-float-label>
 </form>
 <!-- input component test input with float label and textarea -->
 
