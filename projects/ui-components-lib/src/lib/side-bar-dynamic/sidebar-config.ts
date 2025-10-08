@@ -36,9 +36,9 @@ export const SidebarConfigDefaults: SidebarConfig = {
   dismissible: false,
   closeOnEscape: false,
   sidebarSize: "md",
-  showCancelBtn: true,
-  showSaveBtn: true,
-  showSaveAndMoreBtn: true,
+  showCancelBtn: false,
+  showSaveBtn: false,
+  showSaveAndMoreBtn: false,
   actions: {
     save: {},
     saveAndMore: {
