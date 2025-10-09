@@ -24,7 +24,7 @@ import { BaseInputComponent } from '../base-input.component';
   styleUrl: './input.component.scss',
 })
 export class InputComponent extends BaseInputComponent {
-  @Input() type: 'text' | 'textarea' | 'text-floating' = 'text';
+  @Input() type: 'text' | 'textarea' = 'text';
   @Input() contentType: 'text' | 'email' | 'number' = 'text';
   @Input() prefix: string;
   @Input() rows = 2;
