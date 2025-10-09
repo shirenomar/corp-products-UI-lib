@@ -8,7 +8,7 @@ export abstract class BaseInputComponent implements OnInit, OnDestroy {
   @Input({ required: true }) control!: FormControl;
   @Input() name: string = '';
   @Input() label?: string;
-  @Input() placeholder?: string;
+  @Input() placeholder: string = '';
   @Input() inputId!: string;
   @Input() readonly: boolean = false;
   @Input() disabled: boolean = false;
@@ -22,10 +22,6 @@ export abstract class BaseInputComponent implements OnInit, OnDestroy {
 
   get isInvalid(): boolean {
     return this.control.invalid && this.control.touched;
-  }
-
-  get isRequired(): boolean {
-    return this.control.hasValidator(Validators.required);
   }
 
   ngOnInit() {

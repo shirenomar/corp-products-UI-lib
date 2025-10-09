@@ -38,7 +38,7 @@
     <label [for]="inputId">
       {{ label }}
       @if (required) {
-      <span [class.text-red-700]="isRequired">*</span>
+      <span [class.text-red-700]="required">*</span>
       }
     </label>
 
@@ -63,7 +63,7 @@
     <label [for]="inputId">
       {{ label }}
       @if (required) {
-      <span [class.text-red-700]="isRequired">*</span>
+      <span [class.text-red-700]="required">*</span>
       }
     </label>
   </p-floatLabel>
