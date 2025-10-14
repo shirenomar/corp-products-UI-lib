@@ -43,7 +43,7 @@ export class AppBreadcrumbComponent implements OnInit {
     const activeBreadcrumb = this.items?.find((item) => {
       return item.routerLink === this.router.url
     });
-    this.isShownBreadcrumb = !!activeBreadcrumb?.isShownBreadcrumb
+    // this.isShownBreadcrumb = !!activeBreadcrumb?.isShownBreadcrumb
   }
 
   private _createBreadcrumbs(activatedRoute: ActivatedRoute, routerLink = '', breadcrumbs: MenuItem[] = []): any {
@@ -107,9 +107,9 @@ export class AppBreadcrumbComponent implements OnInit {
 
   private _checkEmpty() {
     if (!this.items) return
-    const lastBreadcrumbVisibility = this.items[this.items.length - 1].isShownBreadcrumb;
+    // const lastBreadcrumbVisibility = this.items[this.items.length - 1].isShownBreadcrumb;
     this.items = this.items.filter(b => b.label !== '');
-    this.items[this.items.length - 1].isShownBreadcrumb = lastBreadcrumbVisibility;
+    // this.items[this.items.length - 1].isShownBreadcrumb = lastBreadcrumbVisibility;
   }
 
   private _getRecursiveKey(obj: Record<string, any>, keys: string[]): any | undefined {

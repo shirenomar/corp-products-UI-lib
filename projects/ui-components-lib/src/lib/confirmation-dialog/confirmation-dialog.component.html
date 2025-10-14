@@ -1,41 +1,24 @@
 @if (dynamicDialogConfig.data) {
 <div>
   <div class="bg-gray-150 p-4 flex items-center">
-    <div class="flex-grow flex gap-2 justify-between flex-row items-center">
+    <div class="flex-grow flex pt-2 mb-2 gap-2 justify-between flex-row items-center">
       @if (dynamicDialogConfig.data.headerIcon) {
-      <i [class]="dynamicDialogConfig.data.headerIcon || 'icon-close'"></i>
+      <i [class]="dynamicDialogConfig.data.headerIcon " (click)="close()"></i>
       }
-      @else {
-      <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path
-          d="M12.8751 14.7103L7.5 9.3352L2.12492 14.7103C1.73863 15.0966 1.11239 15.0966 0.726763 14.7103L0.289717 14.2732C-0.0965722 13.8869 -0.0965722 13.2607 0.289717 12.8751L5.6648 7.5L0.289717 2.12492C-0.0965722 1.73863 -0.0965722 1.11239 0.289717 0.726763L0.726763 0.289717C1.11305 -0.0965722 1.73929 -0.0965722 2.12492 0.289717L7.5 5.6648L12.8751 0.289717C13.2614 -0.0965722 13.8876 -0.0965722 14.2732 0.289717L14.7103 0.726763C15.0966 1.11305 15.0966 1.73929 14.7103 2.12492L9.3352 7.5L14.7103 12.8751C15.0966 13.2614 15.0966 13.8876 14.7103 14.2732L14.2732 14.7103C13.8869 15.0966 13.2607 15.0966 12.8751 14.7103Z"
-          fill="#1E252D" />
-      </svg>
-
-      }
-
-
-
     </div>
 
-    <app-button (click)="close()" icon="font-icon-close" [style]="'secondary'" variant="text" />
   </div>
 
   @if (dynamicDialogConfig.data) {
   <div class="p-4 flex flex-column align-center ">
-    @if (dynamicDialogConfig.data.dialogIcon) {
-    <em [class]="dynamicDialogConfig.data.dialogIcon"></em>
-    } @else {
-      <div  class="flex justify-center items-center w-70 h-70 rounded-full bg-[#FFFBEA]">
-
-        <svg width="35" height="32" viewBox="0 0 35 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path
-          d="M17.5 12.2553L17.5 19.5295M17.5 24.9852H17.5182M14.3206 3.42985L2.31645 25.0374C0.96965 27.4616 2.72261 30.4408 5.49585 30.4408H29.5042C32.2775 30.4408 34.0304 27.4616 32.6836 25.0374L20.6794 3.42985C19.2937 0.935495 15.7064 0.935491 14.3206 3.42985Z"
-          stroke="#1E252D" stroke-width="2.6" stroke-linecap="round" />
-        </svg>
-      </div>
-
-    }
+    <div
+      [class] ="'bg-[' + dynamicDialogConfig.data.defaultIconBGColor + ']' " class = 'flex justify-center items-center w-70 h-70 rounded-full '>
+      @if (dynamicDialogConfig.data.dialogIcon) {
+      <em [class]="dynamicDialogConfig.data.dialogIcon"></em>
+      } @else {
+       <i [class]="dynamicDialogConfig.data.defaultIcon " ></i>
+      }
+    </div>
     <h3 class="m-0 font-bold text-[16px]">
       {{ dynamicDialogConfig.data.header }}
     </h3>
@@ -63,8 +46,8 @@
       [style]="dynamicDialogConfig.data.confirmBtnStyle ||'primary'" (click)="submit()" />
 
     <app-button [title]="dynamicDialogConfig.data?.closeLabel ||  ('actions.cancel' | translate)" class="w-[50%]"
-     [class]="dynamicDialogConfig.data.cancelBtnClasses "
-      [style]="'secondary'" [variant]="'outlined'" (click)="close()" />
+      [class]="dynamicDialogConfig.data.cancelBtnClasses " [style]="'secondary'" [variant]="'outlined'"
+      (click)="close()" />
   </div>
 </div>
 }
