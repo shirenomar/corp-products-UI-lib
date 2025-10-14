@@ -1,9 +1,7 @@
 <div class="field flex flex-col gap-2 my-3 relative">
 
   @if(multiple) {
-
-  <p-floatLabel [variant]="variant">
-
+   <p-floatLabel [variant]="variant">
 
     <p-multiselect
     [disabled]="disabled"
@@ -24,6 +22,10 @@
     (onChange)="onChange($event)"
     [ngClass]="{ 'basic-style': basicInput }"
      >
+
+
+
+
 
 
       @if(optionTemplate){
@@ -49,6 +51,7 @@
   </p-floatLabel>
 
   } @else {
+      <p-floatLabel [variant]="variant">
     <p-select
       [checkmark]="checkmark"
       [disabled]="disabled"
@@ -69,6 +72,9 @@
       (onChange)="onChange($event)"
       [ngClass]="{ 'basic-style': basicInput }"
     >
+
+
+
 
 
       @if (selectedItemTemplate) {
