@@ -15,7 +15,9 @@ import { AppButtonIconPos, AppButtonSeverity, AppButtonSize, AppButtonVariant } 
 export class AppButtonComponent {
   @Input() title!: string;
   @Input() class: string;
+  @Input() styleClass: string;
   @Input() icon: string;
+  @Input() loadingIcon: string;
   @Input() size: AppButtonSize;
   @Input() severity!: AppButtonSeverity;
   @Input() iconPos: AppButtonIconPos;
@@ -23,6 +25,14 @@ export class AppButtonComponent {
   @Input() disabled = false;
   @Input() text = false;
   @Input() rounded = false;
+  @Input() autofocus = false;
+  @Input() link = false;
+  @Input() plain = false;
+  @Input() raised = false;
+  @Input() loading = false;
 
   @Output() clickEmitter = new EventEmitter<void>();
+  @Output() onFocus = new EventEmitter<void>();
+  @Output() onClick = new EventEmitter<void>();
+  @Output() onBlur = new EventEmitter<void>();
 }
