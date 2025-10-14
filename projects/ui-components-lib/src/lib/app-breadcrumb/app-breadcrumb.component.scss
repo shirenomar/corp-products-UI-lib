@@ -12,17 +12,14 @@
     padding: 0 4px;
   }
   .p-breadcrumb-item-label {
-    color: #FF375E;
-    position: relative;
+     @apply text-light_red relative;
     &:hover {
-      color: #FF375E;
+        @apply text-light_red;
     }
     &::before {
       content: '/';
-      display: inline-block;
-      position: absolute;
+      @apply inline-block absolute text-gray-900;
       inset-inline-end: -9px;
-      color: #687078;
     }
   }
 }
