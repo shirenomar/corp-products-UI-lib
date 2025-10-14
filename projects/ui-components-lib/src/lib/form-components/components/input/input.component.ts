@@ -1,22 +1,31 @@
-import { NgClass, NgStyle } from "@angular/common";
-import { Component, Input } from "@angular/core";
-import { ReactiveFormsModule } from "@angular/forms";
-import { ValidationErrorsPipe } from "../../@utils/validations/validation-message.pipe";
-import { InputText } from "primeng/inputtext";
-import { Textarea } from "primeng/textarea";
-import { BaseInputComponent } from "../base-input.component";
-import {TranslatePipe} from "@ngx-translate/core";
-
+import { NgClass, NgStyle } from '@angular/common';
+import { Component, Input } from '@angular/core';
+import { ReactiveFormsModule } from '@angular/forms';
+import { TranslatePipe } from '@ngx-translate/core';
+import { FloatLabelModule } from 'primeng/floatlabel';
+import { InputText } from 'primeng/inputtext';
+import { Textarea } from 'primeng/textarea';
+import { ValidationErrorsPipe } from '../../@utils/validations/validation-message.pipe';
+import { BaseInputComponent } from '../base-input.component';
 @Component({
-  selector: "stc-input",
+  selector: 'stc-input',
   standalone: true,
-  imports: [ReactiveFormsModule, InputText, Textarea, ValidationErrorsPipe, NgClass, NgStyle, TranslatePipe],
-  templateUrl: "./input.component.html",
-  styleUrl: "./input.component.scss"
+  imports: [
+    ReactiveFormsModule,
+    InputText,
+    Textarea,
+    ValidationErrorsPipe,
+    NgClass,
+    NgStyle,
+    TranslatePipe,
+    FloatLabelModule,
+  ],
+  templateUrl: './input.component.html',
+  styleUrl: './input.component.scss',
 })
 export class InputComponent extends BaseInputComponent {
-  @Input() type: "text" | "textarea" = "text";
-  @Input() contentType: "text" | "email" | "number" = "text";
+  @Input() type: 'text' | 'textarea' = 'text';
+  @Input() contentType: 'text' | 'email' | 'number' = 'text';
   @Input() prefix: string;
   @Input() rows = 2;
   @Input() cols = 20;
@@ -24,7 +33,8 @@ export class InputComponent extends BaseInputComponent {
   @Input() basicInput!: boolean;
   @Input() noStyle!: boolean;
   @Input() hideOptionalLabel: boolean;
-  @Input() inputDirection: "ltr" | "rtl" | "inherit" = "inherit";
+  @Input() inputDirection: 'ltr' | 'rtl' | 'inherit' = 'inherit';
+  @Input() variant: 'in' | 'over' | 'on' = 'over';
 
   constructor() {
     super();

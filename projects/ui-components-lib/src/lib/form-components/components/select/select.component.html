@@ -1,17 +1,8 @@
 <div class="field flex flex-col gap-2 my-3 relative">
-  @if (label) {
-  <label [for]="inputId">
-    {{ label }}
-    @if (required) {
-    <span [class.text-red-700]="isInvalid">*</span>
-    }
-  </label>
-  } @if (!required) {
-  <span class="absolute top-[6px] left-0 text-[10px] text-gray-400">{{'forms.config.optional' | translate}}</span>
-  }
-
 
   @if(multiple) {
+
+  <p-floatLabel [variant]="variant">
 
 
     <p-multiselect
@@ -35,19 +26,27 @@
      >
 
 
-     @if(optionTemplate){
+      @if(optionTemplate){
       <ng-template let-item #item>
         <ng-container [ngTemplateOutletContext]="{ $implicit: item }" [ngTemplateOutlet]="optionTemplate" />
       </ng-template>
-     }
+      }
 
 
-  <ng-template #dropdownicon>
-      <i class="pi pi-map"></i>
-  </ng-template>
+      <ng-template #dropdownicon>
+        <i class="pi pi-map"></i>
+      </ng-template>
 
 
     </p-multiselect>
+    <label [for]="inputId">
+      {{ label }}
+      @if (required) {
+      <span [class.text-red-700]="required">*</span>
+      }
+    </label>
+
+  </p-floatLabel>
 
   } @else {
     <p-select
@@ -72,13 +71,20 @@
     >
 
 
-    @if (selectedItemTemplate) {
+      @if (selectedItemTemplate) {
       <ng-template let-item pTemplate="item">
         <ng-container [ngTemplateOutletContext]="{ $implicit: item }" [ngTemplateOutlet]="selectedItemTemplate" />
       </ng-template>
-    }
-  </p-select>
-}
+      }
+    </p-select>
+    <label [for]="inputId">
+      {{ label }}
+      @if (required) {
+      <span [class.text-red-700]="required">*</span>
+      }
+    </label>
+  </p-floatLabel>
+  }
 
   @if (hint) {
   <small class="p-mt-1">{{ hint }}</small>

@@ -1,11 +1,11 @@
 import { NgClass } from '@angular/common';
 import { Component, EventEmitter, Input, Output, ViewEncapsulation } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { ValidationErrorsPipe } from '../../@utils/validations/validation-message.pipe';
-import { DatePicker } from 'primeng/datepicker';
-import { BaseInputComponent } from '../base-input.component';
-import { DatePickerModule } from 'primeng/datepicker';
 import { TranslatePipe } from '@ngx-translate/core';
+import { DatePicker, DatePickerModule } from 'primeng/datepicker';
+import { FloatLabelModule } from 'primeng/floatlabel';
+import { ValidationErrorsPipe } from '../../@utils/validations/validation-message.pipe';
+import { BaseInputComponent } from '../base-input.component';
 @Component({
   selector: 'stc-date-picker',
   standalone: true,
@@ -17,6 +17,7 @@ import { TranslatePipe } from '@ngx-translate/core';
     DatePickerModule,
     ValidationErrorsPipe,
     TranslatePipe,
+    FloatLabelModule,
   ],
   templateUrl: './date-picker.component.html',
   styleUrl: './date-picker.component.scss',
@@ -33,6 +34,7 @@ export class DatePickerComponent extends BaseInputComponent {
   nowTime = new Date();
   @Input() selectionMode: 'single' | 'range' = 'single';
   @Output() onAfterClearDate = new EventEmitter<void>();
+  @Input() variant: 'in' | 'over' | 'on' = 'over';
 
   constructor() {
     super();

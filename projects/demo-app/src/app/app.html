@@ -4,4 +4,20 @@
 
   <app-breadcrumb [items]="items"></app-breadcrumb>
 
+<!-- input component test input with float label and textarea -->
+<form [formGroup]="form">
+  <stc-input [variant]="'in'" [contentType]="'text'" [label]="'Label'" [hideOptionalLabel]="true" [type]="'text'"
+    id="id" [control]="inputControl">
+  </stc-input>
+
+  <stc-select [variant]="'in'" [label]="'Select Item'" id="selectId" [control]="selectControl" [options]="selectItems"
+    [multiple]="false" [optionLabel]="'name'" [showClear]="false">
+  </stc-select>
+
+  <stc-date-picker [variant]="'in'" [label]="'Select Date'" id="dateId" [control]="dateControl"
+    [selectionMode]="'single'" [showIcon]="true">
+  </stc-date-picker>
+</form>
+<!-- input component test input with float label and textarea -->
+
 <button (click)="openSideBar()">test sideBar</button>
