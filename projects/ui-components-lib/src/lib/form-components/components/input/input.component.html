@@ -25,6 +25,7 @@
       pInputText
       [ngStyle]="{'direction': inputDirection || 'inherit', 'text-align': 'right'}"
       [ngClass]="{ 'p-invalid ng-dirty ng-invalid': isInvalid, 'basic-style': basicInput, 'no-style':noStyle}"
+          class="w-full border border-[#DFE0E6] rounded-none focus:outline-[#DFE0E6] focus:border-[#DFE0E6] hover:border-[#DFE0E6] disabled:opacity-50"
     />
     @if (prefix) {
       <span class="absolute top-[40px] font-bold text-[16px] left-[25px]">
@@ -44,6 +45,7 @@
       [cols]="cols"
       [autoResize]="autoResize"
       [ngClass]="{'ng-invalid ng-dirty': control.invalid && (control.dirty || control.touched), 'basic-style': basicInput, 'no-style':noStyle}"
+    class="w-full border border-[#DFE0E6] rounded-none focus:outline-[#DFE0E6] focus:border-[#DFE0E6] hover:border-[#DFE0E6] disabled:opacity-50"
     ></textarea>
   }
   @if (hint) {
