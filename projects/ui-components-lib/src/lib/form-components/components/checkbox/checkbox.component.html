@@ -1,0 +1,24 @@
+<div class="field flex items-center gap-2 my-3 relative">
+  <p-checkbox [formControl]="control" [binary]="binary" [inputId]="inputId" [disabled]="disabled"
+    [falseValue]="falseValue" [trueValue]="trueValue" [size]="size" [inputClass]="inputClass" [variant]="variant"
+    [checkboxIcon]="checkboxIcon" (onChange)="onChange.emit($event)"
+    [ngClass]="{ 'p-invalid ng-dirty ng-invalid': isInvalid }" class="m-0"></p-checkbox>
+  @if (label) {
+  <label [for]="inputId" class="m-0 select-none cursor-pointer">
+    {{ label }}
+    @if (required) {
+    <span [class.text-red-700]="required">*</span>
+    }
+  </label>
+  }
+  @if (hint) {
+  <small class="p-mt-1">{{ hint }}</small>
+  }
+  @if (isInvalid && (control.dirty || control.touched)) {
+  <small class="p-error text-red-700">
+    @for (error of control.errors | validationErrors; track error) {
+    {{ error }}<br>
+    }
+  </small>
+  }
+</div>
