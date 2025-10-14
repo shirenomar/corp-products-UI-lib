@@ -25,4 +25,7 @@ export class AppButtonComponent {
   @Input() rounded = false;
 
   @Output() clickEmitter = new EventEmitter<void>();
+  mergeClasses(...classes: (string | undefined)[]): string {
+    return classes.filter(Boolean).join(' ');
+  }
 }

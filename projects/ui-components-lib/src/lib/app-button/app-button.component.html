@@ -1,14 +1,15 @@
 <p-button
   (click)="clickEmitter.emit()"
-  [class]="class"
+    [class]="class"
   [disabled]="disabled"
   [iconPos]="iconPos"
   [icon]="icon"
   [label]="title"
   [rounded]="rounded"
   [severity]="severity"
-  [styleClass]="'w-full'"
+  [styleClass]="mergeClasses('w-full', class)"
   [text]="text"
   [variant]="variant"
+
 >
 </p-button>
