@@ -1,7 +1,6 @@
 import { MenuItem } from 'primeng/api';
 
 export interface BreadcrumbItem {
-  isShownBreadcrumb?: boolean;
   notClickable: boolean;
   label: string;
   routerLink: string;
