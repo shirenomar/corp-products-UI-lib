@@ -35,6 +35,8 @@ export class InputComponent extends BaseInputComponent {
   @Input() hideOptionalLabel: boolean;
   @Input() inputDirection: 'ltr' | 'rtl' | 'inherit' = 'inherit';
   @Input() variant: 'in' | 'over' | 'on' = 'over';
+  @Input() defaultColor = '#DFE0E6'
+
 
   constructor() {
     super();

@@ -2,14 +2,15 @@
       [items]="items">
 </app-breadcrumb> -->
 
+  <app-breadcrumb [items]="items"></app-breadcrumb>
 
 <!-- input component test input with float label and textarea -->
-<form [formGroup]="form">
-  <stc-input [variant]="'in'" [contentType]="'text'" [label]="'Label'" [hideOptionalLabel]="true" [type]="'text'"
+<form [formGroup]="form2">
+
+  <stc-input [variant]="'in'" [contentType]="'text'" [label]="'Label'" [hideOptionalLabel]="true" [type]="'text'" [defaultColor]="'#DFE0E6'"
     id="id" [control]="inputControl">
   </stc-input>
-
-  <stc-select [variant]="'in'" [label]="'Select Item'" id="selectId" [control]="selectControl" [options]="selectItems"
+  <stc-select [variant]="'in'" [defaultColor]="'#DFE0E6'" [label]="'Select Item'" id="selectId" [control]="selectControl" [options]="selectItems"
     [multiple]="false" [optionLabel]="'name'" [showClear]="false">
   </stc-select>
 
@@ -21,3 +22,9 @@
 <!-- input component test input with float label and textarea -->
 
 <button (click)="openSideBar()">test sideBar</button>
+
+  <div class="flex gap-4 justify-between mt-auto">
+    <app-button class="w-full" title="إضافة جهة"  severity="danger" iconPos="left" icon="pi pi-plus"></app-button>
+     <app-button title="إلغاء" severity="warn"  variant="outlined"></app-button>
+  </div>
+

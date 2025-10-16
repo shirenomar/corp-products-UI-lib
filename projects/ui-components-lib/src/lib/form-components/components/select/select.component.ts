@@ -43,7 +43,7 @@ export class SelectComponent extends BaseInputComponent {
   @Input() variant: 'in' | 'over' | 'on' = 'over';
   // eslint-disable-next-line @angular-eslint/no-output-native
   @Output() change = new EventEmitter();
-
+  @Input() defaultColor = '#DFE0E6'
   constructor() {
     super();
   }

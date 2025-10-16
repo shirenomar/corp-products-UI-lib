@@ -1,14 +1,33 @@
 <div class="field flex flex-col gap-2 my-3 relative">
 
   @if(multiple) {
+   <p-floatLabel [variant]="variant">
 
-  <p-floatLabel [variant]="variant">
+    <p-multiselect
+    [disabled]="disabled"
+    [filterBy]="filterBy"
+    [filter]="filter"
+    [formControl]="control"
+    [id]="inputId"
+    [name]="name"
+    [ngClass]="{ 'p-invalid ng-dirty ng-invalid': isInvalid }"
+    [optionLabel]="optionLabel"
+    [options]="options"
+    [placeholder]="placeholder"
+    [readonly]="readonly"
+    [showClear]="showClear"
+    class="w-full"
+    [selectedItemsLabel]="selectedItemsLabel"
+    [class]="
+        'w-full border border-[' + defaultColor + '] rounded-none focus:outline-[' + defaultColor + '] focus:border-[' + defaultColor + '] hover:border-[' + defaultColor + '] disabled:opacity-50'
+        "
+    (onChange)="onChange($event)"
+    [ngClass]="{ 'basic-style': basicInput }"
+     >
 
 
-    <p-multiselect [disabled]="disabled" [filterBy]="filterBy" [filter]="filter" [formControl]="control" [id]="inputId"
-      [name]="name" [ngClass]="{ 'p-invalid ng-dirty ng-invalid': isInvalid }" [optionLabel]="optionLabel"
-      [options]="options" [placeholder]="placeholder" [readonly]="readonly" [showClear]="showClear" class="w-full"
-      [selectedItemsLabel]="selectedItemsLabel" (onChange)="onChange($event)" [ngClass]="{ 'basic-style': basicInput }">
+
+
 
 
       @if(optionTemplate){
@@ -34,13 +53,32 @@
   </p-floatLabel>
 
   } @else {
-  <p-floatLabel [variant]="variant">
+      <p-floatLabel [variant]="variant">
+    <p-select
+      [checkmark]="checkmark"
+      [disabled]="disabled"
+      [editable]="editable"
+      [filterBy]="filterBy"
+      [filter]="filter"
+      [formControl]="control"
+      [id]="inputId"
+      [name]="name"
+      [ngClass]="{ 'p-invalid ng-dirty ng-invalid': isInvalid }"
+      [optionLabel]="optionLabel"
+      [options]="options"
+      [placeholder]="placeholder"
+      [readonly]="readonly"
+      [showClear]="showClear"
+      class="w-full"
+      [class]="
+        'w-full border border-[' + defaultColor + '] rounded-none focus:outline-[' + defaultColor + '] focus:border-[' + defaultColor + '] hover:border-[' + defaultColor + '] disabled:opacity-50'
+        "
+      (onChange)="onChange($event)"
+      [ngClass]="{ 'basic-style': basicInput }"
+    >
 
-    <p-select [checkmark]="checkmark" [disabled]="disabled" [editable]="editable" [filterBy]="filterBy"
-      [filter]="filter" [formControl]="control" [id]="inputId" [name]="name"
-      [ngClass]="{ 'p-invalid ng-dirty ng-invalid': isInvalid }" [optionLabel]="optionLabel" [options]="options"
-      [placeholder]="placeholder" [readonly]="readonly" [showClear]="showClear" class="w-full"
-      (onChange)="onChange($event)" [ngClass]="{ 'basic-style': basicInput }">
+
+
 
 
       @if (selectedItemTemplate) {

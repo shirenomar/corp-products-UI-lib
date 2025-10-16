@@ -4,5 +4,22 @@
   }
   .p-breadcrumb-separator {
     transform: scale(0.7);
+    display: none;
+  }
+}
+.p-breadcrumb-item:not(:last-of-type) {
+  .p-breadcrumb-item-link {
+    padding: 0 4px;
+  }
+  .p-breadcrumb-item-label {
+     @apply text-light_red relative;
+    &:hover {
+        @apply text-light_red;
+    }
+    &::before {
+      content: '/';
+      @apply inline-block absolute text-gray-900;
+      inset-inline-end: -9px;
+    }
   }
 }
