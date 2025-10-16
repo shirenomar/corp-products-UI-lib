@@ -24,7 +24,8 @@ export class AppButtonComponent {
   @Input() text = false;
   @Input() rounded = false;
   @Input() borderColor = '#FF375E'
-  @Input() bgColor = '#fff'
+  @Input() bgColor = '#FF375E'
+  @Input() color = '#fff'
   @Input() minWidth = '100px'
   @Output() clickEmitter = new EventEmitter<void>();
 
