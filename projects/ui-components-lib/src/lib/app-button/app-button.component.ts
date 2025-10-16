@@ -1,5 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { Button, ButtonModule } from 'primeng/button';
+import { Button, ButtonModule, ButtonStyle } from 'primeng/button';
 
 @Component({
   imports: [ButtonModule],
@@ -8,5 +8,6 @@ import { Button, ButtonModule } from 'primeng/button';
   encapsulation: ViewEncapsulation.None,
   styleUrl: './app-button.component.scss',
   templateUrl: './app-button.component.html',
+  providers: [ButtonStyle],
 })
 export class AppButtonComponent extends Button {}
