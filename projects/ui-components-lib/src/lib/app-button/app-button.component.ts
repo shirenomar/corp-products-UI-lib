@@ -23,9 +23,9 @@ export class AppButtonComponent {
   @Input() disabled = false;
   @Input() text = false;
   @Input() rounded = false;
-
+  @Input() borderColor = '#FF375E'
+  @Input() bgColor = '#fff'
+  @Input() minWidth = '100px'
   @Output() clickEmitter = new EventEmitter<void>();
-  mergeClasses(...classes: (string | undefined)[]): string {
-    return classes.filter(Boolean).join(' ');
-  }
+
 }

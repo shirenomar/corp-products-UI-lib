@@ -1,13 +1,13 @@
 <p-button
   (click)="clickEmitter.emit()"
-    [class]="class"
+  [class]="class"
   [disabled]="disabled"
   [iconPos]="iconPos"
   [icon]="icon"
   [label]="title"
   [rounded]="rounded"
   [severity]="severity"
-  [styleClass]="mergeClasses('w-full', class)"
+  [styleClass]="'border-[' + borderColor + '] rounded-none bg-[' + bgColor + '] min-w-['+ minWidth +'] text-[14px]'"
   [text]="text"
   [variant]="variant"
 

@@ -18,7 +18,9 @@
     [showClear]="showClear"
     class="w-full"
     [selectedItemsLabel]="selectedItemsLabel"
-    [class]="customClasses"
+    [class]="
+        'w-full border border-[' + defaultColor + '] rounded-none focus:outline-[' + defaultColor + '] focus:border-[' + defaultColor + '] hover:border-[' + defaultColor + '] disabled:opacity-50'
+        "
     (onChange)="onChange($event)"
     [ngClass]="{ 'basic-style': basicInput }"
      >
@@ -68,7 +70,9 @@
       [readonly]="readonly"
       [showClear]="showClear"
       class="w-full"
-      [class]="customClasses"
+      [class]="
+        'w-full border border-[' + defaultColor + '] rounded-none focus:outline-[' + defaultColor + '] focus:border-[' + defaultColor + '] hover:border-[' + defaultColor + '] disabled:opacity-50'
+        "
       (onChange)="onChange($event)"
       [ngClass]="{ 'basic-style': basicInput }"
     >

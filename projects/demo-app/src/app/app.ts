@@ -18,7 +18,7 @@ import { DatePickerComponent } from './../../../ui-components-lib/src/lib/form-c
 import { AppButtonComponent, AppBreadcrumbComponent } from '@corp-products/ui-components';
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, AppBreadcrumbComponent, InputComponent, ReactiveFormsModule, SelectComponent, DatePickerComponent, AppButtonComponent],
+  imports: [RouterOutlet, AppBreadcrumbComponent, InputComponent, ReactiveFormsModule, SelectComponent, DatePickerComponent, AppButtonComponent, AppButtonComponent],
   providers: [DialogService],
   templateUrl: './app.html',
   styleUrl: './app.scss',
