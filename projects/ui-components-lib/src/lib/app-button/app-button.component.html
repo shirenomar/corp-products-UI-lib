@@ -1,15 +1,7 @@
-<p-button
-  (click)="clickEmitter.emit()"
-  [class]="class"
-  [disabled]="disabled"
-  [iconPos]="iconPos"
-  [icon]="icon"
-  [label]="title"
-  [rounded]="rounded"
-  [severity]="severity"
-  [styleClass]="'border-[' + borderColor + '] text-['+ color +'] rounded-none bg-[' + bgColor + '] min-w-['+ minWidth +'] text-[14px]'"
-  [text]="text"
-  [variant]="variant"
-
->
+<p-button (onFocus)="onFocus.emit()" (onBlur)="onBlur.emit()" (onClick)="onClick.emit()" [size]="size"
+  [loadingIcon]="loadingIcon" [disabled]="disabled" [iconPos]="iconPos" [icon]="icon" [label]="label"
+  [rounded]="rounded" [severity]="severity" [styleClass]="styleClass" [text]="text" [variant]="variant"
+  [loading]="loading" [autofocus]="autofocus" [link]="link" [plain]="plain" [raised]="raised"
+  [loadingIcon]="loadingIcon" [style]="style">
+  <ng-content></ng-content>
 </p-button>
