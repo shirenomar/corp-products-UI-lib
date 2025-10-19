@@ -2,11 +2,12 @@ import { NgClass, NgTemplateOutlet } from "@angular/common";
 import { Component, EventEmitter, Input, Output, TemplateRef, ViewEncapsulation } from "@angular/core";
 import { PrimeTemplate } from "primeng/api";
 import { Drawer } from "primeng/drawer";
+import { TooltipModule } from "primeng/tooltip";
 
 @Component({
   selector: "app-side-bar",
   standalone: true,
-  imports: [PrimeTemplate, Drawer, NgClass, NgTemplateOutlet],
+  imports: [PrimeTemplate, Drawer, NgClass, NgTemplateOutlet, TooltipModule],
   templateUrl: "./side-bar.component.html",
   styleUrl: "./side-bar.component.scss",
   encapsulation: ViewEncapsulation.None
@@ -14,7 +15,7 @@ import { Drawer } from "primeng/drawer";
 export class SideBarComponent {
   @Input() show = false;
   @Input() title: string;
-  @Input() closable = false;
+  @Input() closable = true;
   @Input() dismissible = false;
   @Input() closeOnEscape = false;
   @Input() sidebarSize: "sm" | "md" | "lg" | "xl" = "sm";
