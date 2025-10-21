@@ -1,0 +1,30 @@
+textarea,
+.p-select {
+  border-radius: 0;
+  border-color: #DFE0E6;
+  max-height: 45px;
+
+  &:enabled {
+    &:hover {
+      border-color: #DFE0E6;
+    }
+  }
+
+  &:not(.p-disabled).p-focus,
+  &:not(.p-disabled).p-focus:hover,
+  &:focus {
+    outline: #DFE0E6;
+    border-color: #DFE0E6;
+  }
+}
+.p-floatlabel:has(input:focus) label,
+.p-floatlabel:has(input:-webkit-autofill) label,
+.p-floatlabel:has(textarea:focus) label,
+.p-floatlabel:has(.p-inputwrapper-focus) label {
+      color: #687078;
+
+}
+.p-inputtext:enabled:focus {
+  border-color: #DFE0E6 ;
+}
+
