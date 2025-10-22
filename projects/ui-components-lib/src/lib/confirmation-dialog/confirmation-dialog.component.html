@@ -1,22 +1,28 @@
 @if (dynamicDialogConfig.data) {
-<div>
-  <div class="bg-gray-150 p-4 flex items-center">
-    <div class="flex-grow flex gap-2">
+<div class="dialog-wrapper">
+  <div class="bg-gray-150 p-4 ">
+
+    <app-button (click)="close()" icon="icon-close" [styleClass]="'secondary'" variant="text" />
+    <div class="flex-grow  gap-2 header-content">
       @if (dynamicDialogConfig.data.headerIcon) {
-      <i [class]="dynamicDialogConfig.data.headerIcon"></i>
+        <div class="header-icon flex justify-center align-center">
+          <i [class]="dynamicDialogConfig.data.headerIcon"></i>
+        </div>
+
       }
-      <h3 class="m-0 font-bold text-[16px]">
+      <h3 class="m-0 font-bold text-[16px] text-center">
         {{ dynamicDialogConfig.data.header }}
       </h3>
     </div>
-    <app-button (click)="close()" icon="font-icon-close" [styleClass]="'secondary'" variant="text" />
+
+
   </div>
   @if (dynamicDialogConfig.data) {
-  <div class="p-4">
+  <div class="p-4 flex justify-center text-center">
     @if (dynamicDialogConfig.data.dialogIcon) {
     <em [class]="dynamicDialogConfig.data.dialogIcon"></em>
     }
-    <div>
+    <div class=" mt-2">
       {{ dynamicDialogConfig.data.message }}
     </div>
     @if (dynamicDialogConfig.data.hint) {
@@ -29,14 +35,15 @@
   @if (dynamicDialogConfig.data.inputForm) {
   <app-dynamic-form [dynamicFormData]="dialogFormData"></app-dynamic-form>
   }
-  <div class="p-4 flex gap-3">
+  <div class="p-4 flex gap-2 justify-center" dir="rtl">
     <app-button [title]="dynamicDialogConfig.data?.confirmLabel || ('actions.confirm' | translate)" class="w-[50%]"
-      [disabled]="!!(dialogFormData && dialogFormData.formGroup?.invalid)"
-      [icon]="dynamicDialogConfig.data.confirmBtnIcon || ''"
+      [disabled]="!!(dialogFormData && dialogFormData.formGroup?.invalid)" severity="danger"
+      [icon]="dynamicDialogConfig.data.confirmBtnIcon || ''" [label]="dynamicDialogConfig.data.confirmBtnLabel"
       [iconPos]="dynamicDialogConfig.data.confirmBtnPosition || 'left'"
       [styleClass]="dynamicDialogConfig.data.confirmBtnStyle ||'primary'" (click)="submit()" />
     <app-button [title]="dynamicDialogConfig.data?.closeLabel ||  ('actions.cancel' | translate)" class="w-[50%]"
-      [styleClass]="'secondary'" [variant]="'outlined'" (click)="close()" />
+      severity="warn"  variant="outlined" [label]="dynamicDialogConfig.data.cancelBtnLabel"
+       [styleClass]="'secondary min-w-[140px]'" (click)="close()" />
   </div>
 </div>
 }

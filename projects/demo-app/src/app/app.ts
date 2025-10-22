@@ -1,7 +1,7 @@
 import { Component, inject, signal, ViewEncapsulation } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 
-import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 
 import { FloatLabelModule } from 'primeng/floatlabel';
 import { InputText } from 'primeng/inputtext';
@@ -84,7 +84,7 @@ export class App {
 
   sideBarData: SidebarConfig = SidebarConfigDefaults;
   dateControl: FormControl<any> = new FormControl({ value: null, disabled: false }, []);
-  inputControl: FormControl<any> = new FormControl();
+  inputControl: FormControl<any> = new FormControl('' , [Validators.required]);
   selectControl: FormControl<any> = new FormControl(null, []);
   form: FormGroup = new FormGroup({
     inputControl: this.inputControl,
@@ -116,9 +116,12 @@ export class App {
         cancelBtnClasses: 'w-[160px] h-[48px] rounded-lg border border-[#F44336] text-[#F44336] font-bold text-[16px] hover:bg-[#FFF5F5] transition',
         headerIcon: 'icon-close',
         defaultIconBGColor: '#FFFBEA',
-        defaultIcon: ''
+        confirmBtnStyle: 'min-w-[140px]',
+        defaultIcon: '',
+        cancelBtnLabel: 'تراجع',
+        confirmBtnLabel: 'تاكيد الحذف'
       },
-      style: { 'max-width': '550px', width: '100%' },
+      style: { 'max-width': '550px', width: '100%' ,'display': 'flex', 'justify-content': 'center', 'align-item': 'center' },
       styleClass: 'no-default-header max-w-[550px] w-full',
       header: '',
       showHeader: false,
@@ -132,17 +135,17 @@ export class App {
 
 
   openSideBar() {
-    this.openDialogConfirmation()
-    // this.sidebarDynamicService.open(
-    //   SideBar,
-    //   {
-    //     ...this.sideBarData,
-    //     title: 'Activity Log',
-    //     showSaveAndMoreBtn: false,
-    //     showSaveBtn: false,
-    //     showCancelBtn: false
-    //   },
+    // this.openDialogConfirmation()
+    this.sidebarDynamicService.open(
+      SideBar,
+      {
+        ...this.sideBarData,
+        title: 'Activity Log',
+        showSaveAndMoreBtn: false,
+        showSaveBtn: false,
+        showCancelBtn: false
+      },
 
-    // );
+    );
   }
 }
