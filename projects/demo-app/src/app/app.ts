@@ -110,14 +110,13 @@ export class App {
   openDialogConfirmation() {
     const ref = this.dialogService.open(ConfirmationDialogComponent, {
       data: {
+
         header: 'هل تريد حذف الجهة؟',
         message: 'سيتم حذف هذه الجهة نهائيًا ولن تكون متاحة في أي معاملات لاحقة. لن تتأثر المعاملات السابقة بهذا الإجراء. لا يمكن التراجع عن الحذف.',
-        confirmBtnClasses: 'w-[160px] h-[48px] rounded-lg border border-[#F44336] text-[#F44336] font-bold text-[16px] hover:bg-[#FFF5F5] transition',
-        cancelBtnClasses: 'w-[160px] h-[48px] rounded-lg border border-[#F44336] text-[#F44336] font-bold text-[16px] hover:bg-[#FFF5F5] transition',
-        headerIcon: 'icon-close',
+
         defaultIconBGColor: '#FFFBEA',
         confirmBtnStyle: 'min-w-[140px]',
-        defaultIcon: '',
+        mainIcon: 'icon-delete',
         cancelBtnLabel: 'تراجع',
         confirmBtnLabel: 'تاكيد الحذف'
       },
@@ -135,7 +134,7 @@ export class App {
 
 
   openSideBar() {
-    // this.openDialogConfirmation()
+    this.openDialogConfirmation()
     this.sidebarDynamicService.open(
       SideBar,
       {
