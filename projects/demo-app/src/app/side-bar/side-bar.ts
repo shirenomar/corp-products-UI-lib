@@ -16,7 +16,6 @@ export class SideBar {
   });
   getFormControl = FormUtils.getFormControl;
   onSubmit(){
-    debugger
     console.log(this.form.value);
   }
   close() {
