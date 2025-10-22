@@ -3,4 +3,9 @@
 
         <stc-input [control]="getFormControl('search', form)" [label]="''" [placeholder]="'ابحث'"
           [hideOptionalLabel]="true" />
+
+            <div class="flex gap-4 justify-between mt-auto">
+    <app-button class="w-full" label="إضافة جهة" styleClass="min-w-[225px]"  severity="danger" iconPos="left" icon="pi pi-plus" (click)="onSubmit()"></app-button>
+     <app-button label="إلغاء" severity="warn"  variant="outlined" (click)="close()"></app-button>
+  </div>
 </div>

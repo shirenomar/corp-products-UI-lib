@@ -42,9 +42,8 @@
       [iconPos]="dynamicDialogConfig.data.confirmBtnPosition || 'left'"
       [styleClass]="dynamicDialogConfig.data.confirmBtnStyle ||'primary'" (click)="submit()" />
     <app-button [title]="dynamicDialogConfig.data?.closeLabel ||  ('actions.cancel' | translate)" class="w-[50%]"
-      severity="warn"  variant="outlined"
-      [label]="dynamicDialogConfig.data.cancelBtnLabel" [styleClass]="'secondary min-w-[140px]'"
-      (click)="close()" />
+      severity="warn"  variant="outlined" [label]="dynamicDialogConfig.data.cancelBtnLabel"
+       [styleClass]="'secondary min-w-[140px]'" (click)="close()" />
   </div>
 </div>
 }

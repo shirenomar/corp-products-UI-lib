@@ -135,7 +135,7 @@ export class App {
 
 
   openSideBar() {
-    this.openDialogConfirmation()
+    // this.openDialogConfirmation()
     this.sidebarDynamicService.open(
       SideBar,
       {

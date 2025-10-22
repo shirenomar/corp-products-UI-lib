@@ -60,6 +60,7 @@ export class DynamicSidebarService {
     this.contentComponentData = data;
     this.sidebarConfig = {...this.getDefaultConfig(), ...config};
 
+    debugger
     this.componentRef = createComponent(SideBarDynamicComponent, {
       environmentInjector: this.environmentInjector,
     });
