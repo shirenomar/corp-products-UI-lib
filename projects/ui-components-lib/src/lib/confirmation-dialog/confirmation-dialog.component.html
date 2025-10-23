@@ -1,12 +1,12 @@
 @if (dynamicDialogConfig.data) {
 <div class="dialog-wrapper">
-  <div class="bg-gray-150 p-4 ">
+  <div class="bg-gray-150 ">
 
-    <app-button (click)="close()" icon="icon-close" [styleClass]="'secondary'" variant="text" />
+    <app-button (click)="close()" icon="icon-close"  label="" variant="text" />
     <div class="flex-grow  gap-2 header-content">
-      @if (dynamicDialogConfig.data.headerIcon) {
+      @if (dynamicDialogConfig.data.mainIcon) {
         <div class="header-icon flex justify-center align-center">
-          <i [class]="dynamicDialogConfig.data.headerIcon"></i>
+          <i [class]="dynamicDialogConfig.data.mainIcon"></i>
         </div>
 
       }
@@ -26,7 +26,7 @@
       {{ dynamicDialogConfig.data.message }}
     </div>
     @if (dynamicDialogConfig.data.hint) {
-    <div class="font-bold text-[14px] mt-2">
+    <div class="font-bold text-[14px]">
       {{ dynamicDialogConfig.data.hint }}
     </div>
     }
