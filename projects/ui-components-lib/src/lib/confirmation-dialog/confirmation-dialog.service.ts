@@ -6,6 +6,8 @@ import { ConfirmationDialogComponent } from './confirmation-dialog.component';
 export interface ConfirmationDialogData {
   header: string;
   message: string;
+  confirmBtnId: string;
+  cancelBtnId: string;
   mainIcon?: string;
   cancelBtnLabel?: string;
   confirmBtnLabel?: string;
@@ -20,19 +22,7 @@ export interface ConfirmationDialogData {
 export class ConfirmationDialogService {
   constructor(private dialogService: DialogService) {}
 
-  open(data: {
-    header: string;
-    message: string;
-    confirmBtnId : string;
-    cancelBtnId : string;
-    mainIcon?: string;
-    cancelBtnLabel?: string;
-    confirmBtnLabel?: string;
-    confirmBtnIcon?: string;
-    confirmBtnPosition?: string;
-    hint?: string;
-    inputForm?: any;
-  }): Observable<boolean> {
+  open(data: ConfirmationDialogData): Observable<boolean> {
     const ref: DynamicDialogRef = this.dialogService.open(ConfirmationDialogComponent, {
       data,
       header: '',
