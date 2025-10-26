@@ -25,12 +25,7 @@ export abstract class BaseInputComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.inputId = `input-${this.name + '-' + Math.random().toString(36).substring(7)}`;
-    this.control.valueChanges.pipe(takeUntil(this.destroy$)).subscribe((v) => {
-      if (v) {
-        this.control.markAsTouched();
-      }
-    });
+
   }
 
   ngOnDestroy(): void {
