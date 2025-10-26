@@ -37,12 +37,12 @@
   }
   <div class="p-4 flex gap-2 justify-center" dir="rtl">
     <app-button [title]="dynamicDialogConfig.data?.confirmLabel || ('actions.confirm' | translate)" class="w-[50%]"
-      [disabled]="!!(dialogFormData && dialogFormData.formGroup?.invalid)" severity="danger"
+      [disabled]="!!(dialogFormData && dialogFormData.formGroup?.invalid)" severity="danger" [id]="dynamicDialogConfig.data.confirmBtnId"
       [icon]="dynamicDialogConfig.data.confirmBtnIcon || ''" [label]="dynamicDialogConfig.data.confirmBtnLabel"
       [iconPos]="dynamicDialogConfig.data.confirmBtnPosition || 'left'"
       [styleClass]="'min-w-[140px]'" (click)="submit()" />
     <app-button [title]="dynamicDialogConfig.data?.closeLabel ||  ('actions.cancel' | translate)" class="w-[50%]"
-      severity="warn"  variant="outlined" [label]="dynamicDialogConfig.data.cancelBtnLabel"
+      severity="warn"  variant="outlined" [label]="dynamicDialogConfig.data.cancelBtnLabel" [id]="dynamicDialogConfig.data.cancelBtnId"
        [styleClass]="'secondary min-w-[140px]'" (click)="close()" />
   </div>
 </div>
