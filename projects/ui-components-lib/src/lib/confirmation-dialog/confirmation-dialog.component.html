@@ -40,7 +40,7 @@
       [disabled]="!!(dialogFormData && dialogFormData.formGroup?.invalid)" severity="danger"
       [icon]="dynamicDialogConfig.data.confirmBtnIcon || ''" [label]="dynamicDialogConfig.data.confirmBtnLabel"
       [iconPos]="dynamicDialogConfig.data.confirmBtnPosition || 'left'"
-      [styleClass]="dynamicDialogConfig.data.confirmBtnStyle ||'primary'" (click)="submit()" />
+      [styleClass]="'min-w-[140px]'" (click)="submit()" />
     <app-button [title]="dynamicDialogConfig.data?.closeLabel ||  ('actions.cancel' | translate)" class="w-[50%]"
       severity="warn"  variant="outlined" [label]="dynamicDialogConfig.data.cancelBtnLabel"
        [styleClass]="'secondary min-w-[140px]'" (click)="close()" />

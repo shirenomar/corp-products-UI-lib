@@ -113,15 +113,11 @@ export class App {
 
         header: 'هل تريد حذف الجهة؟',
         message: 'سيتم حذف هذه الجهة نهائيًا ولن تكون متاحة في أي معاملات لاحقة. لن تتأثر المعاملات السابقة بهذا الإجراء. لا يمكن التراجع عن الحذف.',
-
-        defaultIconBGColor: '#FFFBEA',
-        confirmBtnStyle: 'min-w-[140px]',
         mainIcon: 'icon-delete',
         cancelBtnLabel: 'تراجع',
         confirmBtnLabel: 'تاكيد الحذف'
       },
       style: { 'max-width': '550px', width: '100%' ,'display': 'flex', 'justify-content': 'center', 'align-item': 'center' },
-      styleClass: 'no-default-header max-w-[550px] w-full',
       header: '',
       showHeader: false,
       closable: false
