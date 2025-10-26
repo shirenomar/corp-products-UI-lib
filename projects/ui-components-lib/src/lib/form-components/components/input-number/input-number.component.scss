@@ -1,0 +1,29 @@
+.stc-input-number {
+  display: block;
+}
+
+.stc-input-number .label-row {
+  margin-bottom: 0.25rem;
+}
+
+.stc-input-number label {
+  color: #687078;
+}
+
+.stc-input-number .required {
+  color: #ef4444;
+  margin-right: 4px;
+}
+
+.stc-input-number .hint {
+  margin-top: 0.25rem;
+  font-size: 0.75rem;
+  color: #6b7280;
+}
+
+.stc-input-number .error {
+  display: block;
+  margin-top: 0.25rem;
+  font-size: 0.75rem;
+  color: #ef4444;
+}

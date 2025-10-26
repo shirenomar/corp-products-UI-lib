@@ -2,6 +2,7 @@ export * from './@utils/form-utils';
 export * from './@utils/validations';
 export * from './components/auto-complete/auto-complete.component';
 export * from './components/date-picker/date-picker.component';
+export * from './components/input-number/input-number.component';
 export * from './components/input/input.component';
 export * from './components/select-button/select-button.component';
 export * from './components/select/select.component';

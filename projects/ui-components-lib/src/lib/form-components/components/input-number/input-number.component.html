@@ -1,0 +1,30 @@
+<div class="stc-input-number" [ngClass]="wrapperClass">
+  <div class="label-row" *ngIf="label">
+    <label [for]="inputId || name" [ngClass]="labelClass">
+      {{ label }}
+      <span *ngIf="isRequired" class="required">*</span>
+    </label>
+  </div>
+
+
+  <p-inputNumber [formControl]="control" [inputId]="inputId" [showButtons]="showButtons" [format]="format"
+    [buttonLayout]="buttonLayout" [styleClass]="styleClass" [placeholder]="placeholder" [size]="size()"
+    [maxlength]="maxlength()" [tabindex]="tabindex" [title]="title" [ariaLabelledBy]="ariaLabelledBy"
+    [ariaLabel]="ariaLabel" [ariaRequired]="ariaRequired" [name]="name()" [required]="required()"
+    [autocomplete]="autocomplete" [min]="min()" [max]="max()" [incrementButtonClass]="incrementButtonClass"
+    [decrementButtonClass]="decrementButtonClass" [incrementButtonIcon]="incrementButtonIcon"
+    [decrementButtonIcon]="decrementButtonIcon" [readonly]="readonly" [step]="step()" [allowEmpty]="allowEmpty"
+    [locale]="locale" [localeMatcher]="localeMatcher" [mode]="mode" [currency]="currency"
+    [currencyDisplay]="currencyDisplay" [useGrouping]="useGrouping" [variant]="variant()"
+    [minFractionDigits]="minFractionDigits" [maxFractionDigits]="maxFractionDigits" [prefix]="prefix" [suffix]="suffix"
+    [inputStyle]="inputStyle" [inputStyleClass]="inputStyleClass" [showClear]="showClear" [autofocus]="autofocus"
+    [disabled]="disabled()" (onInput)="onInput.emit($event)" (onFocus)="onFocus.emit($event)"
+    (onBlur)="onBlur.emit($event)" (onKeyDown)="onKeyDown.emit($event)"
+    (onClear)="onClear.emit($event)"></p-inputNumber>
+
+  <p class="hint" *ngIf="hint">{{ hint }}</p>
+
+  <small class="error" *ngIf="control.touched && isInvalid">
+    {{ (control.errors ?? null) | validationErrors }}
+  </small>
+</div>
