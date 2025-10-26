@@ -133,17 +133,17 @@ export class App {
 
   openSideBar() {
     // this.openDialogConfirmation()
-    // this.sidebarDynamicService.open(
-    //   SideBar,
-    //   {
-    //     ...this.sideBarData,
-    //     title: 'Activity Log',
-    //     showSaveAndMoreBtn: false,
-    //     showSaveBtn: false,
-    //     showCancelBtn: false
-    //   },
+    this.sidebarDynamicService.open(
+      SideBar,
+      {
+        ...this.sideBarData,
+        title: 'Activity Log',
+        showSaveAndMoreBtn: false,
+        showSaveBtn: false,
+        showCancelBtn: false
+      },
 
-    // );
+    );
       this.confirmationDialogService.open({
       header: 'هل تريد حذف الجهة؟',
       message:
