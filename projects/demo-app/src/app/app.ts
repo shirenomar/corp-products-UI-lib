@@ -112,12 +112,12 @@ export class App {
       data: {
 
         header: 'هل تريد حذف الجهة؟',
-        message: 'سيتم حذف هذه الجهة نهائيًا ولن تكون متاحة في أي معاملات لاحقة. لن تتأثر المعاملات السابقة بهذا الإجراء. لا يمكن التراجع عن الحذف.',
-        mainIcon: 'icon-delete',
+      message: 'لن يتم حفظ أي تغييرات قمت بها على هذا الصف.',
+         mainIcon: 'icon-delete',
         cancelBtnLabel: 'تراجع',
         confirmBtnLabel: 'تاكيد الحذف'
       },
-      style: { 'max-width': '550px', width: '100%' ,'display': 'flex', 'justify-content': 'center', 'align-item': 'center' },
+      style: { 'max-width': '550px', width: '100%'  },
       header: '',
       showHeader: false,
       closable: false
