@@ -2,7 +2,6 @@ textarea,
 .p-select {
   border-radius: 0;
   border-color: #DFE0E6;
-  max-height: 45px;
 
   &:enabled {
     &:hover {
@@ -29,8 +28,8 @@ textarea,
 }
 .p-select {
   .p-select-label {
-    padding-block-end: 0.5rem !important;
-    padding-block-start: 0.5rem !important;
+    padding-block-end: 1rem !important;
+    padding-block-start: 1rem !important;
   }
 }
 

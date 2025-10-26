@@ -39,6 +39,8 @@ export class SelectComponent extends BaseInputComponent {
   @Input() filter = false;
   @Input() multiple = false;
   @Input() filterBy!: string;
+  @Input() size: 'small' | 'large' = "small";
+
   @Input() selectedItemsLabel!: string;
   @Input() basicInput!: boolean;
   @Input() variant: 'in' | 'over' | 'on' = 'over';

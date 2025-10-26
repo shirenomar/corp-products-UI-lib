@@ -1,4 +1,4 @@
-import { Component, ViewEncapsulation } from '@angular/core';
+import { Component, Input, ViewEncapsulation } from '@angular/core';
 import { Button, ButtonModule, ButtonStyle } from 'primeng/button';
 
 @Component({

@@ -26,6 +26,7 @@ import { BaseInputComponent } from '../base-input.component';
 export class InputComponent extends BaseInputComponent {
   @Input() type: 'text' | 'textarea' = 'text';
   @Input() contentType: 'text' | 'email' | 'number' = 'text';
+  @Input() size: 'small' | 'large' = "small";
   @Input() prefix: string;
   @Input() rows = 2;
   @Input() cols = 20;
