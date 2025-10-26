@@ -111,6 +111,7 @@ export class App {
     const ref = this.dialogService.open(ConfirmationDialogComponent, {
       data: {
 
+
         header: 'هل تريد حذف الجهة؟',
       message: 'لن يتم حفظ أي تغييرات قمت بها على هذا الصف.',
          mainIcon: 'icon-delete',
