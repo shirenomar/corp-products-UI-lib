@@ -16,3 +16,6 @@ export * from './lib/app-breadcrumb/app-breadcrumb.component';
 export * from './lib/app-breadcrumb/app-breadcrumb.interface';
 export * from './lib/side-bar-dynamic/dynamic-sidebar.service';
 export * from './lib/side-bar-dynamic/sidebar-config';
+export * from './lib/confirmation-dialog/confirmation-dialog.service';
+export * from './lib/confirmation-dialog/confirmation-dialog.interface';
+

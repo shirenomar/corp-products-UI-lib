@@ -1,8 +1,8 @@
 @if (dynamicDialogConfig.data) {
-<div class="dialog-wrapper w-full max-w-full  flex flex-column justify-center align-center">
-  <div class="bg-gray-150 ">
+<div class="dialog-wrapper w-full max-w-full  flex flex-column justify-center align-center confirmation-dialog">
+  <div class="bg-gray-150 w-full">
 
-    <app-button (click)="close()" icon="icon-close"  label="" variant="text" />
+    <app-button (click)="close()" icon="icon-close" class="close-btn"  label="" variant="text" />
     <div class="flex-grow  gap-2 header-content">
       @if (dynamicDialogConfig.data.mainIcon) {
         <div class="header-icon flex justify-center align-center">
@@ -40,10 +40,10 @@
       [disabled]="!!(dialogFormData && dialogFormData.formGroup?.invalid)" severity="danger" [id]="dynamicDialogConfig.data.confirmBtnId"
       [icon]="dynamicDialogConfig.data.confirmBtnIcon || ''" [label]="dynamicDialogConfig.data.confirmBtnLabel"
       [iconPos]="dynamicDialogConfig.data.confirmBtnPosition || 'left'"
-      [styleClass]="'min-w-[140px]'" (click)="submit()" />
+      [styleClass]="'confirmation-btn'" (click)="submit()" />
     <app-button [title]="dynamicDialogConfig.data?.closeLabel ||  ('actions.cancel' | translate)" class="w-[50%]"
       severity="warn"  variant="outlined" [label]="dynamicDialogConfig.data.cancelBtnLabel" [id]="dynamicDialogConfig.data.cancelBtnId"
-       [styleClass]="'secondary min-w-[140px]'" (click)="close()" />
+       [styleClass]="'cancel-btn confirmation-btn cancel-btn'" (click)="close()" />
   </div>
 </div>
 }

@@ -1,38 +1,71 @@
-.no-default-header .p-dialog-header {
-  display: none !important;
-}
-.header-content {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-.text-center {
-  text-align: center;
-}
-.flex {
-  display: flex;
-}
-.flex-column {
-  flex-direction: column;
-}
-.justify-center {
-  justify-content: center;
-}
-.align-center {
-  align-items: center;
-}
-.header-icon {
-  width: 72px;
-  height: 72px;
-  border-radius: 50%;
-  background-color: #BF374726;
-  font-size: 26px;
+.confirmation-dialog {
+  .no-default-header .p-dialog-header {
+    display: none !important;
+  }
 
-}
-.mt-2 {
-  margin-bottom: 2rem;
-}
+  .header-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
 
-.gap-2 {
-  gap: 0.5rem;
+  .text-center {
+    text-align: center;
+  }
+
+  .flex {
+    display: flex;
+  }
+
+  .flex-column {
+    flex-direction: column;
+  }
+
+  .justify-center {
+    justify-content: center;
+  }
+
+  .align-center {
+    align-items: center;
+  }
+
+  .header-icon {
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    background-color: #BF374726;
+    font-size: 26px;
+
+  }
+
+  .mt-2 {
+    margin-bottom: 2rem;
+  }
+
+  .gap-2 {
+    gap: 0.5rem;
+  }
+
+  .confirmation-btn {
+    min-width: 140px;
+
+  }
+
+  .cancel-btn {
+    border-color: #FF375F;
+    color: #FF375F;
+
+  }
+
+  .close-btn {
+    button {
+      background-color: transparent;
+      color: inherit;
+
+      &:not(:disabled):hover {
+        color: inherit;
+        background: inherit;
+      }
+    }
+  }
 }

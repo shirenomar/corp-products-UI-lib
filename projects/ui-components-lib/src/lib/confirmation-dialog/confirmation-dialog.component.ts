@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit, inject } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewEncapsulation, inject } from '@angular/core';
 import { NavigationStart, Router } from '@angular/router';
 import { AvatarModule } from 'primeng/avatar';
 import { filter, Subscription } from 'rxjs';
@@ -17,6 +17,7 @@ import { TranslatePipe } from '@ngx-translate/core';
   selector: 'app-confirm-dialog',
   templateUrl: './confirmation-dialog.component.html',
   styleUrls: ['./confirmation-dialog.component.scss'],
+  encapsulation: ViewEncapsulation.None,
   standalone: true,
   imports: [
     AppButtonComponent,

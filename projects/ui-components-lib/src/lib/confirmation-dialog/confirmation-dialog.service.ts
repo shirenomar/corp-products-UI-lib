@@ -3,19 +3,8 @@ import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { Observable } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
 import { ConfirmationDialogComponent } from './confirmation-dialog.component';
-export interface ConfirmationDialogData {
-  header: string;
-  message: string;
-  confirmBtnId: string;
-  cancelBtnId: string;
-  mainIcon?: string;
-  cancelBtnLabel?: string;
-  confirmBtnLabel?: string;
-  confirmBtnIcon?: string;
-  confirmBtnPosition?: string;
-  hint?: string;
-  inputForm?: any;
-}
+import { ConfirmationDialogData } from './confirmation-dialog.interface';
+
 @Injectable({
   providedIn: 'root'
 })
