@@ -4,6 +4,7 @@ export interface ConfirmationDialogData {
   confirmBtnId: string;
   cancelBtnId: string;
   mainIcon?: string;
+  mainIconClass?: string;
   cancelBtnLabel?: string;
   confirmBtnLabel?: string;
   confirmBtnIcon?: string;
