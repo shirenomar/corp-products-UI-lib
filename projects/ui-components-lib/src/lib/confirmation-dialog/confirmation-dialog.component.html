@@ -1,5 +1,6 @@
 @if (dynamicDialogConfig.data) {
-<div class="dialog-wrapper w-full max-w-full  flex flex-column justify-center align-center confirmation-dialog">
+<div class="confirmation-dialog">
+  <div class="dialog-wrapper w-full max-w-full  flex flex-column justify-center align-center ">
   <div class="bg-gray-150 w-full">
 
     <app-button (click)="close()" icon="icon-close" class="close-btn"  label="" variant="text" />
@@ -46,5 +47,7 @@
       severity="warn"  variant="outlined" [label]="dynamicDialogConfig.data.cancelBtnLabel" [id]="dynamicDialogConfig.data.cancelBtnId"
        [styleClass]="'cancel-btn confirmation-btn cancel-btn'" (click)="close()" />
   </div>
+</div>
+
 </div>
 }
