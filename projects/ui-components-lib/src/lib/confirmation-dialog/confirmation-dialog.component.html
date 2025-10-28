@@ -6,8 +6,7 @@
       <app-button (click)="close()" icon="icon-close" class="close-btn" label="" variant="text" />
       <div class="flex-grow  gap-2 header-content">
         @if (dynamicDialogConfig.data.mainIcon) {
-        <div
-          [class]="'header-icon flex justify-center align-center' + (dynamicDialogConfig.data.iconContainerClass || '')">
+        <div [class]="'header-icon flex justify-center align-center' + (dynamicDialogConfig.data.mainIconClass || '')">
           <i [class]="dynamicDialogConfig.data.mainIcon"></i>
         </div>
 
