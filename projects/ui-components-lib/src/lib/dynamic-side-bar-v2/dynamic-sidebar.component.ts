@@ -28,6 +28,7 @@ export class DynamicSidebarComponent implements AfterViewInit, OnDestroy {
   @Input() component!: Type<any>;
   @Input() data?: any;
   @Input() title = '';
+  @Input() actionName?: string;
   @Input() sidebarSize: 'sm' | 'md' | 'lg' = 'md';
   @Input() closable = true;
   @Input() closeOnEscape = true;

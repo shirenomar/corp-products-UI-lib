@@ -16,8 +16,8 @@
   </ng-template>
   <ng-template pTemplate="footer">
     <div class="flex gap-4 justify-between mt-4">
-      <app-button [label]="'shared.buttons.submit' | translate" severity="danger" iconPos="left"
-        icon="pi pi-plus" (click)="handleSubmit()" [disabled]="(data.form && data.form.invalid)"/>
+      <app-button [label]="actionName || ('shared.buttons.submit' | translate)" severity="danger"
+        (click)="handleSubmit()" [disabled]="(data.form && data.form.invalid)"/>
       <app-button [label]="'shared.buttons.cancel' | translate" severity="secondary" variant="outlined" (click)="handleClose()"/>
     </div>
   </ng-template>
