@@ -14,8 +14,8 @@ export * from './lib/form-components';
 export * from './lib/user-autocomplete-card/user-autocomplete-card.component';
 export * from './lib/app-breadcrumb/app-breadcrumb.component';
 export * from './lib/app-breadcrumb/app-breadcrumb.interface';
-export * from './lib/side-bar-dynamic/dynamic-sidebar.service';
-export * from './lib/side-bar-dynamic/sidebar-config';
+export * from './lib/dynamic-side-bar/dynamic-sidebar.service';
+export * from './lib/dynamic-side-bar/dynamic-sidebar.config';
 export * from './lib/confirmation-dialog/confirmation-dialog.service';
 export * from './lib/confirmation-dialog/confirmation-dialog.interface';
 
