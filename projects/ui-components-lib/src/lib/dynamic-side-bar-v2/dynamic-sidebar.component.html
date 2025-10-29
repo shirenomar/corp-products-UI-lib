@@ -1,0 +1,24 @@
+<p-drawer
+  [(visible)]="show"
+  [position]="position"
+  appendTo="body"
+  [closable]="closable"
+  [closeOnEscape]="closeOnEscape"
+  [dismissible]="dismissible"
+  (onHide)="handleClose()"
+  [position]="'left'"
+  [styleClass]="'p-drawer-' + sidebarSize + ' custom-content bg-white ' + styleClass">
+  <ng-template pTemplate="header">
+    <p class="truncate" [pTooltip]="title">{{ title }}</p>
+  </ng-template>
+  <ng-template pTemplate="content">
+    <ng-template #contentContainer></ng-template>
+  </ng-template>
+  <ng-template pTemplate="footer">
+    <div class="flex gap-4 justify-between mt-4">
+      <app-button [label]="actionName || ('actions.submit' | translate)" severity="danger"
+        (click)="handleSubmit()" [disabled]="(data.form && data.form.invalid)"/>
+      <app-button [label]="'actions.cancel' | translate" severity="secondary" variant="outlined" (click)="handleClose()"/>
+    </div>
+  </ng-template>
+</p-drawer>
