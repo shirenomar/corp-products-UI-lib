@@ -3,3 +3,17 @@
     min-width: 550px;
   }
 }
+
+.p-drawer-{
+  &.p-drawer-sm {
+    width: clamp(28rem, 100vw, 30rem);
+  }
+
+  &.p-drawer-lg {
+    width: clamp(43rem, 58vw, 58rem);
+  }
+
+  &.p-drawer-xl {
+    width: clamp(calc(100vw - 330px), 70vw, 200px);
+  }
+}
