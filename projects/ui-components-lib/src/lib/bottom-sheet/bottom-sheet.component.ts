@@ -14,8 +14,6 @@ import { TooltipModule } from "primeng/tooltip";
 })
 export class BottomSheetComponent {
   @Input() show = false;
-  @Input() title: string;
-  @Input() styleClass = "";
   @Input() contentTemplate!: TemplateRef<unknown>;
 
   @Output() onHide = new EventEmitter<boolean>();
