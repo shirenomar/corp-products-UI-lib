@@ -1,3 +1,4 @@
+import { AppButtonComponent } from './../app-button/app-button.component';
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { CommonModule } from '@angular/common';
 import {
@@ -11,10 +12,10 @@ import {
   ViewChild,
   ViewContainerRef
 } from '@angular/core';
-import { AppButtonComponent } from '@corp-products/ui-components';
 import { TranslatePipe } from '@ngx-translate/core';
 import { DrawerModule } from 'primeng/drawer';
 import { TooltipModule } from "primeng/tooltip";
+import { SidebarActions } from './dynamic-sidebar.config';
 
 @Component({
   selector: "app-dynamic-sidebar",
@@ -28,7 +29,7 @@ export class DynamicSidebarComponent implements AfterViewInit, OnDestroy {
   @Input() component!: Type<any>;
   @Input() data?: any;
   @Input() title = '';
-  @Input() actionName?: string;
+  @Input() actions?: SidebarActions;
   @Input() sidebarSize: 'sm' | 'md' | 'lg' = 'md';
   @Input() closable = true;
   @Input() closeOnEscape = true;
@@ -64,6 +65,10 @@ export class DynamicSidebarComponent implements AfterViewInit, OnDestroy {
   }
 
   handleSubmit() {
+    if(this.data.form) {
+      this.data.form.markAllAsTouched();
+      if(this.data.form.invalid) return;
+    }
     if(this.contentRef.instance.submit) this.contentRef.instance.submit();
   }
 
