@@ -1,0 +1,18 @@
+<p-drawer
+  (onHide)="hideBottomSheet()"
+  (onShow)="onShow.emit($event)"
+  [(visible)]="show"
+  [closable]="false"
+  [ngClass]="{ show: show }"
+  [position]="'bottom'"
+  appendTo="body"
+  >
+  <ng-template pTemplate="header">
+    <div class="band"></div>
+  </ng-template>
+  @if (contentTemplate) {
+    <ng-template pTemplate="content">
+      <ng-container *ngTemplateOutlet="contentTemplate"></ng-container>
+    </ng-template>
+  }
+</p-drawer>
