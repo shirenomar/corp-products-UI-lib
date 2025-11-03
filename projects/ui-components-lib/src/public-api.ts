@@ -18,4 +18,4 @@ export * from './lib/side-bar-dynamic/dynamic-sidebar.service';
 export * from './lib/side-bar-dynamic/sidebar-config';
 export * from './lib/confirmation-dialog/confirmation-dialog.service';
 export * from './lib/confirmation-dialog/confirmation-dialog.interface';
-
+export * from './lib/bottom-sheet/bottom-sheet.component';

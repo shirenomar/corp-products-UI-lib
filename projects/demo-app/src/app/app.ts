@@ -15,17 +15,18 @@ import { InputComponent } from './../../../ui-components-lib/src/lib/form-compon
 import { SelectComponent } from './../../../ui-components-lib/src/lib/form-components/components/select/select.component';
 import { DynamicSidebarService } from './../../../ui-components-lib/src/lib/side-bar-dynamic/dynamic-sidebar.service';
 import { DatePickerComponent } from './../../../ui-components-lib/src/lib/form-components/components/date-picker/date-picker.component';
-import { AppButtonComponent, AppBreadcrumbComponent } from '@corp-products/ui-components';
+import { AppButtonComponent, AppBreadcrumbComponent, BottomSheetComponent } from '@corp-products/ui-components';
 import { ConfirmationDialogComponent } from './../../../ui-components-lib/src/lib/confirmation-dialog/confirmation-dialog.component';
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, AppBreadcrumbComponent, InputComponent, ReactiveFormsModule, SelectComponent, DatePickerComponent, AppButtonComponent, AppButtonComponent],
+  imports: [RouterOutlet, AppBreadcrumbComponent, InputComponent, ReactiveFormsModule, SelectComponent, DatePickerComponent, AppButtonComponent, AppButtonComponent , BottomSheetComponent],
   providers: [DialogService, ConfirmationDialogService],
   templateUrl: './app.html',
   styleUrl: './app.scss',
   encapsulation: ViewEncapsulation.None,
 })
 export class App {
+  show = false;
   protected readonly title = signal('demo-app');
 
   form2: FormGroup = new FormGroup({
@@ -163,4 +164,5 @@ export class App {
     });
 
   }
+
 }
