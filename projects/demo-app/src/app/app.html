@@ -8,9 +8,9 @@
 <form [formGroup]="form2">
 
   <stc-input [variant]="'in'" [contentType]="'text'" [label]="'Label'" [hideOptionalLabel]="true" [type]="'text'" [defaultColor]="'#DFE0E6'"
-    id="id" [control]="inputControl">
+    [inputId]="'input-id'" [control]="inputControl">
   </stc-input>
-  <stc-select [variant]="'in'" [defaultColor]="'#DFE0E6'" [label]="'Select Item'" id="selectId" [control]="selectControl" [options]="selectItems"
+  <stc-select [variant]="'in'" [inputId]="'select-id'"  [defaultColor]="'#DFE0E6'" [label]="'Select Item'" id="selectId" [control]="selectControl" [options]="selectItems"
     [multiple]="false" [optionLabel]="'name'" [showClear]="false">
   </stc-select>
 

@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit, inject } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewEncapsulation, inject } from '@angular/core';
 import { NavigationStart, Router } from '@angular/router';
 import { AvatarModule } from 'primeng/avatar';
 import { filter, Subscription } from 'rxjs';
@@ -17,6 +17,7 @@ import { TranslatePipe } from '@ngx-translate/core';
   selector: 'app-confirm-dialog',
   templateUrl: './confirmation-dialog.component.html',
   styleUrls: ['./confirmation-dialog.component.scss'],
+  encapsulation: ViewEncapsulation.None,
   standalone: true,
   imports: [
     AppButtonComponent,
@@ -40,7 +41,7 @@ export class ConfirmationDialogComponent implements OnInit, OnDestroy {
     this._subscription.add(
       this.router.events.pipe(filter((event) => event instanceof NavigationStart)).subscribe(() => {
         if (this.dynamicDialogConfig) {
-          this._ref.close();
+          this._ref.close(false);
         }
       })
     );
@@ -52,11 +53,14 @@ export class ConfirmationDialogComponent implements OnInit, OnDestroy {
   }
 
   submit() {
-    const submitData = { submitted: true, data: this.dialogFormData?.formGroup?.value };
-    this._ref.close(this.dynamicDialogConfig.data.inputForm ? submitData : true);
+    // we should pass submitted data when using form dialog
+    // const submitData = { submitted: true, data: this.dialogFormData?.formGroup?.value };
+    // this._ref.close(this.dynamicDialogConfig.data.inputForm ? submitData : true);
+    this._ref.close(true);
+
   }
 
   close() {
-    this._ref.close();
+    this._ref.close(false);
   }
 }

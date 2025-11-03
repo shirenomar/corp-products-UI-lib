@@ -1,3 +1,33 @@
 textarea {
-    @apply h-auto min-h-[50px] overflow-auto;
+  @apply h-auto min-h-[50px] overflow-auto;
+}
+
+
+textarea,
+.p-select, input {
+  border-radius: 0 ;
+  border-color: #DFE0E6 ;
+
+  &:enabled {
+    &:hover {
+      border-color: #DFE0E6 ;
+    }
   }
+
+  &:not(.p-disabled).p-focus,
+  &:not(.p-disabled).p-focus:hover,
+  &:focus {
+    outline: #DFE0E6 ;
+    border-color: #DFE0E6 ;
+  }
+}
+.p-floatlabel:has(input:focus) label,
+.p-floatlabel:has(input:-webkit-autofill) label,
+.p-floatlabel:has(textarea:focus) label,
+.p-floatlabel:has(.p-inputwrapper-focus) label {
+      color: #687078;
+
+}
+.p-inputtext:enabled:focus {
+  border-color: #DFE0E6 ;
+}

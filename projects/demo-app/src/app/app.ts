@@ -1,14 +1,14 @@
 import { Component, inject, signal, ViewEncapsulation } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 
-import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 
 import { FloatLabelModule } from 'primeng/floatlabel';
 import { InputText } from 'primeng/inputtext';
 import { BreadcrumbItem } from '../../../ui-components-lib/src/lib/app-breadcrumb/app-breadcrumb.interface';
 import { SideBar } from './side-bar/side-bar';
 import { DialogService } from 'primeng/dynamicdialog';
-import { ConfirmationDialogComponent } from './../../../ui-components-lib/src/lib/confirmation-dialog/confirmation-dialog.component';
+import { ConfirmationDialogService } from './../../../ui-components-lib/src/lib/confirmation-dialog/confirmation-dialog.service';
 
 import { SidebarConfig, SidebarConfigDefaults } from './../../../ui-components-lib/src/lib/side-bar-dynamic/sidebar-config';
 import { InputComponent } from './../../../ui-components-lib/src/lib/form-components/components/input/input.component';
@@ -16,10 +16,11 @@ import { SelectComponent } from './../../../ui-components-lib/src/lib/form-compo
 import { DynamicSidebarService } from './../../../ui-components-lib/src/lib/side-bar-dynamic/dynamic-sidebar.service';
 import { DatePickerComponent } from './../../../ui-components-lib/src/lib/form-components/components/date-picker/date-picker.component';
 import { AppButtonComponent, AppBreadcrumbComponent } from '@corp-products/ui-components';
+import { ConfirmationDialogComponent } from './../../../ui-components-lib/src/lib/confirmation-dialog/confirmation-dialog.component';
 @Component({
   selector: 'app-root',
   imports: [RouterOutlet, AppBreadcrumbComponent, InputComponent, ReactiveFormsModule, SelectComponent, DatePickerComponent, AppButtonComponent, AppButtonComponent],
-  providers: [DialogService],
+  providers: [DialogService, ConfirmationDialogService],
   templateUrl: './app.html',
   styleUrl: './app.scss',
   encapsulation: ViewEncapsulation.None,
@@ -29,7 +30,8 @@ export class App {
 
   form2: FormGroup = new FormGroup({
     search: new FormControl('')
-  });;
+  });
+  confirmationDialogService = inject(ConfirmationDialogService)
   dialogService = inject(DialogService);
   items: BreadcrumbItem[] = [
     {
@@ -84,7 +86,7 @@ export class App {
 
   sideBarData: SidebarConfig = SidebarConfigDefaults;
   dateControl: FormControl<any> = new FormControl({ value: null, disabled: false }, []);
-  inputControl: FormControl<any> = new FormControl();
+  inputControl: FormControl<any> = new FormControl('', [Validators.required]);
   selectControl: FormControl<any> = new FormControl(null, []);
   form: FormGroup = new FormGroup({
     inputControl: this.inputControl,
@@ -110,20 +112,18 @@ export class App {
   openDialogConfirmation() {
     const ref = this.dialogService.open(ConfirmationDialogComponent, {
       data: {
+
+
         header: 'هل تريد حذف الجهة؟',
-        message: 'سيتم حذف هذه الجهة نهائيًا ولن تكون متاحة في أي معاملات لاحقة. لن تتأثر المعاملات السابقة بهذا الإجراء. لا يمكن التراجع عن الحذف.',
-        confirmBtnClasses: 'w-[160px] h-[48px] rounded-lg border border-[#F44336] text-[#F44336] font-bold text-[16px] hover:bg-[#FFF5F5] transition',
-        cancelBtnClasses: 'w-[160px] h-[48px] rounded-lg border border-[#F44336] text-[#F44336] font-bold text-[16px] hover:bg-[#FFF5F5] transition',
-        headerIcon: 'icon-close',
-        defaultIconBGColor: '#FFFBEA',
-        defaultIcon: ''
+        message: 'لن يتم حفظ أي تغييرات قمت بها على هذا الصف.',
+        mainIcon: 'icon-delete',
+        cancelBtnLabel: 'تراجع',
+        confirmBtnLabel: 'تاكيد الحذف'
       },
       style: { 'max-width': '550px', width: '100%' },
-      styleClass: 'no-default-header max-w-[550px] w-full',
       header: '',
       showHeader: false,
-      closable: false
-
+      closable: false,
     });
     ref.onClose.subscribe((res) => {
       console.log(res);
@@ -132,17 +132,35 @@ export class App {
 
 
   openSideBar() {
-    this.openDialogConfirmation()
-    // this.sidebarDynamicService.open(
-    //   SideBar,
-    //   {
-    //     ...this.sideBarData,
-    //     title: 'Activity Log',
-    //     showSaveAndMoreBtn: false,
-    //     showSaveBtn: false,
-    //     showCancelBtn: false
-    //   },
+    // this.openDialogConfirmation()
+    this.sidebarDynamicService.open(
+      SideBar,
+      {
+        ...this.sideBarData,
+        title: 'Activity Log',
+        showSaveAndMoreBtn: false,
+        showSaveBtn: false,
+        showCancelBtn: false
+      },
 
-    // );
+    );
+      this.confirmationDialogService.open({
+      header: 'هل تريد حذف الجهة؟',
+      message:
+        'سيتم حذف هذه الجهة نهائيًا ولن تكون متاحة في أي معاملات لاحقة. لن تتأثر المعاملات السابقة بهذا الإجراء. لا يمكن التراجع عن الحذف.',
+      mainIcon: 'icon-delete',
+        confirmBtnId : 'confirm-id',
+    cancelBtnId : 'cancel-id',
+      cancelBtnLabel: 'تراجع',
+      confirmBtnLabel: 'تأكيد الحذف'
+    }).subscribe((confirmed) => {
+      if (confirmed) {
+        console.log('✅ User confirmed deletion');
+        // perform delete logic
+      } else {
+        console.log('❌ User canceled');
+      }
+    });
+
   }
 }
