@@ -15,7 +15,7 @@ import {
 import { TranslatePipe } from '@ngx-translate/core';
 import { DrawerModule } from 'primeng/drawer';
 import { TooltipModule } from "primeng/tooltip";
-import { SidebarActions } from './dynamic-sidebar.config';
+import { SidebarV2Actions } from './dynamic-sidebar.config';
 
 @Component({
   selector: "app-dynamic-sidebar",
@@ -29,7 +29,7 @@ export class DynamicSidebarComponent implements AfterViewInit, OnDestroy {
   @Input() component!: Type<any>;
   @Input() data?: any;
   @Input() title = '';
-  @Input() actions?: SidebarActions;
+  @Input() actions?: SidebarV2Actions;
   @Input() sidebarSize: 'sm' | 'md' | 'lg' = 'md';
   @Input() closable = true;
   @Input() closeOnEscape = true;

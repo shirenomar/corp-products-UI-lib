@@ -1,6 +1,6 @@
 import { ApplicationRef, ComponentRef, EnvironmentInjector, Injectable, Injector, createComponent, inject } from '@angular/core';
 import { DynamicSidebarComponent } from './dynamic-sidebar.component';
-import { DynamicSidebarConfig } from './dynamic-sidebar.config';
+import { DynamicSidebarV2Config } from './dynamic-sidebar.config';
 
 @Injectable({ providedIn: 'root' })
 export class DynamicSidebarV2Service {
@@ -9,7 +9,7 @@ export class DynamicSidebarV2Service {
   private readonly injector = inject(Injector);
   private readonly envInjector = inject(EnvironmentInjector);
 
-  open<T>(options: DynamicSidebarConfig<T>) {
+  open<T>(options: DynamicSidebarV2Config<T>) {
     this.close();
 
     this.sidebarRef = createComponent(DynamicSidebarComponent, {
