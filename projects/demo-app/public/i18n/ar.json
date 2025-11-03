@@ -2,7 +2,8 @@
   "HELLO": "مرحبا",
   "WELCOME": "أهلا",
   "actions": {
-    "save" : "حفظ",
-    "cancel" : "الغاء"
+    "save": "حفظ",
+    "cancel": "الغاء",
+    "submit": "تقديم"
   }
 }
