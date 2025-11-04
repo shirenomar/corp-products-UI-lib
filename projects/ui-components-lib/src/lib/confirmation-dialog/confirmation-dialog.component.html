@@ -2,7 +2,7 @@
 <div class="confirmation-dialog">
   <div class="dialog-wrapper w-full max-w-full">
     <div class="confirmation-dialog__header bg-gray-150 w-full">
-      <div class="flex-grow gap-2 header-content">
+      <div class="flex items-center justify-between">
         <app-button (click)="close()" icon="icon-close" class="close-btn" label="x" variant="text" [rounded]="true" />
         <p class="m-0 font-normal text-lg">
           {{ dynamicDialogConfig.data.header }}
