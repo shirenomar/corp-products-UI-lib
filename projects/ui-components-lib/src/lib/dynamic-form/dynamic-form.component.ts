@@ -51,10 +51,4 @@ export class DynamicFormComponent implements OnInit {
     this.inputsMap = this.dynamicFormData?.inputsMap as InputsMap;
     this.inputsNames = Object.keys(this.inputsMap || {});
   }
-
-  onSwitchChange(name: string, event: any) {
-    const value = typeof event === 'boolean' ? event : event === 'true';
-    this.getFormControl(name, this.formGroup).setValue(value);
-    this.switchChange.emit({ name, value });
-  }
 }
