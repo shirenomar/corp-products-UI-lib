@@ -1,8 +1,8 @@
-import {FormGroup} from "@angular/forms";
-import {LabelValue} from "../form-components";
+import { FormGroup } from '@angular/forms';
+import { LabelValue } from '../form-components';
 
-export type InputType = "text" | "textarea";
-export type InputContentType = "text" | "email" | "password" | "number";
+export type InputType = 'text' | 'textarea';
+export type InputContentType = 'text' | 'email' | 'number';
 
 export interface Dropdown<T = unknown> {
   id?: string;
@@ -15,9 +15,13 @@ export interface Dropdown<T = unknown> {
 export interface InputsMapData {
   // General props
   label: string;
-  rowSize?: "half" | "full";
+  rowSize?: 'half' | 'full';
   fieldType: FormFieldTypeEnum;
   inputId?: string;
+  placeholder?: string;
+  hint?: string;
+  readonly?: boolean;
+  disabled?: boolean;
 
   // Date
   dateRange?: DateRangeInterface;
@@ -26,6 +30,31 @@ export interface InputsMapData {
 
   //select button
   selectButtonOptions?: LabelValue<any>[];
+
+  // Input (text/textarea)
+  inputType?: InputType;
+  contentType?: InputContentType;
+  rows?: number;
+  cols?: number;
+  autoResize?: boolean;
+  prefix?: string;
+  size?: 'small' | 'large';
+  variant?: 'in' | 'over' | 'on';
+
+  // Select dropdown
+  selectOptions?: unknown[]; // Array of objects or primitives
+  optionLabel?: string; // property name to display when options are objects
+  filter?: boolean;
+  multiple?: boolean;
+  showClear?: boolean;
+  checkmark?: boolean;
+  filterBy?: string;
+  selectedItemsLabel?: string;
+
+  // Auto-complete
+  autoCompleteItems?: unknown[];
+  minLengthToSearch?: number;
+  delay?: number;
 }
 
 export interface InputsMap {
@@ -51,6 +80,10 @@ export interface DateRangeInterface {
 }
 
 export enum FormFieldTypeEnum {
-  DATE_PICKER = "date-picker",
-  SELECT_BUTTON = "select-button"
+  DATE_PICKER = 'date-picker',
+  SELECT_BUTTON = 'select-button',
+  INPUT = 'input',
+  SELECT = 'select',
+  SWITCH = 'switch',
+  AUTO_COMPLETE = 'auto-complete',
 }
