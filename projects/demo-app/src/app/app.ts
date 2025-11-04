@@ -265,6 +265,52 @@ export class App {
     console.log('Dynamic form submit', this.dynamicFormGroup.value);
   }
 
+  // ===== Confirmation Dialog with Dynamic Form =====
+  dialogFormGroup = new FormGroup({
+    reason: new FormControl<string>('', [Validators.required]),
+  });
+
+  dialogInputsMap: InputsMap = {
+    reason: {
+      label: 'Reason',
+      fieldType: FormFieldTypeEnum.INPUT,
+      inputId: 'dlg-reason',
+      rowSize: 'full',
+      inputType: 'textarea',
+      placeholder: 'Please provide a reason for this action',
+      variant: 'in',
+      rows: 3,
+    },
+  };
+
+  dialogDynamicFormData: DynamicFormData = {
+    formGroup: this.dialogFormGroup,
+    inputsMap: this.dialogInputsMap,
+    title: 'Confirm Action',
+    isReadOnlyForm: false,
+  };
+
+  openConfirmWithForm() {
+    this.confirmationDialogService
+      .open({
+        header: 'Confirm Action',
+        message: 'Please review and provide the required details to confirm.',
+        mainIcon: 'icon-warning',
+        confirmBtnLabel: 'Confirm',
+        cancelBtnLabel: 'Cancel',
+        confirmBtnId: 'confirm-with-form',
+        cancelBtnId: 'cancel-with-form',
+        inputForm: this.dialogDynamicFormData,
+      })
+      .subscribe((confirmed) => {
+        if (confirmed) {
+          console.log('✅ Dialog confirmed with form data:', this.dialogFormGroup.value);
+        } else {
+          console.log('❌ Dialog canceled');
+        }
+      });
+  }
+
   openDialogConfirmation() {
     const ref = this.dialogService.open(ConfirmationDialogComponent, {
       data: {

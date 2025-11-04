@@ -15,7 +15,7 @@ export interface Dropdown<T = unknown> {
 export interface InputsMapData {
   // General props
   label: string;
-  rowSize?: 'half' | 'full';
+  rowSize?: string;
   fieldType: FormFieldTypeEnum;
   inputId?: string;
   placeholder?: string;
