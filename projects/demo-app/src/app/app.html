@@ -2,37 +2,56 @@
       [items]="items">
 </app-breadcrumb> -->
 
-  <app-breadcrumb [items]="items"></app-breadcrumb>
+<app-breadcrumb [items]="items"></app-breadcrumb>
 
 <!-- input component test input with float label and textarea -->
-<form [formGroup]="form2">
+<!-- <form [formGroup]="form2">
 
-  <stc-input [variant]="'in'" [contentType]="'text'" [label]="'Label'" [hideOptionalLabel]="true" [type]="'text'" [defaultColor]="'#DFE0E6'"
-    [inputId]="'input-id'" [control]="inputControl">
+  <stc-input [variant]="'in'" [contentType]="'text'" [label]="'Label'" [hideOptionalLabel]="true" [type]="'text'"
+    [defaultColor]="'#DFE0E6'" [inputId]="'input-id'" [control]="inputControl">
   </stc-input>
-  <stc-select [variant]="'in'" [inputId]="'select-id'"  [defaultColor]="'#DFE0E6'" [label]="'Select Item'" id="selectId" [control]="selectControl" [options]="selectItems"
-    [multiple]="false" [optionLabel]="'name'" [showClear]="false">
+  <stc-select [variant]="'in'" [inputId]="'select-id'" [defaultColor]="'#DFE0E6'" [label]="'Select Item'" id="selectId"
+    [control]="selectControl" [options]="selectItems" [multiple]="false" [optionLabel]="'name'" [showClear]="false">
   </stc-select>
 
   <stc-date-picker [variant]="'in'" [label]="'Select Date'" id="dateId" [control]="dateControl"
     [selectionMode]="'single'" [showIcon]="true">
   </stc-date-picker>
   <app-button [label]="'Submit'" [severity]="'primary'" [raised]="true"></app-button>
-</form>
+</form> -->
 <!-- input component test input with float label and textarea -->
 
 <button (click)="openSideBar()">test sideBar</button>
 
-  <div class="flex gap-4 justify-between mt-auto">
-    <app-button class="w-full" title="إضافة جهة"  severity="danger" iconPos="left" icon="pi pi-plus"></app-button>
-     <app-button title="إلغاء" severity="warn"  variant="outlined"></app-button>
-  </div>
+<div class="flex gap-4 justify-between mt-auto">
+  <app-button class="w-full" title="إضافة جهة" severity="danger" iconPos="left" icon="pi pi-plus"></app-button>
+  <app-button title="إلغاء" severity="warn" variant="outlined"></app-button>
+</div>
 
-  <button (click)="show= !show">toggle button sheet</button>
+<button (click)="show= !show">toggle button sheet</button>
 
-<app-bottom-sheet [title]="'الإجراءات علي المعاملة'" [show]="show" [contentTemplate]="contentTemplate"></app-bottom-sheet>
+<app-bottom-sheet [title]="'الإجراءات علي المعاملة'" [show]="show"
+  [contentTemplate]="contentTemplate"></app-bottom-sheet>
 
 <ng-template #contentTemplate>
   test conent!
 </ng-template>
 
+<hr class="my-8" />
+
+<!-- Dynamic Form Demo -->
+<section class="p-4 border rounded-md mt-4">
+  <h2 class="text-lg font-semibold mb-4">Dynamic Form Demo</h2>
+  <app-dynamic-form [dynamicFormData]="dynamicFormData" (selectButtonChange)="onDynamicSelectButtonChange($event)"
+    (selectChange)="onDynamicSelectChange($event)" (switchChange)="onDynamicSwitchChange($event)"
+    (autoCompleteSearch)="onDynamicAutoCompleteSearch($event)"
+    (autoCompleteSelect)="onDynamicAutoCompleteSelect($event)"></app-dynamic-form>
+
+  <div class="mt-4">
+    <app-button [label]="'Submit Dynamic Form'" [severity]="'primary'" [raised]="true"
+      (click)="onSubmitDynamicForm()"></app-button>
+    <app-button class="ml-2" [label]="'Open Confirmation with Dynamic Form'" [severity]="'primary'" variant="outlined"
+      (click)="openConfirmWithForm()"></app-button>
+  </div>
+  <pre class="mt-4 bg-gray-100 p-2 rounded">{{ dynamicFormGroup.value | json }}</pre>
+</section>
