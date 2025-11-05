@@ -40,7 +40,6 @@ export class ConfirmationDialogComponent extends DynamicDialogRef implements OnI
   ngOnDestroy(): void {
     this._subscription.unsubscribe();
   }
-
   ngOnInit() {
     // closing when navigating back from the browser
     this._subscription.add(
@@ -52,7 +51,6 @@ export class ConfirmationDialogComponent extends DynamicDialogRef implements OnI
     );
     this.dialogFormData = this.dynamicDialogConfig.data?.inputForm;
   }
-
   submit() {
     // we should pass submitted data when using form dialog
     // const submitData = { submitted: true, data: this.dialogFormData?.formGroup?.value };

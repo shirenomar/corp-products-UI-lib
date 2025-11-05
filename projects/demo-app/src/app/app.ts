@@ -295,7 +295,6 @@ export class App {
       .open({
         header: 'Confirm Action',
         message: 'Please review and provide the required details to confirm.',
-        mainIcon: 'icon-warning',
         confirmBtnLabel: 'Confirm',
         cancelBtnLabel: 'Cancel',
         confirmBtnId: 'confirm-with-form',
@@ -344,7 +343,6 @@ export class App {
         header: 'هل تريد حذف الجهة؟',
         message:
           'سيتم حذف هذه الجهة نهائيًا ولن تكون متاحة في أي معاملات لاحقة. لن تتأثر المعاملات السابقة بهذا الإجراء. لا يمكن التراجع عن الحذف.',
-        mainIcon: 'icon-delete',
         confirmBtnId: 'confirm-id',
         cancelBtnId: 'cancel-id',
         cancelBtnLabel: 'تراجع',
