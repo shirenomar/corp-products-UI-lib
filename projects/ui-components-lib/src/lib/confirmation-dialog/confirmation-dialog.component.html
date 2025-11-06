@@ -1,33 +1,25 @@
 @if (dynamicDialogConfig.data) {
 <div class="confirmation-dialog">
-  <div class="dialog-wrapper w-full max-w-full">
-    <div class="confirmation-dialog__header bg-gray-150 w-full">
-      <div class="flex items-center justify-between">
-        <app-button (click)="close()" icon="icon-close" class="close-btn" label="x" variant="text" [rounded]="true" />
-        <p class="m-0 font-normal text-lg">
-          {{ dynamicDialogConfig.data.header }}
-        </p>
-      </div>
-    </div>
+  <div class="dialog-wrapper">
     @if (dynamicDialogConfig.data) {
-    <div class="confirmation-dialog__content p-4">
+    <div class="confirmation-dialog__content my-4">
       @if (dynamicDialogConfig.data.dialogIcon) {
       <em [class]="dynamicDialogConfig.data.dialogIcon"></em>
       }
-      <p class=" mt-2">
+      <p class="confirmation-dialog__message text-xl mb-2">
         {{ dynamicDialogConfig.data.message }}
       </p>
       @if (dynamicDialogConfig.data.hint) {
-      <p class="font-bold text-[14px]">
+      <p class="confirmation-dialog__hint font-normal text-base">
         {{ dynamicDialogConfig.data.hint }}
       </p>
       }
+      @if (dynamicDialogConfig.data.inputForm) {
+      <app-dynamic-form [dynamicFormData]="dialogFormData"></app-dynamic-form>
+      }
     </div>
     }
-    @if (dynamicDialogConfig.data.inputForm) {
-    <app-dynamic-form [dynamicFormData]="dialogFormData"></app-dynamic-form>
-    }
-    <div class="confirmation-dialog__actions p-4 flex gap-2">
+    <div class="confirmation-dialog__actions flex gap-2 mt-4">
       <app-button [title]="dynamicDialogConfig.data?.confirmLabel || ('actions.confirm' | translate)"
         [disabled]="!!(dialogFormData && dialogFormData.formGroup?.invalid)" [severity]="'primary'"
         [id]="dynamicDialogConfig.data.confirmBtnId" [icon]="dynamicDialogConfig.data.confirmBtnIcon || ''"
