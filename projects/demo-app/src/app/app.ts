@@ -1,37 +1,51 @@
+import { CommonModule } from '@angular/common';
 import { Component, inject, signal, ViewEncapsulation } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
 
-import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 
-import { FloatLabelModule } from 'primeng/floatlabel';
-import { InputText } from 'primeng/inputtext';
-import { BreadcrumbItem } from '../../../ui-components-lib/src/lib/app-breadcrumb/app-breadcrumb.interface';
-import { SideBar } from './side-bar/side-bar';
 import { DialogService } from 'primeng/dynamicdialog';
+import { BreadcrumbItem } from '../../../ui-components-lib/src/lib/app-breadcrumb/app-breadcrumb.interface';
 import { ConfirmationDialogService } from './../../../ui-components-lib/src/lib/confirmation-dialog/confirmation-dialog.service';
+import { SideBar } from './side-bar/side-bar';
 
-import { SidebarConfig, SidebarConfigDefaults } from './../../../ui-components-lib/src/lib/side-bar-dynamic/sidebar-config';
-import { InputComponent } from './../../../ui-components-lib/src/lib/form-components/components/input/input.component';
-import { SelectComponent } from './../../../ui-components-lib/src/lib/form-components/components/select/select.component';
-import { DynamicSidebarService } from './../../../ui-components-lib/src/lib/side-bar-dynamic/dynamic-sidebar.service';
-import { DatePickerComponent } from './../../../ui-components-lib/src/lib/form-components/components/date-picker/date-picker.component';
-import { AppButtonComponent, AppBreadcrumbComponent } from '@corp-products/ui-components';
+import {
+  AppBreadcrumbComponent,
+  AppButtonComponent,
+  BottomSheetComponent,
+  DynamicFormComponent,
+  DynamicFormData,
+  FormFieldTypeEnum,
+  InputsMap,
+} from '@corp-products/ui-components';
 import { ConfirmationDialogComponent } from './../../../ui-components-lib/src/lib/confirmation-dialog/confirmation-dialog.component';
+import { DynamicSidebarService } from './../../../ui-components-lib/src/lib/side-bar-dynamic/dynamic-sidebar.service';
+import {
+  SidebarConfig,
+  SidebarConfigDefaults,
+} from './../../../ui-components-lib/src/lib/side-bar-dynamic/sidebar-config';
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, AppBreadcrumbComponent, InputComponent, ReactiveFormsModule, SelectComponent, DatePickerComponent, AppButtonComponent, AppButtonComponent],
+  imports: [
+    AppBreadcrumbComponent,
+    ReactiveFormsModule,
+    AppButtonComponent,
+    BottomSheetComponent,
+    DynamicFormComponent,
+    CommonModule,
+  ],
   providers: [DialogService, ConfirmationDialogService],
   templateUrl: './app.html',
   styleUrl: './app.scss',
   encapsulation: ViewEncapsulation.None,
 })
 export class App {
+  show = false;
   protected readonly title = signal('demo-app');
 
   form2: FormGroup = new FormGroup({
-    search: new FormControl('')
+    search: new FormControl(''),
   });
-  confirmationDialogService = inject(ConfirmationDialogService)
+  confirmationDialogService = inject(ConfirmationDialogService);
   dialogService = inject(DialogService);
   items: BreadcrumbItem[] = [
     {
@@ -109,16 +123,201 @@ export class App {
     { name: 'Item 5', code: '5' },
   ];
 
+  // Dynamic form demo config and state
+  dynamicFormGroup = new FormGroup({
+    startDate: new FormControl<Date | null>(null, [Validators.required]),
+    endDate: new FormControl<Date | null>(null, [Validators.required]),
+    fullName: new FormControl<string>('', [Validators.required]),
+    role: new FormControl<any>(null, [Validators.required]),
+    status: new FormControl<string | null>(null),
+    notify: new FormControl<boolean>(false),
+    assignee: new FormControl<any>(null),
+  });
+
+  private allUsers = [
+    { id: 1, name: 'Alice Smith' },
+    { id: 2, name: 'Bob Johnson' },
+    { id: 3, name: 'Charlie Brown' },
+    { id: 4, name: 'Diana Prince' },
+    { id: 5, name: 'Evan Davis' },
+  ];
+
+  dynamicInputsMap: InputsMap = {
+    startDate: {
+      label: 'Start Date',
+      fieldType: FormFieldTypeEnum.DATE_PICKER,
+      inputId: 'df-start-date',
+      rowSize: 'half',
+      dateRange: { min: new Date(2020, 0, 1), max: new Date(2030, 11, 31) },
+      showIcon: true,
+      variant: 'in',
+    },
+    endDate: {
+      label: 'End Date',
+      fieldType: FormFieldTypeEnum.DATE_PICKER,
+      inputId: 'df-end-date',
+      rowSize: 'half',
+      dateRange: { min: new Date(2020, 0, 1), max: new Date(2030, 11, 31) },
+      showIcon: true,
+      variant: 'in',
+    },
+    fullName: {
+      label: 'Full Name',
+      fieldType: FormFieldTypeEnum.INPUT,
+      inputId: 'df-full-name',
+      rowSize: 'half',
+      inputType: 'text',
+      contentType: 'text',
+      placeholder: 'Enter your full name',
+      variant: 'in',
+    },
+    role: {
+      label: 'Role',
+      fieldType: FormFieldTypeEnum.SELECT,
+      inputId: 'df-role',
+      rowSize: 'half',
+      selectOptions: this.selectItems,
+      optionLabel: 'name',
+      showClear: true,
+      filter: true,
+      variant: 'in',
+    },
+    status: {
+      label: 'Status',
+      fieldType: FormFieldTypeEnum.SELECT_BUTTON,
+      inputId: 'df-status',
+      rowSize: 'half',
+      selectButtonOptions: [
+        { label: 'Active', value: 'active' },
+        { label: 'Inactive', value: 'inactive' },
+      ],
+    },
+    notify: {
+      label: 'Email Notifications',
+      fieldType: FormFieldTypeEnum.SWITCH,
+      inputId: 'df-notify',
+      rowSize: 'half',
+    },
+    assignee: {
+      label: 'Assignee',
+      fieldType: FormFieldTypeEnum.AUTO_COMPLETE,
+      inputId: 'df-assignee',
+      rowSize: 'full',
+      autoCompleteItems: this.allUsers,
+      placeholder: 'Type to search users',
+    },
+  };
+
+  dynamicFormData: DynamicFormData = {
+    formGroup: this.dynamicFormGroup,
+    inputsMap: this.dynamicInputsMap,
+    title: 'Dynamic Form Demo',
+    isReadOnlyForm: false,
+    formValidationErrorsKeys: ['endDateBeforeStartDate', 'startDateEqualsEndDate'],
+  };
+
+  constructor() {
+    // Cross-field validator: end date should be after start date and not equal
+    this.dynamicFormGroup.setValidators((group) => {
+      const start = group.get('startDate')?.value as Date | null;
+      const end = group.get('endDate')?.value as Date | null;
+      if (!start || !end) return null; // Required handled by control validators
+      if (end.getTime() < start.getTime()) return { endDateBeforeStartDate: true };
+      if (end.getTime() === start.getTime()) return { startDateEqualsEndDate: true };
+      return null;
+    });
+  }
+
+  onDynamicSelectButtonChange(e: { name: string; value: any }) {
+    console.log('SelectButton change', e);
+  }
+
+  onDynamicSelectChange(e: { name: string; event: any }) {
+    console.log('Select change', e);
+  }
+
+  onDynamicSwitchChange(e: { name: string; value: boolean }) {
+    console.log('Switch change', e);
+  }
+
+  onDynamicAutoCompleteSearch(e: { name: string; query: string }) {
+    const q = (e.query || '').toLowerCase();
+    const results = this.allUsers.filter((u) => u.name.toLowerCase().includes(q));
+    // update items for the autocomplete field
+    this.dynamicInputsMap[e.name].autoCompleteItems = results;
+  }
+
+  onDynamicAutoCompleteSelect(e: { name: string; event: any }) {
+    console.log('AutoComplete select', e);
+  }
+
+  onSubmitDynamicForm() {
+    this.dynamicFormGroup.markAllAsTouched();
+    this.dynamicFormGroup.updateValueAndValidity();
+    if (this.dynamicFormGroup.invalid) {
+      console.warn(
+        'Dynamic form invalid',
+        this.dynamicFormGroup.errors,
+        this.dynamicFormGroup.value
+      );
+      return;
+    }
+    console.log('Dynamic form submit', this.dynamicFormGroup.value);
+  }
+
+  // ===== Confirmation Dialog with Dynamic Form =====
+  dialogFormGroup = new FormGroup({
+    reason: new FormControl<string>('', [Validators.required]),
+  });
+
+  dialogInputsMap: InputsMap = {
+    reason: {
+      label: 'Reason',
+      fieldType: FormFieldTypeEnum.INPUT,
+      inputId: 'dlg-reason',
+      rowSize: 'full',
+      inputType: 'textarea',
+      placeholder: 'Please provide a reason for this action',
+      variant: 'in',
+      rows: 3,
+    },
+  };
+
+  dialogDynamicFormData: DynamicFormData = {
+    formGroup: this.dialogFormGroup,
+    inputsMap: this.dialogInputsMap,
+    title: 'Confirm Action',
+    isReadOnlyForm: false,
+  };
+
+  openConfirmWithForm() {
+    this.confirmationDialogService
+      .open({
+        header: 'Confirm Action',
+        message: 'Please review and provide the required details to confirm.',
+        confirmBtnLabel: 'Confirm',
+        cancelBtnLabel: 'Cancel',
+        confirmBtnId: 'confirm-with-form',
+        cancelBtnId: 'cancel-with-form',
+        inputForm: this.dialogDynamicFormData,
+      })
+      .subscribe((confirmed) => {
+        if (confirmed) {
+          console.log('✅ Dialog confirmed with form data:', this.dialogFormGroup.value);
+        } else {
+          console.log('❌ Dialog canceled');
+        }
+      });
+  }
+
   openDialogConfirmation() {
     const ref = this.dialogService.open(ConfirmationDialogComponent, {
       data: {
-
-
         header: 'هل تريد حذف الجهة؟',
         message: 'لن يتم حفظ أي تغييرات قمت بها على هذا الصف.',
         mainIcon: 'icon-delete',
         cancelBtnLabel: 'تراجع',
-        confirmBtnLabel: 'تاكيد الحذف'
+        confirmBtnLabel: 'تاكيد الحذف',
       },
       style: { 'max-width': '550px', width: '100%' },
       header: '',
@@ -130,37 +329,32 @@ export class App {
     });
   }
 
-
   openSideBar() {
     // this.openDialogConfirmation()
-    this.sidebarDynamicService.open(
-      SideBar,
-      {
-        ...this.sideBarData,
-        title: 'Activity Log',
-        showSaveAndMoreBtn: false,
-        showSaveBtn: false,
-        showCancelBtn: false
-      },
-
-    );
-      this.confirmationDialogService.open({
-      header: 'هل تريد حذف الجهة؟',
-      message:
-        'سيتم حذف هذه الجهة نهائيًا ولن تكون متاحة في أي معاملات لاحقة. لن تتأثر المعاملات السابقة بهذا الإجراء. لا يمكن التراجع عن الحذف.',
-      mainIcon: 'icon-delete',
-        confirmBtnId : 'confirm-id',
-    cancelBtnId : 'cancel-id',
-      cancelBtnLabel: 'تراجع',
-      confirmBtnLabel: 'تأكيد الحذف'
-    }).subscribe((confirmed) => {
-      if (confirmed) {
-        console.log('✅ User confirmed deletion');
-        // perform delete logic
-      } else {
-        console.log('❌ User canceled');
-      }
+    this.sidebarDynamicService.open(SideBar, {
+      ...this.sideBarData,
+      title: 'Activity Log',
+      showSaveAndMoreBtn: false,
+      showSaveBtn: false,
+      showCancelBtn: false,
     });
-
+    this.confirmationDialogService
+      .open({
+        header: 'هل تريد حذف الجهة؟',
+        message:
+          'سيتم حذف هذه الجهة نهائيًا ولن تكون متاحة في أي معاملات لاحقة. لن تتأثر المعاملات السابقة بهذا الإجراء. لا يمكن التراجع عن الحذف.',
+        confirmBtnId: 'confirm-id',
+        cancelBtnId: 'cancel-id',
+        cancelBtnLabel: 'تراجع',
+        confirmBtnLabel: 'تأكيد الحذف',
+      })
+      .subscribe((confirmed) => {
+        if (confirmed) {
+          console.log('✅ User confirmed deletion');
+          // perform delete logic
+        } else {
+          console.log('❌ User canceled');
+        }
+      });
   }
 }

@@ -1,17 +1,18 @@
-import { Component, OnDestroy, OnInit, ViewEncapsulation, inject } from '@angular/core';
+import { Component, inject, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
 import { NavigationStart, Router } from '@angular/router';
+import { TranslatePipe } from '@ngx-translate/core';
 import { AvatarModule } from 'primeng/avatar';
-import { filter, Subscription } from 'rxjs';
-import { AppButtonComponent } from '../app-button/app-button.component';
 import {
   DialogService,
-  DynamicDialogModule,
   DynamicDialogConfig,
+  DynamicDialogModule,
   DynamicDialogRef,
+  DynamicDialogStyle,
 } from 'primeng/dynamicdialog';
+import { filter, Subscription } from 'rxjs';
+import { AppButtonComponent } from '../app-button/app-button.component';
 import { DynamicFormComponent } from '../dynamic-form/dynamic-form.component';
 import { DynamicFormData } from '../dynamic-form/dynamic-form.interface';
-import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-confirm-dialog',
@@ -26,9 +27,9 @@ import { TranslatePipe } from '@ngx-translate/core';
     DynamicFormComponent,
     TranslatePipe,
   ],
-  providers: [DialogService],
+  providers: [DialogService, DynamicDialogStyle],
 })
-export class ConfirmationDialogComponent implements OnInit, OnDestroy {
+export class ConfirmationDialogComponent extends DynamicDialogRef implements OnInit, OnDestroy {
   router = inject(Router);
   dialogService = inject(DialogService);
   dynamicDialogConfig = inject(DynamicDialogConfig);
@@ -36,6 +37,9 @@ export class ConfirmationDialogComponent implements OnInit, OnDestroy {
   private readonly _subscription = new Subscription();
   dialogFormData: DynamicFormData;
 
+  ngOnDestroy(): void {
+    this._subscription.unsubscribe();
+  }
   ngOnInit() {
     // closing when navigating back from the browser
     this._subscription.add(
@@ -47,20 +51,14 @@ export class ConfirmationDialogComponent implements OnInit, OnDestroy {
     );
     this.dialogFormData = this.dynamicDialogConfig.data?.inputForm;
   }
-
-  ngOnDestroy(): void {
-    this._subscription.unsubscribe();
-  }
-
   submit() {
     // we should pass submitted data when using form dialog
     // const submitData = { submitted: true, data: this.dialogFormData?.formGroup?.value };
     // this._ref.close(this.dynamicDialogConfig.data.inputForm ? submitData : true);
     this._ref.close(true);
-
   }
 
-  close() {
+  override close() {
     this._ref.close(false);
   }
 }

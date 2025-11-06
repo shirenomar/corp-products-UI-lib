@@ -21,10 +21,10 @@ export class SideBarComponent {
   @Input() sidebarSize: "sm" | "md" | "lg" | "xl" = "sm";
   @Input() styleClass = "";
   @Output() hide = new EventEmitter<boolean>();
-  // eslint-disable-next-line @angular-eslint/no-output-on-prefix
   @Output() onShow = new EventEmitter<boolean>();
   @Input() contentTemplate!: TemplateRef<unknown>;
   @Input() footerTemplate!: TemplateRef<unknown>;
+  @Input() position  = 'left';
 
   hideSidebar() {
     this.show = false;
