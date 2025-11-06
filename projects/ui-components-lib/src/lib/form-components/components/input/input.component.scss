@@ -31,3 +31,11 @@ textarea,
 .p-inputtext:enabled:focus {
   border-color: #DFE0E6 ;
 }
+
+.text-required {
+  color: red;
+}
+
+.p-error {
+  color: #dc2626;
+}
