@@ -12,6 +12,7 @@
     [name]="name"
     [ngClass]="{ 'p-invalid ng-dirty ng-invalid': isInvalid }"
     [optionLabel]="optionLabel"
+    [optionValue]="optionValue"
     [options]="options"
     [placeholder]="placeholder"
     [readonly]="readonly"
@@ -66,6 +67,7 @@
       [name]="name"
       [ngClass]="{ 'p-invalid ng-dirty ng-invalid': isInvalid }"
       [optionLabel]="optionLabel"
+      [optionValue]="optionValue"
       [options]="options"
       [placeholder]="placeholder"
       [readonly]="readonly"
@@ -79,14 +81,15 @@
       [ngClass]="{ 'basic-style': basicInput }"
     >
 
-
-
-
-
+      @if (optionTemplate) {
+        <ng-template let-item pTemplate="item">
+          <ng-container [ngTemplateOutletContext]="{ $implicit: item }" [ngTemplateOutlet]="optionTemplate" />
+        </ng-template>
+      }
       @if (selectedItemTemplate) {
-      <ng-template let-item pTemplate="item">
-        <ng-container [ngTemplateOutletContext]="{ $implicit: item }" [ngTemplateOutlet]="selectedItemTemplate" />
-      </ng-template>
+        <ng-template let-item pTemplate="selectedItem">
+          <ng-container [ngTemplateOutletContext]="{ $implicit: item }" [ngTemplateOutlet]="selectedItemTemplate" />
+        </ng-template>
       }
     </p-select>
     <label [for]="inputId">
