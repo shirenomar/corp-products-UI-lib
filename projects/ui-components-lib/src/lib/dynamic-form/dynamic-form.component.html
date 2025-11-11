@@ -19,26 +19,6 @@
         (onChange)="selectButtonChange.emit({ name: inputName, value: $event })" />
       }
       @case (fieldType.INPUT) {
-      @if((inputsMap[inputName].rows || 0) > 1 || inputsMap[inputName].inputType === 'textarea') {
-      <div class="flex justify-between items-center mb-1">
-        <label [for]="inputsMap[inputName].inputId || inputsMap[inputName].label" class="text-[#687078]"
-          [attr.title]="(inputsMap[inputName].label || inputName) | translate"
-          [attr.aria-required]="inputsMap[inputName].required ? true : null">
-          {{ (inputsMap[inputName].label || inputName) | translate }}
-          @if(inputsMap[inputName].required) {
-          <span [class.text-required]="inputsMap[inputName].required" aria-hidden="true">*</span>
-          }
-        </label>
-        @if(inputsMap[inputName].maxLength){
-        <small class="text-sm text-gray-600">
-          {{ (getFormControl(inputName, formGroup).value?.length || 0) }}
-          <span>
-            / {{ inputsMap[inputName].maxLength}}
-          </span>
-        </small>
-        }
-      </div>
-      }
       <stc-input [control]="getFormControl(inputName, formGroup)" [id]="inputsMap[inputName].inputId" [name]="inputName"
         [label]="inputsMap[inputName].label" [placeholder]="inputsMap[inputName].placeholder || ''"
         [hint]="inputsMap[inputName].hint"
@@ -47,7 +27,16 @@
         [contentType]="inputsMap[inputName].contentType || 'text'" [rows]="inputsMap[inputName].rows || 2"
         [cols]="inputsMap[inputName].cols || 20" [autoResize]="inputsMap[inputName].autoResize ?? true"
         [prefix]="inputsMap[inputName].prefix || ''" [size]="inputsMap[inputName].size || 'small'"
-        [variant]="inputsMap[inputName].variant || 'over'" />
+        [variant]="inputsMap[inputName].variant || 'over'">
+        @if(inputsMap[inputName].maxLength){
+        <small class="text-sm text-gray-600">
+          {{ (getFormControl(inputName, formGroup).value?.length || 0) }}
+          <span>
+            / {{ inputsMap[inputName].maxLength}}
+          </span>
+        </small>
+        }
+      </stc-input>
       }
       @case (fieldType.SELECT) {
       <stc-select [control]="getFormControl(inputName, formGroup)" [id]="inputsMap[inputName].inputId"

@@ -280,7 +280,6 @@ export class App {
       placeholder: 'Please provide a reason for this action',
       variant: 'in',
       rows: 3,
-      required: true,
       maxLength: 500,
     },
   };
