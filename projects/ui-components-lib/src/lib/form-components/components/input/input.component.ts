@@ -42,4 +42,9 @@ export class InputComponent extends BaseInputComponent {
   constructor() {
     super();
   }
+
+  preventMultiSpace(event: any) {
+    const value = event.target.value;
+    event.target.value = value.replace(/\s{2,}/g, ' ');
+  }
 }
