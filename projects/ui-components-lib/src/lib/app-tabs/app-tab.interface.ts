@@ -12,8 +12,9 @@ interface Tab {
 export interface RoutedTab extends Tab {
   link: string;
 }
-export interface TemplateTab extends Tab {
+export interface TemplateTab<T = unknown> extends Tab {
   contentTemplate: TemplateRef<unknown>;
+  queryParamValue?: T;
 }
 
 

@@ -1,6 +1,6 @@
 @if (tabs && tabs.items.length) {
   <div [class]="tabsStyle + (responsive ? ' full-width' : '') + ' tabs-container'">
-    <p-tabs [value]="activeTabIndex" scrollable>
+    <p-tabs [value]="selectedTabIndex() || activeTabIndex" scrollable>
       <p-tablist>
 
         @for (tab of tabs.items; let i = $index; track i) {
