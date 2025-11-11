@@ -1,5 +1,5 @@
 import { CommonModule } from "@angular/common";
-import { Component, Input, OnInit, ViewEncapsulation } from "@angular/core";
+import { Component, inject, Input, model, OnInit, ViewEncapsulation } from "@angular/core";
 import { TabsModule } from "primeng/tabs";
 import { AppTabs } from "./app-tab.interface";
 import { IcoMoonIconComponent } from "../ico-moon-icon/ico-moon-icon.component";
@@ -19,8 +19,10 @@ export class AppTabsComponent implements OnInit {
   @Input() tabs: AppTabs;
   @Input() tabsStyle: "basic" | "primary_light" | "primary" = "basic";
   @Input() responsive = false;
+  selectedTabIndex = model<number>(0);
   activeTabIndex = 0;
-  constructor(private route: ActivatedRoute, private router: Router) {}
+  private router = inject(Router);
+  private route = inject(ActivatedRoute);
 
   ngOnInit(): void {
     this.router.events.pipe(filter((event) => event instanceof NavigationEnd)).subscribe(() => {
@@ -39,6 +41,8 @@ export class AppTabsComponent implements OnInit {
   }
 
   onTabChange(index: number): void {
+    this.selectedTabIndex.set(index);
+
     if (!this.tabs.isRouted) return;
     const selectedTab = this.tabs.items[index];
     if (selectedTab && !selectedTab.disabled) {
