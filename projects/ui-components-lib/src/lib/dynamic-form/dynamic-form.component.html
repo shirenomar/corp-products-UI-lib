@@ -26,13 +26,13 @@
           [attr.aria-required]="inputsMap[inputName].required ? true : null">
           {{ (inputsMap[inputName].label || inputName) | translate }}
           @if(inputsMap[inputName].required) {
-          <span [class.text-required] aria-hidden="true">*</span>
+          <span [class.text-required]="inputsMap[inputName].required" aria-hidden="true">*</span>
           }
         </label>
         @if(inputsMap[inputName].maxLength){
         <small class="text-sm text-gray-600">
-          {{ (getFormControl(inputName, formGroup)?.value?.length || 0) }}
-          <span *ngIf="(inputsMap[inputName].maxLength || 0) > 0">
+          {{ (getFormControl(inputName, formGroup).value?.length || 0) }}
+          <span>
             / {{ inputsMap[inputName].maxLength}}
           </span>
         </small>
