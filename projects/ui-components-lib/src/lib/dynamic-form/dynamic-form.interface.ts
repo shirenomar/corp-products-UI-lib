@@ -8,6 +8,7 @@ export interface Dropdown<T = unknown> {
   id?: string;
   keyValue: T;
   label: string;
+  icon?: string;
   hidden?: boolean;
   disabled?: boolean;
 }
@@ -15,7 +16,7 @@ export interface Dropdown<T = unknown> {
 export interface InputsMapData {
   // General props
   label: string;
-  rowSize?: 'half' | 'full';
+  rowSize?: string;
   fieldType: FormFieldTypeEnum;
   inputId?: string;
   placeholder?: string;

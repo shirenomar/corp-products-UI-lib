@@ -6,7 +6,7 @@ import { ConfirmationDialogComponent } from './confirmation-dialog.component';
 import { ConfirmationDialogData } from './confirmation-dialog.interface';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ConfirmationDialogService {
   constructor(private dialogService: DialogService) {}
@@ -14,18 +14,19 @@ export class ConfirmationDialogService {
   open(data: ConfirmationDialogData): Observable<boolean> {
     const ref: DynamicDialogRef = this.dialogService.open(ConfirmationDialogComponent, {
       data,
-      header: '',
-      showHeader: false,
-      style: { 'max-width': '570px', width: '100%'},
-      closable: false
+      header: data.header,
+      showHeader: true,
+      width: '600px',
+      closable: true,
+      modal: true,
+      styleClass: 'confirmation-dialog-wrapper',
+      breakpoints: data.breakpoints,
     });
 
     // Emit true/false when dialog closes
     return ref.onClose.pipe(
-      filter(res => res !== undefined),
-      map(res => !!res)
+      filter((res) => res !== undefined),
+      map((res) => !!res)
     );
   }
-
-
 }

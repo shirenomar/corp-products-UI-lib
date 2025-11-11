@@ -50,6 +50,8 @@
   <div class="mt-4">
     <app-button [label]="'Submit Dynamic Form'" [severity]="'primary'" [raised]="true"
       (click)="onSubmitDynamicForm()"></app-button>
+    <app-button class="ml-2" [label]="'Open Confirmation with Dynamic Form'" [severity]="'primary'" variant="outlined"
+      (click)="openConfirmWithForm()"></app-button>
   </div>
   <pre class="mt-4 bg-gray-100 p-2 rounded">{{ dynamicFormGroup.value | json }}</pre>
 </section>

@@ -3,7 +3,7 @@
     <label [for]="inputId">
       {{ label }}
       @if (required) {
-        <span [class.text-red-700]="isInvalid">*</span>
+        <span [class.text-required]="isInvalid">*</span>
       }
     </label>
   }
@@ -38,7 +38,7 @@
     <small class="p-mt-1">{{ hint }}</small>
   }
   @if (isInvalid && (control.dirty || control.touched)) {
-    <small class="p-error text-red-700">
+    <small class="p-error">
       @for (error of control.errors | validationErrors; track error) {
         {{ error }}<br>
       }

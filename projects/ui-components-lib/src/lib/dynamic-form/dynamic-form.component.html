@@ -2,8 +2,7 @@
   <form [formGroup]="formGroup">
     <div class="grid grid-cols-12 gap-x-2">
       @for (inputName of inputsNames; track $index) {
-      <div
-        [ngClass]="inputsMap[inputName].rowSize === 'half' ? 'col-span-6 md:col-span-6': 'col-span-12 md:col-span-12'">
+      <div [ngClass]="inputsMap[inputName].rowSize">
         @switch (inputsMap[inputName].fieldType) {
         @case (fieldType.DATE_PICKER) {
         <stc-date-picker [minDate]="inputsMap[inputName]?.dateRange?.min"
