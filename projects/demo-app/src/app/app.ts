@@ -267,7 +267,7 @@ export class App {
 
   // ===== Confirmation Dialog with Dynamic Form =====
   dialogFormGroup = new FormGroup({
-    reason: new FormControl<string>('', [Validators.required]),
+    reason: new FormControl<string>('', [Validators.required, Validators.maxLength(500)]),
   });
 
   dialogInputsMap: InputsMap = {
@@ -280,6 +280,7 @@ export class App {
       placeholder: 'Please provide a reason for this action',
       variant: 'in',
       rows: 3,
+      maxLength: 500,
     },
   };
 
@@ -295,6 +296,7 @@ export class App {
       .open({
         header: 'Confirm Action',
         message: 'Please review and provide the required details to confirm.',
+        hint: 'All fields are mandatory unless specified otherwise.',
         confirmBtnLabel: 'Confirm',
         cancelBtnLabel: 'Cancel',
         confirmBtnId: 'confirm-with-form',

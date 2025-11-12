@@ -1,75 +1,81 @@
-<div class="border-t mx-4 py-2">
-  <form [formGroup]="formGroup">
-    <div class="grid grid-cols-12 gap-x-2">
-      @for (inputName of inputsNames; track $index) {
-      <div [ngClass]="inputsMap[inputName].rowSize">
-        @switch (inputsMap[inputName].fieldType) {
-        @case (fieldType.DATE_PICKER) {
-        <stc-date-picker [minDate]="inputsMap[inputName]?.dateRange?.min"
-          [maxDate]="inputsMap[inputName]?.dateRange?.max" [id]="inputsMap[inputName].inputId"
-          [control]="getFormControl(inputName, formGroup)" [name]="inputName" [label]="inputsMap[inputName].label"
-          [placeholder]="inputsMap[inputName].placeholder || ''" [hint]="inputsMap[inputName].hint"
-          [readonly]="inputsMap[inputName].readonly || dynamicFormData.isReadOnlyForm || false"
-          [disabled]="inputsMap[inputName].disabled || false" [variant]="inputsMap[inputName].variant || 'over'"
-          [showIcon]="inputsMap[inputName].showIcon !== false"
-          [isTimeOnly]="inputsMap[inputName].isTimeOnly || false" />
+<form [formGroup]="formGroup" class="dynamic-form">
+  <div class="grid grid-cols-12 gap-x-2">
+    @for (inputName of inputsNames; track $index) {
+    <div [ngClass]="inputsMap[inputName].rowSize">
+      @switch (inputsMap[inputName].fieldType) {
+      @case (fieldType.DATE_PICKER) {
+      <stc-date-picker [minDate]="inputsMap[inputName]?.dateRange?.min" [maxDate]="inputsMap[inputName]?.dateRange?.max"
+        [id]="inputsMap[inputName].inputId" [control]="getFormControl(inputName, formGroup)" [name]="inputName"
+        [label]="inputsMap[inputName].label" [placeholder]="inputsMap[inputName].placeholder || ''"
+        [hint]="inputsMap[inputName].hint"
+        [readonly]="inputsMap[inputName].readonly || dynamicFormData.isReadOnlyForm || false"
+        [disabled]="inputsMap[inputName].disabled || false" [variant]="inputsMap[inputName].variant || 'over'"
+        [showIcon]="inputsMap[inputName].showIcon !== false" [isTimeOnly]="inputsMap[inputName].isTimeOnly || false" />
+      }
+      @case (fieldType.SELECT_BUTTON) {
+      <stc-select-button [control]="getFormControl(inputName, formGroup)" [id]="inputsMap[inputName].inputId"
+        [name]="inputName" [label]="inputsMap[inputName].label"
+        [options]="inputsMap[inputName].selectButtonOptions || []"
+        (onChange)="selectButtonChange.emit({ name: inputName, value: $event })" />
+      }
+      @case (fieldType.INPUT) {
+      <stc-input [control]="getFormControl(inputName, formGroup)" [id]="inputsMap[inputName].inputId" [name]="inputName"
+        [label]="inputsMap[inputName].label" [placeholder]="inputsMap[inputName].placeholder || ''"
+        [hint]="inputsMap[inputName].hint"
+        [readonly]="inputsMap[inputName].readonly || dynamicFormData.isReadOnlyForm || false"
+        [disabled]="inputsMap[inputName].disabled || false" [type]="inputsMap[inputName].inputType || 'text'"
+        [contentType]="inputsMap[inputName].contentType || 'text'" [rows]="inputsMap[inputName].rows || 2"
+        [cols]="inputsMap[inputName].cols || 20" [autoResize]="inputsMap[inputName].autoResize ?? true"
+        [prefix]="inputsMap[inputName].prefix || ''" [size]="inputsMap[inputName].size || 'small'"
+        [variant]="inputsMap[inputName].variant || 'over'">
+        @if(inputsMap[inputName].maxLength){
+        <small class="text-sm text-gray-600">
+          {{ (getFormControl(inputName, formGroup).value?.length || 0) }}
+          <span>
+            / {{ inputsMap[inputName].maxLength}}
+          </span>
+        </small>
         }
-        @case (fieldType.SELECT_BUTTON) {
-        <stc-select-button [control]="getFormControl(inputName, formGroup)" [id]="inputsMap[inputName].inputId"
-          [name]="inputName" [label]="inputsMap[inputName].label"
-          [options]="inputsMap[inputName].selectButtonOptions || []"
-          (onChange)="selectButtonChange.emit({ name: inputName, value: $event })" />
-        }
-        @case (fieldType.INPUT) {
-        <stc-input [control]="getFormControl(inputName, formGroup)" [id]="inputsMap[inputName].inputId"
-          [name]="inputName" [label]="inputsMap[inputName].label" [placeholder]="inputsMap[inputName].placeholder || ''"
-          [hint]="inputsMap[inputName].hint"
-          [readonly]="inputsMap[inputName].readonly || dynamicFormData.isReadOnlyForm || false"
-          [disabled]="inputsMap[inputName].disabled || false" [type]="inputsMap[inputName].inputType || 'text'"
-          [contentType]="inputsMap[inputName].contentType || 'text'" [rows]="inputsMap[inputName].rows || 2"
-          [cols]="inputsMap[inputName].cols || 20" [autoResize]="inputsMap[inputName].autoResize ?? true"
-          [prefix]="inputsMap[inputName].prefix || ''" [size]="inputsMap[inputName].size || 'small'"
-          [variant]="inputsMap[inputName].variant || 'over'" />
-        }
-        @case (fieldType.SELECT) {
-        <stc-select [control]="getFormControl(inputName, formGroup)" [id]="inputsMap[inputName].inputId"
-          [name]="inputName" [label]="inputsMap[inputName].label" [placeholder]="inputsMap[inputName].placeholder || ''"
-          [hint]="inputsMap[inputName].hint"
-          [readonly]="inputsMap[inputName].readonly || dynamicFormData.isReadOnlyForm || false"
-          [disabled]="inputsMap[inputName].disabled || false" [options]="inputsMap[inputName].selectOptions || []"
-          [optionLabel]="inputsMap[inputName].optionLabel || 'label'" [filter]="inputsMap[inputName].filter || false"
-          [multiple]="inputsMap[inputName].multiple || false" [showClear]="inputsMap[inputName].showClear || false"
-          [checkmark]="inputsMap[inputName].checkmark ?? true" [filterBy]="inputsMap[inputName].filterBy || ''"
-          [selectedItemsLabel]="inputsMap[inputName].selectedItemsLabel || ''"
-          [size]="inputsMap[inputName].size || 'small'" [variant]="inputsMap[inputName].variant || 'over'"
-          (change)="selectChange.emit({ name: inputName, event: $event })" />
-        }
-        @case (fieldType.SWITCH) {
-        <stc-switch [label]="inputsMap[inputName].label" [key]="inputName"
-          [checked]="getFormControl(inputName, formGroup).value"
-          (onChange)="getFormControl(inputName, formGroup).setValue(typeof $event === 'string' ? ($event === 'true') : $event); switchChange.emit({ name: inputName, value: (typeof $event === 'string' ? ($event === 'true') : $event) })" />
-        }
-        @case (fieldType.AUTO_COMPLETE) {
-        <stc-auto-complete [control]="getFormControl(inputName, formGroup)" [id]="inputsMap[inputName].inputId"
-          [name]="inputName" [label]="inputsMap[inputName].label" [placeholder]="inputsMap[inputName].placeholder || ''"
-          [hint]="inputsMap[inputName].hint"
-          [readonly]="inputsMap[inputName].readonly || dynamicFormData.isReadOnlyForm || false"
-          [disabled]="inputsMap[inputName].disabled || false" [items]="inputsMap[inputName].autoCompleteItems || []"
-          [minLengthToSearch]="inputsMap[inputName].minLengthToSearch || 3" [delay]="inputsMap[inputName].delay || 300"
-          (onSearch)="autoCompleteSearch.emit({ name: inputName, query: $event })"
-          (selectOption)="autoCompleteSelect.emit({ name: inputName, event: $event })" />
-        }
-        }
-      </div>
+      </stc-input>
+      }
+      @case (fieldType.SELECT) {
+      <stc-select [control]="getFormControl(inputName, formGroup)" [id]="inputsMap[inputName].inputId"
+        [name]="inputName" [label]="inputsMap[inputName].label" [placeholder]="inputsMap[inputName].placeholder || ''"
+        [hint]="inputsMap[inputName].hint"
+        [readonly]="inputsMap[inputName].readonly || dynamicFormData.isReadOnlyForm || false"
+        [disabled]="inputsMap[inputName].disabled || false" [options]="inputsMap[inputName].selectOptions || []"
+        [optionLabel]="inputsMap[inputName].optionLabel || 'label'" [filter]="inputsMap[inputName].filter || false"
+        [multiple]="inputsMap[inputName].multiple || false" [showClear]="inputsMap[inputName].showClear || false"
+        [checkmark]="inputsMap[inputName].checkmark ?? true" [filterBy]="inputsMap[inputName].filterBy || ''"
+        [selectedItemsLabel]="inputsMap[inputName].selectedItemsLabel || ''"
+        [size]="inputsMap[inputName].size || 'small'" [variant]="inputsMap[inputName].variant || 'over'"
+        (change)="selectChange.emit({ name: inputName, event: $event })" />
+      }
+      @case (fieldType.SWITCH) {
+      <stc-switch [label]="inputsMap[inputName].label" [key]="inputName"
+        [checked]="getFormControl(inputName, formGroup).value"
+        (onChange)="getFormControl(inputName, formGroup).setValue(typeof $event === 'string' ? ($event === 'true') : $event); switchChange.emit({ name: inputName, value: (typeof $event === 'string' ? ($event === 'true') : $event) })" />
+      }
+      @case (fieldType.AUTO_COMPLETE) {
+      <stc-auto-complete [control]="getFormControl(inputName, formGroup)" [id]="inputsMap[inputName].inputId"
+        [name]="inputName" [label]="inputsMap[inputName].label" [placeholder]="inputsMap[inputName].placeholder || ''"
+        [hint]="inputsMap[inputName].hint"
+        [readonly]="inputsMap[inputName].readonly || dynamicFormData.isReadOnlyForm || false"
+        [disabled]="inputsMap[inputName].disabled || false" [items]="inputsMap[inputName].autoCompleteItems || []"
+        [minLengthToSearch]="inputsMap[inputName].minLengthToSearch || 3" [delay]="inputsMap[inputName].delay || 300"
+        (onSearch)="autoCompleteSearch.emit({ name: inputName, query: $event })"
+        (selectOption)="autoCompleteSelect.emit({ name: inputName, event: $event })" />
+      }
       }
     </div>
-    <div class="col-span-12">
-      <small class="p-error text-red-700">
-        @for (error of formGroup.errors | validationErrors: dynamicFormData.formValidationErrorsKeys;
-        track error) {
-        {{ error }}
-        }
-      </small>
-    </div>
-  </form>
-</div>
+    }
+  </div>
+  <div class="col-span-12">
+    <small class="p-error text-red-700">
+      @for (error of formGroup.errors | validationErrors: dynamicFormData.formValidationErrorsKeys;
+      track error) {
+      {{ error }}
+      }
+    </small>
+  </div>
+</form>

@@ -23,7 +23,10 @@ export interface InputsMapData {
   hint?: string;
   readonly?: boolean;
   disabled?: boolean;
-
+  hidden?: boolean;
+  required?: boolean;
+  maxLength?: number;
+  minlength?: number;
   // Date
   dateRange?: DateRangeInterface;
   isTimeOnly?: boolean;
