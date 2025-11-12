@@ -6,12 +6,13 @@ import { IcoMoonIconComponent } from "../ico-moon-icon/ico-moon-icon.component";
 import { TranslateModule } from "@ngx-translate/core";
 import { ActivatedRoute, NavigationEnd, Router, RouterLink, RouterOutlet } from "@angular/router";
 import { filter } from "rxjs";
+import { BadgeModule } from "primeng/badge";
 
 @Component({
   selector: "app-tabs",
   standalone: true,
   encapsulation: ViewEncapsulation.None,
-  imports: [CommonModule, TabsModule, RouterLink, RouterOutlet, IcoMoonIconComponent, TranslateModule],
+  imports: [CommonModule, TabsModule, RouterLink, RouterOutlet, IcoMoonIconComponent, TranslateModule, BadgeModule],
   templateUrl: "./app-tabs.component.html",
   styleUrl: "./app-tabs.component.scss"
 })
