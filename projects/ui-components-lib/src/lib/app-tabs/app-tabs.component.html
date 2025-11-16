@@ -12,7 +12,7 @@
         }
         <span>{{ tab.title | translate }}
           @if (tab.count || tab.count === 0) {
-          <p-badge [value]="tab.count" severity="secondary" />
+          <p-badge [value]="getTabCount(tab.count)" severity="secondary" />
           }
         </span>
       </p-tab>

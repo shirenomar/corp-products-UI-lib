@@ -1,25 +1,34 @@
-import { CommonModule } from "@angular/common";
-import { Component, inject, Input, model, OnInit, ViewEncapsulation } from "@angular/core";
-import { TabsModule } from "primeng/tabs";
-import { AppTabs } from "./app-tab.interface";
-import { IcoMoonIconComponent } from "../ico-moon-icon/ico-moon-icon.component";
-import { TranslateModule } from "@ngx-translate/core";
-import { ActivatedRoute, NavigationEnd, Router, RouterLink, RouterOutlet } from "@angular/router";
-import { filter } from "rxjs";
-import { BadgeModule } from "primeng/badge";
+import { CommonModule } from '@angular/common';
+import { Component, inject, Input, model, OnInit, ViewEncapsulation } from '@angular/core';
+import { TabsModule } from 'primeng/tabs';
+import { AppTabs } from './app-tab.interface';
+import { IcoMoonIconComponent } from '../ico-moon-icon/ico-moon-icon.component';
+import { TranslateModule } from '@ngx-translate/core';
+import { ActivatedRoute, NavigationEnd, Router, RouterLink, RouterOutlet } from '@angular/router';
+import { filter } from 'rxjs';
+import { BadgeModule } from 'primeng/badge';
 
 @Component({
-  selector: "app-tabs",
+  selector: 'app-tabs',
   standalone: true,
   encapsulation: ViewEncapsulation.None,
-  imports: [CommonModule, TabsModule, RouterLink, RouterOutlet, IcoMoonIconComponent, TranslateModule, BadgeModule],
-  templateUrl: "./app-tabs.component.html",
-  styleUrl: "./app-tabs.component.scss"
+  imports: [
+    CommonModule,
+    TabsModule,
+    RouterLink,
+    RouterOutlet,
+    IcoMoonIconComponent,
+    TranslateModule,
+    BadgeModule,
+  ],
+  templateUrl: './app-tabs.component.html',
+  styleUrl: './app-tabs.component.scss',
 })
 export class AppTabsComponent implements OnInit {
   @Input() tabs: AppTabs;
-  @Input() tabsStyle: "basic" | "primary_light" | "primary" = "basic";
+  @Input() tabsStyle: 'basic' | 'primary_light' | 'primary' = 'basic';
   @Input() responsive = false;
+  @Input() twoDigitCount: boolean;
   selectedTabIndex = model<number>(0);
   activeTabIndex = 0;
   private router = inject(Router);
@@ -49,5 +58,10 @@ export class AppTabsComponent implements OnInit {
     if (selectedTab && !selectedTab.disabled) {
       this.router.navigate([selectedTab.link], { relativeTo: this.route });
     }
+  }
+
+  getTabCount(count: number): string {
+    if (!count) return '0';
+    return this.twoDigitCount && count > 99 ? '99+' : count.toString();
   }
 }
