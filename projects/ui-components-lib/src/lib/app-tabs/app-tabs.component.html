@@ -11,7 +11,7 @@
           [iconPathCount]="tab.iconPathCount || 0" />
         }
         <span>{{ tab.title | translate }}
-          @if (tab.count) {
+          @if (tab.count || tab.count === 0) {
           <p-badge [value]="tab.count" severity="secondary" />
           }
         </span>
