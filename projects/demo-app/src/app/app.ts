@@ -126,7 +126,7 @@ export class App {
 
   // Dynamic form demo config and state
   dynamicFormGroup = new FormGroup({
-    startDate: new FormControl<Date | null>(null, [Validators.required]),
+    startDate: new FormControl<Date | null>(new Date(), [Validators.required]),
     endDate: new FormControl<Date | null>(null, [Validators.required]),
     fullName: new FormControl<string>('', [Validators.required]),
     role: new FormControl<any>(null, [Validators.required]),
@@ -214,20 +214,7 @@ export class App {
     inputsMap: this.dynamicInputsMap,
     title: 'Dynamic Form Demo',
     isReadOnlyForm: false,
-    formValidationErrorsKeys: ['endDateBeforeStartDate', 'startDateEqualsEndDate'],
   };
-
-  constructor() {
-    // Cross-field validator: end date should be after start date and not equal
-    this.dynamicFormGroup.setValidators((group) => {
-      const start = group.get('startDate')?.value as Date | null;
-      const end = group.get('endDate')?.value as Date | null;
-      if (!start || !end) return null; // Required handled by control validators
-      if (end.getTime() < start.getTime()) return { endDateBeforeStartDate: true };
-      if (end.getTime() === start.getTime()) return { startDateEqualsEndDate: true };
-      return null;
-    });
-  }
 
   onDynamicSelectButtonChange(e: { name: string; value: any }) {
     console.log('SelectButton change', e);

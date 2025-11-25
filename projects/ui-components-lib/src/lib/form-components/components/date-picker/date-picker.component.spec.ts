@@ -1,7 +1,5 @@
-import {ComponentFixture, TestBed} from '@angular/core/testing';
-import {
-  DatePickerComponent
-} from 'nx-BOD-workspace/libs/ui-components/src/lib/form-components/components/date-picker/date-picker.component';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { DatePickerComponent } from 'nx-BOD-workspace/libs/ui-components/src/lib/form-components/components/date-picker/date-picker.component';
 
 describe('DatePickerComponent', () => {
   let component: DatePickerComponent;
