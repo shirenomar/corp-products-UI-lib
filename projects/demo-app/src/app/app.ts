@@ -23,6 +23,7 @@ import {
   SidebarConfig,
   SidebarConfigDefaults,
 } from './../../../ui-components-lib/src/lib/side-bar-dynamic/sidebar-config';
+import { emailValidator } from './validators/email-stc.validator';
 @Component({
   selector: 'app-root',
   imports: [
@@ -131,7 +132,7 @@ export class App {
     role: new FormControl<any>(null, [Validators.required]),
     status: new FormControl<string | null>(null),
     notify: new FormControl<boolean>(false),
-    assignee: new FormControl<any>(null),
+    assignee: new FormControl<any>(null, [Validators.required, emailValidator()]),
   });
 
   private allUsers = [
@@ -267,13 +268,34 @@ export class App {
 
   // ===== Confirmation Dialog with Dynamic Form =====
   dialogFormGroup = new FormGroup({
+    name: new FormControl<string>('', [Validators.required]),
     reason: new FormControl<string>('', [Validators.required, Validators.maxLength(500)]),
   });
 
   dialogInputsMap: InputsMap = {
+    // name: {
+    //   label: 'Name',
+    //   fieldType: FormFieldTypeEnum.INPUT,
+    //   inputId: 'dlg-name',
+    //   rowSize: 'full',
+    //   inputType: 'text',
+    //   contentType: 'text',
+    //   placeholder: 'Enter name',
+    //   variant: 'in',
+    // },
+
+    name: {
+      label: 'name',
+      fieldType: FormFieldTypeEnum.AUTO_COMPLETE,
+      inputId: 'df-name',
+      rowSize: 'full',
+      // autoCompleteItems: this.allUsers,
+      placeholder: 'Type to search users',
+      variant: 'in',
+    },
     reason: {
       label: 'Reason',
-      fieldType: FormFieldTypeEnum.INPUT,
+      fieldType: FormFieldTypeEnum.AUTO_COMPLETE,
       inputId: 'dlg-reason',
       rowSize: 'full',
       inputType: 'textarea',
@@ -285,8 +307,8 @@ export class App {
   };
 
   dialogDynamicFormData: DynamicFormData = {
-    formGroup: this.dialogFormGroup,
-    inputsMap: this.dialogInputsMap,
+    formGroup: this.dynamicFormGroup,
+    inputsMap: this.dynamicInputsMap,
     title: 'Confirm Action',
     isReadOnlyForm: false,
   };

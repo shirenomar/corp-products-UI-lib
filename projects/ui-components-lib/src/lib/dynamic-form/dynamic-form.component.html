@@ -62,7 +62,7 @@
         [hint]="inputsMap[inputName].hint"
         [readonly]="inputsMap[inputName].readonly || dynamicFormData.isReadOnlyForm || false"
         [disabled]="inputsMap[inputName].disabled || false" [items]="inputsMap[inputName].autoCompleteItems || []"
-        [minLengthToSearch]="inputsMap[inputName].minLengthToSearch || 3" [delay]="inputsMap[inputName].delay || 300"
+        [minLengthToSearch]="inputsMap[inputName].minLengthToSearch || 2" [delay]="inputsMap[inputName].delay || 300"
         (onSearch)="autoCompleteSearch.emit({ name: inputName, query: $event })"
         (selectOption)="autoCompleteSelect.emit({ name: inputName, event: $event })" />
       }
