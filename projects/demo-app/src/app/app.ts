@@ -23,7 +23,6 @@ import {
   SidebarConfig,
   SidebarConfigDefaults,
 } from './../../../ui-components-lib/src/lib/side-bar-dynamic/sidebar-config';
-import { emailValidator } from './validators/email-stc.validator';
 @Component({
   selector: 'app-root',
   imports: [
@@ -132,7 +131,7 @@ export class App {
     role: new FormControl<any>(null, [Validators.required]),
     status: new FormControl<string | null>(null),
     notify: new FormControl<boolean>(false),
-    assignee: new FormControl<Array<any>>([], [Validators.required, emailValidator()]),
+    assignee: new FormControl<Array<any>>([], [Validators.required]),
   });
 
   private allUsers = [
