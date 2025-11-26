@@ -38,7 +38,7 @@ export class AutoCompleteComponent extends BaseInputComponent {
   @Input() minLengthToSearch = 3;
   @Input() delay = 300; // default value
   @Input() basicInput!: boolean;
-  @Input() typeahead: boolean = false;
+  @Input() typeAhead: boolean = false;
 
   constructor() {
     super();
