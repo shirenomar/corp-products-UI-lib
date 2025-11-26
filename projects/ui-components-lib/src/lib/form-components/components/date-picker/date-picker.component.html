@@ -2,9 +2,8 @@
 
   <p-floatlabel [variant]="variant">
     <p-datepicker [selectionMode]="selectionMode" [disabled]="disabled" [formControl]="control" [iconDisplay]="'input'"
-      [showClear]="showClear" (onClear)="afterClearDate()" (onSelect)="onDateSelect($event)"
-      (onInput)="onDateType($event)" [inputId]="inputId"
-      [inputStyleClass]="'reset-default-styles ' + (basicInput ? 'basic-style' : '')" [dateFormat]="dateFormat"
+      [showClear]="showClear" (onClear)="afterClearDate()" [inputId]="inputId"
+      [inputStyleClass]="'reset-default-styles ' + (basicInput ? 'basic-style' : '')"
       [ngClass]="{ 'p-invalid ng-dirty ng-invalid': isInvalid }" [placeholder]="placeholder" [showIcon]="showIcon"
       [class]="'w-full'" appendTo="body" [timeOnly]="isTimeOnly" [hourFormat]="hourFormat" [minDate]="minDate"
       [maxDate]="maxDate" panelStyleClass="d-ltr">
