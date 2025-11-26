@@ -29,7 +29,7 @@
         [prefix]="inputsMap[inputName].prefix || ''" [size]="inputsMap[inputName].size || 'small'"
         [variant]="inputsMap[inputName].variant || 'over'">
         @if(inputsMap[inputName].maxLength){
-        <small class="text-sm text-gray-600">
+        <small class="text-sm text-gray-600 self-end">
           {{ (getFormControl(inputName, formGroup).value?.length || 0) }}
           <span>
             / {{ inputsMap[inputName].maxLength}}
