@@ -1,27 +1,26 @@
 <div class="field flex flex-col gap-2 my-3 relative">
-  @if (label) {
-  <label [for]="inputId">
-    {{ label }}
-    @if (required) {
-    <span [class.text-required]="isInvalid">*</span>
-    }
-  </label>
-  }
   @if (!required) {
   <span class="absolute top-[6px] left-0 text-[10px] text-gray-400">{{'forms.config.optional' | translate}}</span>
   }
-  <p-auto-complete (completeMethod)="search($event)" (onSelect)="onSelect($event)" [delay]="delay" [disabled]="disabled"
-    [formControl]="control" [id]="inputId" fluid [typeahead]="typeAhead"
-    [inputStyleClass]="'reset-default-styles w-full' + (basicInput ? ' basic-style': ' ')"
-    [minLength]="minLengthToSearch" [name]="name" [ngClass]="{ 'p-invalid ng-dirty ng-invalid': isInvalid}"
-    [placeholder]="placeholder" [styleClass]="'w-full'" multiple [suggestions]="items">
-    <ng-template let-item pTemplate="item">
-      @if (selectedItemTemplate) {
-      <ng-container [ngTemplateOutletContext]="{ $implicit: item }" [ngTemplateOutlet]="selectedItemTemplate" />
+  <p-floatlabel [variant]="variant">
+    <p-auto-complete (completeMethod)="search($event)" (onSelect)="onSelect($event)" [delay]="delay"
+      [disabled]="disabled" [formControl]="control" [id]="inputId" fluid [typeahead]="typeAhead"
+      [inputStyleClass]="'reset-default-styles w-full' + (basicInput ? ' basic-style': ' ')"
+      [minLength]="minLengthToSearch" [name]="name" [ngClass]="{ 'p-invalid ng-dirty ng-invalid': isInvalid}"
+      [placeholder]="placeholder" [styleClass]="'w-full'" multiple [suggestions]="items">
+      <ng-template let-item pTemplate="item">
+        @if (selectedItemTemplate) {
+        <ng-container [ngTemplateOutletContext]="{ $implicit: item }" [ngTemplateOutlet]="selectedItemTemplate" />
+        }
+      </ng-template>
+    </p-auto-complete>
+    <label [for]="inputId">
+      {{ label }}
+      @if (required) {
+      <span [class.text-required]="isInvalid">*</span>
       }
-    </ng-template>
-  </p-auto-complete>
-
+    </label>
+  </p-floatlabel>
   @if (hint) {
   <small class="p-mt-1">{{ hint }}</small>
   }

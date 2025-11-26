@@ -132,7 +132,7 @@ export class App {
     role: new FormControl<any>(null, [Validators.required]),
     status: new FormControl<string | null>(null),
     notify: new FormControl<boolean>(false),
-    assignee: new FormControl<any>(null, [Validators.required, emailValidator()]),
+    assignee: new FormControl<Array<any>>([], [Validators.required, emailValidator()]),
   });
 
   private allUsers = [
@@ -204,7 +204,8 @@ export class App {
       fieldType: FormFieldTypeEnum.AUTO_COMPLETE,
       inputId: 'df-assignee',
       rowSize: 'full',
-      autoCompleteItems: this.allUsers,
+      // autoCompleteItems: this.allUsers,
+      variant: 'in',
       placeholder: 'Type to search users',
     },
   };

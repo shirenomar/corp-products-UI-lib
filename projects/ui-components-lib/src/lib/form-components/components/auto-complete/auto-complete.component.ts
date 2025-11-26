@@ -8,6 +8,7 @@ import {
   AutoCompleteCompleteEvent,
   AutoCompleteSelectEvent,
 } from 'primeng/autocomplete';
+import { FloatLabel } from 'primeng/floatlabel';
 import { ValidationErrorsPipe } from '../../@utils/validations/validation-message.pipe';
 import { BaseInputComponent } from '../base-input.component';
 
@@ -24,6 +25,7 @@ import { BaseInputComponent } from '../base-input.component';
     JsonPipe,
     ValidationErrorsPipe,
     TranslatePipe,
+    FloatLabel,
   ],
   templateUrl: './auto-complete.component.html',
   styleUrl: './auto-complete.component.scss',
@@ -39,6 +41,7 @@ export class AutoCompleteComponent extends BaseInputComponent {
   @Input() delay = 300; // default value
   @Input() basicInput!: boolean;
   @Input() typeAhead: boolean = false;
+  @Input() variant: 'in' | 'over' | 'on' = 'over';
 
   constructor() {
     super();
