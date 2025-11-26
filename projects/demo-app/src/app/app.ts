@@ -125,13 +125,13 @@ export class App {
 
   // Dynamic form demo config and state
   dynamicFormGroup = new FormGroup({
-    startDate: new FormControl<Date | null>(null, [Validators.required]),
+    startDate: new FormControl<Date | null>(new Date(), [Validators.required]),
     endDate: new FormControl<Date | null>(null, [Validators.required]),
     fullName: new FormControl<string>('', [Validators.required]),
     role: new FormControl<any>(null, [Validators.required]),
     status: new FormControl<string | null>(null),
     notify: new FormControl<boolean>(false),
-    assignee: new FormControl<any>(null),
+    assignee: new FormControl<Array<any>>([], [Validators.required]),
   });
 
   private allUsers = [
@@ -203,7 +203,8 @@ export class App {
       fieldType: FormFieldTypeEnum.AUTO_COMPLETE,
       inputId: 'df-assignee',
       rowSize: 'full',
-      autoCompleteItems: this.allUsers,
+      // autoCompleteItems: this.allUsers,
+      variant: 'in',
       placeholder: 'Type to search users',
     },
   };
@@ -213,20 +214,7 @@ export class App {
     inputsMap: this.dynamicInputsMap,
     title: 'Dynamic Form Demo',
     isReadOnlyForm: false,
-    formValidationErrorsKeys: ['endDateBeforeStartDate', 'startDateEqualsEndDate'],
   };
-
-  constructor() {
-    // Cross-field validator: end date should be after start date and not equal
-    this.dynamicFormGroup.setValidators((group) => {
-      const start = group.get('startDate')?.value as Date | null;
-      const end = group.get('endDate')?.value as Date | null;
-      if (!start || !end) return null; // Required handled by control validators
-      if (end.getTime() < start.getTime()) return { endDateBeforeStartDate: true };
-      if (end.getTime() === start.getTime()) return { startDateEqualsEndDate: true };
-      return null;
-    });
-  }
 
   onDynamicSelectButtonChange(e: { name: string; value: any }) {
     console.log('SelectButton change', e);
@@ -267,13 +255,34 @@ export class App {
 
   // ===== Confirmation Dialog with Dynamic Form =====
   dialogFormGroup = new FormGroup({
+    name: new FormControl<string>('', [Validators.required]),
     reason: new FormControl<string>('', [Validators.required, Validators.maxLength(500)]),
   });
 
   dialogInputsMap: InputsMap = {
+    // name: {
+    //   label: 'Name',
+    //   fieldType: FormFieldTypeEnum.INPUT,
+    //   inputId: 'dlg-name',
+    //   rowSize: 'full',
+    //   inputType: 'text',
+    //   contentType: 'text',
+    //   placeholder: 'Enter name',
+    //   variant: 'in',
+    // },
+
+    name: {
+      label: 'name',
+      fieldType: FormFieldTypeEnum.AUTO_COMPLETE,
+      inputId: 'df-name',
+      rowSize: 'full',
+      // autoCompleteItems: this.allUsers,
+      placeholder: 'Type to search users',
+      variant: 'in',
+    },
     reason: {
       label: 'Reason',
-      fieldType: FormFieldTypeEnum.INPUT,
+      fieldType: FormFieldTypeEnum.AUTO_COMPLETE,
       inputId: 'dlg-reason',
       rowSize: 'full',
       inputType: 'textarea',
@@ -285,8 +294,8 @@ export class App {
   };
 
   dialogDynamicFormData: DynamicFormData = {
-    formGroup: this.dialogFormGroup,
-    inputsMap: this.dialogInputsMap,
+    formGroup: this.dynamicFormGroup,
+    inputsMap: this.dynamicInputsMap,
     title: 'Confirm Action',
     isReadOnlyForm: false,
   };
