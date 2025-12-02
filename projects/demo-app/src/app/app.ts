@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject, signal, ViewEncapsulation } from '@angular/core';
 
-import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 
 import { DialogService } from 'primeng/dynamicdialog';
 import { BreadcrumbItem } from '../../../ui-components-lib/src/lib/app-breadcrumb/app-breadcrumb.interface';
@@ -23,14 +23,17 @@ import {
   SidebarConfig,
   SidebarConfigDefaults,
 } from './../../../ui-components-lib/src/lib/side-bar-dynamic/sidebar-config';
+import { HiijriGregorianComponent } from './../../../ui-components-lib/src/lib/hiijri-gregorian/hiijri-gregorian.component';
 @Component({
   selector: 'app-root',
   imports: [
-    AppBreadcrumbComponent,
+  AppBreadcrumbComponent,
     ReactiveFormsModule,
     AppButtonComponent,
+    FormsModule,
     BottomSheetComponent,
     DynamicFormComponent,
+    HiijriGregorianComponent,
     CommonModule,
   ],
   providers: [DialogService, ConfirmationDialogService],
@@ -41,7 +44,7 @@ import {
 export class App {
   show = false;
   protected readonly title = signal('demo-app');
-
+  selectedDate: any;
   form2: FormGroup = new FormGroup({
     search: new FormControl(''),
   });
@@ -122,7 +125,9 @@ export class App {
     { name: 'Item 4', code: '4' },
     { name: 'Item 5', code: '5' },
   ];
-
+onDateChange(event: any) {
+  this.selectedDate = event;
+}
   // Dynamic form demo config and state
   dynamicFormGroup = new FormGroup({
     startDate: new FormControl<Date | null>(new Date(), [Validators.required]),
@@ -141,7 +146,20 @@ export class App {
     { id: 4, name: 'Diana Prince' },
     { id: 5, name: 'Evan Davis' },
   ];
+    onSubmitEvent(code: string) {
+    }
 
+    // this called only every time the use selects a date
+    onChangeEvent(code: string) {
+    }
+
+    // this called every time the month value channges
+    onMonthChangeEvent(code: string) {
+    }
+
+    // this called every time the year value channges
+    onYearChangeEvent(code: string) {
+    }
   dynamicInputsMap: InputsMap = {
     startDate: {
       label: 'Start Date',

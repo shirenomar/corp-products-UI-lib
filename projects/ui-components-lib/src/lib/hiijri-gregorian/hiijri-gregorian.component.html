@@ -1,0 +1,104 @@
+
+
+<div class="datepicker-container" dir="rtl">
+  <!-- Header with tabs -->
+  <div class="header-tabs">
+    <div class="header-label">نوع التقويم</div>
+    <div class="tabs">
+      <button (click)="switchMode('gregorian')" [class.active]="mode === 'gregorian'" class="tab-button">
+        الميلادي
+      </button>
+      <button (click)="switchMode('hijri')" [class.active]="mode === 'hijri'" class="tab-button">
+        هجري
+      </button>
+
+    </div>
+
+  </div>
+  <!-- Month/Year selector -->
+  <div class="month-selector">
+    <button (click)="prevMonth()" class="nav-button">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <polyline points="9 18 15 12 9 6"></polyline>
+      </svg>
+
+
+    </button>
+
+    <div class="month-year-display">
+      <button (click)="toggleYearPicker()" class="year-button">
+        <span>{{ getMonthName() }} {{ currentYear }}</span>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polyline points="6 9 12 15 18 9"></polyline>
+        </svg>
+      </button>
+
+      <!-- Year Picker Dropdown -->
+      <div *ngIf="showYearPicker" class="year-picker-dropdown">
+        <div class="year-grid">
+          <div class="year-picker-header">
+            <button (click)="previousYearRange()" class="year-nav-btn">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="9 18 15 12 9 6"></polyline>
+              </svg>
+            </button>
+            <span>{{ yearRangeStart }} - {{ yearRangeEnd }}</span>
+            <button (click)="nextYearRange()" class="year-nav-btn">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="15 18 9 12 15 6"></polyline>
+              </svg>
+            </button>
+          </div>
+          <div class="year-pair" *ngFor="let pair of getYearChunks()">
+            <button *ngFor="let year of pair" (click)="selectYear(year)" [class.selected-year]="year === currentYear"
+              class="year-item">
+              {{ year }}
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <button (click)="nextMonth()" class="nav-button">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <polyline points="15 18 9 12 15 6"></polyline>
+      </svg>
+    </button>
+  </div>
+
+  <!-- Calendar grid -->
+  <div class="calendar-wrapper">
+    <!-- Day headers -->
+    <div class="day-headers">
+      <div *ngFor="let day of arabicDays" class="day-header">
+        {{ day }}
+      </div>
+    </div>
+
+    <!-- Calendar days -->
+    <div class="calendar-grid">
+      <button *ngFor="let dateObj of generateCalendarDays(); let i = index" (click)="selectDate(dateObj)"
+        [disabled]="!dateObj.isCurrentMonth" [class.disabled]="!dateObj.isCurrentMonth"
+        [class.selected]="isSelected(dateObj)" [class.today]="isToday(dateObj)" class="day-cell">
+        {{ dateObj.day || '' }}
+      </button>
+    </div>
+  </div>
+
+  <!-- Selected date display with both calendars -->
+  <div *ngIf="selectedDate" class="selected-date-display">
+    <div class="date-info">
+      <div class="date-section">
+        <p class="label">التاريخ الميلادي</p>
+        <p class="date-text">{{ selectedDate.gregorian }}</p>
+      </div>
+      <div class="divider"></div>
+      <div class="date-section">
+        <p class="label">التاريخ الهجري</p>
+        <p class="date-text">{{ selectedDate.hijri }}</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+
