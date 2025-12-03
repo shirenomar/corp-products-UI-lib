@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, OnInit, Output, signal, ViewEncapsulation } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, ViewEncapsulation } from '@angular/core';
 import { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
 import { TagModule } from 'primeng/tag';
@@ -17,6 +17,7 @@ interface SelectedDate {
   year: number;
   gregorian?: string;
   hijri?: string;
+  index?: number;
 }
 
 @Component({
@@ -158,7 +159,7 @@ export class HiijriGregorianComponent implements OnInit {
     this.calendarDays = days;
   }
 
-  selectDate(dateObj: CalendarDay): void {
+  selectDate(dateObj: CalendarDay, index: number): void {
     if (!dateObj.isCurrentMonth) return;
 
     // Convert clicked date to Gregorian if current mode is Hijri
@@ -246,7 +247,6 @@ export class HiijriGregorianComponent implements OnInit {
     this.mode = newMode;
 
     if (!this.selectedDate) return;
-
     let targetDate;
     if (newMode === 'gregorian') {
       // Convert stored Gregorian date to Gregorian (no change)
@@ -266,6 +266,10 @@ export class HiijriGregorianComponent implements OnInit {
 
     this.currentMonth = targetDate.month;
     this.currentYear = targetDate.year;
+  }
+
+  trackByDay(index: number, day: CalendarDay) {
+    return day.day + '-' + (day.isPrevMonth ? 'p' : 'c'); // unique key per day
   }
 
   prevMonth(): void {
@@ -336,14 +340,6 @@ export class HiijriGregorianComponent implements OnInit {
     this.yearRangeEnd += 12;
   }
 
-  // Hijri to Gregorian conversion (simplified algorithm)
-  // hijriToGregorian(day: number, month: number, year: number): { day: number; month: number; year: number } {
-  //   console.log('hijriToGregorian')
-
-  //   // This is a simplified conversion. For production, use a library like moment-hijri
-  //   const jd = this.hijriToJulian(day, month + 1, year);
-  //   return this.julianToGregorian(jd);
-  // }
   hijriToGregorian(
     day: number,
     month: number,
@@ -360,15 +356,6 @@ export class HiijriGregorianComponent implements OnInit {
     };
   }
 
-  // Gregorian to Hijri conversion (simplified algorithm)
-  // gregorianToHijri(day: number, month: number, year: number): { day: number; month: number; year: number } {
-  //   console.log('gregorianToHijri')
-
-  //   // This is a simplified conversion. For production, use a library like moment-hijri
-  //   const jd = this.gregorianToJulian(day, month + 1, year);
-  //   return this.julianToHijri(jd);
-  // }
-
   gregorianToHijri(
     day: number,
     month: number,
@@ -383,77 +370,5 @@ export class HiijriGregorianComponent implements OnInit {
       month: gregorianDate.iMonth(),
       year: gregorianDate.iYear(),
     };
-  }
-
-  // Helper: Hijri to Julian Day Number
-  private hijriToJulian(day: number, month: number, year: number): number {
-    console.log('hijriToJulian');
-
-    return (
-      Math.floor((11 * year + 3) / 30) +
-      Math.floor(354 * year) +
-      Math.floor(30 * month) -
-      Math.floor((month - 1) / 2) +
-      day +
-      1948440 -
-      385
-    );
-  }
-
-  // Helper: Julian Day Number to Hijri
-  private julianToHijri(jd: number): { day: number; month: number; year: number } {
-    console.log('julianToHijri');
-
-    const l = jd - 1948440 + 10632;
-    const n = Math.floor((l - 1) / 10631);
-    const l1 = l - 10631 * n + 354;
-    const j =
-      Math.floor((10985 - l1) / 5316) * Math.floor((50 * l1) / 17719) +
-      Math.floor(l1 / 5670) * Math.floor((43 * l1) / 15238);
-    const l2 =
-      l1 -
-      Math.floor((30 - j) / 15) * Math.floor((17719 * j) / 50) -
-      Math.floor(j / 16) * Math.floor((15238 * j) / 43) +
-      29;
-    const month = Math.floor((24 * l2) / 709);
-    const day = l2 - Math.floor((709 * month) / 24);
-    const year = 30 * n + j - 30;
-
-    return { day, month: month - 1, year };
-  }
-
-  // Helper: Gregorian to Julian Day Number
-  private gregorianToJulian(day: number, month: number, year: number): number {
-    console.log('gregorianToJulian');
-
-    const a = Math.floor((14 - month) / 12);
-    const y = year + 4800 - a;
-    const m = month + 12 * a - 3;
-    return (
-      day +
-      Math.floor((153 * m + 2) / 5) +
-      365 * y +
-      Math.floor(y / 4) -
-      Math.floor(y / 100) +
-      Math.floor(y / 400) -
-      32045
-    );
-  }
-
-  // Helper: Julian Day Number to Gregorian
-  private julianToGregorian(jd: number): { day: number; month: number; year: number } {
-    console.log('julianToGregorian');
-
-    const a = jd + 32044;
-    const b = Math.floor((4 * a + 3) / 146097);
-    const c = a - Math.floor((146097 * b) / 4);
-    const d = Math.floor((4 * c + 3) / 1461);
-    const e = c - Math.floor((1461 * d) / 4);
-    const m = Math.floor((5 * e + 2) / 153);
-    const day = e - Math.floor((153 * m + 2) / 5) + 1;
-    const month = m + 3 - 12 * Math.floor(m / 10);
-    const year = 100 * b + d - 4800 + Math.floor(m / 10);
-
-    return { day, month: month - 1, year };
   }
 }

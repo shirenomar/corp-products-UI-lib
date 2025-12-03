@@ -115,8 +115,8 @@
     <!-- Calendar days -->
     <div class="calendar-grid">
       <button
-        *ngFor="let dateObj of calendarDays; let i = index"
-        (click)="selectDate(dateObj)"
+        *ngFor="let dateObj of calendarDays; let i = index; trackBy: trackByDay"
+        (click)="selectDate(dateObj, i)"
         [disabled]="!dateObj.isCurrentMonth"
         [class.disabled]="!dateObj.isCurrentMonth"
         [class.selected]="isSelected(dateObj)"
