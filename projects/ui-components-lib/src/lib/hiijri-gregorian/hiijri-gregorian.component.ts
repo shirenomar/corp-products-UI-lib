@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, OnInit, Output, signal, ViewEncapsulation, } from '@angular/core';
-import { FormGroup, FormsModule, ReactiveFormsModule, } from '@angular/forms';
+import { Component, EventEmitter, OnInit, Output, signal, ViewEncapsulation } from '@angular/core';
+import { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
 import { TagModule } from 'primeng/tag';
 import moment from 'moment-hijri';
@@ -21,19 +21,12 @@ interface SelectedDate {
 
 @Component({
   selector: 'app-hiijri-gregorian',
-  imports: [
-    FormsModule,
-    ReactiveFormsModule,
-    TagModule,
-    CommonModule,
-    TranslateModule,
-  ],
+  imports: [FormsModule, ReactiveFormsModule, TagModule, CommonModule, TranslateModule],
   templateUrl: './hiijri-gregorian.component.html',
   styleUrl: './hiijri-gregorian.component.scss',
   encapsulation: ViewEncapsulation.None,
 })
 export class HiijriGregorianComponent implements OnInit {
-
   @Output() onnDateSelect = new EventEmitter<SelectedDate>();
   correspondenceForm!: FormGroup;
   mode: 'hijri' | 'gregorian' = 'hijri';
@@ -43,6 +36,7 @@ export class HiijriGregorianComponent implements OnInit {
   showYearPicker = false;
   yearRangeStart = 2020;
   yearRangeEnd = 2031;
+  calendarDays: CalendarDay[] = [];
   calenderSelectedDate!: CalendarDay;
   // Store the equivalent date in the other calendar
   equivalentDate: { month: number; year: number; day: number } | null = null;
@@ -50,39 +44,60 @@ export class HiijriGregorianComponent implements OnInit {
   arabicDays = ['ح', 'ن', 'ث', 'ر', 'خ', 'ج', 'س'];
 
   gregorianMonths = [
-    'يناير', 'فبراير', 'مارس', 'أبريل', 'مايو', 'يونيو',
-    'يوليو', 'أغسطس', 'سبتمبر', 'أكتوبر', 'نوفمبر', 'ديسمبر'
+    'يناير',
+    'فبراير',
+    'مارس',
+    'أبريل',
+    'مايو',
+    'يونيو',
+    'يوليو',
+    'أغسطس',
+    'سبتمبر',
+    'أكتوبر',
+    'نوفمبر',
+    'ديسمبر',
   ];
 
   hijriMonths = [
-    'محرم', 'صفر', 'ربيع الأول', 'ربيع الثاني', 'جمادى الأولى', 'جمادى الآخرة',
-    'رجب', 'شعبان', 'رمضان', 'شوال', 'ذو القعدة', 'ذو الحجة'
+    'محرم',
+    'صفر',
+    'ربيع الأول',
+    'ربيع الثاني',
+    'جمادى الأولى',
+    'جمادى الآخرة',
+    'رجب',
+    'شعبان',
+    'رمضان',
+    'شوال',
+    'ذو القعدة',
+    'ذو الحجة',
   ];
   ngOnInit() {
-      const today = new Date();
-    this.currentMonth = new Date().getMonth();   // 0-indexed (0 = Jan)
+    const today = new Date();
+    this.currentMonth = new Date().getMonth(); // 0-indexed (0 = Jan)
     this.currentYear = new Date().getFullYear();
 
-     if (this.mode === 'hijri') {
-      const hijriToday = this.gregorianToHijri(today.getDate(), today.getMonth(), today.getFullYear());
+    if (this.mode === 'hijri') {
+      const hijriToday = this.gregorianToHijri(
+        today.getDate(),
+        today.getMonth(),
+        today.getFullYear()
+      );
       this.currentMonth = hijriToday.month;
       this.currentYear = hijriToday.year;
     }
-  }
 
-  get calendarDays(): CalendarDay[] {
-    console.log('calendarDays')
-    return this.generateCalendarDays();
+    this.generateCalendarDays();
   }
 
   getMonthName(): string {
-    console.log('getMonthName')
+    console.log('getMonthName');
 
     const months = this.mode === 'hijri' ? this.hijriMonths : this.gregorianMonths;
     return months[this.currentMonth];
   }
   getYearChunks(): number[][] {
-    console.log('getYearChunks')
+    console.log('getYearChunks');
 
     const years = this.getYearRange();
     const chunks: number[][] = [];
@@ -94,20 +109,18 @@ export class HiijriGregorianComponent implements OnInit {
     return chunks;
   }
   getDaysInMonth(year: number, month: number): number {
-    console.log('getDaysInMonth')
+    console.log('getDaysInMonth');
 
     return new Date(year, month + 1, 0).getDate();
   }
 
   getFirstDayOfMonth(year: number, month: number): number {
-    console.log('getFirstDayOfMonth')
+    console.log('getFirstDayOfMonth');
 
     return new Date(year, month, 1).getDay();
   }
 
-  generateCalendarDays(): CalendarDay[] {
-    console.log('generateCalendarDays')
-
+  generateCalendarDays() {
     const daysInMonth = this.getDaysInMonth(this.currentYear, this.currentMonth);
     const firstDay = this.getFirstDayOfMonth(this.currentYear, this.currentMonth);
     const prevMonthDays = this.getDaysInMonth(this.currentYear, this.currentMonth - 1);
@@ -119,7 +132,7 @@ export class HiijriGregorianComponent implements OnInit {
       days.push({
         day: prevMonthDays - i,
         isCurrentMonth: false,
-        isPrevMonth: true
+        isPrevMonth: true,
       });
     }
 
@@ -128,7 +141,7 @@ export class HiijriGregorianComponent implements OnInit {
       days.push({
         day: i,
         isCurrentMonth: true,
-        isPrevMonth: false
+        isPrevMonth: false,
       });
     }
 
@@ -138,101 +151,125 @@ export class HiijriGregorianComponent implements OnInit {
       days.push({
         day: i,
         isCurrentMonth: false,
-        isPrevMonth: false
+        isPrevMonth: false,
       });
     }
 
-    return days;
+    this.calendarDays = days;
   }
 
   selectDate(dateObj: CalendarDay): void {
-    console.log('selectDate')
-debugger
-    if(!dateObj) return
-    // if (!dateObj.isCurrentMonth) return;
-    this.calenderSelectedDate = {...dateObj}
-    const gregorianDate = this.mode === 'gregorian'
-      ? { day: dateObj.day, month: this.currentMonth, year: this.currentYear }
-      : this.hijriToGregorian(dateObj.day, this.currentMonth, this.currentYear);
+    if (!dateObj.isCurrentMonth) return;
 
-    const hijriDate = this.mode === 'hijri'
-      ? { day: dateObj.day, month: this.currentMonth, year: this.currentYear }
-      : this.gregorianToHijri(dateObj.day, this.currentMonth, this.currentYear);
+    // Convert clicked date to Gregorian if current mode is Hijri
+    const gregorianDate =
+      this.mode === 'gregorian'
+        ? { day: dateObj.day, month: this.currentMonth, year: this.currentYear }
+        : this.hijriToGregorian(dateObj.day, this.currentMonth, this.currentYear);
 
-    // Store the equivalent date for highlighting
-    this.equivalentDate = this.mode === 'gregorian' ? hijriDate : gregorianDate;
+    const hijriDate =
+      this.mode === 'hijri'
+        ? { day: dateObj.day, month: this.currentMonth, year: this.currentYear }
+        : this.gregorianToHijri(dateObj.day, this.currentMonth, this.currentYear);
 
     this.selectedDate = {
-      day: dateObj.day,
-      month: this.currentMonth,
-      year: this.currentYear,
+      day: gregorianDate.day,
+      month: gregorianDate.month,
+      year: gregorianDate.year,
       gregorian: this.formatDate(gregorianDate, this.gregorianMonths),
-      hijri: this.formatDate(hijriDate, this.hijriMonths)
+      hijri: this.formatDate(hijriDate, this.hijriMonths),
     };
 
-    // this.onnDateSelect.emit(this.selectedDate | nul);
+    // Update calendar to show selected month/year
+    this.currentMonth = this.mode === 'gregorian' ? gregorianDate.month : hijriDate.month;
+    this.currentYear = this.mode === 'gregorian' ? gregorianDate.year : hijriDate.year;
   }
 
   formatDate(date: { day: number; month: number; year: number }, months: string[]): string {
-    console.log('formatDate')
+    console.log('formatDate');
 
     return `${date.day} ${months[date.month]} ${date.year}`;
   }
 
   isSelected(dateObj: CalendarDay): boolean {
-    console.log('isSelected')
+    if (!this.selectedDate) return false;
 
     if (!dateObj.isCurrentMonth) return false;
 
-    // Check if this is the selected date in current mode
-    const isCurrentModeSelected = this.selectedDate &&
-      this.selectedDate.day === dateObj.day &&
-      this.selectedDate.month === this.currentMonth &&
-      this.selectedDate.year === this.currentYear;
-
-    // Check if this is the equivalent date when viewing the other calendar
-    const isEquivalentDate = this.equivalentDate &&
-      this.equivalentDate.day === dateObj.day &&
-      this.equivalentDate.month === this.currentMonth &&
-      this.equivalentDate.year === this.currentYear;
-
-    return !!(isCurrentModeSelected || isEquivalentDate);
+    if (this.mode === 'gregorian') {
+      return (
+        dateObj.day === this.selectedDate.day &&
+        this.currentMonth === this.selectedDate.month &&
+        this.currentYear === this.selectedDate.year
+      );
+    } else {
+      const hijri = this.gregorianToHijri(
+        this.selectedDate.day,
+        this.selectedDate.month,
+        this.selectedDate.year
+      );
+      return (
+        dateObj.day === hijri.day &&
+        this.currentMonth === hijri.month &&
+        this.currentYear === hijri.year
+      );
+    }
   }
+
   isToday(dateObj: CalendarDay): boolean {
     const today = new Date();
 
     if (this.mode === 'gregorian') {
-      return dateObj.day === today.getDate() &&
+      return (
+        dateObj.day === today.getDate() &&
         this.currentMonth === today.getMonth() &&
         this.currentYear === today.getFullYear() &&
-        dateObj.isCurrentMonth;
+        dateObj.isCurrentMonth
+      );
     } else {
-      const hijriToday = this.gregorianToHijri(today.getDate(), today.getMonth(), today.getFullYear());
-      return dateObj.day === hijriToday.day &&
+      const hijriToday = this.gregorianToHijri(
+        today.getDate(),
+        today.getMonth(),
+        today.getFullYear()
+      );
+      return (
+        dateObj.day === hijriToday.day &&
         this.currentMonth === hijriToday.month &&
         this.currentYear === hijriToday.year &&
-        dateObj.isCurrentMonth;
+        dateObj.isCurrentMonth
+      );
     }
   }
 
-
   switchMode(newMode: 'hijri' | 'gregorian'): void {
-    if(this.mode == newMode) return
+    if (this.mode === newMode) return;
     this.mode = newMode;
-    console.log('switchMode')
 
-    // If there's a selected date, convert the calendar to show the equivalent date
-    if (this.equivalentDate) {
-      this.currentMonth = this.equivalentDate.month;
-      this.currentYear = this.equivalentDate.year;
+    if (!this.selectedDate) return;
+
+    let targetDate;
+    if (newMode === 'gregorian') {
+      // Convert stored Gregorian date to Gregorian (no change)
+      targetDate = {
+        day: this.selectedDate.day,
+        month: this.selectedDate.month,
+        year: this.selectedDate.year,
+      };
+    } else {
+      // Convert stored Gregorian date to Hijri
+      targetDate = this.gregorianToHijri(
+        this.selectedDate.day,
+        this.selectedDate.month,
+        this.selectedDate.year
+      );
     }
-    // debugger
 
-      // this.selectDate(this.calenderSelectedDate)
+    this.currentMonth = targetDate.month;
+    this.currentYear = targetDate.year;
   }
 
   prevMonth(): void {
-    console.log('prevMonth')
+    console.log('prevMonth');
 
     if (this.currentMonth === 0) {
       this.currentMonth = 11;
@@ -240,10 +277,12 @@ debugger
     } else {
       this.currentMonth--;
     }
+
+    this.generateCalendarDays();
   }
 
   nextMonth(): void {
-    console.log('nextMonth')
+    console.log('nextMonth');
 
     if (this.currentMonth === 11) {
       this.currentMonth = 0;
@@ -251,10 +290,12 @@ debugger
     } else {
       this.currentMonth++;
     }
+
+    this.generateCalendarDays();
   }
 
   toggleYearPicker(): void {
-    console.log('toggleYearPicker')
+    console.log('toggleYearPicker');
 
     this.showYearPicker = !this.showYearPicker;
     if (this.showYearPicker) {
@@ -265,7 +306,7 @@ debugger
   }
 
   getYearRange(): number[] {
-    console.log('getYearRange')
+    console.log('getYearRange');
 
     const years = [];
     for (let i = this.yearRangeStart; i <= this.yearRangeEnd; i++) {
@@ -275,21 +316,21 @@ debugger
   }
 
   selectYear(year: number): void {
-    console.log('selectYear')
+    console.log('selectYear');
 
     this.currentYear = year;
     this.showYearPicker = false;
   }
 
   previousYearRange(): void {
-    console.log('previousYearRange')
+    console.log('previousYearRange');
 
     this.yearRangeStart -= 12;
     this.yearRangeEnd -= 12;
   }
 
   nextYearRange(): void {
-    console.log('nextYearRange')
+    console.log('nextYearRange');
 
     this.yearRangeStart += 12;
     this.yearRangeEnd += 12;
@@ -303,17 +344,21 @@ debugger
   //   const jd = this.hijriToJulian(day, month + 1, year);
   //   return this.julianToGregorian(jd);
   // }
-  hijriToGregorian(day: number, month: number, year: number): { day: number; month: number; year: number } {
-  console.log('hijriToGregorian');
+  hijriToGregorian(
+    day: number,
+    month: number,
+    year: number
+  ): { day: number; month: number; year: number } {
+    console.log('hijriToGregorian');
 
-  const hijriDate = (moment as any)(`${year}-${month + 1}-${day}`, 'iYYYY-iM-iD');
+    const hijriDate = (moment as any)(`${year}-${month + 1}-${day}`, 'iYYYY-iM-iD');
 
-  return {
-    day: hijriDate.date(),
-    month: hijriDate.month(),
-    year: hijriDate.year()
-  };
-}
+    return {
+      day: hijriDate.date(),
+      month: hijriDate.month(),
+      year: hijriDate.year(),
+    };
+  }
 
   // Gregorian to Hijri conversion (simplified algorithm)
   // gregorianToHijri(day: number, month: number, year: number): { day: number; month: number; year: number } {
@@ -324,40 +369,52 @@ debugger
   //   return this.julianToHijri(jd);
   // }
 
- gregorianToHijri(day: number, month: number, year: number): { day: number; month: number; year: number } {
-  console.log('gregorianToHijri');
+  gregorianToHijri(
+    day: number,
+    month: number,
+    year: number
+  ): { day: number; month: number; year: number } {
+    console.log('gregorianToHijri');
 
-  const gregorianDate = (moment as any)(`${year}-${month + 1}-${day}`, 'YYYY-M-D');
+    const gregorianDate = (moment as any)(`${year}-${month + 1}-${day}`, 'YYYY-M-D');
 
-  return {
-    day: gregorianDate.iDate(),
-    month: gregorianDate.iMonth(),
-    year: gregorianDate.iYear()
-  };
-}
+    return {
+      day: gregorianDate.iDate(),
+      month: gregorianDate.iMonth(),
+      year: gregorianDate.iYear(),
+    };
+  }
 
   // Helper: Hijri to Julian Day Number
   private hijriToJulian(day: number, month: number, year: number): number {
-    console.log('hijriToJulian')
+    console.log('hijriToJulian');
 
-    return Math.floor((11 * year + 3) / 30) +
+    return (
+      Math.floor((11 * year + 3) / 30) +
       Math.floor(354 * year) +
       Math.floor(30 * month) -
       Math.floor((month - 1) / 2) +
-      day + 1948440 - 385;
+      day +
+      1948440 -
+      385
+    );
   }
 
   // Helper: Julian Day Number to Hijri
   private julianToHijri(jd: number): { day: number; month: number; year: number } {
-    console.log('julianToHijri')
+    console.log('julianToHijri');
 
     const l = jd - 1948440 + 10632;
     const n = Math.floor((l - 1) / 10631);
     const l1 = l - 10631 * n + 354;
-    const j = Math.floor((10985 - l1) / 5316) * Math.floor((50 * l1) / 17719) +
+    const j =
+      Math.floor((10985 - l1) / 5316) * Math.floor((50 * l1) / 17719) +
       Math.floor(l1 / 5670) * Math.floor((43 * l1) / 15238);
-    const l2 = l1 - Math.floor((30 - j) / 15) * Math.floor((17719 * j) / 50) -
-      Math.floor(j / 16) * Math.floor((15238 * j) / 43) + 29;
+    const l2 =
+      l1 -
+      Math.floor((30 - j) / 15) * Math.floor((17719 * j) / 50) -
+      Math.floor(j / 16) * Math.floor((15238 * j) / 43) +
+      29;
     const month = Math.floor((24 * l2) / 709);
     const day = l2 - Math.floor((709 * month) / 24);
     const year = 30 * n + j - 30;
@@ -367,19 +424,25 @@ debugger
 
   // Helper: Gregorian to Julian Day Number
   private gregorianToJulian(day: number, month: number, year: number): number {
-    console.log('gregorianToJulian')
+    console.log('gregorianToJulian');
 
     const a = Math.floor((14 - month) / 12);
     const y = year + 4800 - a;
     const m = month + 12 * a - 3;
-    return day + Math.floor((153 * m + 2) / 5) + 365 * y +
-      Math.floor(y / 4) - Math.floor(y / 100) +
-      Math.floor(y / 400) - 32045;
+    return (
+      day +
+      Math.floor((153 * m + 2) / 5) +
+      365 * y +
+      Math.floor(y / 4) -
+      Math.floor(y / 100) +
+      Math.floor(y / 400) -
+      32045
+    );
   }
 
   // Helper: Julian Day Number to Gregorian
   private julianToGregorian(jd: number): { day: number; month: number; year: number } {
-    console.log('julianToGregorian')
+    console.log('julianToGregorian');
 
     const a = jd + 32044;
     const b = Math.floor((4 * a + 3) / 146097);
@@ -393,7 +456,4 @@ debugger
 
     return { day, month: month - 1, year };
   }
-
-
-
 }
