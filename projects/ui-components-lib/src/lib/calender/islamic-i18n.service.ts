@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
-import { NgbDatepickerI18n, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
-
+import { NgbCalendar,  NgbCalendarIslamicUmalqura,  NgbDatepickerI18n,  NgbDatepickerModule,  NgbDateStruct, } from '@ng-bootstrap/ng-bootstrap';
 const WEEKDAYS = ['ن', 'ث', 'ر', 'خ', 'ج', 'س', 'ح'];
 const MONTHS = [
   'محرم',

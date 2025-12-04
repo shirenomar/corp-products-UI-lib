@@ -337,7 +337,7 @@ export class App {
       showHeader: false,
       closable: false,
     });
-    ref.onClose.subscribe((res) => {
+    ref?.onClose.subscribe((res) => {
       console.log(res);
     });
   }

@@ -1,13 +1,15 @@
 <!-- calender.html -->
 <div dir="rtl" class="p-2">
   <!-- Tabs -->
-  <div class="flex gap-2 mb-2">
-    <button class="btn" [class.btn-primary]="mode === 'gregorian'" (click)="mode='gregorian'">
+
+
+  <div class="header-tabs">
+    <button class="tab-btn" [class.active]="mode === 'gregorian'" (click)="mode='gregorian'">
       الميلادي
     </button>
 
-    <button class="btn" [class.btn-primary]="mode === 'hijri'" (click)="mode='hijri'">
-      الهجري
+    <button class="tab-btn" [class.active]="mode === 'hijri'" (click)="mode='hijri'">
+      هجري
     </button>
   </div>
 

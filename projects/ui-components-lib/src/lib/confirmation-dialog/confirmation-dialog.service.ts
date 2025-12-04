@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
 import { ConfirmationDialogComponent } from './confirmation-dialog.component';
 import { ConfirmationDialogData } from './confirmation-dialog.interface';
@@ -9,10 +9,10 @@ import { ConfirmationDialogData } from './confirmation-dialog.interface';
   providedIn: 'root',
 })
 export class ConfirmationDialogService {
-  constructor(private dialogService: DialogService) {}
+  constructor(private dialogService: DialogService) { }
 
   open(data: ConfirmationDialogData): Observable<boolean> {
-    const ref: DynamicDialogRef = this.dialogService.open(ConfirmationDialogComponent, {
+    const ref: DynamicDialogRef | null = this.dialogService.open(ConfirmationDialogComponent, {
       data,
       header: data.header,
       showHeader: true,
@@ -22,7 +22,9 @@ export class ConfirmationDialogService {
       styleClass: 'confirmation-dialog-wrapper',
       breakpoints: data.breakpoints,
     });
-
+    if (!ref) {
+      return of(false); // or EMPTY / throwError — depending on your logic
+    }
     // Emit true/false when dialog closes
     return ref.onClose.pipe(
       filter((res) => res !== undefined),
