@@ -1,10 +1,6 @@
-<p>gregorian-date works!</p>
-    <ngb-datepicker
-      [(ngModel)]="model"
-      (dateSelect)="dateSelected.emit($event)"
-      [dayTemplate]="dayTemplate"
-      [markDisabled]="isDisabled">
-    </ngb-datepicker>
+<ngb-datepicker #dp [ngModel]="model" [startDate]="startDate" (ngModelChange)="onDateChange($event)"
+  (dateSelect)="dateSelected.emit($event)" [dayTemplate]="dayTemplate" [markDisabled]="isDisabled">
+</ngb-datepicker>
 <ng-template #dayTemplate let-date let-currentMonth="currentMonth" let-selected="selected" let-disabled="disabled">
   <span class="custom-day" [class.today]="isToday(date)" [class.selected]="selected"
     [class.outside]="date.month !== currentMonth" [class.disabled]="disabled">
