@@ -1,18 +1,16 @@
 <!-- calender.html -->
-<div dir="rtl" class="p-2">
-  <!-- Tabs -->
-
-
+<div dir="rtl" class="p-2 calendar-wrapper">
   <div class="header-tabs">
-    <button class="tab-btn" [class.active]="mode === 'gregorian'" (click)="mode='gregorian'">
-      الميلادي
-    </button>
-
-    <button class="tab-btn" [class.active]="mode === 'hijri'" (click)="mode='hijri'">
-      هجري
-    </button>
+    <div class="header-label">نوع التقويم</div>
+    <div class="tabs">
+      <button class="tab-button" [class.active]="mode === 'gregorian'" (click)="mode='gregorian'">
+        الميلادي
+      </button>
+      <button class="tab-button" [class.active]="mode === 'hijri'" (click)="mode='hijri'">
+        هجري
+      </button>
+    </div>
   </div>
-
   @if(mode === 'gregorian') {
   <app-gregorian-calendar [model]="gregorianModel" (dateSelected)="onSelectGregorian($event)">
   </app-gregorian-calendar>

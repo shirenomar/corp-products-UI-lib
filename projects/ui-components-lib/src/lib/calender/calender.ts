@@ -1,67 +1,12 @@
-import { Component, inject, Injectable } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { NgbCalendar, NgbDateStruct, NgbCalendarGregorian, NgbCalendarIslamicUmalqura, NgbDatepickerModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbCalendar, NgbDateStruct, NgbCalendarIslamicUmalqura, NgbDatepickerModule, NgbDatepickerI18n, NgbCalendarGregorian } from '@ng-bootstrap/ng-bootstrap';
 import moment from 'moment-hijri';
 import '@angular/localize/init';
-
-import {
-  NgbCalendarIslamicCivil,
-  NgbDatepickerI18n,
-} from '@ng-bootstrap/ng-bootstrap';
-import { JsonPipe } from '@angular/common';
 import { HijriCalendarComponent } from './hijri-calendar/hijri-calendar.component';
 import { GregorianCalendarComponent } from './gregorian-calendar/gregorian-calendar.component';
+import { EnglishI18n, IslamicI18n } from './islamic-i18n.service';
 
-const WEEKDAYS = ['ن', 'ث', 'ر', 'خ', 'ج', 'س', 'ح'];
-const MONTHS = [
-  'محرم',
-  'صفر',
-  'ربيع الأول',
-  'ربيع الآخر',
-  'جمادى الأولى',
-  'جمادى الآخرة',
-  'رجب',
-  'شعبان',
-  'رمضان',
-  'شوال',
-  'ذو القعدة',
-  'ذو الحجة',
-];
-
-@Injectable()
-export class IslamicI18n extends NgbDatepickerI18n {
-  getMonthShortName(month: number): string {
-    return MONTHS[month - 1];
-  }
-
-  getMonthFullName(month: number): string {
-    return MONTHS[month - 1];
-  }
-
-  getWeekdayLabel(weekday: number): string {
-    return WEEKDAYS[weekday - 1];
-  }
-
-  getWeekdayShortName(weekday: number): string {
-    return WEEKDAYS[weekday - 1];
-  }
-
-  getDayAriaLabel(date: NgbDateStruct): string {
-    return `${date.day}-${date.month}-${date.year}`;
-  }
-
-  override getYearNumerals(year: number): string {
-    return String(year);
-  }
-
-  override getWeekNumerals(weekNumber: number): string {
-    return String(weekNumber);
-  }
-
-  override getDayNumerals(date: NgbDateStruct): string {
-    return String(date.day);
-  }
-}
 
 @Component({
   selector: 'lib-calender',
@@ -75,13 +20,23 @@ export class IslamicI18n extends NgbDatepickerI18n {
     { provide: NgbCalendar, useClass: NgbCalendarIslamicUmalqura }
   ],
   templateUrl: './calender.html',
-  styleUrl: './calender.css'
+  styleUrl: './calender.scss'
 })
 export class Calender {
 mode: 'gregorian' | 'hijri' = 'gregorian';
   gregorianModel!: NgbDateStruct;
   hijriModel!: NgbDateStruct;
-
+  get providers() {
+    return this.mode === 'hijri'
+      ? [
+          { provide: NgbCalendar, useClass: NgbCalendarIslamicUmalqura },
+          { provide: NgbDatepickerI18n, useClass: IslamicI18n }
+        ]
+      : [
+          { provide: NgbCalendar, useClass: NgbCalendarGregorian },
+          { provide: NgbDatepickerI18n, useClass: EnglishI18n }
+        ];
+  }
   constructor() {
     const today = new Date();
     this.gregorianModel = {

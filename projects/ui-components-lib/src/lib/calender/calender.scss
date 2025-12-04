@@ -1,3 +1,87 @@
+.calendar-wrapper {
+  font-family: "Tajawal", sans-serif;
+  max-width: 375px;
+}
+
+.header-tabs {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.tab-button {
+  flex: 1;
+  padding: 6px 10px;
+  font-size: 14px;
+  background: #f0f0f5;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.tab-button.active {
+  background: #dcd6f8;
+  color: #4a3fb4;
+  font-weight: 600;
+}
+
+.custom-datepicker {
+  width: 100%;
+  background: white;
+  border: 1px solid #e5e5e5;
+  border-radius: 8px;
+  padding: 12px;
+}
+
+/* Calendar Header (Month + Arrows) */
+.custom-datepicker .ngb-dp-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+  max-width: 375px;
+}
+
+.custom-datepicker .ngb-dp-arrow-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+}
+
+/* Weekdays Row */
+.custom-datepicker .ngb-dp-weekdays {
+  margin-bottom: 6px;
+}
+
+.custom-datepicker .ngb-dp-weekday {
+  color: #9b9b9b;
+  font-weight: 600;
+  text-align: center;
+}
+
+
+
+/* Today style */
+.custom-day.today {
+  border: 1px solid #6a41d8;
+  border-radius: 8px;
+}
+
+/* Outside month */
+.custom-day.outside {
+  opacity: 0.3;
+}
+
+/* Disabled */
+.custom-day.disabled {
+  opacity: 0.2;
+  pointer-events: none;
+}
+
+
 ::ng-deep {
   .ngb-datepicker {
     width: 100%;
@@ -40,7 +124,7 @@
   .ngb-dp-day,
   .ngb-dp-weekday,
   .ngb-dp-week-number {
-    width: 39px !important;
+    width: 42px !important;
     height: 44px !important;
     display: flex;
     margin: 5px;
