@@ -30,7 +30,7 @@ interface SelectedDate {
 export class HiijriGregorianComponent implements OnInit {
   @Output() onnDateSelect = new EventEmitter<SelectedDate>();
   correspondenceForm!: FormGroup;
-  mode: 'hijri' | 'gregorian' = 'hijri';
+  mode: 'hijri' | 'gregorian' = 'gregorian';
   selectedDate: SelectedDate | null = null;
   currentMonth = 10; // September (0-indexed)
   currentYear = 2020;
@@ -74,7 +74,13 @@ export class HiijriGregorianComponent implements OnInit {
     'ذو الحجة',
   ];
   ngOnInit() {
-    const today = new Date();
+    this.setTodayDate()
+    this.generateCalendarDays();
+  }
+
+
+  setTodayDate() {
+   const today = new Date();
     this.currentMonth = new Date().getMonth(); // 0-indexed (0 = Jan)
     this.currentYear = new Date().getFullYear();
 
@@ -87,8 +93,6 @@ export class HiijriGregorianComponent implements OnInit {
       this.currentMonth = hijriToday.month;
       this.currentYear = hijriToday.year;
     }
-
-    this.generateCalendarDays();
   }
 
   getMonthName(): string {
@@ -246,7 +250,10 @@ export class HiijriGregorianComponent implements OnInit {
     if (this.mode === newMode) return;
     this.mode = newMode;
 
-    if (!this.selectedDate) return;
+    if (!this.selectedDate) {
+      this.setTodayDate()
+      return;
+    }
     let targetDate;
     if (newMode === 'gregorian') {
       // Convert stored Gregorian date to Gregorian (no change)
