@@ -1,11 +1,10 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { NgbCalendar, NgbDateStruct, NgbCalendarIslamicUmalqura, NgbDatepickerModule, NgbDatepickerI18n, NgbCalendarGregorian } from '@ng-bootstrap/ng-bootstrap';
+import { NgbCalendar, NgbDateStruct, NgbCalendarIslamicUmalqura, NgbDatepickerModule } from '@ng-bootstrap/ng-bootstrap';
 import moment from 'moment-hijri';
 import '@angular/localize/init';
 import { HijriCalendarComponent } from './hijri-calendar/hijri-calendar.component';
 import { GregorianCalendarComponent } from './gregorian-calendar/gregorian-calendar.component';
-import { IslamicI18n } from './islamic-i18n.service';
 
 
 @Component({
@@ -26,7 +25,7 @@ export class Calender {
   mode: 'gregorian' | 'hijri' = 'gregorian';
   gregorianModel!: NgbDateStruct;
   hijriModel!: NgbDateStruct;
-  currentLang: 'ar' | 'en' = 'en';
+  currentLang: 'ar' | 'en' = 'ar';
   constructor() { }
 
   onSelectGregorian(date: NgbDateStruct) {

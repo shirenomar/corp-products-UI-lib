@@ -1,11 +1,13 @@
-import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
 import {
   NgbCalendar,
   NgbCalendarGregorian,
+  NgbDatepickerI18n,
   NgbDatepickerModule,
   NgbDateStruct,
 } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
+import { DynamicGregorianI18n } from '../services/gregorian-i18n.servics';
 
 
 @Component({
@@ -13,7 +15,8 @@ import { FormsModule } from '@angular/forms';
   standalone: true,
   imports: [NgbDatepickerModule, FormsModule],
   providers: [
-    { provide: NgbCalendar, useClass: NgbCalendarGregorian }
+     { provide: NgbCalendar, useClass: NgbCalendarGregorian },
+   { provide: NgbDatepickerI18n, useClass: DynamicGregorianI18n }
   ],
   templateUrl: "./gregorian-calendar.component.html",
   styleUrl: "./gregorian-calendar.component.scss"
@@ -22,13 +25,20 @@ export class GregorianCalendarComponent implements OnChanges{
   @Input() model!: NgbDateStruct;
   @Output() dateSelected = new EventEmitter<NgbDateStruct>();
 
+  @Input() language: 'ar' | 'en' = 'en';
   startDate!: NgbDateStruct;
   private calendar = new NgbCalendarGregorian();
-
+  constructor(
+    private i18n: NgbDatepickerI18n,
+    private cdr: ChangeDetectorRef
+  ) {}
   ngOnChanges(changes: SimpleChanges) {
     if (changes['model'] && changes['model'].currentValue) {
       this.startDate = { ...changes['model'].currentValue };
-      console.log('Gregorian navigating to:', this.startDate);
+    }
+      if (changes['language'] && this.i18n instanceof DynamicGregorianI18n) {
+      this.i18n.setLanguage(this.language);
+      this.cdr.detectChanges();
     }
   }
 

@@ -7,7 +7,7 @@ import {
   NgbDateStruct,
 } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
-import { DynamicHijriI18n, HijriEnglishI18n, IslamicI18n } from '../islamic-i18n.service';
+import { DynamicHijriI18n } from '../services/islamic-i18n.service';
 
 @Component({
   selector: "app-hijri-calendar",
