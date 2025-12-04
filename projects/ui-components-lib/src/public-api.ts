@@ -21,4 +21,6 @@ export * from './lib/confirmation-dialog/confirmation-dialog.interface';
 export * from './lib/bottom-sheet/bottom-sheet.component';
 export * from './lib/dynamic-side-bar-v2/dynamic-sidebar.service';
 export * from './lib/dynamic-side-bar-v2/dynamic-sidebar.config';
+export * from './lib/calender/calender';
+
 

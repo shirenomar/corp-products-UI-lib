@@ -1,0 +1,23 @@
+<!-- calender.html -->
+<div dir="rtl" class="p-2">
+  <!-- Tabs -->
+  <div class="flex gap-2 mb-2">
+    <button class="btn" [class.btn-primary]="mode === 'gregorian'" (click)="mode='gregorian'">
+      الميلادي
+    </button>
+
+    <button class="btn" [class.btn-primary]="mode === 'hijri'" (click)="mode='hijri'">
+      الهجري
+    </button>
+  </div>
+
+  @if(mode === 'gregorian') {
+  <app-gregorian-calendar [model]="gregorianModel" (dateSelected)="onSelectGregorian($event)">
+  </app-gregorian-calendar>
+  }
+
+  @if(mode === 'hijri') {
+  <app-hijri-calendar [model]="hijriModel" (dateSelected)="onSelectHijri($event)">
+  </app-hijri-calendar>
+  }
+</div>
