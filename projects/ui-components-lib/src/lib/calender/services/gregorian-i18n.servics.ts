@@ -1,42 +1,20 @@
 import { Injectable } from '@angular/core';
 import { NgbDatepickerI18n, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 
-// Arabic (Hijri) Configuration
 const WEEKDAYS_AR = ['ن', 'ث', 'ر', 'خ', 'ج', 'س', 'ح'];
 const MONTHS_AR = [
-  'محرم',
-  'صفر',
-  'ربيع الأول',
-  'ربيع الآخر',
-  'جمادى الأولى',
-  'جمادى الآخرة',
-  'رجب',
-  'شعبان',
-  'رمضان',
-  'شوال',
-  'ذو القعدة',
-  'ذو الحجة',
+  'يناير', 'فبراير', 'مارس', 'أبريل', 'مايو', 'يونيو',
+  'يوليو', 'أغسطس', 'سبتمبر', 'أكتوبر', 'نوفمبر', 'ديسمبر'
 ];
-// English (Hijri) Configuration
 
 const WEEKDAYS_EN = ['M', 'T', 'W', 'T', 'F', 'S', 'S'];
 const MONTHS_EN = [
-  'Muharram',
-  'Safar',
-  'Rabi al-Awwal',
-  'Rabi al-Thani',
-  'Jumada al-Awwal',
-  'Jumada al-Thani',
-  'Rajab',
-  'Shaban',
-  'Ramadan',
-  'Shawwal',
-  'Dhu al-Qadah',
-  'Dhu al-Hijjah',
+  'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
+  'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'
 ];
 
 @Injectable()
-export class IslamicI18n extends NgbDatepickerI18n {
+export class GregorianArabicI18n extends NgbDatepickerI18n {
   getMonthShortName(month: number): string {
     return MONTHS_AR[month - 1];
   }
@@ -71,7 +49,7 @@ export class IslamicI18n extends NgbDatepickerI18n {
 }
 
 @Injectable()
-export class HijriEnglishI18n extends NgbDatepickerI18n {
+export class GregorianEnglishI18n extends NgbDatepickerI18n {
   getMonthShortName(month: number): string {
     return MONTHS_EN[month - 1].substring(0, 3);
   }
@@ -104,11 +82,14 @@ export class HijriEnglishI18n extends NgbDatepickerI18n {
     return String(date.day);
   }
 }
+
+// ============ Dynamic I18N Factory ============
+
 @Injectable()
-export class DynamicHijriI18n extends NgbDatepickerI18n {
-  private currentLang: 'ar' | 'en' = 'ar';
-  private arabicI18n = new IslamicI18n();
-  private englishI18n = new HijriEnglishI18n();
+export class DynamicGregorianI18n extends NgbDatepickerI18n {
+  private currentLang: 'ar' | 'en' = 'en';
+  private arabicI18n = new GregorianArabicI18n();
+  private englishI18n = new GregorianEnglishI18n();
 
   setLanguage(lang: 'ar' | 'en') {
     this.currentLang = lang;

@@ -1,5 +1,6 @@
-<ngb-datepicker #dp class="ltr" [ngModel]="model" [startDate]="startDate" (ngModelChange)="onDateChange($event)"
-  (dateSelect)="dateSelected.emit($event)" [dayTemplate]="dayTemplate" [markDisabled]="isDisabled">
+<ngb-datepicker #dp [class.rtl]="language === 'ar'" [class.ltr]="language === 'en'" [ngModel]="model"
+  [startDate]="startDate" (ngModelChange)="onDateChange($event)" (dateSelect)="dateSelected.emit($event)"
+  [dayTemplate]="dayTemplate" [markDisabled]="isDisabled">
 </ngb-datepicker>
 <ng-template #dayTemplate let-date let-currentMonth="currentMonth" let-selected="selected" let-disabled="disabled">
   <span class="custom-day" [class.today]="isToday(date)" [class.selected]="selected"

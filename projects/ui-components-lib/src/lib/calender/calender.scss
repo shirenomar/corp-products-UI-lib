@@ -6,8 +6,16 @@
 .header-tabs {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   gap: 10px;
   margin-bottom: 10px;
+}
+
+.tabs {
+
+  background: #f0f0f5;
+  padding: 3px;
+  border-radius: 2px;
 }
 
 .tab-button {
