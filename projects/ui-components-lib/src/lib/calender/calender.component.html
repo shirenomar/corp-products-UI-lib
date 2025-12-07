@@ -1,23 +1,31 @@
-<!-- calender.html -->
-<div dir="rtl" class="p-2 calendar-wrapper">
-  <div class="header-tabs">
-    <div class="header-label">نوع التقويم</div>
-    <div class="tabs">
-      <button class="tab-button" [class.active]="mode === 'gregorian'" (click)="mode='gregorian'">
-        الميلادي
-      </button>
-      <button class="tab-button" [class.active]="mode === 'hijri'" (click)="mode='hijri'">
-        هجري
-      </button>
-    </div>
-  </div>
-  @if(mode === 'gregorian') {
-  <app-gregorian-calendar [model]="gregorianModel" [language]="currentLang" (dateSelected)="onSelectGregorian($event)">
-  </app-gregorian-calendar>
-  }
+<div class="calender-content  "   #calendarContainer>
+  <stc-hijri-date-picker [variant]="'in'" [label]="'Select Date'" id="dateId" (openCalender)="showCalender($event)"
+    [control]="control" [formattedDate]='selectedDate'  >
+  </stc-hijri-date-picker>
 
-  @if(mode === 'hijri') {
-  <app-hijri-calendar [model]="hijriModel" [language]="currentLang" (dateSelected)="onSelectHijri($event)">
-  </app-hijri-calendar>
-  }
+  <!-- calender.html -->
+  <div dir="rtl" class="p-2 calendar-wrapper " [@slideDown]="isCalendarOpen ? 'open' : 'closed'"  >
+    <div class="header-tabs">
+      <div class="header-label">نوع التقويم</div>
+      <div class="tabs">
+        <button class="tab-button" [class.active]="mode === 'gregorian'" (click)="  mode='gregorian'">
+          الميلادي
+        </button>
+        <button class="tab-button" [class.active]="mode === 'hijri'" (click)=" mode='hijri'">
+          هجري
+        </button>
+      </div>
+    </div>
+    @if(mode === 'gregorian') {
+    <app-gregorian-calendar [model]="gregorianModel" [language]="currentLang"
+      (dateSelected)="onSelectGregorian($event)">
+    </app-gregorian-calendar>
+    }
+
+    @if(mode === 'hijri') {
+    <app-hijri-calendar [model]="hijriModel" [language]="currentLang" (dateSelected)="onSelectHijri($event)">
+    </app-hijri-calendar>
+    }
+  </div>
+
 </div>

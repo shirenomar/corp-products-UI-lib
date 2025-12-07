@@ -23,11 +23,11 @@ import {
   SidebarConfig,
   SidebarConfigDefaults,
 } from './../../../ui-components-lib/src/lib/side-bar-dynamic/sidebar-config';
-import {  CalenderComponent } from '../../../ui-components-lib/src/lib/calender/calender.component';
+import { CalenderComponent } from '../../../ui-components-lib/src/lib/calender/calender.component';
 @Component({
   selector: 'app-root',
   imports: [
-  AppBreadcrumbComponent,
+    AppBreadcrumbComponent,
     ReactiveFormsModule,
     AppButtonComponent,
     BottomSheetComponent,
@@ -129,6 +129,8 @@ export class App {
   dynamicFormGroup = new FormGroup({
     startDate: new FormControl<Date | null>(new Date(), [Validators.required]),
     endDate: new FormControl<Date | null>(null, [Validators.required]),
+    hijriDate: new FormControl<Date | null>(null ),
+
     fullName: new FormControl<string>('', [Validators.required]),
     role: new FormControl<any>(null, [Validators.required]),
     status: new FormControl<string | null>(null),
@@ -157,7 +159,8 @@ export class App {
     hijriDate: {
       label: 'Hijri Date',
       fieldType: FormFieldTypeEnum.HIJRI_DATE_PICKER,
-       rowSize: 'half',
+      rowSize: 'half',
+      showIcon: true,
     },
     endDate: {
       label: 'End Date',

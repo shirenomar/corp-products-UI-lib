@@ -1,6 +1,7 @@
 .calendar-wrapper {
   font-family: "Tajawal", sans-serif;
   max-width: 375px;
+  padding: 15px;
 }
 
 .header-tabs {
@@ -89,6 +90,22 @@
   pointer-events: none;
 }
 
+.calender-content {
+  position: relative;
+  padding-top: 10px;
+}
+
+.calendar-wrapper {
+  position: absolute; /* overlay */
+  top: 100%;          /* directly below the picker */
+  left: 0;
+  width: 100%;        /* optional: match width of parent */
+  z-index: 50;        /* ensure it overlays other content */
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  background-color: #fff;
+  border-radius: 4px;
+  overflow: hidden;
+}
 
 ::ng-deep {
   .ngb-datepicker {
@@ -132,7 +149,7 @@
   .ngb-dp-day,
   .ngb-dp-weekday,
   .ngb-dp-week-number {
-    width: 42px !important;
+    width: 38px !important;
     height: 44px !important;
     display: flex;
     margin: 5px;

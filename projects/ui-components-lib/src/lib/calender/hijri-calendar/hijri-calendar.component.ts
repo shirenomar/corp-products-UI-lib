@@ -8,7 +8,6 @@ import {
 } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
 import { DynamicHijriI18n } from '../services/islamic-i18n.service';
-import { BaseInputComponent } from '../../form-components/components/base-input.component';
 
 @Component({
   selector: "app-hijri-calendar",

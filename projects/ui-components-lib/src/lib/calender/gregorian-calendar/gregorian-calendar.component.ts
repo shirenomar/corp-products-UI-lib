@@ -7,8 +7,7 @@ import {
   NgbDateStruct,
 } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
-import { DynamicGregorianI18n } from '../services/gregorian-i18n.servics';
-import { BaseInputComponent } from '../../form-components/components/base-input.component';
+import { DynamicGregorianI18n } from './../services/gregorian-i18n.service';
 
 
 @Component({
@@ -16,13 +15,13 @@ import { BaseInputComponent } from '../../form-components/components/base-input.
   standalone: true,
   imports: [NgbDatepickerModule, FormsModule],
   providers: [
-     { provide: NgbCalendar, useClass: NgbCalendarGregorian },
-   { provide: NgbDatepickerI18n, useClass: DynamicGregorianI18n }
+    { provide: NgbCalendar, useClass: NgbCalendarGregorian },
+    { provide: NgbDatepickerI18n, useClass: DynamicGregorianI18n }
   ],
   templateUrl: "./gregorian-calendar.component.html",
   styleUrl: "./gregorian-calendar.component.scss"
 })
-export class GregorianCalendarComponent    implements OnChanges{
+export class GregorianCalendarComponent implements OnChanges {
   @Input() model!: NgbDateStruct;
   @Output() dateSelected = new EventEmitter<NgbDateStruct>();
 
@@ -38,7 +37,7 @@ export class GregorianCalendarComponent    implements OnChanges{
     if (changes['model'] && changes['model'].currentValue) {
       this.startDate = { ...changes['model'].currentValue };
     }
-      if (changes['language'] && this.i18n instanceof DynamicGregorianI18n) {
+    if (changes['language'] && this.i18n instanceof DynamicGregorianI18n) {
       this.i18n.setLanguage(this.language);
       this.cdr.detectChanges();
     }
@@ -52,8 +51,8 @@ export class GregorianCalendarComponent    implements OnChanges{
   isToday(date: NgbDateStruct): boolean {
     const today = this.calendar.getToday();
     return date.year === today.year &&
-           date.month === today.month &&
-           date.day === today.day;
+      date.month === today.month &&
+      date.day === today.day;
   }
 
   isDisabled = () => false;

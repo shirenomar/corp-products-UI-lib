@@ -4,7 +4,7 @@
     <div [ngClass]="inputsMap[inputName].rowSize">
       @switch (inputsMap[inputName].fieldType) {
       @case (fieldType.HIJRI_DATE_PICKER) {
-         <app-calender></app-calender>
+         <app-calender [control]="getFormControl(inputName, formGroup)"  ></app-calender>
       }
 
       @case (fieldType.DATE_PICKER) {
