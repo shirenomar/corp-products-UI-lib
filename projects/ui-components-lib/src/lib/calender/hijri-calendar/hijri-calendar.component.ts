@@ -8,6 +8,7 @@ import {
 } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
 import { DynamicHijriI18n } from '../services/islamic-i18n.service';
+import { BaseInputComponent } from '../../form-components/components/base-input.component';
 
 @Component({
   selector: "app-hijri-calendar",
@@ -20,7 +21,7 @@ import { DynamicHijriI18n } from '../services/islamic-i18n.service';
   templateUrl: "./hijri-calendar.component.html",
   styleUrl: "./hijri-calendar.component.scss"
 })
-export class HijriCalendarComponent implements OnChanges {
+export class HijriCalendarComponent  implements OnChanges   {
   @Input() model!: NgbDateStruct;
   @Output() dateSelected = new EventEmitter<NgbDateStruct>();
   @Input() language: 'ar' | 'en' = 'en';
@@ -29,7 +30,8 @@ export class HijriCalendarComponent implements OnChanges {
   constructor(
     private i18n: NgbDatepickerI18n,
     private cdr: ChangeDetectorRef
-  ) { }
+  ) {
+  }
   ngOnChanges(changes: SimpleChanges) {
     if (changes['model'] && changes['model'].currentValue) {
       this.startDate = { ...changes['model'].currentValue };

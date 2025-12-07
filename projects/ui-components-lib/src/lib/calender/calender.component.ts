@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { NgbCalendar, NgbDateStruct, NgbCalendarIslamicUmalqura, NgbDatepickerModule } from '@ng-bootstrap/ng-bootstrap';
 import moment from 'moment-hijri';
@@ -8,7 +8,7 @@ import { GregorianCalendarComponent } from './gregorian-calendar/gregorian-calen
 
 
 @Component({
-  selector: 'lib-calender',
+  selector: 'app-calender',
   imports: [
     NgbDatepickerModule,
     FormsModule,
@@ -18,14 +18,16 @@ import { GregorianCalendarComponent } from './gregorian-calendar/gregorian-calen
   providers: [
     { provide: NgbCalendar, useClass: NgbCalendarIslamicUmalqura }
   ],
-  templateUrl: './calender.html',
-  styleUrl: './calender.scss'
+  templateUrl: './calender.component.html',
+  styleUrl: './calender.component.scss'
 })
-export class Calender {
+export class CalenderComponent {
   mode: 'gregorian' | 'hijri' = 'gregorian';
   gregorianModel!: NgbDateStruct;
   hijriModel!: NgbDateStruct;
   currentLang: 'ar' | 'en' = 'ar';
+  @Output() selectButtonChange = new EventEmitter<{ name: string; value: any }>();
+
   constructor() { }
 
   onSelectGregorian(date: NgbDateStruct) {

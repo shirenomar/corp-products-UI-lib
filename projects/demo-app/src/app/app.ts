@@ -23,7 +23,7 @@ import {
   SidebarConfig,
   SidebarConfigDefaults,
 } from './../../../ui-components-lib/src/lib/side-bar-dynamic/sidebar-config';
-import { Calender } from './../../../ui-components-lib/src/lib/calender/calender';
+import {  CalenderComponent } from '../../../ui-components-lib/src/lib/calender/calender.component';
 @Component({
   selector: 'app-root',
   imports: [
@@ -32,7 +32,7 @@ import { Calender } from './../../../ui-components-lib/src/lib/calender/calender
     AppButtonComponent,
     BottomSheetComponent,
     DynamicFormComponent,
-    Calender,
+    CalenderComponent,
     CommonModule,
   ],
   providers: [DialogService, ConfirmationDialogService],
@@ -153,6 +153,11 @@ export class App {
       dateRange: { min: new Date(2020, 0, 1), max: new Date(2030, 11, 31) },
       showIcon: true,
       variant: 'in',
+    },
+    hijriDate: {
+      label: 'Hijri Date',
+      fieldType: FormFieldTypeEnum.HIJRI_DATE_PICKER,
+       rowSize: 'half',
     },
     endDate: {
       label: 'End Date',

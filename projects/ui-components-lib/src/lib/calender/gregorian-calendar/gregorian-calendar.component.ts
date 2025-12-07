@@ -8,6 +8,7 @@ import {
 } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
 import { DynamicGregorianI18n } from '../services/gregorian-i18n.servics';
+import { BaseInputComponent } from '../../form-components/components/base-input.component';
 
 
 @Component({
@@ -21,7 +22,7 @@ import { DynamicGregorianI18n } from '../services/gregorian-i18n.servics';
   templateUrl: "./gregorian-calendar.component.html",
   styleUrl: "./gregorian-calendar.component.scss"
 })
-export class GregorianCalendarComponent implements OnChanges{
+export class GregorianCalendarComponent    implements OnChanges{
   @Input() model!: NgbDateStruct;
   @Output() dateSelected = new EventEmitter<NgbDateStruct>();
 
@@ -31,7 +32,8 @@ export class GregorianCalendarComponent implements OnChanges{
   constructor(
     private i18n: NgbDatepickerI18n,
     private cdr: ChangeDetectorRef
-  ) {}
+  ) {
+  }
   ngOnChanges(changes: SimpleChanges) {
     if (changes['model'] && changes['model'].currentValue) {
       this.startDate = { ...changes['model'].currentValue };
