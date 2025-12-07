@@ -5,11 +5,8 @@ import moment from 'moment-hijri';
 import '@angular/localize/init';
 import { HijriCalendarComponent } from './hijri-calendar/hijri-calendar.component';
 import { GregorianCalendarComponent } from './gregorian-calendar/gregorian-calendar.component';
-import { DatePickerComponent, ValidationErrorsPipe } from '../form-components';
 import { FloatLabelModule } from 'primeng/floatlabel';
-import { TranslatePipe } from '@ngx-translate/core';
 import { DatePicker, DatePickerModule } from 'primeng/datepicker';
-import { NgClass } from '@angular/common';
 import { HijriDatePickerComponent } from './date-picker/date-picker.component';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 
@@ -36,7 +33,6 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
     NgbDatepickerModule,
     FormsModule,
     FormsModule,
-    DatePicker,
     ReactiveFormsModule,
     DatePickerModule,
     FloatLabelModule,
@@ -67,7 +63,7 @@ export class CalenderComponent {
 
     const clickedInside = this.calendarContainer.nativeElement.contains(event.target);
     if (!clickedInside) {
-      this.isCalendarOpen = false; // close calendar if clicked outside
+      this.isCalendarOpen = false;
     }
   }
   onSelectGregorian(date: NgbDateStruct) {
