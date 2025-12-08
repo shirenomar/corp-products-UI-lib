@@ -53,7 +53,7 @@
         [checkmark]="inputsMap[inputName].checkmark ?? true" [filterBy]="inputsMap[inputName].filterBy || ''"
         [selectedItemsLabel]="inputsMap[inputName].selectedItemsLabel || ''"
         [size]="inputsMap[inputName].size || 'small'" [variant]="inputsMap[inputName].variant || 'over'"
-        (change)=" onChangeTry(inputName, $event)" />
+        (change)="selectChange.emit({ name: inputName, event: $event })"/>
       }
       @case (fieldType.SWITCH) {
       <stc-switch [label]="inputsMap[inputName].label" [key]="inputName"

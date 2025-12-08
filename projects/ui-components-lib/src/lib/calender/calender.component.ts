@@ -2,11 +2,10 @@ import { Component, ElementRef, EventEmitter, HostListener, Input, Output, ViewC
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbCalendar, NgbDateStruct, NgbCalendarIslamicUmalqura, NgbDatepickerModule } from '@ng-bootstrap/ng-bootstrap';
 import moment from 'moment-hijri';
-import '@angular/localize/init';
 import { HijriCalendarComponent } from './hijri-calendar/hijri-calendar.component';
 import { GregorianCalendarComponent } from './gregorian-calendar/gregorian-calendar.component';
 import { FloatLabelModule } from 'primeng/floatlabel';
-import { DatePicker, DatePickerModule } from 'primeng/datepicker';
+import { DatePickerModule } from 'primeng/datepicker';
 import { HijriDatePickerComponent } from './date-picker/date-picker.component';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 
