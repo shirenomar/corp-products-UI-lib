@@ -9,6 +9,7 @@ import { DatePickerModule } from 'primeng/datepicker';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { DatePickerSwitcherComponent } from './date-picker-switcher/date-picker-switcher.component';
 import '@angular/localize/init';
+import { getGregorianMonthName, getHijriMonthName } from './utils/date-i18n.utils';
 @Component({
   selector: 'app-calender',
   animations: [
@@ -94,23 +95,13 @@ export class CalenderComponent {
   }
   formatHijri(m: moment.Moment): string {
     const hijriDay = m.format('iD');
-    const hijriMonth = this.getHijriMonthName(+m.format('iM'));
+    const hijriMonth = getHijriMonthName(this.currentLang, +m.format('iM'));
     const gregorianDay = m.format('D');
-    const gregorianMonth = this.getGregorianMonthName(+m.format('M'));
+    const gregorianMonth = getGregorianMonthName(this.currentLang, +m.format('M'));
     const gregorianYear = m.format('YYYY');
     const hijriYear = m.format('iYYYY');
-
-    // Customize as you want
     return `${gregorianDay} ${gregorianMonth} ${gregorianYear} - ${hijriDay} ${hijriMonth} ${hijriYear}`;
   }
-  // Month names in Arabic
-  getHijriMonthName(month: number): string {
-    const months = ['محرم', 'صفر', 'ربيع الأول', 'ربيع الآخر', 'جمادى الأولى', 'جمادى الآخرة', 'رجب', 'شعبان', 'رمضان', 'شوال', 'ذو القعدة', 'ذو الحجة'];
-    return months[month - 1] || '';
-  }
 
-  getGregorianMonthName(month: number): string {
-    const months = ['يناير', 'فبراير', 'مارس', 'أبريل', 'مايو', 'يونيو', 'يوليو', 'أغسطس', 'سبتمبر', 'أكتوبر', 'نوفمبر', 'ديسمبر'];
-    return months[month - 1] || '';
-  }
+
 }

@@ -1,16 +1,16 @@
 import { Injectable } from '@angular/core';
 import { NgbDatepickerI18n, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
-import { MONTHS, WEEKDAYS } from '../utils/date-i18n.utils';
+import { MONTHS_GREGORIAN, WEEKDAYS } from '../utils/date-i18n.utils';
 
 
 @Injectable()
 export class GregorianArabicI18n extends NgbDatepickerI18n {
   getMonthShortName(month: number): string {
-    return MONTHS.ar[month - 1];
+    return MONTHS_GREGORIAN.ar[month - 1];
   }
 
   getMonthFullName(month: number): string {
-    return MONTHS.ar[month - 1];
+    return MONTHS_GREGORIAN.ar[month - 1];
   }
 
   getWeekdayLabel(weekday: number): string {
@@ -41,11 +41,11 @@ export class GregorianArabicI18n extends NgbDatepickerI18n {
 @Injectable()
 export class GregorianEnglishI18n extends NgbDatepickerI18n {
   getMonthShortName(month: number): string {
-    return MONTHS.en[month - 1].substring(0, 3);
+    return MONTHS_GREGORIAN.en[month - 1].substring(0, 3);
   }
 
   getMonthFullName(month: number): string {
-    return MONTHS.en[month - 1];
+    return MONTHS_GREGORIAN.en[month - 1];
   }
 
   getWeekdayLabel(weekday: number): string {
