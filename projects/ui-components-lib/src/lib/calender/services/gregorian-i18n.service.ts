@@ -1,34 +1,24 @@
 import { Injectable } from '@angular/core';
 import { NgbDatepickerI18n, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
+import { MONTHS, WEEKDAYS } from '../utils/date-i18n.utils';
 
-const WEEKDAYS_AR = ['ن', 'ث', 'ر', 'خ', 'ج', 'س', 'ح'];
-const MONTHS_AR = [
-  'يناير', 'فبراير', 'مارس', 'أبريل', 'مايو', 'يونيو',
-  'يوليو', 'أغسطس', 'سبتمبر', 'أكتوبر', 'نوفمبر', 'ديسمبر'
-];
-
-const WEEKDAYS_EN = ['M', 'T', 'W', 'T', 'F', 'S', 'S'];
-const MONTHS_EN = [
-  'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
-  'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'
-];
 
 @Injectable()
 export class GregorianArabicI18n extends NgbDatepickerI18n {
   getMonthShortName(month: number): string {
-    return MONTHS_AR[month - 1];
+    return MONTHS.ar[month - 1];
   }
 
   getMonthFullName(month: number): string {
-    return MONTHS_AR[month - 1];
+    return MONTHS.ar[month - 1];
   }
 
   getWeekdayLabel(weekday: number): string {
-    return WEEKDAYS_AR[weekday - 1];
+    return WEEKDAYS.ar[weekday - 1];
   }
 
   getWeekdayShortName(weekday: number): string {
-    return WEEKDAYS_AR[weekday - 1];
+    return WEEKDAYS.ar[weekday - 1];
   }
 
   getDayAriaLabel(date: NgbDateStruct): string {
@@ -51,19 +41,19 @@ export class GregorianArabicI18n extends NgbDatepickerI18n {
 @Injectable()
 export class GregorianEnglishI18n extends NgbDatepickerI18n {
   getMonthShortName(month: number): string {
-    return MONTHS_EN[month - 1].substring(0, 3);
+    return MONTHS.en[month - 1].substring(0, 3);
   }
 
   getMonthFullName(month: number): string {
-    return MONTHS_EN[month - 1];
+    return MONTHS.en[month - 1];
   }
 
   getWeekdayLabel(weekday: number): string {
-    return WEEKDAYS_EN[weekday - 1];
+    return WEEKDAYS.en[weekday - 1];
   }
 
   getWeekdayShortName(weekday: number): string {
-    return WEEKDAYS_EN[weekday - 1];
+    return WEEKDAYS.en[weekday - 1];
   }
 
   getDayAriaLabel(date: NgbDateStruct): string {

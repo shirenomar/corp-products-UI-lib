@@ -8,7 +8,7 @@ import { FloatLabelModule } from 'primeng/floatlabel';
 import { DatePickerModule } from 'primeng/datepicker';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { DatePickerSwitcherComponent } from './date-picker-switcher/date-picker-switcher.component';
-
+import '@angular/localize/init';
 @Component({
   selector: 'app-calender',
   animations: [

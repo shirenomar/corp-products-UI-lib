@@ -12,7 +12,6 @@ import { InputText } from 'primeng/inputtext';
   standalone: true,
   imports: [
   FormsModule,
-    DatePicker,
     ReactiveFormsModule,
     NgClass,
     InputText,
