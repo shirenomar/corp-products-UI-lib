@@ -1,4 +1,4 @@
-import { Component, ElementRef, EventEmitter, HostListener, Input, Output, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, HostListener, Input, Output, ViewChild, ViewEncapsulation } from '@angular/core';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbCalendar, NgbDateStruct, NgbCalendarIslamicUmalqura, NgbDatepickerModule } from '@ng-bootstrap/ng-bootstrap';
 import moment from 'moment-hijri';
@@ -43,7 +43,8 @@ import '@angular/localize/init';
     { provide: NgbCalendar, useClass: NgbCalendarIslamicUmalqura }
   ],
   templateUrl: './calender.component.html',
-  styleUrl: './calender.component.scss'
+  styleUrl: './calender.component.scss',
+  encapsulation: ViewEncapsulation.None
 })
 export class CalenderComponent {
   selectedDate = ''
