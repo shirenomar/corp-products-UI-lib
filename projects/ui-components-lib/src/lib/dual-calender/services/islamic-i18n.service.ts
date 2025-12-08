@@ -1,56 +1,23 @@
 import { Injectable } from '@angular/core';
 import { NgbDatepickerI18n, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
-
-// Arabic (Hijri) Configuration
-const WEEKDAYS_AR = ['ن', 'ث', 'ر', 'خ', 'ج', 'س', 'ح'];
-const MONTHS_AR = [
-  'محرم',
-  'صفر',
-  'ربيع الأول',
-  'ربيع الآخر',
-  'جمادى الأولى',
-  'جمادى الآخرة',
-  'رجب',
-  'شعبان',
-  'رمضان',
-  'شوال',
-  'ذو القعدة',
-  'ذو الحجة',
-];
-// English (Hijri) Configuration
-
-const WEEKDAYS_EN = ['M', 'T', 'W', 'T', 'F', 'S', 'S'];
-const MONTHS_EN = [
-  'Muharram',
-  'Safar',
-  'Rabi al-Awwal',
-  'Rabi al-Thani',
-  'Jumada al-Awwal',
-  'Jumada al-Thani',
-  'Rajab',
-  'Shaban',
-  'Ramadan',
-  'Shawwal',
-  'Dhu al-Qadah',
-  'Dhu al-Hijjah',
-];
+import { MONTHS_HIJRI, WEEKDAYS } from '../utils/date-i18n.utils';
 
 @Injectable()
 export class IslamicI18n extends NgbDatepickerI18n {
   getMonthShortName(month: number): string {
-    return MONTHS_AR[month - 1];
+    return MONTHS_HIJRI.ar[month - 1];
   }
 
   getMonthFullName(month: number): string {
-    return MONTHS_AR[month - 1];
+    return MONTHS_HIJRI.ar[month - 1];
   }
 
   getWeekdayLabel(weekday: number): string {
-    return WEEKDAYS_AR[weekday - 1];
+    return WEEKDAYS.ar[weekday - 1];
   }
 
   getWeekdayShortName(weekday: number): string {
-    return WEEKDAYS_AR[weekday - 1];
+    return WEEKDAYS.ar[weekday - 1];
   }
 
   getDayAriaLabel(date: NgbDateStruct): string {
@@ -73,19 +40,19 @@ export class IslamicI18n extends NgbDatepickerI18n {
 @Injectable()
 export class HijriEnglishI18n extends NgbDatepickerI18n {
   getMonthShortName(month: number): string {
-    return MONTHS_EN[month - 1].substring(0, 3);
+    return MONTHS_HIJRI.en[month - 1].substring(0, 3);
   }
 
   getMonthFullName(month: number): string {
-    return MONTHS_EN[month - 1];
+    return MONTHS_HIJRI.en[month - 1];
   }
 
   getWeekdayLabel(weekday: number): string {
-    return WEEKDAYS_EN[weekday - 1];
+    return WEEKDAYS.en[weekday - 1];
   }
 
   getWeekdayShortName(weekday: number): string {
-    return WEEKDAYS_EN[weekday - 1];
+    return WEEKDAYS.en[weekday - 1];
   }
 
   getDayAriaLabel(date: NgbDateStruct): string {
