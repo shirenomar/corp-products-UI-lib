@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter,  Input, OnInit, Output } from '@angular/core';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
 import {
@@ -19,7 +19,7 @@ import { DualCalendarComponent } from './../dual-calender/dual-calendar.componen
   selector: 'app-dynamic-form',
   standalone: true,
   imports: [
-    CommonModule,
+  CommonModule,
     ReactiveFormsModule,
     DatePickerComponent,
     ValidationErrorsPipe,
