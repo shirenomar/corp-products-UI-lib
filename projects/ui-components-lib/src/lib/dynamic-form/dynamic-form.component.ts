@@ -13,7 +13,7 @@ import {
   ValidationErrorsPipe,
 } from '../form-components';
 import { DynamicFormData, FormFieldTypeEnum, InputsMap } from './dynamic-form.interface';
-import { CalenderComponent } from './../calender/calender.component';
+import { DualCalendarComponent } from '@corp-products/ui-components';
 
 @Component({
   selector: 'app-dynamic-form',
@@ -25,7 +25,7 @@ import { CalenderComponent } from './../calender/calender.component';
     ValidationErrorsPipe,
     TranslateModule,
     SelectButtonComponent,
-    CalenderComponent,
+    DualCalendarComponent,
     InputComponent,
     SelectComponent,
     AutoCompleteComponent,

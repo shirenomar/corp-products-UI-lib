@@ -11,7 +11,7 @@ import { DatePickerSwitcherComponent } from './date-picker-switcher/date-picker-
 import '@angular/localize/init';
 import { getGregorianMonthName, getHijriMonthName } from './utils/date-i18n.utils';
 @Component({
-  selector: 'app-calender',
+  selector: 'app-dual-calendar',
   animations: [
     trigger('slideDown', [
       state('closed', style({
@@ -43,11 +43,11 @@ import { getGregorianMonthName, getHijriMonthName } from './utils/date-i18n.util
   providers: [
     { provide: NgbCalendar, useClass: NgbCalendarIslamicUmalqura }
   ],
-  templateUrl: './calender.component.html',
-  styleUrl: './calender.component.scss',
+  templateUrl: './dual-calendar.component.html',
+  styleUrl: './dual-calendar.component.scss',
   encapsulation: ViewEncapsulation.None
 })
-export class CalenderComponent {
+export class DualCalendarComponent {
   selectedDate = ''
   @Input() control: FormControl<any> = new FormControl({ value: null, disabled: false }, []);
   mode: 'gregorian' | 'hijri' = 'gregorian';

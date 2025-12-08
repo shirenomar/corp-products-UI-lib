@@ -23,16 +23,14 @@ import {
   SidebarConfig,
   SidebarConfigDefaults,
 } from './../../../ui-components-lib/src/lib/side-bar-dynamic/sidebar-config';
-import { CalenderComponent } from '../../../ui-components-lib/src/lib/calender/calender.component';
 @Component({
   selector: 'app-root',
   imports: [
-    AppBreadcrumbComponent,
+  AppBreadcrumbComponent,
     ReactiveFormsModule,
     AppButtonComponent,
     BottomSheetComponent,
     DynamicFormComponent,
-    CalenderComponent,
     CommonModule,
   ],
   providers: [DialogService, ConfirmationDialogService],
