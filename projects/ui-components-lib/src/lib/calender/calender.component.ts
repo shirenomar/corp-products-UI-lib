@@ -6,8 +6,8 @@ import { HijriCalendarComponent } from './hijri-calendar/hijri-calendar.componen
 import { GregorianCalendarComponent } from './gregorian-calendar/gregorian-calendar.component';
 import { FloatLabelModule } from 'primeng/floatlabel';
 import { DatePickerModule } from 'primeng/datepicker';
-import { HijriDatePickerComponent } from './date-picker/date-picker.component';
 import { trigger, state, style, transition, animate } from '@angular/animations';
+import { DatePickerSwitcherComponent } from './date-picker-switcher/date-picker-switcher.component';
 
 @Component({
   selector: 'app-calender',
@@ -36,7 +36,7 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
     DatePickerModule,
     FloatLabelModule,
     HijriCalendarComponent,
-    HijriDatePickerComponent,
+    DatePickerSwitcherComponent,
     GregorianCalendarComponent
   ],
   providers: [

@@ -1,7 +1,7 @@
 <div class="calender-content  "   #calendarContainer>
-  <stc-hijri-date-picker [variant]="'in'" [label]="'Select Date'" id="dateId" (openCalender)="showCalender($event)"
+  <stc-date-picker-switcher [variant]="'in'" [label]="'Select Date'" id="dateId" (openCalender)="showCalender($event)"
     [control]="control" [formattedDate]='selectedDate'  >
-  </stc-hijri-date-picker>
+  </stc-date-picker-switcher>
 
   <!-- calender.html -->
   <div dir="rtl" class="p-2 calendar-wrapper " [@slideDown]="isCalendarOpen ? 'open' : 'closed'"  >

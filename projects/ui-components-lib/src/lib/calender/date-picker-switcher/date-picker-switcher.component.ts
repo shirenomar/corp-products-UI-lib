@@ -4,14 +4,14 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TranslatePipe } from '@ngx-translate/core';
 import { DatePicker, DatePickerModule } from 'primeng/datepicker';
 import { FloatLabelModule } from 'primeng/floatlabel';
-import { ValidationErrorsPipe } from './../../form-components/@utils/validations/validation-message.pipe';
+import { ValidationErrorsPipe } from '../../form-components/@utils/validations/validation-message.pipe';
 import { BaseInputComponent } from '../../form-components/components/base-input.component';
 import { InputText } from 'primeng/inputtext';
 @Component({
-  selector: 'stc-hijri-date-picker',
+  selector: 'stc-date-picker-switcher',
   standalone: true,
   imports: [
-    FormsModule,
+  FormsModule,
     DatePicker,
     ReactiveFormsModule,
     NgClass,
@@ -21,11 +21,11 @@ import { InputText } from 'primeng/inputtext';
     TranslatePipe,
     FloatLabelModule,
   ],
-  templateUrl: './date-picker.component.html',
-  styleUrl: './date-picker.component.scss',
+  templateUrl: './date-picker-switcher.component.html',
+  styleUrl: './date-picker-switcher.component.scss',
   encapsulation: ViewEncapsulation.None,
 })
-export class HijriDatePickerComponent extends BaseInputComponent  implements OnChanges {
+export class DatePickerSwitcherComponent extends BaseInputComponent  implements OnChanges {
   @Input() type: 'text' | 'textarea' = 'text';
   @Input() contentType: 'text' | 'email' | 'number' = 'text';
   @Input() size: 'small' | 'large' = "small";

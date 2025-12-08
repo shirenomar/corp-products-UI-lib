@@ -21,7 +21,6 @@ import { BaseInputComponent } from '../base-input.component';
     PrimeTemplate,
     ValidationErrorsPipe,
     MultiSelectModule,
-    TranslatePipe,
     FloatLabelModule,
   ],
   templateUrl: './select.component.html',
