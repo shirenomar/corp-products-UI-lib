@@ -1,0 +1,27 @@
+<div class="field flex flex-col gap-2 my-3 relative">
+    <p-floatlabel [variant]="variant">
+    <input [id]="inputId" [type]="'text-float-label'" [formControl]="control" [readonly]="true" (focus)="openCalendar(true)"
+      (click)="openCalendar(true)" [pSize]="'small'"  style="direction: rtl; unicode-bidi: plaintext;"
+      [class]="
+        'w-full border border-[' + defaultColor + '] rounded-none focus:outline-[' + defaultColor + '] focus:border-[' + defaultColor + '] hover:border-[' + defaultColor + '] disabled:opacity-50'
+        " [disabled]="disabled" [name]="name" pInputText
+      class="w-full"
+      [ngClass]="{ 'p-invalid ng-dirty ng-invalid': isInvalid, 'basic-style': basicInput, 'no-style':noStyle}" />
+    <label [for]="inputId">
+      {{ label }}
+      @if (required) {
+      <span [class.text-required]="required">*</span>
+      }
+    </label>
+  </p-floatlabel>
+  @if (hint) {
+  <small class="p-mt-1">{{ hint }}</small>
+  }
+  @if (isInvalid && (control.dirty || control.touched)) {
+  <small class="p-error">
+    @for (error of control.errors | validationErrors; track error) {
+    {{ error }}<br>
+    }
+  </small>
+  }
+</div>

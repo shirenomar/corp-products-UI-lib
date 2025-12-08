@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter,  Input, OnInit, Output } from '@angular/core';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
 import {
@@ -13,17 +13,19 @@ import {
   ValidationErrorsPipe,
 } from '../form-components';
 import { DynamicFormData, FormFieldTypeEnum, InputsMap } from './dynamic-form.interface';
+import { DualCalendarComponent } from '@corp-products/ui-components';
 
 @Component({
   selector: 'app-dynamic-form',
   standalone: true,
   imports: [
-    CommonModule,
+  CommonModule,
     ReactiveFormsModule,
     DatePickerComponent,
     ValidationErrorsPipe,
     TranslateModule,
     SelectButtonComponent,
+    DualCalendarComponent,
     InputComponent,
     SelectComponent,
     AutoCompleteComponent,
@@ -40,6 +42,7 @@ export class DynamicFormComponent implements OnInit {
   @Output() switchChange = new EventEmitter<{ name: string; value: boolean }>();
   @Output() autoCompleteSearch = new EventEmitter<{ name: string; query: string }>();
   @Output() autoCompleteSelect = new EventEmitter<{ name: string; event: any }>();
+
   inputsNames: string[] = [];
   formGroup: FormGroup;
   inputsMap: InputsMap;
@@ -51,4 +54,5 @@ export class DynamicFormComponent implements OnInit {
     this.inputsMap = this.dynamicFormData?.inputsMap as InputsMap;
     this.inputsNames = Object.keys(this.inputsMap || {});
   }
+
 }

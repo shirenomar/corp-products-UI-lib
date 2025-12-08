@@ -16,7 +16,6 @@ import { BaseInputComponent } from '../base-input.component';
     NgClass,
     DatePickerModule,
     ValidationErrorsPipe,
-    TranslatePipe,
     FloatLabelModule,
   ],
   templateUrl: './date-picker.component.html',

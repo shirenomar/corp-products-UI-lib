@@ -90,4 +90,5 @@ export enum FormFieldTypeEnum {
   SELECT = 'select',
   SWITCH = 'switch',
   AUTO_COMPLETE = 'auto-complete',
+  HIJRI_DATE_PICKER = 'hijri-date'
 }

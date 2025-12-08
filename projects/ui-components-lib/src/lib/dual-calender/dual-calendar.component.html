@@ -1,0 +1,31 @@
+<div class="calender-content  "   #calendarContainer>
+  <stc-date-picker-switcher [variant]="'in'" [label]="'Select Date'" id="dateId" (openCalender)="showCalender($event)"
+    [control]="control" [formattedDate]='selectedDate'  >
+  </stc-date-picker-switcher>
+
+  <!-- calender.html -->
+  <div dir="rtl" class="p-2 calendar-wrapper " [@slideDown]="isCalendarOpen ? 'open' : 'closed'"  >
+    <div class="header-tabs">
+      <div class="header-label">نوع التقويم</div>
+      <div class="tabs">
+        <button class="tab-button" [class.active]="mode === 'gregorian'" (click)="  mode='gregorian'">
+          الميلادي
+        </button>
+        <button class="tab-button" [class.active]="mode === 'hijri'" (click)=" mode='hijri'">
+          هجري
+        </button>
+      </div>
+    </div>
+    @if(mode === 'gregorian') {
+    <app-gregorian-calendar [model]="gregorianModel" [language]="currentLang"
+      (dateSelected)="onSelectGregorian($event)">
+    </app-gregorian-calendar>
+    }
+
+    @if(mode === 'hijri') {
+    <app-hijri-calendar [model]="hijriModel" [language]="currentLang" (dateSelected)="onSelectHijri($event)">
+    </app-hijri-calendar>
+    }
+  </div>
+
+</div>

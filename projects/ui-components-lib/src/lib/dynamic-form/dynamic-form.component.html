@@ -3,6 +3,10 @@
     @for (inputName of inputsNames; track $index) {
     <div [ngClass]="inputsMap[inputName].rowSize">
       @switch (inputsMap[inputName].fieldType) {
+      @case (fieldType.HIJRI_DATE_PICKER) {
+         <app-dual-calendar [control]="getFormControl(inputName, formGroup)"  ></app-dual-calendar>
+      }
+
       @case (fieldType.DATE_PICKER) {
       <stc-date-picker [minDate]="inputsMap[inputName]?.dateRange?.min" [maxDate]="inputsMap[inputName]?.dateRange?.max"
         [id]="inputsMap[inputName].inputId" [control]="getFormControl(inputName, formGroup)" [name]="inputName"
@@ -49,7 +53,7 @@
         [checkmark]="inputsMap[inputName].checkmark ?? true" [filterBy]="inputsMap[inputName].filterBy || ''"
         [selectedItemsLabel]="inputsMap[inputName].selectedItemsLabel || ''"
         [size]="inputsMap[inputName].size || 'small'" [variant]="inputsMap[inputName].variant || 'over'"
-        (change)="selectChange.emit({ name: inputName, event: $event })" />
+        (change)="selectChange.emit({ name: inputName, event: $event })"/>
       }
       @case (fieldType.SWITCH) {
       <stc-switch [label]="inputsMap[inputName].label" [key]="inputName"

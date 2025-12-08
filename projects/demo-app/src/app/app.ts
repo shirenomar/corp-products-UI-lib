@@ -26,7 +26,7 @@ import {
 @Component({
   selector: 'app-root',
   imports: [
-    AppBreadcrumbComponent,
+  AppBreadcrumbComponent,
     ReactiveFormsModule,
     AppButtonComponent,
     BottomSheetComponent,
@@ -127,6 +127,8 @@ export class App {
   dynamicFormGroup = new FormGroup({
     startDate: new FormControl<Date | null>(new Date(), [Validators.required]),
     endDate: new FormControl<Date | null>(null, [Validators.required]),
+    hijriDate: new FormControl<Date | null>(null ),
+
     fullName: new FormControl<string>('', [Validators.required]),
     role: new FormControl<any>(null, [Validators.required]),
     status: new FormControl<string | null>(null),
@@ -151,6 +153,12 @@ export class App {
       dateRange: { min: new Date(2020, 0, 1), max: new Date(2030, 11, 31) },
       showIcon: true,
       variant: 'in',
+    },
+    hijriDate: {
+      label: 'Hijri Date',
+      fieldType: FormFieldTypeEnum.HIJRI_DATE_PICKER,
+      rowSize: 'half',
+      showIcon: true,
     },
     endDate: {
       label: 'End Date',
@@ -335,7 +343,7 @@ export class App {
       showHeader: false,
       closable: false,
     });
-    ref.onClose.subscribe((res) => {
+    ref?.onClose.subscribe((res) => {
       console.log(res);
     });
   }
