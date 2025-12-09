@@ -1,6 +1,6 @@
 import { Component, ElementRef, EventEmitter, HostListener, Input, Output, ViewChild, ViewEncapsulation } from '@angular/core';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { NgbCalendar, NgbDateStruct, NgbCalendarIslamicUmalqura, NgbDatepickerModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbCalendar, NgbDateStruct, NgbCalendarIslamicUmalqura, NgbDatepickerModule, NgbDate } from '@ng-bootstrap/ng-bootstrap';
 import moment from 'moment-hijri';
 import { HijriCalendarComponent } from './hijri-calendar/hijri-calendar.component';
 import { GregorianCalendarComponent } from './gregorian-calendar/gregorian-calendar.component';
@@ -50,7 +50,7 @@ import { getGregorianMonthName, getHijriMonthName } from './utils/date-i18n.util
 export class DualCalendarComponent {
   selectedDate = ''
   @Input() control: FormControl<any> = new FormControl({ value: null, disabled: false }, []);
-  @Input() label= '';
+  @Input() label = '';
   mode: 'gregorian' | 'hijri' = 'gregorian';
   gregorianModel!: NgbDateStruct;
   hijriModel!: NgbDateStruct;
@@ -58,7 +58,8 @@ export class DualCalendarComponent {
   @Output() selectButtonChange = new EventEmitter<{ name: string; value: any }>();
   isCalendarOpen = false
   @ViewChild('calendarContainer') calendarContainer!: ElementRef;
-  constructor() { }
+    hijriCal = new NgbCalendarIslamicUmalqura();
+  constructor( ) { }
   @HostListener('document:click', ['$event'])
   onDocumentClick(event: MouseEvent) {
     if (!this.calendarContainer) return;
@@ -67,43 +68,61 @@ export class DualCalendarComponent {
       this.isCalendarOpen = false;
     }
   }
+  private structToNgbDate(d: NgbDateStruct): NgbDate {
+    return new NgbDate(d.year, d.month, d.day);
+  }
+
   onSelectGregorian(date: NgbDateStruct) {
     this.gregorianModel = date;
-    const m = moment(`${date.year}-${date.month}-${date.day}`, 'YYYY-M-D');
+
+    // Convert to NgbDate
+    const jsDate = new Date(date.year, date.month - 1, date.day);
+
+    // fromGregorian expects NgbDate or JS Date (depending on version)
+    const hijri = this.hijriCal.fromGregorian(jsDate);
+
     this.hijriModel = {
-      year: +m.format('iYYYY'),
-      month: +m.format('iM'),
-      day: +m.format('iD')
+      year: hijri.year,
+      month: hijri.month,
+      day: hijri.day
     };
-    console.log('onSelectGregorian', this.hijriModel )
-    this.selectedDate = this.formatHijri(m);
+
+    this.selectedDate = this.formatHijri(this.structToNgbDate(this.hijriModel));
     this.isCalendarOpen = false;
   }
 
   onSelectHijri(date: NgbDateStruct) {
     this.hijriModel = date;
-    const m = moment(`${date.year}-${date.month}-${date.day}`, 'iYYYY-iM-iD');
-    this.gregorianModel = {
-      year: +m.format('YYYY'),
-      month: +m.format('M'),
-      day: +m.format('D')
-    };
-    console.log('onSelectHijri', this.gregorianModel )
 
-    this.selectedDate = this.formatHijri(m);
+    const ngbDate = this.structToNgbDate(date);
+
+    const greg = this.hijriCal.toGregorian(ngbDate);
+
+    this.gregorianModel = {
+      year: greg.getFullYear(),
+      month: greg.getMonth() + 1,
+      day: greg.getDate()
+    };
+
+    this.selectedDate = this.formatHijri(ngbDate);
     this.isCalendarOpen = false;
   }
+
   showCalender(isOpen: boolean) {
     this.isCalendarOpen = isOpen;
   }
-  formatHijri(m: moment.Moment): string {
-    const hijriDay = m.format('iD');
-    const hijriMonth = getHijriMonthName(this.currentLang, +m.format('iM'));
-    const gregorianDay = m.format('D');
-    const gregorianMonth = getGregorianMonthName(this.currentLang, +m.format('M'));
-    const gregorianYear = m.format('YYYY');
-    const hijriYear = m.format('iYYYY');
-    console.log('formateHijri', hijriMonth)
+  formatHijri(h: NgbDate): string {
+    const hijriDay = h.day;
+    const hijriMonth = getHijriMonthName(this.currentLang, h.month);
+    const hijriYear = h.year;
+
+    const greg = this.hijriCal.toGregorian(h);
+
+    const gregorianDay = greg.getDate();
+    const gregorianMonth =
+      getGregorianMonthName(this.currentLang, greg.getMonth() + 1);
+    const gregorianYear = greg.getFullYear();
+
     return `${gregorianDay} ${gregorianMonth} ${gregorianYear} - ${hijriDay} ${hijriMonth} ${hijriYear}`;
   }
 
