@@ -50,6 +50,7 @@ import { getGregorianMonthName, getHijriMonthName } from './utils/date-i18n.util
 export class DualCalendarComponent {
   selectedDate = ''
   @Input() control: FormControl<any> = new FormControl({ value: null, disabled: false }, []);
+  @Input() label= '';
   mode: 'gregorian' | 'hijri' = 'gregorian';
   gregorianModel!: NgbDateStruct;
   hijriModel!: NgbDateStruct;
@@ -61,7 +62,6 @@ export class DualCalendarComponent {
   @HostListener('document:click', ['$event'])
   onDocumentClick(event: MouseEvent) {
     if (!this.calendarContainer) return;
-
     const clickedInside = this.calendarContainer.nativeElement.contains(event.target);
     if (!clickedInside) {
       this.isCalendarOpen = false;
@@ -75,6 +75,7 @@ export class DualCalendarComponent {
       month: +m.format('iM'),
       day: +m.format('iD')
     };
+    console.log('onSelectGregorian', this.hijriModel )
     this.selectedDate = this.formatHijri(m);
     this.isCalendarOpen = false;
   }
@@ -87,6 +88,8 @@ export class DualCalendarComponent {
       month: +m.format('M'),
       day: +m.format('D')
     };
+    console.log('onSelectHijri', this.gregorianModel )
+
     this.selectedDate = this.formatHijri(m);
     this.isCalendarOpen = false;
   }
@@ -100,6 +103,7 @@ export class DualCalendarComponent {
     const gregorianMonth = getGregorianMonthName(this.currentLang, +m.format('M'));
     const gregorianYear = m.format('YYYY');
     const hijriYear = m.format('iYYYY');
+    console.log('formateHijri', hijriMonth)
     return `${gregorianDay} ${gregorianMonth} ${gregorianYear} - ${hijriDay} ${hijriMonth} ${hijriYear}`;
   }
 
