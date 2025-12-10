@@ -8,6 +8,8 @@ export interface Dropdown<T = unknown> {
   id?: string;
   keyValue: T;
   label: string;
+  labelAr?: string;
+  labelEn?: string;
   icon?: string;
   hidden?: boolean;
   disabled?: boolean;
