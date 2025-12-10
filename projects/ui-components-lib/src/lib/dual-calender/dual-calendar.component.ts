@@ -1,7 +1,6 @@
 import { Component, ElementRef, EventEmitter, HostListener, Input, Output, ViewChild, ViewEncapsulation } from '@angular/core';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbCalendar, NgbDateStruct, NgbCalendarIslamicUmalqura, NgbDatepickerModule, NgbDate } from '@ng-bootstrap/ng-bootstrap';
-import moment from 'moment-hijri';
 import { HijriCalendarComponent } from './hijri-calendar/hijri-calendar.component';
 import { GregorianCalendarComponent } from './gregorian-calendar/gregorian-calendar.component';
 import { FloatLabelModule } from 'primeng/floatlabel';
@@ -55,11 +54,11 @@ export class DualCalendarComponent {
   gregorianModel!: NgbDateStruct;
   hijriModel!: NgbDateStruct;
   currentLang: 'ar' | 'en' = 'ar';
-  @Output() selectButtonChange = new EventEmitter<{ name: string; value: any }>();
+  @Output() gregorianUTC = new EventEmitter<string>();
   isCalendarOpen = false
   @ViewChild('calendarContainer') calendarContainer!: ElementRef;
-    hijriCal = new NgbCalendarIslamicUmalqura();
-  constructor( ) { }
+  hijriCal = new NgbCalendarIslamicUmalqura();
+  constructor() { }
   @HostListener('document:click', ['$event'])
   onDocumentClick(event: MouseEvent) {
     if (!this.calendarContainer) return;
@@ -74,30 +73,28 @@ export class DualCalendarComponent {
 
   onSelectGregorian(date: NgbDateStruct) {
     this.gregorianModel = date;
-
     // Convert to NgbDate
     const jsDate = new Date(date.year, date.month - 1, date.day);
-
     // fromGregorian expects NgbDate or JS Date (depending on version)
     const hijri = this.hijriCal.fromGregorian(jsDate);
-
+    const isoUTC = jsDate.toISOString();
+    this.gregorianUTC.emit(isoUTC);
     this.hijriModel = {
       year: hijri.year,
       month: hijri.month,
       day: hijri.day
-    };
+    }; // datepicker
 
-    this.selectedDate = this.formatHijri(this.structToNgbDate(this.hijriModel));
+    this.selectedDate = this.formatHijri(this.structToNgbDate(this.hijriModel)); //input
     this.isCalendarOpen = false;
   }
 
   onSelectHijri(date: NgbDateStruct) {
     this.hijriModel = date;
-
     const ngbDate = this.structToNgbDate(date);
-
     const greg = this.hijriCal.toGregorian(ngbDate);
-
+    const isoUTC = greg.toISOString();
+    this.gregorianUTC.emit(isoUTC);
     this.gregorianModel = {
       year: greg.getFullYear(),
       month: greg.getMonth() + 1,
@@ -115,16 +112,14 @@ export class DualCalendarComponent {
     const hijriDay = h.day;
     const hijriMonth = getHijriMonthName(this.currentLang, h.month);
     const hijriYear = h.year;
-
     const greg = this.hijriCal.toGregorian(h);
-
     const gregorianDay = greg.getDate();
     const gregorianMonth =
       getGregorianMonthName(this.currentLang, greg.getMonth() + 1);
     const gregorianYear = greg.getFullYear();
-
     return `${gregorianDay} ${gregorianMonth} ${gregorianYear} - ${hijriDay} ${hijriMonth} ${hijriYear}`;
   }
+
 
 
 }
