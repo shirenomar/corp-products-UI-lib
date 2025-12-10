@@ -22,5 +22,7 @@ export * from './lib/bottom-sheet/bottom-sheet.component';
 export * from './lib/dynamic-side-bar-v2/dynamic-sidebar.service';
 export * from './lib/dynamic-side-bar-v2/dynamic-sidebar.config';
 export * from './lib/dual-calender/dual-calendar.component';
+export * from './lib/dual-calender/utils/date-i18n.utils';
+
 
 
