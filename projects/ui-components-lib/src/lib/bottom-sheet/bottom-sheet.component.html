@@ -10,9 +10,5 @@
   <ng-template pTemplate="header">
     <div class="band"></div>
   </ng-template>
-  @if (contentTemplate) {
-    <ng-template pTemplate="content">
-      <ng-container *ngTemplateOutlet="contentTemplate"></ng-container>
-    </ng-template>
-  }
+  <ng-template #dynamicContainer></ng-template>
 </p-drawer>

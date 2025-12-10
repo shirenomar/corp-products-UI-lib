@@ -28,11 +28,11 @@
      <app-button title="إلغاء" severity="warn"  variant="outlined"></app-button>
   </div>
 
-  <button (click)="show= !show">toggle button sheet</button>
+  <button (click)="showButtomSheet()">toggle button sheet</button>
+    <button (click)="showButtomSheet2()">toggle button sheet222</button>
+      <button (click)="hidebottomSheet()">Hide bottom Sheet</button>
 
-<app-bottom-sheet [title]="'الإجراءات علي المعاملة'" [show]="show" [contentTemplate]="contentTemplate"></app-bottom-sheet>
 
-<ng-template #contentTemplate>
-  test conent!
-</ng-template>
+<app-bottom-sheet></app-bottom-sheet>
+
 

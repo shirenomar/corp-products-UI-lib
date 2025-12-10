@@ -3,8 +3,6 @@ import { RouterOutlet } from '@angular/router';
 
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 
-import { FloatLabelModule } from 'primeng/floatlabel';
-import { InputText } from 'primeng/inputtext';
 import { BreadcrumbItem } from '../../../ui-components-lib/src/lib/app-breadcrumb/app-breadcrumb.interface';
 import { SideBar } from './side-bar/side-bar';
 import { DialogService } from 'primeng/dynamicdialog';
@@ -15,7 +13,7 @@ import { InputComponent } from './../../../ui-components-lib/src/lib/form-compon
 import { SelectComponent } from './../../../ui-components-lib/src/lib/form-components/components/select/select.component';
 import { DynamicSidebarService } from './../../../ui-components-lib/src/lib/side-bar-dynamic/dynamic-sidebar.service';
 import { DatePickerComponent } from './../../../ui-components-lib/src/lib/form-components/components/date-picker/date-picker.component';
-import { AppButtonComponent, AppBreadcrumbComponent, BottomSheetComponent } from '@corp-products/ui-components';
+import { AppButtonComponent, AppBreadcrumbComponent, BottomSheetComponent, BottomSheetService } from '@corp-products/ui-components';
 import { ConfirmationDialogComponent } from './../../../ui-components-lib/src/lib/confirmation-dialog/confirmation-dialog.component';
 @Component({
   selector: 'app-root',
@@ -84,6 +82,7 @@ export class App {
   ];
 
   sidebarDynamicService = inject(DynamicSidebarService);
+  bottomSheetService = inject(BottomSheetService);
 
   sideBarData: SidebarConfig = SidebarConfigDefaults;
   dateControl: FormControl<any> = new FormControl({ value: null, disabled: false }, []);
@@ -165,4 +164,15 @@ export class App {
 
   }
 
+  showButtomSheet(){
+    this.bottomSheetService.open(App);
+  }
+
+   showButtomSheet2(){
+    this.bottomSheetService.open(SideBar);
+  }
+
+  hidebottomSheet(){
+    this.bottomSheetService.hide();
+  }
 }
