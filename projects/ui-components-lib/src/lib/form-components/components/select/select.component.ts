@@ -8,7 +8,9 @@ import { MultiSelectModule } from 'primeng/multiselect';
 import { Select, SelectChangeEvent } from 'primeng/select';
 import { ValidationErrorsPipe } from '../../@utils/validations';
 import { BaseInputComponent } from '../base-input.component';
+import { AppButtonComponent } from './../../../app-button/app-button.component';
 
+import { IconField } from 'primeng/iconfield';
 @Component({
   selector: 'stc-select',
   standalone: true,
@@ -19,6 +21,8 @@ import { BaseInputComponent } from '../base-input.component';
     NgClass,
     NgTemplateOutlet,
     PrimeTemplate,
+    AppButtonComponent,
+    IconField,
     ValidationErrorsPipe,
     MultiSelectModule,
     FloatLabelModule,
@@ -39,18 +43,38 @@ export class SelectComponent extends BaseInputComponent {
   @Input() multiple = false;
   @Input() filterBy!: string;
   @Input() size: 'small' | 'large' = "small";
-
   @Input() selectedItemsLabel!: string;
   @Input() basicInput!: boolean;
   @Input() variant: 'in' | 'over' | 'on' = 'over';
   // eslint-disable-next-line @angular-eslint/no-output-native
   @Output() change = new EventEmitter();
   @Input() defaultColor = '#DFE0E6'
+  @Output() addValue = new EventEmitter()
+  filterValue = '';
   constructor() {
     super();
   }
-
+  addNewItem(item: string) {
+    this.addValue.emit(item)
+  }
+  onFilter(event: any) {
+    // PrimeNG sends the typed value here
+    this.filterValue = event.filter?.trim();
+  }
   onChange(e: SelectChangeEvent) {
     this.change.emit(e);
   }
+  onFilterValueChange(value: string) {
+    this.filterValue = value;
+  }
+  get addLabel(): string {
+    if (!this.filterValue) return 'أضف';
+    return `أضف "${this.filterValue}"`;
+  }
+  clearFilter(event: MouseEvent): void {
+    event.stopPropagation();
+    this.filterValue = '';
+    this.control.setValue(this.control.value);
+  }
+
 }

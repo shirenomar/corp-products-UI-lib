@@ -23,14 +23,16 @@ import {
   SidebarConfig,
   SidebarConfigDefaults,
 } from './../../../ui-components-lib/src/lib/side-bar-dynamic/sidebar-config';
+import { SelectComponent } from './../../../ui-components-lib/src/lib/form-components/components/select/select.component';
 @Component({
   selector: 'app-root',
   imports: [
-  AppBreadcrumbComponent,
+AppBreadcrumbComponent,
     ReactiveFormsModule,
     AppButtonComponent,
     BottomSheetComponent,
     DynamicFormComponent,
+    SelectComponent,
     CommonModule,
   ],
   providers: [DialogService, ConfirmationDialogService],
@@ -266,6 +268,10 @@ export class App {
     name: new FormControl<string>('', [Validators.required]),
     reason: new FormControl<string>('', [Validators.required, Validators.maxLength(500)]),
   });
+  addNewGroup(newGroup: string) {
+    console.log('newGroup', newGroup);
+
+  }
 
   dialogInputsMap: InputsMap = {
     // name: {
