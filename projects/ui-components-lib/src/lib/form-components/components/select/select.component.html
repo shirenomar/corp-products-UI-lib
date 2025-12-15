@@ -1,72 +1,83 @@
 <div class="field flex flex-col gap-2 my-3 relative">
 
-  @if (multiple) {
-
-  <p-floatLabel [variant]="variant">
+  @if(multiple) {
+   <p-floatLabel [variant]="variant">
 
     <p-multiselect
-     [disabled]="disabled"
-     [filter]="filter"
-     [filterBy]="filterBy"
-     (onFilter)="onFilter($event)"
-     [formControl]="control"
-     [id]="inputId" [name]="name"
-     [optionLabel]="optionLabel"
-     [options]="options"
-     [placeholder]="placeholder"
-     [readonly]="readonly"
-     [showClear]="showClear"
+    [disabled]="disabled"
+    [filterBy]="filterBy"
+    [filter]="filter"
+    [formControl]="control"
+    [id]="inputId"
+    [name]="name"
+    [ngClass]="{ 'p-invalid ng-dirty ng-invalid': isInvalid }"
+    [optionLabel]="optionLabel"
+    [options]="options"
+    [placeholder]="placeholder"
+    [readonly]="readonly"
+    [showClear]="showClear"
+    class="w-full"
      [size]="size"
-     [selectedItemsLabel]="selectedItemsLabel" class="w-full" [ngClass]="{
-        'p-invalid ng-dirty ng-invalid': isInvalid,
-        'basic-style': basicInput
-      }">
+    [selectedItemsLabel]="selectedItemsLabel"
+    [class]="
+        'w-full border border-[' + defaultColor + '] rounded-none focus:outline-[' + defaultColor + '] focus:border-[' + defaultColor + '] hover:border-[' + defaultColor + '] disabled:opacity-50'
+        "
+    (onChange)="onChange($event)"
+    [ngClass]="{ 'basic-style': basicInput }"
+     >
 
 
 
-      <!-- Option Template -->
-      @if (optionTemplate) {
-      <ng-template let-item pTemplate="item">
-        <ng-container [ngTemplateOutlet]="optionTemplate" [ngTemplateOutletContext]="{ $implicit: item }">
-        </ng-container>
+
+
+
+      @if(optionTemplate){
+      <ng-template let-item #item>
+        <ng-container [ngTemplateOutletContext]="{ $implicit: item }" [ngTemplateOutlet]="optionTemplate" />
       </ng-template>
       }
 
-    </p-multiselect>
 
+      <ng-template #dropdownicon>
+        <i class="pi pi-map"></i>
+      </ng-template>
+
+
+    </p-multiselect>
     <label [for]="inputId">
       {{ label }}
       @if (required) {
-      <span class="text-required">*</span>
+      <span [class.text-required]="required">*</span>
       }
     </label>
 
   </p-floatLabel>
 
   } @else {
-
-  <p-floatLabel [variant]="variant">
-
+      <p-floatLabel [variant]="variant">
     <p-select
+      [checkmark]="checkmark"
       [disabled]="disabled"
       [editable]="editable"
-      [filter]="filter"
       [filterBy]="filterBy"
-      (onFilter)="onFilter($event)"
+      [filter]="filter"
       [formControl]="control"
       [id]="inputId"
       [name]="name"
+      [ngClass]="{ 'p-invalid ng-dirty ng-invalid': isInvalid }"
       [optionLabel]="optionLabel"
       [options]="options"
       [placeholder]="placeholder"
       [readonly]="readonly"
       [showClear]="showClear"
-      [size]="size"
-      class="w-full" [ngClass]="{
-        'p-invalid ng-dirty ng-invalid': isInvalid,
-        'basic-style': basicInput
-      }">
-
+       [size]="size"
+      class="w-full"
+      [class]="
+        'w-full border border-[' + defaultColor + '] rounded-none focus:outline-[' + defaultColor + '] focus:border-[' + defaultColor + '] hover:border-[' + defaultColor + '] disabled:opacity-50'
+        "
+      (onChange)="onChange($event)"
+      [ngClass]="{ 'basic-style': basicInput }"
+    >
       <ng-template pTemplate="filtericon">
         @if(filterValue) {
         <svg width="14" height="14" viewBox="0 0 14 14" fill="none" (click)="clearFilter($event)"
@@ -77,7 +88,7 @@
             fill="currentColor"></path>
         </svg>
         } @else {
-          <i class="pi pi-search p-select-filter-icon p-icon"></i>
+        <i class="pi pi-search p-select-filter-icon p-icon"></i>
         }
       </ng-template>
 
@@ -91,44 +102,33 @@
         </div>
         }
       </ng-template>
-
       @if (optionTemplate) {
-      <ng-template let-item pTemplate="item">
-        <ng-container [ngTemplateOutlet]="optionTemplate" [ngTemplateOutletContext]="{ $implicit: item }">
-        </ng-container>
-      </ng-template>
+        <ng-template let-item pTemplate="item">
+          <ng-container [ngTemplateOutletContext]="{ $implicit: item }" [ngTemplateOutlet]="optionTemplate" />
+        </ng-template>
       }
-
       @if (selectedItemTemplate) {
-      <ng-template let-item pTemplate="selectedItem">
-        <ng-container [ngTemplateOutlet]="selectedItemTemplate" [ngTemplateOutletContext]="{ $implicit: item }">
-        </ng-container>
-      </ng-template>
+        <ng-template let-item pTemplate="selectedItem">
+          <ng-container [ngTemplateOutletContext]="{ $implicit: item }" [ngTemplateOutlet]="selectedItemTemplate" />
+        </ng-template>
       }
-
     </p-select>
-
     <label [for]="inputId">
       {{ label }}
       @if (required) {
-      <span class="text-required">*</span>
+      <span [class.text-required]="required">*</span>
       }
     </label>
-
   </p-floatLabel>
-
   }
 
   @if (hint) {
   <small class="p-mt-1">{{ hint }}</small>
-  }
-
-  @if (isInvalid && (control.dirty || control.touched)) {
+  } @if (isInvalid && (control.dirty || control.touched)) {
   <small class="p-error">
     @for (error of control.errors | validationErrors; track error) {
     {{ error }}<br />
     }
   </small>
   }
-
 </div>
