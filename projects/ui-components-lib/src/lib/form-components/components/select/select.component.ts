@@ -1,7 +1,7 @@
 import { NgClass, NgTemplateOutlet } from '@angular/common';
-import { Component, EventEmitter, Input, Output, TemplateRef, ViewEncapsulation } from '@angular/core';
+import { Component, EventEmitter, inject, Input, Output, TemplateRef, ViewEncapsulation } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { TranslatePipe } from '@ngx-translate/core';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { PrimeTemplate } from 'primeng/api';
 import { FloatLabelModule } from 'primeng/floatlabel';
 import { MultiSelectModule } from 'primeng/multiselect';
@@ -49,6 +49,8 @@ export class SelectComponent extends BaseInputComponent {
   // eslint-disable-next-line @angular-eslint/no-output-native
   @Output() change = new EventEmitter();
   @Input() defaultColor = '#DFE0E6'
+
+  private translate = inject(TranslateService);
   @Output() addValue = new EventEmitter()
   filterValue = '';
   constructor() {
@@ -68,8 +70,8 @@ export class SelectComponent extends BaseInputComponent {
     this.filterValue = value;
   }
   get addLabel(): string {
-    if (!this.filterValue) return 'أضف';
-    return `أضف "${this.filterValue}"`;
+    if (!this.filterValue) return this.translate.instant('shared.buttons.add');
+    return `${this.translate.instant('shared.buttons.add')} "${this.filterValue}"`;
   }
   clearFilter(event: MouseEvent): void {
     event.stopPropagation();
