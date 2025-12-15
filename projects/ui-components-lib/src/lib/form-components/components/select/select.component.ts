@@ -1,7 +1,7 @@
 import { NgClass, NgTemplateOutlet } from '@angular/common';
-import { Component, EventEmitter, inject, Input, Output, TemplateRef, ViewEncapsulation } from '@angular/core';
+import { Component, EventEmitter, inject, Input, Output, signal, TemplateRef, ViewEncapsulation } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { TranslatePipe, TranslateService } from '@ngx-translate/core';
+import {   TranslateService } from '@ngx-translate/core';
 import { PrimeTemplate } from 'primeng/api';
 import { FloatLabelModule } from 'primeng/floatlabel';
 import { MultiSelectModule } from 'primeng/multiselect';
@@ -52,7 +52,7 @@ export class SelectComponent extends BaseInputComponent {
 
   private translate = inject(TranslateService);
   @Output() addValue = new EventEmitter()
-  filterValue = '';
+  filterValue =  signal<string>('');
   constructor() {
     super();
   }
@@ -61,21 +61,21 @@ export class SelectComponent extends BaseInputComponent {
   }
   onFilter(event: any) {
     // PrimeNG sends the typed value here
-    this.filterValue = event.filter?.trim();
+    this.filterValue.set(event.filter?.trim());
   }
   onChange(e: SelectChangeEvent) {
     this.change.emit(e);
   }
   onFilterValueChange(value: string) {
-    this.filterValue = value;
+    this.filterValue.set(value);
   }
   get addLabel(): string {
     if (!this.filterValue) return this.translate.instant('shared.buttons.add');
-    return `${this.translate.instant('shared.buttons.add')} "${this.filterValue}"`;
+    return `${this.translate.instant('shared.buttons.add')} "${this.filterValue()}"`;
   }
   clearFilter(event: MouseEvent): void {
     event.stopPropagation();
-    this.filterValue = '';
+    this.filterValue.set('');
     this.control.setValue(this.control.value);
   }
 
