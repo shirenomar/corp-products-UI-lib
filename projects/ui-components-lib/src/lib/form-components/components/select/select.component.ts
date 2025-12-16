@@ -52,10 +52,8 @@ export class SelectComponent extends BaseInputComponent implements OnInit {
   @Output() change = new EventEmitter();
   @Input() isEditSearch = false
   @Input() defaultColor = '#DFE0E6'
-  filteredOptions = signal<unknown[]>([]);
-  override ngOnInit() {
-    this.filteredOptions.set(this.options);
-  }
+  @Input() filteredOptions: unknown[];
+
   private translate = inject(TranslateService);
   @Output() addValue = new EventEmitter()
   filterValue = signal<string>('');
@@ -76,7 +74,7 @@ export class SelectComponent extends BaseInputComponent implements OnInit {
         .includes(e.value.toLowerCase())
     );
     this.onFilterValueChange(e.value)
-    this.filteredOptions.set(search)
+    this.filteredOptions = [...search]
     this.change.emit(e);
   }
   onFilterValueChange(value: string) {

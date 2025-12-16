@@ -46,7 +46,7 @@
   <p-floatLabel [variant]="variant">
     <p-select [checkmark]="checkmark" [disabled]="disabled" [editable]="editable" [filterBy]="filterBy"
        [filter]="filter" [formControl]="control" [id]="inputId" [name]="name"
-      [ngClass]="{ 'p-invalid ng-dirty ng-invalid': isInvalid }" [optionLabel]="optionLabel" [options]="filteredOptions()"
+      [ngClass]="{ 'p-invalid ng-dirty ng-invalid': isInvalid }" [optionLabel]="optionLabel" [options]="isEditSearch? filteredOptions : options"
       [placeholder]="placeholder" [readonly]="readonly" [emptyMessage]="emptyMessage || ('shared.no_results_found'|translate)"
       [showClear]="showClear" [size]="size" class="w-full" [class]="'w-full border border-[' + defaultColor + '] rounded-none focus:outline-[' + defaultColor + '] focus:border-[' + defaultColor + '] hover:border-[' + defaultColor + '] disabled:opacity-50'
         " (onChange)="onChange($event)" [ngClass]="{ 'basic-style': basicInput }">
