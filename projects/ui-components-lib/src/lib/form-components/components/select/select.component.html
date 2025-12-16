@@ -1,4 +1,4 @@
-<div class="field flex flex-col gap-2 my-3 relative">
+<div class="field flex flex-col gap-2 my-3 relative"   [class.edit-search]="isEditSearch" >
 
   @if(multiple) {
   <p-floatLabel [variant]="variant">
@@ -38,26 +38,20 @@
   </p-floatLabel>
 
   } @else {
+   @if (isEditSearch) {
+
+     <i class="pi pi-search p-select-filter-icon p-icon absolute top-[17px] left-[13px] z-[999]"></i>
+    }
   <p-floatLabel [variant]="variant">
     <p-select [checkmark]="checkmark" [disabled]="disabled" [editable]="editable" [filterBy]="filterBy"
-      (onFilter)="onFilter($event)" [filter]="filter" [formControl]="control" [id]="inputId" [name]="name"
-      [ngClass]="{ 'p-invalid ng-dirty ng-invalid': isInvalid }" [optionLabel]="optionLabel" [options]="options"
+       [filter]="filter" [formControl]="control" [id]="inputId" [name]="name"
+      [ngClass]="{ 'p-invalid ng-dirty ng-invalid': isInvalid }" [optionLabel]="optionLabel" [options]="filteredOptions()"
       [placeholder]="placeholder" [readonly]="readonly" [showClear]="showClear" [size]="size" class="w-full" [class]="
         'w-full border border-[' + defaultColor + '] rounded-none focus:outline-[' + defaultColor + '] focus:border-[' + defaultColor + '] hover:border-[' + defaultColor + '] disabled:opacity-50'
         " (onChange)="onChange($event)" [ngClass]="{ 'basic-style': basicInput }">
-      <ng-template pTemplate="filtericon">
-        @if(filterValue()) {
-        <i class="pi pi-times p-select-clear-icon" (click)="clearFilter($event)">
-        </i>
-        } @else {
-
-        <i class="pi pi-search p-select-filter-icon p-icon"></i>
-        }
-      </ng-template>
 
 
-      <!-- ➕ Add Item When No Results -->
-      <ng-template pTemplate="emptyfilter">
+      <ng-template pTemplate="empty">
         @if (filterValue()) {
         <div class="p-2 text-center">
           <app-button icon="font-icon-plus" [label]="addLabel" severity="danger" text

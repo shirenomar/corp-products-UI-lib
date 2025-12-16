@@ -189,7 +189,7 @@ export class App {
       selectOptions: this.selectItems,
       optionLabel: 'name',
       showClear: true,
-      filter: true,
+      filter: false,
       variant: 'in',
     },
     status: {

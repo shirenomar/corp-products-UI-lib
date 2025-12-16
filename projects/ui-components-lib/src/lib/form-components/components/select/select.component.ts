@@ -1,7 +1,7 @@
 import { NgClass, NgTemplateOutlet } from '@angular/common';
-import { Component, EventEmitter, inject, Input, Output, signal, TemplateRef, ViewEncapsulation } from '@angular/core';
+import { Component, EventEmitter, inject, Input, OnInit, Output, signal, TemplateRef, ViewEncapsulation } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import {   TranslateService } from '@ngx-translate/core';
+import { TranslateService } from '@ngx-translate/core';
 import { PrimeTemplate } from 'primeng/api';
 import { FloatLabelModule } from 'primeng/floatlabel';
 import { MultiSelectModule } from 'primeng/multiselect';
@@ -31,7 +31,7 @@ import { IconField } from 'primeng/iconfield';
   styleUrl: './select.component.scss',
   encapsulation: ViewEncapsulation.None
 })
-export class SelectComponent extends BaseInputComponent {
+export class SelectComponent extends BaseInputComponent implements OnInit {
   @Input() selectedItemTemplate: TemplateRef<unknown> | null = null;
   @Input() optionTemplate: TemplateRef<unknown> | null = null;
   @Input() options: unknown[];
@@ -48,11 +48,15 @@ export class SelectComponent extends BaseInputComponent {
   @Input() variant: 'in' | 'over' | 'on' = 'over';
   // eslint-disable-next-line @angular-eslint/no-output-native
   @Output() change = new EventEmitter();
+  @Input() isEditSearch = false
   @Input() defaultColor = '#DFE0E6'
-
+  filteredOptions = signal<unknown[]>([]);
+  override ngOnInit() {
+    this.filteredOptions.set(this.options);
+  }
   private translate = inject(TranslateService);
   @Output() addValue = new EventEmitter()
-  filterValue =  signal<string>('');
+  filterValue = signal<string>('');
   constructor() {
     super();
   }
@@ -64,6 +68,13 @@ export class SelectComponent extends BaseInputComponent {
     this.filterValue.set(event.filter?.trim());
   }
   onChange(e: SelectChangeEvent) {
+    const search = this.options.filter((opt: any) =>
+      opt[this.optionLabel]
+        ?.toLowerCase()
+        .includes(e.value.toLowerCase())
+    );
+    this.onFilterValueChange(e.value)
+    this.filteredOptions.set(search)
     this.change.emit(e);
   }
   onFilterValueChange(value: string) {

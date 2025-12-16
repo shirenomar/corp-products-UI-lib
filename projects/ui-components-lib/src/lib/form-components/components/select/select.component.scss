@@ -40,4 +40,14 @@ textarea,
 .p-error {
   color: #dc2626;
 }
+.edit-search {
+  .p-select-label {
+    padding: 1rem 1rem 1rem 2.2rem !important;
+  }
+  .p-floatlabel {
+    >label {
+      padding-inline-start: 25px;
+    }
+  }
+}
 
