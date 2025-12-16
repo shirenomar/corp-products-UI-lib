@@ -5,5 +5,8 @@
     "save": "Save",
     "cancel": "Cancel",
     "submit": "Submit"
+  },
+  "shared": {
+    "no_results_found": "No results found"
   }
 }
