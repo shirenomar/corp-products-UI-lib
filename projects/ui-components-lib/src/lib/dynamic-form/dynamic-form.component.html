@@ -33,12 +33,10 @@
         [prefix]="inputsMap[inputName].prefix || ''" [size]="inputsMap[inputName].size || 'small'"
         [variant]="inputsMap[inputName].variant || 'over'">
         @if(inputsMap[inputName].maxLength){
-        <small class="text-sm text-gray-600 self-end">
+        <span class="text-xs text-gray-700">
           {{ (getFormControl(inputName, formGroup).value?.length || 0) }}
-          <span>
-            / {{ inputsMap[inputName].maxLength}}
-          </span>
-        </small>
+          <span> / {{ inputsMap[inputName].maxLength}}</span>
+        </span>
         }
       </stc-input>
       }

@@ -9,14 +9,15 @@
   @switch (type) {
   @case ('textarea') {
   @if (label) {
-  <label [for]="inputId">
-    {{ label }}
-    @if (required) {
-    <span [class.text-required]="required">*</span>
-    }
-  </label>
-
-  <ng-content></ng-content>
+  <div class="flex items-center justify-between gap-2">
+    <label [for]="inputId">
+      {{ label }}
+      @if (required) {
+      <span [class.text-required]="required">*</span>
+      }
+    </label>
+    <ng-content></ng-content>
+  </div>
   }
   <textarea [name]="name" [id]="inputId" [formControl]="control" [placeholder]="placeholder" [readonly]="readonly"
     [disabled]="disabled" pTextarea [rows]="rows" [cols]="cols" [autoResize]="autoResize" [class]="

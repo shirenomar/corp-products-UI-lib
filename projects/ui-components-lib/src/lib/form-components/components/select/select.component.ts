@@ -26,6 +26,7 @@ import { IconField } from 'primeng/iconfield';
     ValidationErrorsPipe,
     MultiSelectModule,
     FloatLabelModule,
+    TranslatePipe
   ],
   templateUrl: './select.component.html',
   styleUrl: './select.component.scss',
@@ -36,6 +37,7 @@ export class SelectComponent extends BaseInputComponent implements OnInit {
   @Input() optionTemplate: TemplateRef<unknown> | null = null;
   @Input() options: unknown[];
   @Input() optionLabel!: string;
+  @Input() emptyMessage!: string;
   @Input() checkmark = true;
   @Input() showClear = false;
   @Input() editable = false;
