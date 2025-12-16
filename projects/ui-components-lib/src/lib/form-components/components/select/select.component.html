@@ -6,6 +6,7 @@
     <p-multiselect [disabled]="disabled" [filterBy]="filterBy" [filter]="filter" [formControl]="control" [id]="inputId"
       [name]="name" [ngClass]="{ 'p-invalid ng-dirty ng-invalid': isInvalid }" [optionLabel]="optionLabel"
       [options]="options" [placeholder]="placeholder" [readonly]="readonly" [showClear]="showClear" class="w-full"
+      [emptyMessage]="emptyMessage || ('shared.no_results_found'|translate)"
       [size]="size" [selectedItemsLabel]="selectedItemsLabel" [class]="
         'w-full border border-[' + defaultColor + '] rounded-none focus:outline-[' + defaultColor + '] focus:border-[' + defaultColor + '] hover:border-[' + defaultColor + '] disabled:opacity-50'
         " (onChange)="onChange($event)" [ngClass]="{ 'basic-style': basicInput }">
@@ -46,8 +47,8 @@
     <p-select [checkmark]="checkmark" [disabled]="disabled" [editable]="editable" [filterBy]="filterBy"
        [filter]="filter" [formControl]="control" [id]="inputId" [name]="name"
       [ngClass]="{ 'p-invalid ng-dirty ng-invalid': isInvalid }" [optionLabel]="optionLabel" [options]="filteredOptions()"
-      [placeholder]="placeholder" [readonly]="readonly" [showClear]="showClear" [size]="size" class="w-full" [class]="
-        'w-full border border-[' + defaultColor + '] rounded-none focus:outline-[' + defaultColor + '] focus:border-[' + defaultColor + '] hover:border-[' + defaultColor + '] disabled:opacity-50'
+      [placeholder]="placeholder" [readonly]="readonly" [emptyMessage]="emptyMessage || ('shared.no_results_found'|translate)"
+      [showClear]="showClear" [size]="size" class="w-full" [class]="'w-full border border-[' + defaultColor + '] rounded-none focus:outline-[' + defaultColor + '] focus:border-[' + defaultColor + '] hover:border-[' + defaultColor + '] disabled:opacity-50'
         " (onChange)="onChange($event)" [ngClass]="{ 'basic-style': basicInput }">
 
 
