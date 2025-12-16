@@ -53,6 +53,7 @@ export class SelectComponent extends BaseInputComponent implements OnInit {
   @Input() isEditSearch = false
   @Input() defaultColor = '#DFE0E6'
   @Input() filteredOptions: unknown[];
+  @Input() addButtonLabel = ''
 
 @ViewChild('selectRef') select!: Select;
   private translate = inject(TranslateService);
@@ -88,8 +89,8 @@ handleFocus() {
     this.filterValue.set(value);
   }
   get addLabel(): string {
-    if (!this.filterValue) return this.translate.instant('shared.buttons.add');
-    return `${this.translate.instant('shared.buttons.add')} "${this.filterValue()}"`;
+    if (!this.filterValue) return this.addButtonLabel;
+    return `${this.addButtonLabel} "${this.filterValue()}"`;
   }
   clearFilter(event: MouseEvent): void {
     event.stopPropagation();
