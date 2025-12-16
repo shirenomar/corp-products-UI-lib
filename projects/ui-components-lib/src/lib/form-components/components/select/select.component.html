@@ -44,8 +44,8 @@
      <i class="pi pi-search p-select-filter-icon p-icon absolute top-[17px] left-[13px] z-[999]"></i>
     }
   <p-floatLabel [variant]="variant">
-    <p-select [checkmark]="checkmark" [disabled]="disabled" [editable]="editable" [filterBy]="filterBy"
-       [filter]="filter" [formControl]="control" [id]="inputId" [name]="name"
+    <p-select [checkmark]="checkmark" [disabled]="disabled" [editable]="editable" [filterBy]="filterBy"  #selectRef
+       [filter]="filter" [formControl]="control" [id]="inputId" [name]="name"     (onFocus)="handleFocus()"
       [ngClass]="{ 'p-invalid ng-dirty ng-invalid': isInvalid }" [optionLabel]="optionLabel" [options]="isEditSearch? filteredOptions : options"
       [placeholder]="placeholder" [readonly]="readonly" [emptyMessage]="emptyMessage || ('shared.no_results_found'|translate)"
       [showClear]="showClear" [size]="size" class="w-full" [class]="'w-full border border-[' + defaultColor + '] rounded-none focus:outline-[' + defaultColor + '] focus:border-[' + defaultColor + '] hover:border-[' + defaultColor + '] disabled:opacity-50'

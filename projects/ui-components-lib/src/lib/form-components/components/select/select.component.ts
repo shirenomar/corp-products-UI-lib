@@ -1,5 +1,5 @@
 import { NgClass, NgTemplateOutlet } from '@angular/common';
-import { Component, EventEmitter, inject, Input, OnInit, Output, signal, TemplateRef, ViewEncapsulation } from '@angular/core';
+import { Component, EventEmitter, inject, Input, OnInit, Output, signal, TemplateRef, ViewChild, ViewEncapsulation } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { PrimeTemplate } from 'primeng/api';
@@ -54,6 +54,7 @@ export class SelectComponent extends BaseInputComponent implements OnInit {
   @Input() defaultColor = '#DFE0E6'
   @Input() filteredOptions: unknown[];
 
+@ViewChild('selectRef') select!: Select;
   private translate = inject(TranslateService);
   @Output() addValue = new EventEmitter()
   filterValue = signal<string>('');
@@ -67,7 +68,12 @@ export class SelectComponent extends BaseInputComponent implements OnInit {
     // PrimeNG sends the typed value here
     this.filterValue.set(event.filter?.trim());
   }
-
+handleFocus() {
+  // small timeout ensures focus finishes before opening
+  setTimeout(() => {
+    this.select.show();
+  });
+}
   onChange(e: SelectChangeEvent) {
     const search = this.options.filter((opt: any) =>
       opt[this.optionLabel]
