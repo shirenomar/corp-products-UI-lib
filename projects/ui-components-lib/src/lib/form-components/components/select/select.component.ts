@@ -67,6 +67,7 @@ export class SelectComponent extends BaseInputComponent implements OnInit {
     // PrimeNG sends the typed value here
     this.filterValue.set(event.filter?.trim());
   }
+
   onChange(e: SelectChangeEvent) {
     const search = this.options.filter((opt: any) =>
       opt[this.optionLabel]

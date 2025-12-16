@@ -29,7 +29,7 @@
         [readonly]="inputsMap[inputName].readonly || dynamicFormData.isReadOnlyForm || false"
         [disabled]="inputsMap[inputName].disabled || false" [type]="inputsMap[inputName].inputType || 'text'"
         [contentType]="inputsMap[inputName].contentType || 'text'" [rows]="inputsMap[inputName].rows || 2"
-        [cols]="inputsMap[inputName].cols || 20" [autoResize]="inputsMap[inputName].autoResize ?? true"
+        [cols]="inputsMap[inputName].cols || 20" [autoResize]="inputsMap[inputName].autoResize ?? false"
         [prefix]="inputsMap[inputName].prefix || ''" [size]="inputsMap[inputName].size || 'small'"
         [variant]="inputsMap[inputName].variant || 'over'">
         @if(inputsMap[inputName].maxLength){
