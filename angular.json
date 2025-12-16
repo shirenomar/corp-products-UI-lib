@@ -53,7 +53,8 @@
               }
             ],
             "styles": [
-              "projects/demo-app/src/styles.scss"
+              "projects/demo-app/src/styles.scss",
+              "node_modules/primeicons/primeicons.css"
             ]
           },
           "configurations": {
@@ -107,7 +108,8 @@
               }
             ],
             "styles": [
-              "projects/demo-app/src/styles.scss"
+              "projects/demo-app/src/styles.scss",
+              "node_modules/primeicons/primeicons.css"
             ]
           }
         }
