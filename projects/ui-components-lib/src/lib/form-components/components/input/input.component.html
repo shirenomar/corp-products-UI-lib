@@ -1,9 +1,5 @@
 <div class="field flex flex-col gap-2 my-3 relative">
 
-  @if (!required && !hideOptionalLabel) {
-  <span class="absolute top-[6px] left-0 text-[10px] text-gray-400">{{'forms.config.optional' | translate}}</span>
-  }
-
   <!-- input text align will be handled according to lang when implemented -->
 
   @switch (type) {
@@ -15,6 +11,9 @@
       @if (required) {
       <span [class.text-required]="required">*</span>
       }
+      <!-- @else if (!hideOptionalLabel) {
+        <span span class="optional-label">{{'forms.config.optional' | translate}}</span>
+      } -->
     </label>
     <ng-content></ng-content>
   </div>

@@ -39,3 +39,8 @@ textarea,
 .p-error {
   color: #dc2626;
 }
+
+.optional-label {
+  @apply text-[10px] text-gray-400;
+  margin-inline-start: 4px;
+}
