@@ -22,7 +22,7 @@ import { BaseInputComponent } from '../base-input.component';
     ValidationErrorsPipe,
     MultiSelectModule,
     FloatLabelModule,
-  ],
+TranslatePipe  ],
   templateUrl: './select.component.html',
   styleUrl: './select.component.scss',
   encapsulation: ViewEncapsulation.None
@@ -32,6 +32,7 @@ export class SelectComponent extends BaseInputComponent {
   @Input() optionTemplate: TemplateRef<unknown> | null = null;
   @Input() options: unknown[];
   @Input() optionLabel!: string;
+  @Input() emptyMessage!: string;
   @Input() checkmark = true;
   @Input() showClear = false;
   @Input() editable = false;
