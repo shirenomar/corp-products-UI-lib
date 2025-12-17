@@ -42,7 +42,13 @@ textarea,
 }
 .edit-search {
   .p-select-label {
-    padding: 1rem 1rem 1rem 2.2rem !important;
+    padding: 1rem 2.2rem 1rem 2.2rem !important;
+  }
+  .pi-search {
+    position: absolute;
+    inset-inline-end: 17px;
+    inset-inline-end: 13px;
+    z-index: 999;
   }
   .p-floatlabel {
     >label {

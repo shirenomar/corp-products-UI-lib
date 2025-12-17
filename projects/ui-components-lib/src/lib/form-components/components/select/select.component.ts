@@ -1,5 +1,5 @@
 import { NgClass, NgTemplateOutlet } from '@angular/common';
-import { Component, EventEmitter, inject, Input, OnInit, Output, signal, TemplateRef, ViewEncapsulation } from '@angular/core';
+import { Component, EventEmitter, inject, Input, OnInit, Output, signal, TemplateRef, ViewChild, ViewEncapsulation } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { PrimeTemplate } from 'primeng/api';
@@ -52,10 +52,10 @@ export class SelectComponent extends BaseInputComponent implements OnInit {
   @Output() change = new EventEmitter();
   @Input() isEditSearch = false
   @Input() defaultColor = '#DFE0E6'
-  filteredOptions = signal<unknown[]>([]);
-  override ngOnInit() {
-    this.filteredOptions.set(this.options);
-  }
+  @Input() filteredOptions: unknown[];
+  @Input() addButtonLabel = ''
+
+@ViewChild('selectRef') select!: Select;
   private translate = inject(TranslateService);
   @Output() addValue = new EventEmitter()
   filterValue = signal<string>('');
@@ -69,6 +69,12 @@ export class SelectComponent extends BaseInputComponent implements OnInit {
     // PrimeNG sends the typed value here
     this.filterValue.set(event.filter?.trim());
   }
+handleFocus() {
+  // small timeout ensures focus finishes before opening
+  setTimeout(() => {
+    this.select.show();
+  });
+}
   onChange(e: SelectChangeEvent) {
     const search = this.options.filter((opt: any) =>
       opt[this.optionLabel]
@@ -76,15 +82,15 @@ export class SelectComponent extends BaseInputComponent implements OnInit {
         .includes(e.value.toLowerCase())
     );
     this.onFilterValueChange(e.value)
-    this.filteredOptions.set(search)
+    this.filteredOptions = [...search]
     this.change.emit(e);
   }
   onFilterValueChange(value: string) {
     this.filterValue.set(value);
   }
   get addLabel(): string {
-    if (!this.filterValue) return this.translate.instant('shared.buttons.add');
-    return `${this.translate.instant('shared.buttons.add')} "${this.filterValue()}"`;
+    if (!this.filterValue) return this.addButtonLabel;
+    return `${this.addButtonLabel} "${this.filterValue()}"`;
   }
   clearFilter(event: MouseEvent): void {
     event.stopPropagation();
