@@ -54,4 +54,25 @@ export class AutoCompleteComponent extends BaseInputComponent {
   onSelect(event: AutoCompleteSelectEvent) {
     this.selectOption.emit(event);
   }
+
+  onKeyDown(event: KeyboardEvent) {
+    if (!['Enter', 'Tab', ' '].includes(event.key)) return;
+
+    const input = event.target as HTMLInputElement;
+    const value = input.value?.trim();
+    if (!value) return;
+
+    event.preventDefault();
+
+    const current = this.control.value ?? [];
+
+    // prevent duplicates
+    if (!current.includes(value)) {
+      this.control.setValue([...current, value]);
+      this.control.markAsDirty();
+    }
+
+    // clear input text after add
+    input.value = '';
+  }
 }
