@@ -8,5 +8,10 @@
   },
   "shared": {
     "no_results_found": "لا توجد نتائج"
+  },
+  "forms": {
+    "config": {
+      "optional": "اختياري"
+    }
   }
 }
