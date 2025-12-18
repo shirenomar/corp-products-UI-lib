@@ -5,5 +5,13 @@
     "save": "حفظ",
     "cancel": "الغاء",
     "submit": "تقديم"
+  },
+  "shared": {
+    "no_results_found": "لا توجد نتائج"
+  },
+  "forms": {
+    "config": {
+      "optional": "اختياري"
+    }
   }
 }

@@ -34,7 +34,7 @@ export class InputComponent extends BaseInputComponent {
   @Input() prefix: string;
   @Input() rows = 2;
   @Input() cols = 20;
-  @Input() autoResize = true;
+  @Input() autoResize = false;
   @Input() basicInput!: boolean;
   @Input() noStyle!: boolean;
   @Input() hideOptionalLabel: boolean;

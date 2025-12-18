@@ -20,7 +20,9 @@
   <app-button [label]="'Submit'" [severity]="'primary'" [raised]="true"></app-button>
 </form> -->
 <!-- input component test input with float label and textarea -->
-
+  <stc-select [variant]="'in'" (addValue)="addNewGroup($event)" [showClear]="true" [isEditSearch] = "true" [editable]="true"  [inputId]="'select-id'" [defaultColor]="'#DFE0E6'" [label]="'Select Item'" id="selectId"
+    [control]="selectControl" [options]="selectItems" [multiple]="false" [optionLabel]="'name'">
+  </stc-select>
 <button (click)="openSideBar()">test sideBar</button>
 <div class="flex gap-4 justify-between mt-auto">
   <app-button class="w-full" title="إضافة جهة" severity="danger" iconPos="left" icon="pi pi-plus"></app-button>
