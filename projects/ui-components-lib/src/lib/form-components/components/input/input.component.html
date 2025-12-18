@@ -25,7 +25,7 @@
     [ngClass]="{'ng-invalid ng-dirty': control.invalid && (control.dirty || control.touched), 'basic-style': basicInput, 'no-style':noStyle}">
   </textarea>
   }
-  @case ('hasIcon') {
+  @case ('withIcon') {
       <p-iconfield class="filter-input">
         <p-inputicon [class]="iconClass" />
         <input pInputText [id]="inputId" type="text" [placeholder]="placeholder" [formControl]="control" [readonly]="readonly"
