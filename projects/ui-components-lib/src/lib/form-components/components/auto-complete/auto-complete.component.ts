@@ -1,5 +1,5 @@
 import { JsonPipe, NgClass, NgIf, NgTemplateOutlet } from '@angular/common';
-import { Component, EventEmitter, Input, Output, TemplateRef } from '@angular/core';
+import { Component, EventEmitter, Input, Output, TemplateRef, ViewEncapsulation } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { TranslatePipe } from '@ngx-translate/core';
 import { PrimeTemplate } from 'primeng/api';
@@ -29,6 +29,7 @@ import { BaseInputComponent } from '../base-input.component';
   ],
   templateUrl: './auto-complete.component.html',
   styleUrl: './auto-complete.component.scss',
+  encapsulation : ViewEncapsulation.None
 })
 export class AutoCompleteComponent extends BaseInputComponent {
   @Input() selectedItemTemplate: TemplateRef<unknown> | null = null;
