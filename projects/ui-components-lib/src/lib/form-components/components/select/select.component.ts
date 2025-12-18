@@ -32,6 +32,7 @@ export class SelectComponent extends BaseInputComponent {
   @Input() optionTemplate: TemplateRef<unknown> | null = null;
   @Input() options: unknown[];
   @Input() optionLabel!: string;
+  @Input() optionValue!: string;
   @Input() emptyMessage!: string;
   @Input() checkmark = true;
   @Input() showClear = false;
