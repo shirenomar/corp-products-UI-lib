@@ -25,6 +25,13 @@
     [ngClass]="{'ng-invalid ng-dirty': control.invalid && (control.dirty || control.touched), 'basic-style': basicInput, 'no-style':noStyle}">
   </textarea>
   }
+  @case ('hasIcon') {
+      <p-iconfield class="filter-input">
+        <p-inputicon [class]="iconClass" />
+        <input pInputText [id]="inputId" type="text" [placeholder]="placeholder" [formControl]="control" [readonly]="readonly"
+          [ngClass]="{ 'p-invalid ng-dirty ng-invalid': isInvalid, 'basic-style': basicInput, 'no-style':noStyle}" />
+      </p-iconfield>
+  }
   @default {
   <p-floatlabel [variant]="variant">
     <!-- <input pInputText id="value2" [(ngModel)]="value2" [invalid]="!value2" autocomplete="off" /> -->
