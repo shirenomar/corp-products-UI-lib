@@ -12,6 +12,7 @@
     [name]="name"
     [ngClass]="{ 'p-invalid ng-dirty ng-invalid': isInvalid }"
     [optionLabel]="optionLabel"
+    [optionValue]="optionValue"
     [options]="options"
     [placeholder]="placeholder"
     [emptyMessage]="emptyMessage || ('shared.no_results_found'|translate)"
@@ -39,9 +40,7 @@
       }
 
 
-      <ng-template #dropdownicon>
-        <i class="pi pi-map"></i>
-      </ng-template>
+     
 
 
     </p-multiselect>
@@ -68,6 +67,7 @@
       [ngClass]="{ 'p-invalid ng-dirty ng-invalid': isInvalid }"
       [emptyMessage]="emptyMessage || ('shared.no_results_found'|translate)"
       [optionLabel]="optionLabel"
+      [optionValue]="optionValue"
       [options]="options"
       [placeholder]="placeholder"
       [readonly]="readonly"
