@@ -3,7 +3,7 @@
   <span class="absolute top-[6px] left-0 text-[10px] text-gray-400">{{'forms.config.optional' | translate}}</span>
   }
   <p-floatlabel [variant]="variant" class="autoComplete">
-    <p-auto-complete (keydown)="onKeyDown($event)" (completeMethod)="search($event)" (onSelect)="onSelect($event)" [delay]="delay"
+    <p-auto-complete (keydown)="onKeyDown($event)"  (onBlur)="onBlur($event)" (completeMethod)="search($event)" (onSelect)="onSelect($event)" [delay]="delay"
       [disabled]="disabled" [formControl]="control" [id]="inputId" fluid [typeahead]="typeAhead"
       [inputStyleClass]="'reset-default-styles w-full' + (basicInput ? ' basic-style': ' ')"
       [minLength]="minLengthToSearch" [name]="name" [ngClass]="{ 'p-invalid ng-dirty ng-invalid': isInvalid}"

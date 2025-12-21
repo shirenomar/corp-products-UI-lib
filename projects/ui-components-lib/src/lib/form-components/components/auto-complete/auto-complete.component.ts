@@ -29,7 +29,7 @@ import { BaseInputComponent } from '../base-input.component';
   ],
   templateUrl: './auto-complete.component.html',
   styleUrl: './auto-complete.component.scss',
-  encapsulation : ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None
 })
 export class AutoCompleteComponent extends BaseInputComponent {
   @Input() selectedItemTemplate: TemplateRef<unknown> | null = null;
@@ -58,22 +58,25 @@ export class AutoCompleteComponent extends BaseInputComponent {
 
   onKeyDown(event: KeyboardEvent) {
     if (!['Enter', 'Tab', ' '].includes(event.key)) return;
-
+    event.preventDefault();
     const input = event.target as HTMLInputElement;
+    this.addValueFromInput(input);
+  }
+
+  onBlur(event: Event) {
+    const input = event.target as HTMLInputElement;
+    this.addValueFromInput(input);
+  }
+
+  private addValueFromInput(input: HTMLInputElement) {
     const value = input.value?.trim();
     if (!value) return;
-
-    event.preventDefault();
-
     const current = this.control.value ?? [];
-
-    // prevent duplicates
     if (!current.includes(value)) {
       this.control.setValue([...current, value]);
       this.control.markAsDirty();
     }
-
-    // clear input text after add
     input.value = '';
   }
+
 }
