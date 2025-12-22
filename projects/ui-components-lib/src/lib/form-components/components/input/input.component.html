@@ -26,11 +26,19 @@
   </textarea>
   }
   @case ('withIcon') {
-      <p-iconfield class="filter-input">
-        <p-inputicon [class]="iconClass" />
-        <input pInputText [id]="inputId" type="text" [placeholder]="placeholder" [formControl]="control" [readonly]="readonly"
-          [ngClass]="{ 'p-invalid ng-dirty ng-invalid': isInvalid, 'basic-style': basicInput, 'no-style':noStyle}" />
-      </p-iconfield>
+  <p-iconfield class="filter-input">
+    <p-inputicon [class]="iconClass" />
+    <input pInputText [id]="inputId" type="text" [placeholder]="placeholder" [formControl]="control"
+      [readonly]="readonly"
+      [class]="
+        'w-full border border-[' + defaultColor + '] rounded-none focus:outline-[' + defaultColor + '] focus:border-[' + defaultColor + '] hover:border-[' + defaultColor + '] disabled:opacity-50'"
+      [ngClass]="{ 'p-invalid ng-dirty ng-invalid': isInvalid, 'basic-style': basicInput, 'no-style':noStyle}" />
+    @if (canClear && control.value) {
+    <p-inputicon class="pi pi-times cursor-pointer text-gray-400 hover:text-gray-600" 
+    (click)="clearInput()"/>
+    }
+
+  </p-iconfield>
   }
   @default {
   <p-floatlabel [variant]="variant">

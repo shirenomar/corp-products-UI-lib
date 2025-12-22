@@ -37,6 +37,7 @@ export class InputComponent extends BaseInputComponent {
   @Input() autoResize = false;
   @Input() basicInput!: boolean;
   @Input() noStyle!: boolean;
+  @Input() canClear!: boolean;
   @Input() hideOptionalLabel: boolean;
   @Input() inputDirection: 'ltr' | 'rtl' | 'inherit' = 'inherit';
   @Input() variant: 'in' | 'over' | 'on' = 'over';
@@ -48,4 +49,8 @@ export class InputComponent extends BaseInputComponent {
   constructor() {
     super();
   }
+
+  clearInput() {
+  this.control.reset();
+}
 }
