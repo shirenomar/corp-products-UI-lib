@@ -50,6 +50,7 @@ export class DualCalendarComponent {
   selectedDate = ''
   @Input() control: FormControl<any> = new FormControl({ value: null, disabled: false }, []);
   @Input() label = '';
+  @Input() withTime = true;
   mode: 'gregorian' | 'hijri' = 'gregorian';
   gregorianModel!: NgbDateStruct;
   hijriModel!: NgbDateStruct;
@@ -78,7 +79,7 @@ export class DualCalendarComponent {
     // fromGregorian expects NgbDate or JS Date (depending on version)
     const hijri = this.hijriCal.fromGregorian(jsDate);
     const isoUTC = jsDate.toISOString();
-    this.gregorianUTC.emit(isoUTC);
+    this.gregorianUTC.emit(this.withTime? isoUTC : this.getDateOnlyFormat(date));
     this.hijriModel = {
       year: hijri.year,
       month: hijri.month,
@@ -94,13 +95,12 @@ export class DualCalendarComponent {
     const ngbDate = this.structToNgbDate(date);
     const greg = this.hijriCal.toGregorian(ngbDate);
     const isoUTC = greg.toISOString();
-    this.gregorianUTC.emit(isoUTC);
     this.gregorianModel = {
       year: greg.getFullYear(),
       month: greg.getMonth() + 1,
       day: greg.getDate()
     };
-
+    this.gregorianUTC.emit(this.withTime? isoUTC : this.getDateOnlyFormat(this.gregorianModel));
     this.selectedDate = this.formatHijri(ngbDate);
     this.isCalendarOpen = false;
   }
@@ -120,6 +120,8 @@ export class DualCalendarComponent {
     return `${gregorianDay} ${gregorianMonth} ${gregorianYear} - ${hijriDay} ${hijriMonth} ${hijriYear}`;
   }
 
-
+  getDateOnlyFormat(date: NgbDateStruct) {
+    return `${date.year}-${String(date.month).padStart(2, '0')}-${String(date.day).padStart(2, '0')}`;
+  }
 
 }
