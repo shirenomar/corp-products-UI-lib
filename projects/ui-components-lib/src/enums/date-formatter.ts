@@ -1,4 +1,5 @@
 export enum DateFormats {
+  DATE_ONLY = "yyyy-MM-dd",
   DATE_UTC = "yyyy-MM-dd'T'HH:mm:ss'Z'",
   DATE_TIME_FULL = "dd MMMM yyyy - hh:mm a",
   DATE_TIME_SEMI = "yyyy/MM/dd - hh:mm a",
