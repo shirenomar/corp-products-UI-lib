@@ -9,6 +9,8 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
 import { DatePickerSwitcherComponent } from './date-picker-switcher/date-picker-switcher.component';
 import '@angular/localize/init';
 import { getGregorianMonthName, getHijriMonthName } from './utils/date-i18n.utils';
+import { formatDate } from '@angular/common';
+import { DateFormats } from '../../enums/date-formatter';
 @Component({
   selector: 'app-dual-calendar',
   animations: [
@@ -79,7 +81,7 @@ export class DualCalendarComponent {
     // fromGregorian expects NgbDate or JS Date (depending on version)
     const hijri = this.hijriCal.fromGregorian(jsDate);
     const isoUTC = jsDate.toISOString();
-    this.gregorianUTC.emit(this.withTime? isoUTC : this.getDateOnlyFormat(date));
+    this.gregorianUTC.emit(this.withTime? isoUTC : formatDate(jsDate, DateFormats.DATE_ONLY, 'en'));
     this.hijriModel = {
       year: hijri.year,
       month: hijri.month,
@@ -100,7 +102,8 @@ export class DualCalendarComponent {
       month: greg.getMonth() + 1,
       day: greg.getDate()
     };
-    this.gregorianUTC.emit(this.withTime? isoUTC : this.getDateOnlyFormat(this.gregorianModel));
+    const jsDate = new Date(this.gregorianModel.year, this.gregorianModel.month - 1, this.gregorianModel.day);
+    this.gregorianUTC.emit(this.withTime? isoUTC : formatDate(jsDate, DateFormats.DATE_ONLY, 'en'));
     this.selectedDate = this.formatHijri(ngbDate);
     this.isCalendarOpen = false;
   }
@@ -108,6 +111,7 @@ export class DualCalendarComponent {
   showCalender(isOpen: boolean) {
     this.isCalendarOpen = isOpen;
   }
+
   formatHijri(h: NgbDate): string {
     const hijriDay = h.day;
     const hijriMonth = getHijriMonthName(this.currentLang, h.month);
@@ -118,10 +122,6 @@ export class DualCalendarComponent {
       getGregorianMonthName(this.currentLang, greg.getMonth() + 1);
     const gregorianYear = greg.getFullYear();
     return `${gregorianDay} ${gregorianMonth} ${gregorianYear} - ${hijriDay} ${hijriMonth} ${hijriYear}`;
-  }
-
-  getDateOnlyFormat(date: NgbDateStruct) {
-    return `${date.year}-${String(date.month).padStart(2, '0')}-${String(date.day).padStart(2, '0')}`;
   }
 
 }
