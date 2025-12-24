@@ -58,7 +58,7 @@ export class DualCalendarComponent {
   mode: 'gregorian' | 'hijri' = 'gregorian';
   gregorianModel!: NgbDateStruct;
   hijriModel!: NgbDateStruct;
-  currentLang: 'ar' | 'en' = 'ar';
+  @Input() currentLang: 'ar' | 'en' = 'ar';
   @Output() gregorianUTC = new EventEmitter<string>();
   isCalendarOpen = false
   @ViewChild('calendarContainer') calendarContainer!: ElementRef;
