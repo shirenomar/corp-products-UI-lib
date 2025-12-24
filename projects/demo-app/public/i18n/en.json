@@ -13,5 +13,11 @@
     "config": {
       "optional": "Optional"
     }
+  },
+  "calender": {
+    "calender_type": "Calender type",
+    "gregorian": "Gregorian",
+    "hijri": "Hijri"
+
   }
 }

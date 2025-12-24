@@ -1,7 +1,19 @@
 .calendar-wrapper {
-  font-family: "Tajawal", sans-serif;
   max-width: 375px;
   padding: 15px;
+
+  .rtl {
+    .ngb-dp-header {
+      .ngb-dp-arrow.ngb-dp-arrow-next {
+        inset-inline-end: -6px;
+        transform: rotate(180deg);
+      }
+      .ngb-dp-arrow.ngb-dp-arrow-prev {
+          inset-inline-end: 6px;
+         transform: rotate(180deg);
+      }
+    }
+  }
 }
 
 .header-tabs {
