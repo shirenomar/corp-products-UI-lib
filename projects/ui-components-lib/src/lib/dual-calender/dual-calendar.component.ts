@@ -54,7 +54,7 @@ export class DualCalendarComponent {
   @Input() label = '';
   @Input() withTime = true;
   mode: 'gregorian' | 'hijri' = 'gregorian';
-  @Input() gregorianModel!: NgbDateStruct;
+  gregorianModel!: NgbDateStruct;
   hijriModel!: NgbDateStruct;
   currentLang: 'ar' | 'en' = 'ar';
   @Output() gregorianUTC = new EventEmitter<string>();
