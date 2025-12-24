@@ -54,13 +54,28 @@ export class DualCalendarComponent {
   @Input() label = '';
   @Input() withTime = true;
   mode: 'gregorian' | 'hijri' = 'gregorian';
-  gregorianModel!: NgbDateStruct;
+  @Input() gregorianModel!: NgbDateStruct;
   hijriModel!: NgbDateStruct;
   currentLang: 'ar' | 'en' = 'ar';
   @Output() gregorianUTC = new EventEmitter<string>();
   isCalendarOpen = false
   @ViewChild('calendarContainer') calendarContainer!: ElementRef;
   hijriCal = new NgbCalendarIslamicUmalqura();
+  @Input() set gregorianInput(value: string | null) {
+    if (!value) return;
+
+    const jsDate = new Date(value);
+    if (isNaN(jsDate.getTime())) return;
+
+    const ngbDate: NgbDateStruct = {
+      year: jsDate.getFullYear(),
+      month: jsDate.getMonth() + 1,
+      day: jsDate.getDate()
+    };
+
+    // 🔥 Reuse existing logic
+    this.onSelectGregorian(ngbDate);
+  }
   constructor() { }
   @HostListener('document:click', ['$event'])
   onDocumentClick(event: MouseEvent) {
@@ -81,7 +96,7 @@ export class DualCalendarComponent {
     // fromGregorian expects NgbDate or JS Date (depending on version)
     const hijri = this.hijriCal.fromGregorian(jsDate);
     const isoUTC = jsDate.toISOString();
-    this.gregorianUTC.emit(this.withTime? isoUTC : formatDate(jsDate, DateFormats.DATE_ONLY, 'en'));
+    this.gregorianUTC.emit(this.withTime ? isoUTC : formatDate(jsDate, DateFormats.DATE_ONLY, 'en'));
     this.hijriModel = {
       year: hijri.year,
       month: hijri.month,
@@ -103,7 +118,7 @@ export class DualCalendarComponent {
       day: greg.getDate()
     };
     const jsDate = new Date(this.gregorianModel.year, this.gregorianModel.month - 1, this.gregorianModel.day);
-    this.gregorianUTC.emit(this.withTime? isoUTC : formatDate(jsDate, DateFormats.DATE_ONLY, 'en'));
+    this.gregorianUTC.emit(this.withTime ? isoUTC : formatDate(jsDate, DateFormats.DATE_ONLY, 'en'));
     this.selectedDate = this.formatHijri(ngbDate);
     this.isCalendarOpen = false;
   }
