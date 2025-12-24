@@ -13,5 +13,10 @@
     "config": {
       "optional": "اختياري"
     }
+  },
+  "calender": {
+     "calender_type": "نوع التقويم",
+    "gregorian": "الميلادي",
+    "hijri": "الهجري"
   }
 }
