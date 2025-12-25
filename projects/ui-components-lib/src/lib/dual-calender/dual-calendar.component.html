@@ -6,13 +6,13 @@
   <!-- calender.html -->
   <div dir="rtl" class="p-2 calendar-wrapper " [@slideDown]="isCalendarOpen ? 'open' : 'closed'"  >
     <div class="header-tabs">
-      <div class="header-label">نوع التقويم</div>
+      <div class="header-label">{{'calender.calender_type' | translate}}</div>
       <div class="tabs">
-        <button class="tab-button" [class.active]="mode === 'gregorian'" (click)="  mode='gregorian'">
-          الميلادي
+        <button class="tab-button" [class.active]="mode === 'gregorian'"  type="button" (click)="  mode='gregorian'">
+          {{'calender.gregorian' | translate}}
         </button>
-        <button class="tab-button" [class.active]="mode === 'hijri'" (click)=" mode='hijri'">
-          هجري
+        <button class="tab-button" [class.active]="mode === 'hijri'" type="button" (click)=" mode='hijri'">
+          {{'calender.hijri' | translate}}
         </button>
       </div>
     </div>

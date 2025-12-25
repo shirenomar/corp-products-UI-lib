@@ -11,6 +11,7 @@ import '@angular/localize/init';
 import { getGregorianMonthName, getHijriMonthName } from './utils/date-i18n.utils';
 import { formatDate } from '@angular/common';
 import { DateFormats } from '../../enums/date-formatter';
+import { TranslatePipe } from '@ngx-translate/core';
 @Component({
   selector: 'app-dual-calendar',
   animations: [
@@ -39,6 +40,7 @@ import { DateFormats } from '../../enums/date-formatter';
     FloatLabelModule,
     HijriCalendarComponent,
     DatePickerSwitcherComponent,
+    TranslatePipe,
     GregorianCalendarComponent
   ],
   providers: [
@@ -56,7 +58,7 @@ export class DualCalendarComponent {
   mode: 'gregorian' | 'hijri' = 'gregorian';
   gregorianModel!: NgbDateStruct;
   hijriModel!: NgbDateStruct;
-  currentLang: 'ar' | 'en' = 'ar';
+  @Input() currentLang: 'ar' | 'en' = 'ar';
   @Output() gregorianUTC = new EventEmitter<string>();
   isCalendarOpen = false
   @ViewChild('calendarContainer') calendarContainer!: ElementRef;
