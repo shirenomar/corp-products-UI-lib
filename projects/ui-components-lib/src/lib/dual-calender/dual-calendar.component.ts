@@ -63,7 +63,12 @@ export class DualCalendarComponent {
   isCalendarOpen = false
   @ViewChild('calendarContainer') calendarContainer!: ElementRef;
   hijriCal = new NgbCalendarIslamicUmalqura();
-  @Input() set gregorianInput(value: string | null) {
+
+  ngOnInit() {
+    this.setDate(this.control?.value);
+
+  }
+  setDate(value: string | null) {
     if (!value) return;
 
     const jsDate = new Date(value);
@@ -78,7 +83,6 @@ export class DualCalendarComponent {
     // 🔥 Reuse existing logic
     this.onSelectGregorian(ngbDate);
   }
-  constructor() { }
   @HostListener('document:click', ['$event'])
   onDocumentClick(event: MouseEvent) {
     if (!this.calendarContainer) return;
