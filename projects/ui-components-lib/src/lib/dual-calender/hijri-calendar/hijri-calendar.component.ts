@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, inject, Input, OnChanges, Output, Renderer2, SimpleChanges } from '@angular/core';
 import {
   NgbCalendar,
   NgbCalendarIslamicUmalqura,
@@ -24,6 +24,8 @@ export class HijriCalendarComponent  implements OnChanges   {
   @Input() model!: NgbDateStruct;
   @Output() dateSelected = new EventEmitter<NgbDateStruct>();
   @Input() language: 'ar' | 'en' = 'en';
+  renderer = inject(Renderer2)
+
   startDate!: NgbDateStruct;
   private calendar = new NgbCalendarIslamicUmalqura();
   constructor(
@@ -42,7 +44,12 @@ export class HijriCalendarComponent  implements OnChanges   {
       this.cdr.detectChanges(); // Force re-render to update labels
     }
   }
-
+ngAfterViewInit() {
+  const buttons = document.querySelectorAll('.ngb-dp-arrow-btn');
+  buttons.forEach(btn => {
+    this.renderer.removeAttribute(btn, 'title');
+  });
+}
   onDateChange(date: NgbDateStruct) {
     this.model = date;
     this.startDate = { ...date };
