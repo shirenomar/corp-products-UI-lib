@@ -7,7 +7,6 @@
   <div dir="rtl" class="p-2 calendar-wrapper " [@slideDown]="isCalendarOpen ? 'open' : 'closed'"  >
     <div class="header-tabs">
       <div class="header-label">{{'calender.calender_type' | translate}}</div>
-      <div class="header-label">{{'calender.calender_type' | translate}}</div>
       <div class="tabs">
         <button class="tab-button" [class.active]="mode === 'gregorian'"  type="button" (click)="  mode='gregorian'">
           {{'calender.gregorian' | translate}}
