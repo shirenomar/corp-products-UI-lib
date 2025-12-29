@@ -14,6 +14,7 @@
     [optionLabel]="optionLabel"
     [optionValue]="optionValue"
     [options]="options"
+    [showToggleAll]="false"
     [placeholder]="placeholder"
     [emptyMessage]="emptyMessage || ('shared.no_results_found'|translate)"
     [readonly]="readonly"
@@ -28,10 +29,16 @@
     [ngClass]="{ 'basic-style': basicInput }"
      >
 
-
-
-
-
+      @if (selectAllLabel) {
+       <ng-template #filter>
+         <p-checkbox
+         binary="true"
+         (onChange)="toggleAll($event)"
+         inputId="toggleAll">
+         </p-checkbox>
+         <span>{{selectAllLabel}}</span>
+       </ng-template>
+      }
 
       @if(optionTemplate){
       <ng-template let-item #item>
