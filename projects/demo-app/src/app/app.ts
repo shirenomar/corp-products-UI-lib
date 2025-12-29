@@ -15,6 +15,7 @@ import {
   DynamicFormComponent,
   DynamicFormData,
   FormFieldTypeEnum,
+  FormUtils,
   InputsMap,
 } from '@corp-products/ui-components';
 import { ConfirmationDialogComponent } from './../../../ui-components-lib/src/lib/confirmation-dialog/confirmation-dialog.component';
@@ -41,6 +42,18 @@ AppBreadcrumbComponent,
   encapsulation: ViewEncapsulation.None,
 })
 export class App {
+  formGroup: FormGroup = new FormGroup({
+    status: new FormControl(''),
+  });
+
+  statusOptions = [
+    { id : 1 , labelEn: 'Active', labelAr: 'نشط', value: 'active' },
+    { id : 2 , labelEn: 'Inactive', labelAr: 'غير نشط', value: 'inactive' },
+    { id : 3 , labelEn: 'Pending', labelAr: 'قيد الانتظار', value: 'pending' },
+  ];
+
+  translateLabel = true;
+
   show = false;
   protected readonly title = signal('demo-app');
 
@@ -99,6 +112,7 @@ export class App {
   ];
 
   sidebarDynamicService = inject(DynamicSidebarService);
+  getFormControl = FormUtils.getFormControl
 
   sideBarData: SidebarConfig = SidebarConfigDefaults;
   dateControl: FormControl<any> = new FormControl({ value: null, disabled: false }, []);
