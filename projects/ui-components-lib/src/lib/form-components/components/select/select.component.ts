@@ -40,6 +40,7 @@ export class SelectComponent extends BaseInputComponent {
   @Input() filter = false;
   @Input() multiple = false;
   @Input() filterBy!: string;
+  @Input() dataKey!: string;
   @Input() size: 'small' | 'large' = "small";
 
   @Input() selectedItemsLabel!: string;
