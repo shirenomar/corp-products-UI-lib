@@ -33,7 +33,7 @@ import { CheckboxModule } from 'primeng/checkbox';
 export class SelectComponent extends BaseInputComponent {
   @Input() selectedItemTemplate: TemplateRef<unknown> | null = null;
   @Input() optionTemplate: TemplateRef<unknown> | null = null;
-  @Input() options: Array<string | Record<string, unknown>> = [];
+  @Input() options:unknown[] = [];
   @Input() optionLabel!: string;
   @Input() optionValue!: string;
   @Input() emptyMessage!: string;
