@@ -44,6 +44,7 @@ export class SelectComponent extends BaseInputComponent {
   @Input() multiple = false;
   @Input() filterBy!: string;
   @Input() selectAllLabel: string;
+  @Input() dataKey!: string;
   @Input() size: 'small' | 'large' = 'small';
 
   @Input() selectedItemsLabel!: string;
