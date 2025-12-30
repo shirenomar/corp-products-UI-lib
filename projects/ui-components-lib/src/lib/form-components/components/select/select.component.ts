@@ -24,16 +24,16 @@ import { CheckboxModule } from 'primeng/checkbox';
     MultiSelectModule,
     FloatLabelModule,
     TranslatePipe,
-    CheckboxModule
+    CheckboxModule,
   ],
   templateUrl: './select.component.html',
   styleUrl: './select.component.scss',
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None,
 })
 export class SelectComponent extends BaseInputComponent {
   @Input() selectedItemTemplate: TemplateRef<unknown> | null = null;
   @Input() optionTemplate: TemplateRef<unknown> | null = null;
-  @Input() options:unknown[] = [];
+  @Input() options: unknown[] = [];
   @Input() optionLabel!: string;
   @Input() optionValue!: string;
   @Input() emptyMessage!: string;
@@ -53,25 +53,31 @@ export class SelectComponent extends BaseInputComponent {
   // eslint-disable-next-line @angular-eslint/no-output-native
   @Output() change = new EventEmitter();
   @Input() defaultColor = '#DFE0E6';
+  allSelectd = false;
 
   constructor() {
     super();
   }
 
   toggleAll(event: any) {
-  if (!event.checked) {
-    this.control.setValue([]);
-    return;
+    if (!event.checked) {
+      this.control.setValue([]);
+      return;
+    }
+
+    if (this.optionValue) {
+      const values = this.options.map(
+        (o) => (o as Record<string, unknown>)[this.optionValue as string]
+      );
+      this.control.setValue([...values]);
+    } else {
+      this.control.setValue([...this.options]);
+    }
   }
 
-  if(this.optionValue){
-    const values = this.options.map(o => (o as Record<string, unknown>)[this.optionValue as string]);
-    this.control.setValue([...values]);
+  onMultiSelectClear() {
+    this.allSelectd = false;
   }
-  else {
-    this.control.setValue([...this.options]);
-  }
-}
 
   onChange(e: SelectChangeEvent) {
     this.change.emit(e);
