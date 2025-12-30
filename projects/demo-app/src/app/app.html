@@ -5,20 +5,20 @@
 <app-breadcrumb [items]="items"></app-breadcrumb>
 
 <!-- input component test input with float label and textarea -->
-<!-- <form [formGroup]="form2">
+<form [formGroup]="form2">
 
-  <stc-input [variant]="'in'" [contentType]="'text'" [label]="'Label'" [hideOptionalLabel]="true" [type]="'text'"
+  <!-- <stc-input [variant]="'in'" [contentType]="'text'" [label]="'Label'" [hideOptionalLabel]="true" [type]="'text'"
     [defaultColor]="'#DFE0E6'" [inputId]="'input-id'" [control]="inputControl">
-  </stc-input>
-  <stc-select [variant]="'in'" [inputId]="'select-id'" [defaultColor]="'#DFE0E6'" [label]="'Select Item'" id="selectId"
-    [control]="selectControl" [options]="selectItems" [multiple]="false" [optionLabel]="'name'" [showClear]="false">
+  </stc-input> -->
+  <stc-select [inputId]="'select-id'"  [label]="'Select Item'" id="selectId" [multiple]="true" [selectAllLabel]="'All actions'"
+    [control]="selectControl" [options]="selectItems"  [optionLabel]="'name'" [optionValue]="'code'" [showClear]="true">
   </stc-select>
 
-  <stc-date-picker [variant]="'in'" [label]="'Select Date'" id="dateId" [control]="dateControl"
+  <!-- <stc-date-picker [variant]="'in'" [label]="'Select Date'" id="dateId" [control]="dateControl"
     [selectionMode]="'single'" [showIcon]="true">
-  </stc-date-picker>
+  </stc-date-picker> -->
   <app-button [label]="'Submit'" [severity]="'primary'" [raised]="true"></app-button>
-</form> -->
+</form>
 <!-- input component test input with float label and textarea -->
 
 <button (click)="openSideBar()">test sideBar</button>
