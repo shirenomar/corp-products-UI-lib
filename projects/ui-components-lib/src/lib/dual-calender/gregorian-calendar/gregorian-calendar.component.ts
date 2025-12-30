@@ -34,13 +34,18 @@ export class GregorianCalendarComponent implements OnChanges {
     private cdr: ChangeDetectorRef
   ) {
   }
+  show = true;
+
   ngOnChanges(changes: SimpleChanges) {
+
     if (changes['model'] && changes['model'].currentValue) {
       this.startDate = { ...changes['model'].currentValue };
     }
     if (changes['language'] && this.i18n instanceof DynamicGregorianI18n) {
+      this.show = false;
       this.i18n.setLanguage(this.language);
       this.cdr.detectChanges();
+      this.show = true;
     }
   }
 ngAfterViewInit() {
