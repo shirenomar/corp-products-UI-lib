@@ -2,15 +2,37 @@
   max-width: 375px;
   padding: 15px;
 
+  .ngb-dp-header {
+    .ngb-dp-arrow.ngb-dp-arrow-next {
+      margin: 0 10px;
+      max-width: 20px;
+    }
+  }
+
   .rtl {
     .ngb-dp-header {
       .ngb-dp-arrow.ngb-dp-arrow-next {
         inset-inline-end: -6px;
         transform: rotate(180deg);
+        margin: 0 10px;
+        max-width: 20px;
       }
+
       .ngb-dp-arrow.ngb-dp-arrow-prev {
-          inset-inline-end: 6px;
-         transform: rotate(180deg);
+        inset-inline-end: 22px;
+        transform: rotate(180deg);
+      }
+    }
+  }
+
+  .ltr {
+    .ngb-dp-header {
+      .ngb-dp-arrow.ngb-dp-arrow-next {
+        inset-inline-end: -4px;
+      }
+
+      .ngb-dp-arrow.ngb-dp-arrow-prev {
+        inset-inline-end: 11px;
       }
     }
   }
@@ -70,6 +92,7 @@
   border: none;
   cursor: pointer;
   padding: 4px;
+
 }
 
 /* Weekdays Row */
@@ -178,6 +201,8 @@
 .ngb-dp-arrow-btn {
   margin-inline-end: 0 !important;
   outline: 0 !important;
+   padding: 0 !important;
+  margin: 0 !important;
 }
 
 .ngb-dp-header {
