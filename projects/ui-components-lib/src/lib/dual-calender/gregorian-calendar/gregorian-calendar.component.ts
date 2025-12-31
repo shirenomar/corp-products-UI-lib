@@ -9,7 +9,6 @@ import {
 import { FormsModule } from '@angular/forms';
 import { DynamicGregorianI18n } from './../services/gregorian-i18n.service';
 
-
 @Component({
   selector: "app-gregorian-calendar",
   standalone: true,
@@ -29,31 +28,27 @@ export class GregorianCalendarComponent implements OnChanges {
   @Input() language: 'ar' | 'en' = 'en';
   startDate!: NgbDateStruct;
   private calendar = new NgbCalendarGregorian();
-  constructor(
-    private i18n: NgbDatepickerI18n,
-    private cdr: ChangeDetectorRef
-  ) {
-  }
-  show = true;
+  i18n = inject(NgbDatepickerI18n)
+  cdr = inject(ChangeDetectorRef)
+  calendarKey = 0;
 
   ngOnChanges(changes: SimpleChanges) {
-
     if (changes['model'] && changes['model'].currentValue) {
       this.startDate = { ...changes['model'].currentValue };
     }
     if (changes['language'] && this.i18n instanceof DynamicGregorianI18n) {
-      this.show = false;
       this.i18n.setLanguage(this.language);
-      this.cdr.detectChanges();
-      this.show = true;
+      this.calendarKey++; // Increment to force recreation
     }
   }
-ngAfterViewInit() {
-  const buttons = document.querySelectorAll('.ngb-dp-arrow-btn');
-  buttons.forEach(btn => {
-    this.renderer.removeAttribute(btn, 'title');
-  });
-}
+
+  ngAfterViewInit() {
+    const buttons = document.querySelectorAll('.ngb-dp-arrow-btn');
+    buttons.forEach(btn => {
+      this.renderer.removeAttribute(btn, 'title');
+    });
+  }
+
   onDateChange(date: NgbDateStruct) {
     this.model = date;
     this.startDate = { ...date };
