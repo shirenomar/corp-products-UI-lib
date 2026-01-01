@@ -7,7 +7,8 @@
     "submit": "Submit"
   },
   "shared": {
-    "no_results_found": "No results found"
+    "no_results_found": "No results found",
+    "Items_Selected": "{{count}} Items Selected"
   },
   "forms": {
     "config": {
