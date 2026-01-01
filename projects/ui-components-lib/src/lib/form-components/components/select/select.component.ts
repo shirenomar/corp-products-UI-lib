@@ -1,5 +1,12 @@
 import { NgClass, NgTemplateOutlet } from '@angular/common';
-import { Component, EventEmitter, Input, Output, TemplateRef, ViewEncapsulation } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+  TemplateRef,
+  ViewEncapsulation,
+} from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TranslatePipe } from '@ngx-translate/core';
 import { PrimeTemplate } from 'primeng/api';
@@ -64,15 +71,10 @@ export class SelectComponent extends BaseInputComponent {
       this.control.setValue([]);
       return;
     }
-
-    if (this.optionValue) {
-      const values = this.options.map(
-        (o) => (o as Record<string, unknown>)[this.optionValue as string]
-      );
-      this.control.setValue([...values]);
-    } else {
-      this.control.setValue([...this.options]);
-    }
+    const values = this.optionValue
+      ? this.options.map((o) => (o as Record<string, unknown>)[this.optionValue as string])
+      : this.options;
+    this.control.setValue([...values]);
   }
 
   onMultiSelectClear() {
