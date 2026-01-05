@@ -4,7 +4,8 @@
   "actions": {
     "save": "حفظ",
     "cancel": "الغاء",
-    "submit": "تقديم"
+    "submit": "تقديم",
+    "close": "إغلاق"
   },
   "shared": {
     "no_results_found": "لا توجد نتائج",
@@ -16,7 +17,7 @@
     }
   },
   "calender": {
-     "calender_type": "نوع التقويم",
+    "calender_type": "نوع التقويم",
     "gregorian": "الميلادي",
     "hijri": "الهجري"
   }

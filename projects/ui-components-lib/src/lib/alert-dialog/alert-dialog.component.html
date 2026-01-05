@@ -14,7 +14,7 @@
       <div class="alert-dialog__actions flex gap-2 mt-4">
         <app-button [severity]="'primary'" variant="outlined"
           [label]="dynamicDialogConfig.data.cancelBtnLabel??('actions.close' | translate)"
-          [id]="dynamicDialogConfig.data.cancelBtnId??'close-alert'" [styleClass]="'cancel-btn alert-btn'"
+          [id]="dynamicDialogConfig.data.cancelBtnId??'button_close_alert'" [styleClass]="'cancel-btn alert-btn'"
           (click)="close()" />
       </div>
     </div>

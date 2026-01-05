@@ -4,7 +4,8 @@
   "actions": {
     "save": "Save",
     "cancel": "Cancel",
-    "submit": "Submit"
+    "submit": "Submit",
+    "close": "Close"
   },
   "shared": {
     "no_results_found": "No results found",
@@ -19,6 +20,5 @@
     "calender_type": "Calender type",
     "gregorian": "Gregorian",
     "hijri": "Hijri"
-
   }
 }
