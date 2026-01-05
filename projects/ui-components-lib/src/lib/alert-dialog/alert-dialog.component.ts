@@ -1,6 +1,6 @@
 import { Component, DestroyRef, inject, OnInit, ViewEncapsulation } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { NavigationStart, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { TranslatePipe } from '@ngx-translate/core';
 import { AvatarModule } from 'primeng/avatar';
 import {
@@ -9,9 +9,7 @@ import {
   DynamicDialogRef,
   DynamicDialogStyle
 } from 'primeng/dynamicdialog';
-import { filter } from 'rxjs';
 import { AppButtonComponent } from '../app-button';
-
 @Component({
   selector: 'app-alert-dialog',
   templateUrl: './alert-dialog.component.html',
@@ -33,10 +31,7 @@ export class AlertDialogComponent extends DynamicDialogRef implements OnInit {
   private readonly _ref = inject(DynamicDialogRef);
 
   ngOnInit() {
-    this.router.events.pipe(
-      takeUntilDestroyed(this._destroyRef),
-      filter((event) => event instanceof NavigationStart)
-    ).subscribe(() => {
+    this.router.events.pipe(takeUntilDestroyed(this._destroyRef)).subscribe(() => {
       if (this.dynamicDialogConfig) {
         this._ref.close(false);
       }
