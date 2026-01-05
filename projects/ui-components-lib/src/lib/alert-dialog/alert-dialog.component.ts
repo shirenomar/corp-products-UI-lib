@@ -1,15 +1,15 @@
-import { Component, inject, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, DestroyRef, inject, OnInit, ViewEncapsulation } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { NavigationStart, Router } from '@angular/router';
 import { TranslatePipe } from '@ngx-translate/core';
 import { AvatarModule } from 'primeng/avatar';
 import {
-  DialogService,
   DynamicDialogConfig,
   DynamicDialogModule,
   DynamicDialogRef,
-  DynamicDialogStyle,
+  DynamicDialogStyle
 } from 'primeng/dynamicdialog';
-import { filter, Subscription } from 'rxjs';
+import { filter } from 'rxjs';
 import { AppButtonComponent } from '../app-button';
 
 @Component({
@@ -24,27 +24,23 @@ import { AppButtonComponent } from '../app-button';
     DynamicDialogModule,
     TranslatePipe,
   ],
-  providers: [DialogService, DynamicDialogStyle],
+  providers: [DynamicDialogStyle],
 })
-export class AlertDialogComponent extends DynamicDialogRef implements OnInit, OnDestroy {
-  router = inject(Router);
-  dialogService = inject(DialogService);
-  dynamicDialogConfig = inject(DynamicDialogConfig);
+export class AlertDialogComponent extends DynamicDialogRef implements OnInit {
+  private readonly router = inject(Router);
+  readonly dynamicDialogConfig = inject(DynamicDialogConfig);
+  private readonly _destroyRef = inject(DestroyRef);
   private readonly _ref = inject(DynamicDialogRef);
-  private readonly _subscription = new Subscription();
-
-  ngOnDestroy(): void {
-    this._subscription.unsubscribe();
-  }
 
   ngOnInit() {
-    this._subscription.add(
-      this.router.events.pipe(filter((event) => event instanceof NavigationStart)).subscribe(() => {
-        if (this.dynamicDialogConfig) {
-          this._ref.close(false);
-        }
-      })
-    );
+    this.router.events.pipe(
+      takeUntilDestroyed(this._destroyRef),
+      filter((event) => event instanceof NavigationStart)
+    ).subscribe(() => {
+      if (this.dynamicDialogConfig) {
+        this._ref.close(false);
+      }
+    })
   }
 
   override close() {
