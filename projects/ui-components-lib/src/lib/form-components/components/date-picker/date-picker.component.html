@@ -1,7 +1,7 @@
 <div class="field flex flex-col gap-2 my-3 relative">
 
   <p-floatlabel [variant]="variant">
-    <p-datepicker [selectionMode]="selectionMode" [disabled]="disabled" [formControl]="control" [iconDisplay]="'input'"
+    <p-datepicker [selectionMode]="selectionMode" [disabled]="disabled" [formControl]="control" (onSelect)="onDateChange($event)" [iconDisplay]="'input'"
       [showClear]="showClear" (onClear)="afterClearDate()" [inputId]="inputId"
       [inputStyleClass]="'reset-default-styles ' + (basicInput ? 'basic-style' : '')"
       [ngClass]="{ 'p-invalid ng-dirty ng-invalid': isInvalid }" [placeholder]="placeholder" [showIcon]="showIcon"
