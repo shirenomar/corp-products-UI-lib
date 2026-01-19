@@ -23,6 +23,9 @@ export * from './lib/dynamic-side-bar-v2/dynamic-sidebar.service';
 export * from './lib/dynamic-side-bar-v2/dynamic-sidebar.config';
 export * from './lib/dual-calender/dual-calendar.component';
 export * from './lib/dual-calender/utils/date-i18n.utils';
+export * from './lib/alert-dialog/alert-dialog.component';
+export * from './lib/alert-dialog/alert-dialog.service';
+export * from './lib/alert-dialog/alert-dialog.interface';
 
 
 

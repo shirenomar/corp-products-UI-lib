@@ -34,12 +34,18 @@ export class DatePickerComponent extends BaseInputComponent {
   @Input() selectionMode: 'single' | 'range' = 'single';
   @Output() onAfterClearDate = new EventEmitter<void>();
   @Input() variant: 'in' | 'over' | 'on' = 'over';
+  @Input() withTime: boolean = false;
 
   constructor() {
     super();
   }
 
   selectCurrentTime(e: any) {
+    if (this.withTime) {
+      const d = new Date();
+      this.control.setValue(d.toISOString().split('T')[0]);
+      return;
+    }
     this.control.setValue(this.nowTime);
   }
 
@@ -50,5 +56,11 @@ export class DatePickerComponent extends BaseInputComponent {
   afterClearDate() {
     this.control.reset();
     this.onAfterClearDate.emit();
+  }
+
+  onDateChange(value: any) {
+    if (!this.withTime || !value) return;
+    const dateOnly = value instanceof Date ? value.toISOString().split('T')[0] : value;
+    this.control.setValue(dateOnly, { emitEvent: false });
   }
 }
