@@ -1,11 +1,12 @@
 import { NgClass } from '@angular/common';
 import { Component, EventEmitter, Input, Output, ViewEncapsulation } from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { TranslatePipe } from '@ngx-translate/core';
+import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ValidationErrorsPipe } from '@corp-products/ui-components';
 import { DatePicker, DatePickerModule } from 'primeng/datepicker';
 import { FloatLabelModule } from 'primeng/floatlabel';
-import { ValidationErrorsPipe } from '../../@utils/validations/validation-message.pipe';
 import { BaseInputComponent } from '../base-input.component';
+import { formatDate } from '@angular/common';
+
 @Component({
   selector: 'stc-date-picker',
   standalone: true,
@@ -34,14 +35,28 @@ export class DatePickerComponent extends BaseInputComponent {
   @Input() selectionMode: 'single' | 'range' = 'single';
   @Output() onAfterClearDate = new EventEmitter<void>();
   @Input() variant: 'in' | 'over' | 'on' = 'over';
-  @Input() withTime: boolean = false;
+  @Input() withoutTime: boolean = false;
+  innerControl = new FormControl<Date | null>(null);
 
   constructor() {
     super();
   }
 
+  override ngOnInit() {
+    if (typeof this.control?.value === 'string') {
+      const date = new Date(this.control.value);
+      if (date) {
+        this.innerControl.setValue(date, { emitEvent: false });
+      }
+    }
+
+    this.control.valueChanges.subscribe((value) => {
+      if (!value) this.innerControl.reset();
+    });
+  }
+
   selectCurrentTime(e: any) {
-    if (this.withTime) {
+    if (this.withoutTime) {
       const d = new Date();
       this.control.setValue(d.toISOString().split('T')[0]);
       return;
@@ -59,8 +74,8 @@ export class DatePickerComponent extends BaseInputComponent {
   }
 
   onDateChange(value: any) {
-    if (!this.withTime || !value) return;
-    const dateOnly = value instanceof Date ? value.toISOString().split('T')[0] : value;
-    this.control.setValue(dateOnly, { emitEvent: false });
+    if (!this.withoutTime || !value) return;
+    const dateOnly = value instanceof Date ? formatDate(value, 'yyyy-MM-dd', 'en-US') : value;
+    this.control.setValue(dateOnly, { emitEvent: true });
   }
 }
