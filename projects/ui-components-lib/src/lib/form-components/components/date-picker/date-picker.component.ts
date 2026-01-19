@@ -44,7 +44,7 @@ export class DatePickerComponent extends BaseInputComponent {
 
   override ngOnInit() {
     if (typeof this.control?.value === 'string') {
-      const date = this.toDate(this.control.value);
+      const date = new Date(this.control.value);
       if (date) {
         this.innerControl.setValue(date, { emitEvent: false });
       }
@@ -53,13 +53,6 @@ export class DatePickerComponent extends BaseInputComponent {
     this.control.valueChanges.subscribe((value) => {
       if (!value) this.innerControl.reset();
     });
-  }
-
-  private toDate(value: string): Date | null {
-    if (!value) return null;
-    const [year, month, day] = value.split('-').map(Number);
-    if (!year || !month || !day) return null;
-    return new Date(year, month - 1, day, 12, 0, 0);
   }
 
   selectCurrentTime(e: any) {
