@@ -8,15 +8,7 @@ import { BreadcrumbItem } from '../../../ui-components-lib/src/lib/app-breadcrum
 import { ConfirmationDialogService } from './../../../ui-components-lib/src/lib/confirmation-dialog/confirmation-dialog.service';
 import { SideBar } from './side-bar/side-bar';
 
-import {
-  AppBreadcrumbComponent,
-  AppButtonComponent,
-  BottomSheetComponent,
-  DynamicFormComponent,
-  DynamicFormData,
-  FormFieldTypeEnum,
-  InputsMap,
-} from '@corp-products/ui-components';
+import { AppBreadcrumbComponent, AppButtonComponent, BottomSheetComponent, DynamicFormComponent, DynamicFormData, FormFieldTypeEnum, InputsMap, AppDropdownMenuComponent, DropdownMenuItem } from '@corp-products/ui-components';
 import { ConfirmationDialogComponent } from './../../../ui-components-lib/src/lib/confirmation-dialog/confirmation-dialog.component';
 import { DynamicSidebarService } from './../../../ui-components-lib/src/lib/side-bar-dynamic/dynamic-sidebar.service';
 import {
@@ -27,14 +19,15 @@ import { SelectComponent } from './../../../ui-components-lib/src/lib/form-compo
 @Component({
   selector: 'app-root',
   imports: [
-AppBreadcrumbComponent,
+    AppBreadcrumbComponent,
     ReactiveFormsModule,
     AppButtonComponent,
     BottomSheetComponent,
     DynamicFormComponent,
     SelectComponent,
     CommonModule,
-  ],
+    AppDropdownMenuComponent
+],
   providers: [DialogService, ConfirmationDialogService],
   templateUrl: './app.html',
   styleUrl: './app.scss',
@@ -123,6 +116,12 @@ export class App {
     { name: 'Item 3', code: '3' },
     { name: 'Item 4', code: '4' },
     { name: 'Item 5', code: '5' },
+  ];
+
+   attachmentActionsMenu: DropdownMenuItem[] = [
+    { title: 'attachments.add_correspondences', show: false },
+    { title: 'attachments.add_attachments', show: true },
+    { title: 'attachments.add_receipts', show: true  },
   ];
 
   // Dynamic form demo config and state

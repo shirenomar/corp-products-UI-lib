@@ -1,6 +1,7 @@
 @if (showMenu) {
 <app-button (click)="op.toggle($event)" [class]="buttonClass" [iconPos]="buttonIconPosition" [icon]="buttonIcon"
-  [title]="buttonTitle" [styleClass]="buttonStyle" />
+      variant="outlined"
+  [label]="buttonTitle" [styleClass]="buttonStyle" [severity]="buttonSeverity" />
 }
 <p-popover #op [styleClass]="popupMenuStyle === 'white' ? 'white-menu' : 'purple-menu'">
   <div class="flex flex-col gap-4 text-sm md:text-xs">
