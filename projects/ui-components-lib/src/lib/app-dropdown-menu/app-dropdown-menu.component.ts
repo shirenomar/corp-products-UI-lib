@@ -7,6 +7,7 @@ import {AppButtonIconPos, AppButtonSeverity} from '../app-button';
 import { TranslateModule } from '@ngx-translate/core';
 import {NgClass} from "@angular/common";
 import {MenuPopupTextColorPipe} from "./menu-popup.pipe";
+import { Button } from 'primeng/button';
 
 @Component({
   selector: "app-dropdown-menu",
@@ -16,7 +17,7 @@ import {MenuPopupTextColorPipe} from "./menu-popup.pipe";
   styleUrl: "./app-dropdown-menu.component.scss",
   encapsulation: ViewEncapsulation.None
 })
-export class AppDropdownMenuComponent implements OnInit {
+export class AppDropdownMenuComponent extends Button implements OnInit {
   @Input({ required: true }) buttonTitle: string;
   @Input({ required: true }) menuItems: DropdownMenuItem[] = [];
   @Input() popupMenuStyle: "white" | "purple" = "purple";
@@ -29,7 +30,8 @@ export class AppDropdownMenuComponent implements OnInit {
 
   showMenu: boolean;
 
-  ngOnInit() {
+   override ngOnInit() {
+    super.ngOnInit();
     this.showMenu = this.menuItems.some((item) => {
       return item.show;
     });
