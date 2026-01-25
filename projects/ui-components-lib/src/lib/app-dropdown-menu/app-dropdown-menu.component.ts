@@ -7,7 +7,6 @@ import {AppButtonIconPos, AppButtonSeverity} from '../app-button';
 import { TranslateModule } from '@ngx-translate/core';
 import {NgClass} from "@angular/common";
 import {MenuPopupTextColorPipe} from "./menu-popup.pipe";
-import { Button } from 'primeng/button';
 
 @Component({
   selector: "app-dropdown-menu",
