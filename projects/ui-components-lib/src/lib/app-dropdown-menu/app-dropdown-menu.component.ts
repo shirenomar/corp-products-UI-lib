@@ -17,7 +17,7 @@ import { Button } from 'primeng/button';
   styleUrl: "./app-dropdown-menu.component.scss",
   encapsulation: ViewEncapsulation.None
 })
-export class AppDropdownMenuComponent extends Button implements OnInit {
+export class AppDropdownMenuComponent implements OnInit {
   @Input({ required: true }) buttonTitle: string;
   @Input({ required: true }) menuItems: DropdownMenuItem[] = [];
   @Input() popupMenuStyle: "white" | "purple" = "purple";
@@ -29,9 +29,7 @@ export class AppDropdownMenuComponent extends Button implements OnInit {
   router = inject(Router);
 
   showMenu: boolean;
-
-   override ngOnInit() {
-    super.ngOnInit();
+  ngOnInit() {
     this.showMenu = this.menuItems.some((item) => {
       return item.show;
     });
