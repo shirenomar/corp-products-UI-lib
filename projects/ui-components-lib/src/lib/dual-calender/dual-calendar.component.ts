@@ -56,13 +56,14 @@ export class DualCalendarComponent {
   @Input() label = '';
   @Input() name = '';
   @Input() withTime = true;
+  @Input() isDatePickerShow = true;
   mode: 'gregorian' | 'hijri' = 'gregorian';
   gregorianModel!: NgbDateStruct;
   hijriModel!: NgbDateStruct;
   @Input() currentLang = signal<'ar' | 'en'>('ar');
   @Output() gregorianUTC = new EventEmitter<string>();
   gregorianUTCValue  = ''
-  isCalendarOpen = false
+  @Input() isCalendarOpen =  false
   @ViewChild('calendarContainer') calendarContainer!: ElementRef;
   hijriCal = new NgbCalendarIslamicUmalqura();
   constructor() {

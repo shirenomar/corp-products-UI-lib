@@ -8,16 +8,34 @@ import { BreadcrumbItem } from '../../../ui-components-lib/src/lib/app-breadcrum
 import { ConfirmationDialogService } from './../../../ui-components-lib/src/lib/confirmation-dialog/confirmation-dialog.service';
 import { SideBar } from './side-bar/side-bar';
 
-import { AppBreadcrumbComponent, AppButtonComponent, BottomSheetComponent, DynamicFormComponent, DynamicFormData, FormFieldTypeEnum, InputsMap, AppDropdownMenuComponent, DropdownMenuItem } from '@corp-products/ui-components';
+import { AppBreadcrumbComponent, AppButtonComponent, BottomSheetComponent, DynamicFormComponent, DynamicFormData, FormFieldTypeEnum, InputsMap, AppDropdownMenuComponent, DropdownMenuItem, DualCalendarComponent } from '@corp-products/ui-components';
 import { ConfirmationDialogComponent } from './../../../ui-components-lib/src/lib/confirmation-dialog/confirmation-dialog.component';
 import { DynamicSidebarService } from './../../../ui-components-lib/src/lib/side-bar-dynamic/dynamic-sidebar.service';
 import {
   SidebarConfig,
   SidebarConfigDefaults,
 } from './../../../ui-components-lib/src/lib/side-bar-dynamic/sidebar-config';
+import { trigger, state, style, transition, animate } from '@angular/animations';
 import { SelectComponent } from './../../../ui-components-lib/src/lib/form-components/components/select/select.component';
 @Component({
   selector: 'app-root',
+    animations: [
+    trigger('slideDown', [
+      state('closed', style({
+        height: '0px',
+        opacity: 0,
+        overflow: 'hidden'
+      })),
+      state('open', style({
+        height: '*',
+        opacity: 1,
+        overflow: 'hidden'
+      })),
+      transition('closed <=> open', [
+        animate('300ms ease')
+      ])
+    ])
+  ],
   imports: [
     AppBreadcrumbComponent,
     ReactiveFormsModule,
@@ -25,6 +43,7 @@ import { SelectComponent } from './../../../ui-components-lib/src/lib/form-compo
     BottomSheetComponent,
     DynamicFormComponent,
     SelectComponent,
+    DualCalendarComponent,
     CommonModule,
     AppDropdownMenuComponent
 ],
@@ -42,6 +61,7 @@ export class App {
   });
   confirmationDialogService = inject(ConfirmationDialogService);
   dialogService = inject(DialogService);
+  isCalendarOpen  = false
   items: BreadcrumbItem[] = [
     {
       notClickable: false,
@@ -97,6 +117,8 @@ export class App {
   dateControl: FormControl<any> = new FormControl({ value: null, disabled: false }, []);
   inputControl: FormControl<any> = new FormControl('', [Validators.required]);
   selectControl: FormControl<any> = new FormControl(null, []);
+  dualControl: FormControl<any> = new FormControl(null);
+
   form: FormGroup = new FormGroup({
     inputControl: this.inputControl,
     dateControl: this.dateControl,
@@ -136,6 +158,15 @@ export class App {
     notify: new FormControl<boolean>(false),
     assignee: new FormControl<Array<any>>([], [Validators.required]),
   });
+  showCalender( ) {
+    this.isCalendarOpen = !this.isCalendarOpen;
+    console.log('date selected ', this.dualControl.value);
+
+  }
+  selectedDate(selectedDate: string) {
+    console.log('date selected ', selectedDate);
+
+  }
 
   private allUsers = [
     { id: 1, name: 'Alice Smith' },
