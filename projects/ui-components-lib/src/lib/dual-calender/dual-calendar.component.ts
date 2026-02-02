@@ -56,13 +56,14 @@ export class DualCalendarComponent {
   @Input() label = '';
   @Input() name = '';
   @Input() withTime = true;
+  @Input() isDatePickerShow = true;
   mode: 'gregorian' | 'hijri' = 'gregorian';
   gregorianModel!: NgbDateStruct;
   hijriModel!: NgbDateStruct;
   @Input() currentLang = signal<'ar' | 'en'>('ar');
   @Output() gregorianUTC = new EventEmitter<string>();
   gregorianUTCValue  = ''
-  isCalendarOpen = false
+  @Input() isShown =  false
   @ViewChild('calendarContainer') calendarContainer!: ElementRef;
   hijriCal = new NgbCalendarIslamicUmalqura();
   constructor() {
@@ -95,7 +96,7 @@ export class DualCalendarComponent {
     if (!this.calendarContainer) return;
     const clickedInside = this.calendarContainer.nativeElement.contains(event.target);
     if (!clickedInside) {
-      this.isCalendarOpen = false;
+      this.isShown = false;
     }
   }
   private structToNgbDate(d: NgbDateStruct): NgbDate {
@@ -118,7 +119,7 @@ export class DualCalendarComponent {
     }; // datepicker
 
     this.selectedDate = this.formatHijri(this.structToNgbDate(this.hijriModel)); //input
-    this.isCalendarOpen = false;
+    this.isShown = false;
   }
 
   onSelectHijri(date: NgbDateStruct) {
@@ -135,11 +136,11 @@ export class DualCalendarComponent {
      this.gregorianUTCValue = this.withTime ? isoUTC : formatDate(jsDate, DateFormats.DATE_ONLY, 'en');
     this.gregorianUTC.emit(this.gregorianUTCValue);
     this.selectedDate = this.formatHijri(ngbDate);
-    this.isCalendarOpen = false;
+    this.isShown = false;
   }
 
   showCalender(isOpen: boolean) {
-    this.isCalendarOpen = isOpen;
+    this.isShown = isOpen;
   }
 
   formatHijri(h: NgbDate): string {
