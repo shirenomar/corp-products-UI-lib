@@ -26,3 +26,4 @@ export * from './lib/alert-dialog/alert-dialog.component';
 export * from './lib/alert-dialog/alert-dialog.service';
 export * from './lib/alert-dialog/alert-dialog.interface';
 export * from './lib/form-components/components/date-picker/date-picker.validator';
+export * from './lib/form-components/@utils/validations/numbers-only.validator';

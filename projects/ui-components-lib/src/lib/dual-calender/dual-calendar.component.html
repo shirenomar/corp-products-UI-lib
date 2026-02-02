@@ -1,10 +1,12 @@
-<div class="calender-content  "   #calendarContainer>
-  <stc-date-picker-switcher [variant]="'in'" [label]="label" id="dateId" (openCalender)="showCalender($event)"
+<div class="calender-content"   #calendarContainer>
+  @if(isDatePickerShow) {
+    <stc-date-picker-switcher [variant]="'in'" [label]="label" id="dateId" (openCalender)="showCalender($event)"
     [control]="control" [formattedDate]='selectedDate'  >
-  </stc-date-picker-switcher>
+    </stc-date-picker-switcher>
+  }
 
   <!-- calender.html -->
-  <div [dir]="currentLang() === 'ar' ? 'rtl' : 'ltr'" class="p-2 calendar-wrapper " [@slideDown]="isCalendarOpen ? 'open' : 'closed'"  >
+  <div [dir]="currentLang() === 'ar' ? 'rtl' : 'ltr'" class="p-2 calendar-wrapper " [@slideDown]="isShown ? 'open' : 'closed'"  >
     <div class="header-tabs">
       <div class="header-label">{{'calender.calender_type' | translate}}</div>
       <div class="tabs">
