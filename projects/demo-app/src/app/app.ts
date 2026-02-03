@@ -19,7 +19,7 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
 import { SelectComponent } from './../../../ui-components-lib/src/lib/form-components/components/select/select.component';
 @Component({
   selector: 'app-root',
-    animations: [
+  animations: [
     trigger('slideDown', [
       state('closed', style({
         height: '0px',
@@ -46,7 +46,7 @@ import { SelectComponent } from './../../../ui-components-lib/src/lib/form-compo
     DualCalendarComponent,
     CommonModule,
     AppDropdownMenuComponent
-],
+  ],
   providers: [DialogService, ConfirmationDialogService],
   templateUrl: './app.html',
   styleUrl: './app.scss',
@@ -61,7 +61,7 @@ export class App {
   });
   confirmationDialogService = inject(ConfirmationDialogService);
   dialogService = inject(DialogService);
-  isCalendarOpen  = false
+  isCalendarOpen = false
   items: BreadcrumbItem[] = [
     {
       notClickable: false,
@@ -140,17 +140,17 @@ export class App {
     { name: 'Item 5', code: '5' },
   ];
 
-   attachmentActionsMenu: DropdownMenuItem[] = [
+  attachmentActionsMenu: DropdownMenuItem[] = [
     { title: 'attachments.add_correspondences', show: false },
     { title: 'attachments.add_attachments', show: true },
-    { title: 'attachments.add_receipts', show: true  },
+    { title: 'attachments.add_receipts', show: true },
   ];
 
   // Dynamic form demo config and state
   dynamicFormGroup = new FormGroup({
     startDate: new FormControl<Date | null>(new Date(), [Validators.required]),
     endDate: new FormControl<Date | null>(null, [Validators.required]),
-    hijriDate: new FormControl<Date | null>(null ),
+    hijriDate: new FormControl<Date | null>(null),
 
     fullName: new FormControl<string>('', [Validators.required]),
     role: new FormControl<any>(null, [Validators.required]),
@@ -158,7 +158,7 @@ export class App {
     notify: new FormControl<boolean>(false),
     assignee: new FormControl<Array<any>>([], [Validators.required]),
   });
-  showCalender( ) {
+  showCalender() {
     this.isCalendarOpen = !this.isCalendarOpen;
     console.log('date selected ', this.dualControl.value);
 
@@ -167,7 +167,11 @@ export class App {
     console.log('date selected ', selectedDate);
 
   }
+  onCloseCalender(isClose: boolean) {
+    console.log('calender close ', isClose)
 
+
+  }
   private allUsers = [
     { id: 1, name: 'Alice Smith' },
     { id: 2, name: 'Bob Johnson' },

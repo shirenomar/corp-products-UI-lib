@@ -62,6 +62,8 @@ export class DualCalendarComponent {
   hijriModel!: NgbDateStruct;
   @Input() currentLang = signal<'ar' | 'en'>('ar');
   @Output() gregorianUTC = new EventEmitter<string>();
+  @Output() onClose = new EventEmitter<boolean>();
+
   gregorianUTCValue  = ''
   @Input() isShown =  false
   @ViewChild('calendarContainer') calendarContainer!: ElementRef;
@@ -93,8 +95,10 @@ export class DualCalendarComponent {
   }
   @HostListener('document:click', ['$event'])
   onDocumentClick(event: MouseEvent) {
+    event.stopPropagation()
     if (!this.calendarContainer) return;
     const clickedInside = this.calendarContainer.nativeElement.contains(event.target);
+    this.onClose.emit(!clickedInside)
     if (!clickedInside) {
       this.isShown = false;
     }
