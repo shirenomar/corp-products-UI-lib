@@ -16,7 +16,7 @@
   <button (click)="showCalender()">open dual </button>
 
 
-  <app-dual-calendar  [isDatePickerShow]="false"  [isShown]="isCalendarOpen" (gregorianUTC)="selectedDate($event)"></app-dual-calendar>
+  <app-dual-calendar [isDatePickerShow]="false" (onClose)="onCloseCalender($event)" [isShown]="isCalendarOpen" (gregorianUTC)="selectedDate($event)"></app-dual-calendar>
 
 
 
