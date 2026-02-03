@@ -9,14 +9,12 @@ import { ConfirmationDialogService } from './../../../ui-components-lib/src/lib/
 import { SideBar } from './side-bar/side-bar';
 
 import { AppBreadcrumbComponent, AppButtonComponent, BottomSheetComponent, DynamicFormComponent, DynamicFormData, FormFieldTypeEnum, InputsMap, AppDropdownMenuComponent, DropdownMenuItem, DualCalendarComponent } from '@corp-products/ui-components';
-import { AppBreadcrumbComponent, AppButtonComponent, BottomSheetComponent, DynamicFormComponent, DynamicFormData, FormFieldTypeEnum, InputsMap, AppDropdownMenuComponent, DropdownMenuItem, DualCalendarComponent } from '@corp-products/ui-components';
 import { ConfirmationDialogComponent } from './../../../ui-components-lib/src/lib/confirmation-dialog/confirmation-dialog.component';
 import { DynamicSidebarService } from './../../../ui-components-lib/src/lib/side-bar-dynamic/dynamic-sidebar.service';
 import {
   SidebarConfig,
   SidebarConfigDefaults,
 } from './../../../ui-components-lib/src/lib/side-bar-dynamic/sidebar-config';
-import { trigger, state, style, transition, animate } from '@angular/animations';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { SelectComponent } from './../../../ui-components-lib/src/lib/form-components/components/select/select.component';
 @Component({
