@@ -6,11 +6,6 @@
   @apply cursor-pointer absolute top-[50%] left-[13px] text-[var(--p-datepicker-input-icon-color)] ml-[calc(var(--p-icon-size))] leading-none;
 }
 
-.d-ltr {
-  direction: ltr;
-}
-
-
 .text-required {
   color: red;
 }
