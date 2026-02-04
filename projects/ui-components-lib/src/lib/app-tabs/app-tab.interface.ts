@@ -19,6 +19,7 @@ export interface TemplateTab<T = unknown> extends Tab {
 
 
 export type AppTabs = ({
+  key? : unknown;
   isRouted: true;
   items: RoutedTab[];
 } | {
