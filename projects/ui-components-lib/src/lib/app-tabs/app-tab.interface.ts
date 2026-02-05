@@ -7,6 +7,7 @@ interface Tab {
   disabled?: boolean;
   count?: number;
   permissionKey?: string;
+  key? : unknown;
 }
 
 export interface RoutedTab extends Tab {
