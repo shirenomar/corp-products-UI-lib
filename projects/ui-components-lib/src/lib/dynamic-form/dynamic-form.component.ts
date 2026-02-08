@@ -15,6 +15,7 @@ import {
 import { DynamicFormData, FormFieldTypeEnum, InputsMap } from './dynamic-form.interface';
 import { DualCalendarComponent } from './../dual-calender/dual-calendar.component';
 import { FileManagementComponent } from '../file-management/file-management.component';
+import { LocalizedLabelPipe } from '../../pipes/translate-key.pipe';
 
 @Component({
   selector: 'app-dynamic-form',

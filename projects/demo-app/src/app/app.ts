@@ -20,7 +20,6 @@ import { SelectComponent } from './../../../ui-components-lib/src/lib/form-compo
 @Component({
   selector: 'app-root',
   animations: [
-  animations: [
     trigger('slideDown', [
       state('closed', style({
         height: '0px',
