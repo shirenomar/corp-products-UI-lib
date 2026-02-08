@@ -14,6 +14,7 @@ import {
 } from '../form-components';
 import { DynamicFormData, FormFieldTypeEnum, InputsMap } from './dynamic-form.interface';
 import { DualCalendarComponent } from './../dual-calender/dual-calendar.component';
+import { LocalizedLabelPipe } from '../../pipes/translate-key.pipe';
 
 @Component({
   selector: 'app-dynamic-form',
@@ -30,6 +31,7 @@ import { DualCalendarComponent } from './../dual-calender/dual-calendar.componen
     SelectComponent,
     AutoCompleteComponent,
     SwitchComponent,
+    LocalizedLabelPipe
   ],
   templateUrl: './dynamic-form.component.html',
   styleUrl: './dynamic-form.component.scss',
