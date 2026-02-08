@@ -59,7 +59,6 @@ export class DynamicFormComponent implements OnInit {
   }
 
   onFilesUploaded(file: any) {
-    debugger
     this.popUpFilesUploaded.emit(file)
   }
   onFileDeleted(file: any) {

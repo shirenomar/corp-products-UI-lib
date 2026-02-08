@@ -7,11 +7,6 @@
       <app-dual-calendar [control]="getFormControl(inputName, formGroup)"></app-dual-calendar>
       }
 
-      @case(fieldType.UPLOAD_FILE) {
-      <app-file-management #fileManager #groupFileManager [maxFileSize]="262144000" [maxConcurrentUploads]="1"
-        [allowPreview]="true" (filesUploaded)="onFilesUploaded($event)" (fileDeleted)="onFileDeleted($event)" />
-      }
-
       @case (fieldType.DATE_PICKER) {
       <stc-date-picker [minDate]="inputsMap[inputName]?.dateRange?.min" [maxDate]="inputsMap[inputName]?.dateRange?.max"
         [id]="inputsMap[inputName].inputId" [control]="getFormControl(inputName, formGroup)" [name]="inputName"
@@ -73,6 +68,10 @@
         (onSearch)="autoCompleteSearch.emit({ name: inputName, query: $event })"
         (selectOption)="autoCompleteSelect.emit({ name: inputName, event: $event })"
         [variant]="inputsMap[inputName].variant || 'over'" />
+      }
+      @case(fieldType.UPLOAD_FILE) {
+      <app-file-management #fileManager #groupFileManager [maxFileSize]="262144000" [maxConcurrentUploads]="1"
+        [allowPreview]="true" (filesUploaded)="onFilesUploaded($event)" (fileDeleted)="onFileDeleted($event)" />
       }
       }
     </div>

@@ -56,7 +56,6 @@ export class ConfirmationDialogComponent extends DynamicDialogRef implements OnI
     // we should pass submitted data when using form dialog
     // const submitData = { submitted: true, data: this.dialogFormData?.formGroup?.value };
     // this._ref.close(this.dynamicDialogConfig.data.inputForm ? submitData : true);
-    debugger
     if(this.uploadedFile) {
       this._ref.close({isSubmitted: true, file: this.uploadedFile});
 
@@ -69,7 +68,6 @@ export class ConfirmationDialogComponent extends DynamicDialogRef implements OnI
     this._ref.close(false);
   }
   onPopFilesUploaded(file: any) {
-    debugger
     this.uploadedFile = file
   }
   onFileDeleted(file: any) {

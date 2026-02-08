@@ -37,6 +37,7 @@ export class FileManagementComponent  implements OnDestroy {
   allowPreview = input<boolean>(true);
   permissonKey = input<string>('');
   allowedActions = input<string[]>([]);
+  uploadedFile = signal<any []> ([]);
 
   // Outputs
   @Output() filesUploaded = new EventEmitter<any>();
@@ -201,9 +202,14 @@ export class FileManagementComponent  implements OnDestroy {
 
     if (validFiles.length > 0) {
       // this.uploadFiles(validFiles);
+      this.uploadedFile.set(validFiles)
       this.filesUploaded.emit(validFiles)
-      console.log('validFiles', validFiles)
+      console.log('uploadedFile', this.uploadedFile())
     }
+  }
+  deleteFile() {
+          this.uploadedFile.set([])
+      this.filesUploaded.emit([])
   }
 
   private isValidFileType(file: File): boolean {
