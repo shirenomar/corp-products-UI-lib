@@ -125,6 +125,14 @@ export class App {
     { name: 'Item 5', code: '5' },
   ];
 
+  selectItemsTranslated = [
+    { nameAr: 'Item 1 Ar', nameEn: 'Item 1 En', code: '1' },
+    { nameAr: 'Item 2 Ar', nameEn: 'Item 1 En', code: '2' },
+    { nameAr: 'Item 3 Ar', nameEn: 'Item 1 En', code: '3' },
+    { nameAr: 'Item 4 Ar', nameEn: 'Item 1 En', code: '4' },
+    { nameAr: 'Item 5 Ar', nameEn: 'Item 1 En', code: '5' },
+  ];
+
   // Dynamic form demo config and state
   dynamicFormGroup = new FormGroup({
     startDate: new FormControl<Date | null>(new Date(), [Validators.required]),
@@ -186,7 +194,8 @@ export class App {
       fieldType: FormFieldTypeEnum.SELECT,
       inputId: 'df-role',
       rowSize: 'half',
-      selectOptions: this.selectItems,
+      selectOptions: this.selectItemsTranslated,
+      translatable : true,
       optionLabel: 'name',
       showClear: true,
       filter: false,

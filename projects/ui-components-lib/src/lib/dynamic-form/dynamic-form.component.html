@@ -46,7 +46,10 @@
         [hint]="inputsMap[inputName].hint"
         [readonly]="inputsMap[inputName].readonly || dynamicFormData.isReadOnlyForm || false"
         [disabled]="inputsMap[inputName].disabled || false" [options]="inputsMap[inputName].selectOptions || []"
-        [optionLabel]="inputsMap[inputName].optionLabel || 'label'" [filter]="inputsMap[inputName].filter || false"
+        [optionLabel]="inputsMap[inputName]?.translatable
+        ? ((inputsMap[inputName]?.optionLabel || 'label') | localizedLabel)
+        : (inputsMap[inputName]?.optionLabel || 'label')"
+        [filter]="inputsMap[inputName].filter || false"
         [multiple]="inputsMap[inputName].multiple || false" [showClear]="inputsMap[inputName].showClear || false"
         [checkmark]="inputsMap[inputName].checkmark ?? true" [filterBy]="inputsMap[inputName].filterBy || ''"
         [selectedItemsLabel]="inputsMap[inputName].selectedItemsLabel || ''"
