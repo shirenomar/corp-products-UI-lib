@@ -1,0 +1,50 @@
+.file-management {
+  width: 100%;
+}
+
+.drop-zone {
+  @apply cursor-pointer rounded-l border-2 border-dashed border-gray-300 p-8 bg-purple-light3 text-center transition-all duration-200 ease-in-out;
+
+  &.drag-over {
+    @apply border-purple-200 bg-purple-light;
+  }
+}
+
+.drop-zone-content {
+  @apply flex flex-col items-center gap-2;
+}
+
+.drop-icon {
+  font-size: 3rem;
+  color: var(--gray-400, #9ca3af);
+  margin-bottom: 0.5rem;
+}
+
+.drop-text {
+  font-size: 1rem;
+  color: var(--gray-700, #374151);
+  margin: 0;
+}
+
+.drop-or {
+  font-size: 0.875rem;
+  color: var(--gray-500, #6b7280);
+  margin: 0.25rem 0;
+}
+
+.drop-hint {
+  margin-top: 0.75rem;
+}
+
+.files-table {
+  border: 1px solid var(--gray-200, #e5e7eb);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+// RTL Support
+:host-context([dir='rtl']) {
+  .drop-zone-content {
+    direction: rtl;
+  }
+}

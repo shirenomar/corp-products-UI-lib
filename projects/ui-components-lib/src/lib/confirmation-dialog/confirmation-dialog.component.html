@@ -15,7 +15,7 @@
       </p>
       }
       @if (dynamicDialogConfig.data.inputForm) {
-      <app-dynamic-form [dynamicFormData]="dialogFormData"></app-dynamic-form>
+      <app-dynamic-form [dynamicFormData]="dialogFormData"  (popUpFilesUploaded)="onPopFilesUploaded($event)" (fileDeleted)="onFileDeleted($event)" ></app-dynamic-form>
       }
     </div>
     }

@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter,  Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
 import {
@@ -14,12 +14,13 @@ import {
 } from '../form-components';
 import { DynamicFormData, FormFieldTypeEnum, InputsMap } from './dynamic-form.interface';
 import { DualCalendarComponent } from './../dual-calender/dual-calendar.component';
+import { FileManagementComponent } from '../file-management/file-management.component';
 
 @Component({
   selector: 'app-dynamic-form',
   standalone: true,
   imports: [
-  CommonModule,
+    CommonModule,
     ReactiveFormsModule,
     DatePickerComponent,
     ValidationErrorsPipe,
@@ -27,6 +28,7 @@ import { DualCalendarComponent } from './../dual-calender/dual-calendar.componen
     SelectButtonComponent,
     DualCalendarComponent,
     InputComponent,
+    FileManagementComponent,
     SelectComponent,
     AutoCompleteComponent,
     SwitchComponent,
@@ -42,7 +44,8 @@ export class DynamicFormComponent implements OnInit {
   @Output() switchChange = new EventEmitter<{ name: string; value: boolean }>();
   @Output() autoCompleteSearch = new EventEmitter<{ name: string; query: string }>();
   @Output() autoCompleteSelect = new EventEmitter<{ name: string; event: any }>();
-
+  @Output() popUpFilesUploaded = new EventEmitter<any>();
+  @Output() fileDeleted = new EventEmitter<{ fileId: string; isNew: boolean }>();
   inputsNames: string[] = [];
   formGroup: FormGroup;
   inputsMap: InputsMap;
@@ -53,6 +56,14 @@ export class DynamicFormComponent implements OnInit {
     this.formGroup = this.dynamicFormData?.formGroup as FormGroup;
     this.inputsMap = this.dynamicFormData?.inputsMap as InputsMap;
     this.inputsNames = Object.keys(this.inputsMap || {});
+  }
+
+  onFilesUploaded(file: any) {
+    debugger
+    this.popUpFilesUploaded.emit(file)
+  }
+  onFileDeleted(file: any) {
+    this.fileDeleted.emit(file)
   }
 
 }

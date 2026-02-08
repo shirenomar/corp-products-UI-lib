@@ -4,7 +4,12 @@
     <div [ngClass]="inputsMap[inputName].rowSize">
       @switch (inputsMap[inputName].fieldType) {
       @case (fieldType.HIJRI_DATE_PICKER) {
-         <app-dual-calendar [control]="getFormControl(inputName, formGroup)"  ></app-dual-calendar>
+      <app-dual-calendar [control]="getFormControl(inputName, formGroup)"></app-dual-calendar>
+      }
+
+      @case(fieldType.UPLOAD_FILE) {
+      <app-file-management #fileManager #groupFileManager [maxFileSize]="262144000" [maxConcurrentUploads]="1"
+        [allowPreview]="true" (filesUploaded)="onFilesUploaded($event)" (fileDeleted)="onFileDeleted($event)" />
       }
 
       @case (fieldType.DATE_PICKER) {
@@ -51,7 +56,7 @@
         [checkmark]="inputsMap[inputName].checkmark ?? true" [filterBy]="inputsMap[inputName].filterBy || ''"
         [selectedItemsLabel]="inputsMap[inputName].selectedItemsLabel || ''"
         [size]="inputsMap[inputName].size || 'small'" [variant]="inputsMap[inputName].variant || 'over'"
-        (change)="selectChange.emit({ name: inputName, event: $event })"/>
+        (change)="selectChange.emit({ name: inputName, event: $event })" />
       }
       @case (fieldType.SWITCH) {
       <stc-switch [label]="inputsMap[inputName].label" [key]="inputName"
@@ -72,6 +77,9 @@
       }
     </div>
     }
+
+
+
   </div>
   <div class="col-span-12">
     <small class="p-error text-red-700">

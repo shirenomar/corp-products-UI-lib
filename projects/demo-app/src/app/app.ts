@@ -151,6 +151,7 @@ export class App {
     startDate: new FormControl<Date | null>(new Date(), [Validators.required]),
     endDate: new FormControl<Date | null>(null, [Validators.required]),
     hijriDate: new FormControl<Date | null>(null),
+    file: new FormControl<null>(null),
 
     fullName: new FormControl<string>('', [Validators.required]),
     role: new FormControl<any>(null, [Validators.required]),
@@ -187,6 +188,14 @@ export class App {
       inputId: 'df-start-date',
       rowSize: 'half',
       dateRange: { min: new Date(2020, 0, 1), max: new Date(2030, 11, 31) },
+      showIcon: true,
+      variant: 'in',
+    },
+    file: {
+      label: 'Start Date',
+      fieldType: FormFieldTypeEnum.UPLOAD_FILE,
+      inputId: 'df-file-date',
+      rowSize: 'half',
       showIcon: true,
       variant: 'in',
     },
@@ -361,6 +370,8 @@ export class App {
         inputForm: this.dialogDynamicFormData,
       })
       .subscribe((confirmed) => {
+        console.log('✅ Dialog confirmed dynamic with form data:', confirmed, this.dialogFormGroup.value);
+
         if (confirmed) {
           console.log('✅ Dialog confirmed with form data:', this.dialogFormGroup.value);
         } else {
@@ -387,7 +398,58 @@ export class App {
       console.log(res);
     });
   }
+  dialogCancelFollowUpFormGroup = new FormGroup({
+    file: new FormControl<null>(null),
+    comment: new FormControl<string>('', [Validators.required, Validators.maxLength(2000)]),
+  });
+  dialogCloseFollowUpInputsMap: InputsMap = {
+    file: {
+      label: 'upload file',
+      fieldType: FormFieldTypeEnum.UPLOAD_FILE,
+      inputId: 'df-file-date',
+      rowSize: 'half',
+      showIcon: true,
+      variant: 'in',
+    },
+    comment: {
+      label: 'follow_up.comment',
+      fieldType: FormFieldTypeEnum.INPUT,
+      inputId: 'cancel-follow-up',
+      rowSize: 'full',
+      inputType: 'textarea',
+      placeholder: 'follow_up.write_comment',
+      variant: 'in',
+      rows: 3,
+      maxLength: 2000,
+    },
+  };
+  dialogDynamicCancelFormData: DynamicFormData = {
+    formGroup: this.dialogCancelFollowUpFormGroup,
+    inputsMap: this.dialogCloseFollowUpInputsMap,
+    title: 'Confirm Action',
+    isReadOnlyForm: false,
+  };
+  openCancelFollowUp() {
+    this.confirmationDialogService
+      .open({
+        header: 'follow_up.cancel_follow_up',
+        message: 'follow_up.do_you_cancel_this_note',
+        cancelBtnLabel: 'shared.buttons.cancel',
+        hint: 'follow_up.note_will_cancel_this_follow_up',
+        confirmBtnLabel: 'follow_up.cancel_follow_up',
+        confirmBtnId: 'follow_up-date-modify',
+        cancelBtnId: 'follow_up-date-cancel',
+        inputForm: this.dialogDynamicCancelFormData,
+      })
+      .subscribe((confirmed) => {
 
+        console.log('po up follow up with dynamic form ', confirmed, this.dialogCancelFollowUpFormGroup.value)
+
+        if (confirmed) {
+          console.log('po up follow up with dynamic form ', confirmed)
+        }
+      });
+  }
   openSideBar() {
     // this.openDialogConfirmation()
     this.sidebarDynamicService.open(SideBar, {
