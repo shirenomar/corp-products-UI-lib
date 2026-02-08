@@ -20,6 +20,7 @@ import { SelectComponent } from './../../../ui-components-lib/src/lib/form-compo
 @Component({
   selector: 'app-root',
   animations: [
+  animations: [
     trigger('slideDown', [
       state('closed', style({
         height: '0px',
@@ -139,6 +140,13 @@ export class App {
     { name: 'Item 4', code: '4' },
     { name: 'Item 5', code: '5' },
   ];
+  selectItemsTranslated = [
+    { nameAr: 'Item 1 Ar', nameEn: 'Item 1 En', code: '1' },
+    { nameAr: 'Item 2 Ar', nameEn: 'Item 1 En', code: '2' },
+    { nameAr: 'Item 3 Ar', nameEn: 'Item 1 En', code: '3' },
+    { nameAr: 'Item 4 Ar', nameEn: 'Item 1 En', code: '4' },
+    { nameAr: 'Item 5 Ar', nameEn: 'Item 1 En', code: '5' },
+  ];
 
   attachmentActionsMenu: DropdownMenuItem[] = [
     { title: 'attachments.add_correspondences', show: false },
@@ -229,7 +237,8 @@ export class App {
       fieldType: FormFieldTypeEnum.SELECT,
       inputId: 'df-role',
       rowSize: 'half',
-      selectOptions: this.selectItems,
+      selectOptions: this.selectItemsTranslated,
+      translatable : true,
       optionLabel: 'name',
       showClear: true,
       filter: false,

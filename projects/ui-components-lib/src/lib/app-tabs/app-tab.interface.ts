@@ -7,6 +7,7 @@ interface Tab {
   disabled?: boolean;
   count?: number;
   permissionKey?: string;
+  key? : unknown;
 }
 
 export interface RoutedTab extends Tab {
@@ -19,9 +20,11 @@ export interface TemplateTab<T = unknown> extends Tab {
 
 
 export type AppTabs = ({
+  key? : unknown;
   isRouted: true;
   items: RoutedTab[];
 } | {
+  key? : unknown;
   isRouted: false;
   items: TemplateTab[];
 })

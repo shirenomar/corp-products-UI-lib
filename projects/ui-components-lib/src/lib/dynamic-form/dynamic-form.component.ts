@@ -32,6 +32,7 @@ import { FileManagementComponent } from '../file-management/file-management.comp
     SelectComponent,
     AutoCompleteComponent,
     SwitchComponent,
+    LocalizedLabelPipe
   ],
   templateUrl: './dynamic-form.component.html',
   styleUrl: './dynamic-form.component.scss',

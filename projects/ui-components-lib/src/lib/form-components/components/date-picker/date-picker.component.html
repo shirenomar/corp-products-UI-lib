@@ -5,7 +5,7 @@
       [inputId]="inputId" [inputStyleClass]="'reset-default-styles ' + (basicInput ? 'basic-style' : '')"
       [ngClass]="{ 'p-invalid ng-dirty ng-invalid': isInvalid }" [placeholder]="placeholder" [showIcon]="showIcon"
       [class]="'w-full'" appendTo="body" [timeOnly]="isTimeOnly" [hourFormat]="hourFormat" [minDate]="minDate"
-      [maxDate]="maxDate" panelStyleClass="d-ltr">
+      [maxDate]="maxDate">
       @if (isTimeOnly) {
       <ng-template #inputicon let-clickCallBack="clickCallBack">
         <i class="text-[18px] font-icon-time-clock" (click)="clickCallBack($event)"></i>
