@@ -49,6 +49,7 @@ export interface InputsMapData {
 
   // Select dropdown
   selectOptions?: unknown[]; // Array of objects or primitives
+  translatable? : boolean;
   optionLabel?: string; // property name to display when options are objects
   filter?: boolean;
   multiple?: boolean;
