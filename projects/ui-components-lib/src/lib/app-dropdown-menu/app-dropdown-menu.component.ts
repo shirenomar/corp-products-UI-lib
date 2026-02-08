@@ -22,12 +22,12 @@ export class AppDropdownMenuComponent implements OnInit {
   @Input() popupMenuStyle: "white" | "purple" = "purple";
   @Input() buttonIcon = "font-icon-plus";
   @Input() buttonClass: string;
-  @Input() buttonStyle: AppButtonSeverity;
+  @Input() buttonStyle: string;
+  @Input() buttonSeverity: AppButtonSeverity;
   @Input() buttonIconPosition: AppButtonIconPos = "left";
   router = inject(Router);
 
   showMenu: boolean;
-
   ngOnInit() {
     this.showMenu = this.menuItems.some((item) => {
       return item.show;

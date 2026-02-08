@@ -4,10 +4,12 @@
   "actions": {
     "save": "حفظ",
     "cancel": "الغاء",
-    "submit": "تقديم"
+    "submit": "تقديم",
+    "close": "إغلاق"
   },
   "shared": {
-    "no_results_found": "لا توجد نتائج"
+    "no_results_found": "لا توجد نتائج",
+    "Items_Selected": "تم اختيار {{count}} عناصر"
   },
   "forms": {
     "config": {
@@ -15,7 +17,7 @@
     }
   },
   "calender": {
-     "calender_type": "نوع التقويم",
+    "calender_type": "نوع التقويم",
     "gregorian": "الميلادي",
     "hijri": "الهجري"
   }

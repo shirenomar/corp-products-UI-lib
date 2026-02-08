@@ -1,11 +1,10 @@
+.p-datepicker {
+  @apply relative;
+}
+
 .p-datepicker-clear-icon {
-    @apply cursor-pointer absolute top-[50%] left-[13px] -translate-y-1/2 text-[var(--p-datepicker-input-icon-color)] ml-[calc(var(--p-icon-size))] leading-none;
+  @apply cursor-pointer absolute top-[50%] left-[13px] text-[var(--p-datepicker-input-icon-color)] ml-[calc(var(--p-icon-size))] leading-none;
 }
-
-.d-ltr{
-  direction: ltr;
-}
-
 
 .text-required {
   color: red;
@@ -13,4 +12,16 @@
 
 .p-error {
   color: #dc2626;
+}
+
+stc-date-picker.w-full,
+stc-date-picker.w-full .field,
+stc-date-picker.w-full .p-floatlabel,
+stc-date-picker.w-full .p-datepicker,
+stc-date-picker.w-full .p-inputtext {
+  @apply w-full;
+}
+
+stc-date-picker.w-full .p-datepicker {
+  @apply block;
 }

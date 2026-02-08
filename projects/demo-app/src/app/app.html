@@ -4,8 +4,21 @@
 
 <app-breadcrumb [items]="items"></app-breadcrumb>
 
+  <app-dropdown-menu
+      [buttonTitle]="'Add'"
+      [buttonSeverity]="'danger'"
+      [menuItems]="attachmentActionsMenu"
+      popupMenuStyle="white"
+
+    ></app-dropdown-menu>
 <!-- input component test input with float label and textarea -->
 <form [formGroup]="form2">
+  <button (click)="showCalender()">open dual </button>
+
+
+  <app-dual-calendar [isDatePickerShow]="false" (onClose)="onCloseCalender($event)" [isShown]="isCalendarOpen" (gregorianUTC)="selectedDate($event)"></app-dual-calendar>
+
+
 
   <!-- <stc-input [variant]="'in'" [contentType]="'text'" [label]="'Label'" [hideOptionalLabel]="true" [type]="'text'"
     [defaultColor]="'#DFE0E6'" [inputId]="'input-id'" [control]="inputControl">
