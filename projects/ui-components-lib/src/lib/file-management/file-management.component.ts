@@ -26,7 +26,7 @@ import { Attachment, AttachmentFile, FileItem, UploadStatus } from './interfaces
   templateUrl: './file-management.component.html',
   styleUrl: './file-management.component.scss',
 })
-export class FileManagementComponent  implements OnDestroy {
+export class FileManagementComponent implements OnDestroy {
   // Inputs
   existingFiles = input<AttachmentFile[]>([]);
   acceptedTypes = input<string>('*');
@@ -37,7 +37,7 @@ export class FileManagementComponent  implements OnDestroy {
   allowPreview = input<boolean>(true);
   permissonKey = input<string>('');
   allowedActions = input<string[]>([]);
-  uploadedFile = signal<any []> ([]);
+  uploadedFile = signal<any[]>([]);
 
   // Outputs
   @Output() filesUploaded = new EventEmitter<any>();
@@ -208,8 +208,8 @@ export class FileManagementComponent  implements OnDestroy {
     }
   }
   deleteFile() {
-          this.uploadedFile.set([])
-      this.filesUploaded.emit([])
+    this.uploadedFile.set([])
+    this.filesUploaded.emit([])
   }
 
   private isValidFileType(file: File): boolean {
