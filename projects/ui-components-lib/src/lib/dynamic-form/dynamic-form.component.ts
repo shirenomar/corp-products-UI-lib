@@ -16,6 +16,7 @@ import { DynamicFormData, FormFieldTypeEnum, InputsMap } from './dynamic-form.in
 import { DualCalendarComponent } from './../dual-calender/dual-calendar.component';
 import { FileManagementComponent } from '../file-management/file-management.component';
 import { LocalizedLabelPipe } from '../../pipes/translate-key.pipe';
+import { FileExtentions } from '../file-management/consts/accept-file-types';
 
 @Component({
   selector: 'app-dynamic-form',
@@ -58,6 +59,9 @@ export class DynamicFormComponent implements OnInit {
     this.formGroup = this.dynamicFormData?.formGroup as FormGroup;
     this.inputsMap = this.dynamicFormData?.inputsMap as InputsMap;
     this.inputsNames = Object.keys(this.inputsMap || {});
+  }
+  getAcceptedTypes(): string {
+    return FileExtentions.toString();
   }
 
   onFilesUploaded(file: any) {
