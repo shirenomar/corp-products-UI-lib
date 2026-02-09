@@ -1,4 +1,3 @@
-
 export interface AttachmentFile {
   id: string;
   fileName: string;
@@ -47,16 +46,16 @@ export interface PdfPreviewState {
   fileName: string;
 }
 export interface Attachment {
-    id?: string;
-    nameFile: string;
-    size: number;
-    url?: string | ArrayBuffer | null;
-    file?: File;
-    isCanceled?: boolean;
-    uploadStatus?: UploadStatus;
-    status?: AttachmentStatusDisplay;
-    serverResponse?: unknown;
-    errorMessage?: string;
+  id?: string;
+  nameFile: string;
+  size: number;
+  url?: string | ArrayBuffer | null;
+  file?: File;
+  isCanceled?: boolean;
+  uploadStatus?: UploadStatus;
+  status?: AttachmentStatusDisplay;
+  serverResponse?: unknown;
+  errorMessage?: string;
 }
 export interface AttachmentStatusDisplay {
     icon: string;
