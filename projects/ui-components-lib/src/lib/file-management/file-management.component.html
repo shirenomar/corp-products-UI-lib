@@ -1,0 +1,52 @@
+<div class="file-management">
+  <!-- Drop Zone -->
+  @if (showDropZone()) {
+    <div
+      class="drop-zone upload-container"
+      [class.drag-over]="isDragOver()"
+      (dragover)="onDragOver($event)"
+      (dragleave)="onDragLeave($event)"
+      (drop)="onDrop($event)"
+    >
+      <div class="drop-zone-content">
+        <p class="drop-text">{{ 'file.drag_drop_files' | translate }}</p>
+        <p-button
+          [label]="'file.browse' | translate"
+          severity="danger"
+          [outlined]="true"
+          (onClick)="onBrowseClick()"
+        />
+        <p class="drop-hint text-xs text-gray-500 mt-2">
+          {{ 'file.max_size_hint' | translate }}: {{ maxFileSize() | fileSize: 2 : 'MB' }}
+        </p>
+        @if (formattedAcceptedTypes()) {
+          <p class="accepted-types text-xs text-gray-400">
+            {{ 'file.accepted_types' | translate }}: {{ formattedAcceptedTypes() }}
+          </p>
+        }
+      </div>
+    </div>
+  }
+
+  <!-- Hidden file input (always present for programmatic access) -->
+  <input
+    #fileInput
+    type="file"
+    [accept]="acceptedTypes()"
+    multiple
+    hidden
+    (change)="onFileInputChange($event)"
+  />
+
+  @if(uploadedFile().length) {
+    @for(file of uploadedFile() ; track file) {
+      <div class="uploaded-files "  >
+         <p>{{file.name}}</p>
+         <i class="pi pi-trash" style="font-size: 1.5rem; color: #f00" (click)="deleteFile()"></i>
+      </div>
+    }
+  }
+
+  <!-- Files Table -->
+
+</div>

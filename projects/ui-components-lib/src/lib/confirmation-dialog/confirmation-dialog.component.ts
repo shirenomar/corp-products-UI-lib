@@ -36,6 +36,7 @@ export class ConfirmationDialogComponent extends DynamicDialogRef implements OnI
   private readonly _ref = inject(DynamicDialogRef);
   private readonly _subscription = new Subscription();
   dialogFormData: DynamicFormData;
+  uploadedFile: any;
 
   ngOnDestroy(): void {
     this._subscription.unsubscribe();
@@ -55,10 +56,20 @@ export class ConfirmationDialogComponent extends DynamicDialogRef implements OnI
     // we should pass submitted data when using form dialog
     // const submitData = { submitted: true, data: this.dialogFormData?.formGroup?.value };
     // this._ref.close(this.dynamicDialogConfig.data.inputForm ? submitData : true);
-    this._ref.close(true);
+    if(this.uploadedFile) {
+      this._ref.close({isSubmitted: true, file: this.uploadedFile});
+
+    } else {
+      this._ref.close(true);
+    }
   }
 
   override close() {
     this._ref.close(false);
+  }
+  onPopFilesUploaded(file: any) {
+    this.uploadedFile = file
+  }
+  onFileDeleted(file: any) {
   }
 }

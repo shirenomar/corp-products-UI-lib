@@ -28,7 +28,7 @@ export class ConfirmationDialogService {
     // Emit true/false when dialog closes
     return ref.onClose.pipe(
       filter((res) => res !== undefined),
-      map((res) => !!res)
+      map((res) => res)
     );
   }
 }
