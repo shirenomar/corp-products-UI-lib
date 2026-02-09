@@ -74,7 +74,7 @@
       }
       @case(fieldType.UPLOAD_FILE) {
       <app-file-management #fileManager #groupFileManager [maxFileSize]="262144000" [maxConcurrentUploads]="1"
-        [allowPreview]="true" (filesUploaded)="onFilesUploaded($event)" (fileDeleted)="onFileDeleted($event)" />
+        [allowPreview]="true" (filesUploaded)="onFilesUploaded($event)" [control]="getFormControl(inputName, formGroup)" (fileDeleted)="onFileDeleted($event)" />
       }
       }
     </div>

@@ -19,6 +19,7 @@ import { Subject } from 'rxjs';
 
 import { FileSizePipe } from './pipes';
 import { Attachment, AttachmentFile, FileItem, UploadStatus } from './interfaces/file.interface';
+import { BaseInputComponent } from '../form-components/components/base-input.component';
 
 @Component({
   selector: 'app-file-management',
@@ -26,7 +27,7 @@ import { Attachment, AttachmentFile, FileItem, UploadStatus } from './interfaces
 templateUrl: './file-management.component.html',
   styleUrl: './file-management.component.scss',
 })
-export class FileManagementComponent implements OnDestroy {
+export class FileManagementComponent extends BaseInputComponent implements OnDestroy {
   // Inputs
   existingFiles = input<AttachmentFile[]>([]);
   acceptedTypes = input<string>('*');
@@ -49,7 +50,6 @@ export class FileManagementComponent implements OnDestroy {
 
   @ViewChild('fileInput') fileInput!: ElementRef<HTMLInputElement>;
 
-  private destroy$ = new Subject<void>();
 
   // State - separate new uploads from existing files
   isDragOver = signal(false);
@@ -87,20 +87,6 @@ export class FileManagementComponent implements OnDestroy {
   });
 
   // Table configuration
-
-
-  constructor() {
-    // Emit when new files change
-    effect(() => {
-      const newFilesList = this.newFiles();
-      this.newFilesChange.emit(newFilesList);
-    });
-  }
-
-  ngOnDestroy(): void {
-    this.destroy$.next();
-    this.destroy$.complete();
-  }
 
   // Drag & Drop handlers
   onDragOver(event: DragEvent): void {
