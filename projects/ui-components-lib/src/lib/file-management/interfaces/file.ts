@@ -1,4 +1,3 @@
-
 export interface AttachmentFile {
   id: string;
   fileName: string;
@@ -47,43 +46,43 @@ export interface PdfPreviewState {
   fileName: string;
 }
 export interface Attachment {
-    id?: string;
-    nameFile: string;
-    size: number;
-    url?: string | ArrayBuffer | null;
-    file?: File;
-    isCanceled?: boolean;
-    uploadStatus?: UploadStatus;
-    status?: AttachmentStatusDisplay;
-    serverResponse?: unknown;
-    errorMessage?: string;
+  id?: string;
+  nameFile: string;
+  size: number;
+  url?: string | ArrayBuffer | null;
+  file?: File;
+  isCanceled?: boolean;
+  uploadStatus?: UploadStatus;
+  status?: AttachmentStatusDisplay;
+  serverResponse?: unknown;
+  errorMessage?: string;
 }
 interface AttachmentStatusDisplay {
-    icon: string;
-    label: string;
-    labelClass?: string;
-    percentage?: number;
-    success?: boolean;
+  icon: string;
+  label: string;
+  labelClass?: string;
+  percentage?: number;
+  success?: boolean;
 }
-export declare enum UploadStatus {
-    PENDING = "pending",
-    UPLOADING = "uploading",
-    SUCCESS = "success",
-    FAILED = "failed"
+export enum UploadStatus {
+  PENDING = 'pending',
+  UPLOADING = 'uploading',
+  SUCCESS = 'success',
+  FAILED = 'failed',
 }
 interface UserProfileData {
-    contact: Contact;
-    position: Position;
-    email: string;
-    profileImage: string;
-    nameEn: string;
-    nameAr: string;
+  contact: Contact;
+  position: Position;
+  email: string;
+  profileImage: string;
+  nameEn: string;
+  nameAr: string;
 }
 interface Contact {
-    mobile: string;
-    work: string;
+  mobile: string;
+  work: string;
 }
 interface Position {
-    code: string;
-    name: string;
+  code: string;
+  name: string;
 }
