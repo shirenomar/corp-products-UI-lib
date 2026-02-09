@@ -67,8 +67,8 @@ export interface AttachmentStatusDisplay {
 }
 export enum UploadStatus {
     PENDING = "pending",
-    UPLOADING = "uploading",
     SUCCESS = "success",
+    UPLOADING = "uploading",
     FAILED = "failed"
 }
 export interface UserProfileData {
