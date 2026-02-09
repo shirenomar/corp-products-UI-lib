@@ -53,6 +53,7 @@ export class DatePickerComponent extends BaseInputComponent {
     this.control.valueChanges.subscribe((value) => {
       if (!value) this.innerControl.reset();
     });
+
   }
 
   selectCurrentTime(e: any) {
@@ -74,7 +75,6 @@ export class DatePickerComponent extends BaseInputComponent {
   }
 
   onDateChange(value: any) {
-    if (!this.withoutTime || !value) return;
     const dateOnly = value instanceof Date ? formatDate(value, 'yyyy-MM-dd', 'en-US') : value;
     this.control.setValue(dateOnly, { emitEvent: true });
   }

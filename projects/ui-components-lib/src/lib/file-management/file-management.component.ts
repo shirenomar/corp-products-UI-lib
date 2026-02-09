@@ -15,7 +15,6 @@ import { CommonModule } from '@angular/common';
 import { TranslatePipe } from '@ngx-translate/core';
 import { ButtonModule } from 'primeng/button';
 import { TooltipModule } from 'primeng/tooltip';
-import { Subject } from 'rxjs';
 
 import { FileSizePipe } from './pipes';
 import { Attachment, AttachmentFile, FileItem, UploadStatus } from './interfaces/file.interface';

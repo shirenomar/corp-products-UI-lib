@@ -237,7 +237,7 @@ export class App {
       inputId: 'df-role',
       rowSize: 'half',
       selectOptions: this.selectItemsTranslated,
-      translatable : true,
+      translatable: true,
       optionLabel: 'name',
       showClear: true,
       filter: false,
@@ -407,10 +407,20 @@ export class App {
     });
   }
   dialogCancelFollowUpFormGroup = new FormGroup({
+    dateFollowUP: new FormControl<null>(null),
     file: new FormControl<null>(null),
     comment: new FormControl<string>('', [Validators.required, Validators.maxLength(2000)]),
   });
   dialogCloseFollowUpInputsMap: InputsMap = {
+    dateFollowUP: {
+      label: 'file.created_at',
+      fieldType: FormFieldTypeEnum.DATE_PICKER,
+      inputId: 'df-start-date',
+      rowSize: 'full',
+      inputType: 'text',
+      showIcon: true,
+      variant: 'in',
+    },
     file: {
       label: 'upload file',
       fieldType: FormFieldTypeEnum.UPLOAD_FILE,
