@@ -57,32 +57,32 @@ export interface Attachment {
   serverResponse?: unknown;
   errorMessage?: string;
 }
-interface AttachmentStatusDisplay {
-  icon: string;
-  label: string;
-  labelClass?: string;
-  percentage?: number;
-  success?: boolean;
+export interface AttachmentStatusDisplay {
+    icon: string;
+    label: string;
+    labelClass?: string;
+    percentage?: number;
+    success?: boolean;
 }
 export enum UploadStatus {
-  PENDING = 'pending',
-  UPLOADING = 'uploading',
-  SUCCESS = 'success',
-  FAILED = 'failed',
+    PENDING = "pending",
+    SUCCESS = "success",
+    UPLOADING = "uploading",
+    FAILED = "failed"
 }
-interface UserProfileData {
-  contact: Contact;
-  position: Position;
-  email: string;
-  profileImage: string;
-  nameEn: string;
-  nameAr: string;
+export interface UserProfileData {
+    contact: Contact;
+    position: Position;
+    email: string;
+    profileImage: string;
+    nameEn: string;
+    nameAr: string;
 }
-interface Contact {
-  mobile: string;
-  work: string;
+export interface Contact {
+    mobile: string;
+    work: string;
 }
-interface Position {
-  code: string;
-  name: string;
+export interface Position {
+    code: string;
+    name: string;
 }
