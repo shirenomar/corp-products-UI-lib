@@ -18,12 +18,12 @@ import { TooltipModule } from 'primeng/tooltip';
 import { Subject } from 'rxjs';
 
 import { FileSizePipe } from './pipes';
-import { Attachment, AttachmentFile, FileItem, UploadStatus } from './interfaces/file';
+import { Attachment, AttachmentFile, FileItem, UploadStatus } from './interfaces/file.interface';
 
 @Component({
   selector: 'app-file-management',
   imports: [CommonModule, TranslatePipe, ButtonModule, TooltipModule, FileSizePipe],
-  templateUrl: './file-management.component.html',
+templateUrl: './file-management.component.html',
   styleUrl: './file-management.component.scss',
 })
 export class FileManagementComponent implements OnDestroy {
