@@ -2,6 +2,9 @@ import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
+import { LocalizedLabelPipe } from '../../pipes/translate-key.pipe';
+import { FileExtentions } from '../file-management/consts/accept-file-types';
+import { FileManagementComponent } from '../file-management/file-management.component';
 import {
   AutoCompleteComponent,
   DatePickerComponent,
@@ -12,11 +15,8 @@ import {
   SwitchComponent,
   ValidationErrorsPipe,
 } from '../form-components';
-import { DynamicFormData, FormFieldTypeEnum, InputsMap } from './dynamic-form.interface';
 import { DualCalendarComponent } from './../dual-calender/dual-calendar.component';
-import { FileManagementComponent } from '../file-management/file-management.component';
-import { LocalizedLabelPipe } from '../../pipes/translate-key.pipe';
-import { FileExtentions } from '../file-management/consts/accept-file-types';
+import { DynamicFormData, FormFieldTypeEnum, InputsMap } from './dynamic-form.interface';
 
 @Component({
   selector: 'app-dynamic-form',
@@ -34,7 +34,7 @@ import { FileExtentions } from '../file-management/consts/accept-file-types';
     SelectComponent,
     AutoCompleteComponent,
     SwitchComponent,
-    LocalizedLabelPipe
+    LocalizedLabelPipe,
   ],
   templateUrl: './dynamic-form.component.html',
   styleUrl: './dynamic-form.component.scss',
@@ -44,6 +44,7 @@ export class DynamicFormComponent implements OnInit {
   // Generic field change outputs (optional for consumers)
   @Output() selectButtonChange = new EventEmitter<{ name: string; value: any }>();
   @Output() selectChange = new EventEmitter<{ name: string; event: any }>();
+  @Output() selectClicked = new EventEmitter<{ name: string; event: any }>();
   @Output() switchChange = new EventEmitter<{ name: string; value: boolean }>();
   @Output() autoCompleteSearch = new EventEmitter<{ name: string; query: string }>();
   @Output() autoCompleteSelect = new EventEmitter<{ name: string; event: any }>();
@@ -65,10 +66,9 @@ export class DynamicFormComponent implements OnInit {
   }
 
   onFilesUploaded(file: any) {
-    this.popUpFilesUploaded.emit(file)
+    this.popUpFilesUploaded.emit(file);
   }
   onFileDeleted(file: any) {
-    this.fileDeleted.emit(file)
+    this.fileDeleted.emit(file);
   }
-
 }

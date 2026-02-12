@@ -1,7 +1,7 @@
 <form [formGroup]="formGroup" class="dynamic-form">
   <div class="grid grid-cols-12 gap-x-2 dynamic-form__content">
     @for (inputName of inputsNames; track $index) {
-    <div [ngClass]="inputsMap[inputName].rowSize"  >
+    <div [ngClass]="inputsMap[inputName].rowSize">
       @switch (inputsMap[inputName].fieldType) {
       @case (fieldType.HIJRI_DATE_PICKER) {
       <app-dual-calendar [control]="getFormControl(inputName, formGroup)"></app-dual-calendar>
@@ -48,13 +48,13 @@
         [disabled]="inputsMap[inputName].disabled || false" [options]="inputsMap[inputName].selectOptions || []"
         [optionLabel]="inputsMap[inputName]?.translatable
         ? ((inputsMap[inputName]?.optionLabel || 'label') | localizedLabel)
-        : (inputsMap[inputName]?.optionLabel || 'label')"
-        [filter]="inputsMap[inputName].filter || false"
+        : (inputsMap[inputName]?.optionLabel || 'label')" [filter]="inputsMap[inputName].filter || false"
         [multiple]="inputsMap[inputName].multiple || false" [showClear]="inputsMap[inputName].showClear || false"
         [checkmark]="inputsMap[inputName].checkmark ?? true" [filterBy]="inputsMap[inputName].filterBy || ''"
         [selectedItemsLabel]="inputsMap[inputName].selectedItemsLabel || ''"
         [size]="inputsMap[inputName].size || 'small'" [variant]="inputsMap[inputName].variant || 'over'"
-        (change)="selectChange.emit({ name: inputName, event: $event })" />
+        (change)="selectChange.emit({ name: inputName, event: $event })"
+        (click)="selectClicked.emit({ name: inputName, event: $event })" />
       }
       @case (fieldType.SWITCH) {
       <stc-switch [label]="inputsMap[inputName].label" [key]="inputName"
@@ -74,7 +74,8 @@
       }
       @case(fieldType.UPLOAD_FILE) {
       <app-file-management #fileManager #groupFileManager [maxFileSize]="262144000" [maxConcurrentUploads]="1"
-        [allowPreview]="true"   [acceptedTypes]="getAcceptedTypes()" (filesUploaded)="onFilesUploaded($event)" [control]="getFormControl(inputName, formGroup)" (fileDeleted)="onFileDeleted($event)" />
+        [allowPreview]="true" [acceptedTypes]="getAcceptedTypes()" (filesUploaded)="onFilesUploaded($event)"
+        [control]="getFormControl(inputName, formGroup)" (fileDeleted)="onFileDeleted($event)" />
       }
       }
     </div>
