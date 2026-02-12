@@ -1,45 +1,23 @@
 <div class="field flex flex-col gap-2 my-3 relative">
 
   @if(multiple) {
-   <p-floatLabel [variant]="variant">
+  <p-floatLabel [variant]="variant">
 
-    <p-multiselect
-    [disabled]="disabled"
-    [filterBy]="filterBy"
-    [filter]="filter"
-    [formControl]="control"
-    [id]="inputId"
-    [name]="name"
-    [ngClass]="{ 'p-invalid ng-dirty ng-invalid': isInvalid }"
-    [optionLabel]="optionLabel"
-    [optionValue]="optionValue"
-    [options]="options"
-    [showToggleAll]="false"
-    [placeholder]="placeholder"
-    [emptyMessage]="emptyMessage || ('shared.no_results_found'|translate)"
-    [readonly]="readonly"
-    [showClear]="showClear"
-    (onClear)="onMultiSelectClear()"
-    class="w-full"
-     [size]="size"
-    [selectedItemsLabel]="selectedItemsLabel || ('shared.Items_Selected'| translate: {count: '{0}'})"
-    [class]="
+    <p-multiselect [disabled]="disabled" [filterBy]="filterBy" [filter]="filter" [formControl]="control" [id]="inputId"
+      [name]="name" [ngClass]="{ 'p-invalid ng-dirty ng-invalid': isInvalid }" [optionLabel]="optionLabel"
+      [optionValue]="optionValue" [options]="options" [showToggleAll]="false" [placeholder]="placeholder"
+      [emptyMessage]="emptyMessage || ('shared.no_results_found'|translate)" [readonly]="readonly"
+      [showClear]="showClear" (onClear)="onMultiSelectClear()" class="w-full" [size]="size"
+      [selectedItemsLabel]="selectedItemsLabel || ('shared.Items_Selected'| translate: {count: '{0}'})" [class]="
         'w-full border border-[' + defaultColor + '] rounded-none focus:outline-[' + defaultColor + '] focus:border-[' + defaultColor + '] hover:border-[' + defaultColor + '] disabled:opacity-50'
-        "
-    (onChange)="onChange($event)"
-    [ngClass]="{ 'basic-style': basicInput }"
-     >
+        " (onChange)="onChange($event)" [ngClass]="{ 'basic-style': basicInput }">
 
       @if (selectAllLabel) {
-       <ng-template #filter>
-         <p-checkbox
-         binary="true"
-         [(ngModel)]="allSelectd"
-         (onChange)="toggleAll($event)"
-         inputId="toggleAll">
-         </p-checkbox>
-         <span>{{selectAllLabel}}</span>
-       </ng-template>
+      <ng-template #filter>
+        <p-checkbox binary="true" [(ngModel)]="allSelectd" (onChange)="toggleAll($event)" inputId="toggleAll">
+        </p-checkbox>
+        <span>{{selectAllLabel}}</span>
+      </ng-template>
       }
 
       @if(optionTemplate){
@@ -63,43 +41,25 @@
   </p-floatLabel>
 
   } @else {
-      <p-floatLabel [variant]="variant">
-    <p-select
-      [dataKey]="dataKey"
-      [checkmark]="checkmark"
-      [disabled]="disabled"
-      [editable]="editable"
-      [filterBy]="filterBy"
-      [filter]="filter"
-      [formControl]="control"
-      [id]="inputId"
-      [name]="name"
+  <p-floatLabel [variant]="variant">
+    <p-select [dataKey]="dataKey" [checkmark]="checkmark" [disabled]="disabled" [editable]="editable"
+      [filterBy]="filterBy" [filter]="filter" [formControl]="control" [id]="inputId" [name]="name"
       [ngClass]="{ 'p-invalid ng-dirty ng-invalid': isInvalid }"
-      [emptyMessage]="emptyMessage || ('shared.no_results_found'|translate)"
-      [optionLabel]="optionLabel"
-      [optionValue]="optionValue"
-      [options]="options"
-      [placeholder]="placeholder"
-      [readonly]="readonly"
-      [showClear]="showClear"
-       [size]="size"
-      class="w-full"
-      [class]="
+      [emptyMessage]="emptyMessage || ('shared.no_results_found'|translate)" [optionLabel]="optionLabel"
+      [optionValue]="optionValue" [options]="options" [placeholder]="placeholder" [readonly]="readonly"
+      [showClear]="showClear" [size]="size" class="w-full" [class]="
         'w-full border border-[' + defaultColor + '] rounded-none focus:outline-[' + defaultColor + '] focus:border-[' + defaultColor + '] hover:border-[' + defaultColor + '] disabled:opacity-50'
-        "
-      (onChange)="onChange($event)"
-      [ngClass]="{ 'basic-style': basicInput }"
-    >
+        " (onChange)="onChange($event)" (click)="clicked.emit($event)" [ngClass]="{ 'basic-style': basicInput }">
 
       @if (optionTemplate) {
-        <ng-template let-item pTemplate="item">
-          <ng-container [ngTemplateOutletContext]="{ $implicit: item }" [ngTemplateOutlet]="optionTemplate" />
-        </ng-template>
+      <ng-template let-item pTemplate="item">
+        <ng-container [ngTemplateOutletContext]="{ $implicit: item }" [ngTemplateOutlet]="optionTemplate" />
+      </ng-template>
       }
       @if (selectedItemTemplate) {
-        <ng-template let-item pTemplate="selectedItem">
-          <ng-container [ngTemplateOutletContext]="{ $implicit: item }" [ngTemplateOutlet]="selectedItemTemplate" />
-        </ng-template>
+      <ng-template let-item pTemplate="selectedItem">
+        <ng-container [ngTemplateOutletContext]="{ $implicit: item }" [ngTemplateOutlet]="selectedItemTemplate" />
+      </ng-template>
       }
     </p-select>
     <label [for]="inputId">

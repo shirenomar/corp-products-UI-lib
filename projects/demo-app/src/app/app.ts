@@ -8,33 +8,48 @@ import { BreadcrumbItem } from '../../../ui-components-lib/src/lib/app-breadcrum
 import { ConfirmationDialogService } from './../../../ui-components-lib/src/lib/confirmation-dialog/confirmation-dialog.service';
 import { SideBar } from './side-bar/side-bar';
 
-import { AppBreadcrumbComponent, AppButtonComponent, BottomSheetComponent, DynamicFormComponent, DynamicFormData, FormFieldTypeEnum, InputsMap, AppDropdownMenuComponent, DropdownMenuItem, DualCalendarComponent } from '@corp-products/ui-components';
+import { animate, state, style, transition, trigger } from '@angular/animations';
+import {
+  AppBreadcrumbComponent,
+  AppButtonComponent,
+  AppDropdownMenuComponent,
+  BottomSheetComponent,
+  DropdownMenuItem,
+  DualCalendarComponent,
+  DynamicFormComponent,
+  DynamicFormData,
+  FormFieldTypeEnum,
+  InputsMap,
+} from '@corp-products/ui-components';
 import { ConfirmationDialogComponent } from './../../../ui-components-lib/src/lib/confirmation-dialog/confirmation-dialog.component';
+import { SelectComponent } from './../../../ui-components-lib/src/lib/form-components/components/select/select.component';
 import { DynamicSidebarService } from './../../../ui-components-lib/src/lib/side-bar-dynamic/dynamic-sidebar.service';
 import {
   SidebarConfig,
   SidebarConfigDefaults,
 } from './../../../ui-components-lib/src/lib/side-bar-dynamic/sidebar-config';
-import { trigger, state, style, transition, animate } from '@angular/animations';
-import { SelectComponent } from './../../../ui-components-lib/src/lib/form-components/components/select/select.component';
 @Component({
   selector: 'app-root',
   animations: [
     trigger('slideDown', [
-      state('closed', style({
-        height: '0px',
-        opacity: 0,
-        overflow: 'hidden'
-      })),
-      state('open', style({
-        height: '*',
-        opacity: 1,
-        overflow: 'hidden'
-      })),
-      transition('closed <=> open', [
-        animate('300ms ease')
-      ])
-    ])
+      state(
+        'closed',
+        style({
+          height: '0px',
+          opacity: 0,
+          overflow: 'hidden',
+        }),
+      ),
+      state(
+        'open',
+        style({
+          height: '*',
+          opacity: 1,
+          overflow: 'hidden',
+        }),
+      ),
+      transition('closed <=> open', [animate('300ms ease')]),
+    ]),
   ],
   imports: [
     AppBreadcrumbComponent,
@@ -45,7 +60,7 @@ import { SelectComponent } from './../../../ui-components-lib/src/lib/form-compo
     SelectComponent,
     DualCalendarComponent,
     CommonModule,
-    AppDropdownMenuComponent
+    AppDropdownMenuComponent,
   ],
   providers: [DialogService, ConfirmationDialogService],
   templateUrl: './app.html',
@@ -61,7 +76,7 @@ export class App {
   });
   confirmationDialogService = inject(ConfirmationDialogService);
   dialogService = inject(DialogService);
-  isCalendarOpen = false
+  isCalendarOpen = false;
   items: BreadcrumbItem[] = [
     {
       notClickable: false,
@@ -169,16 +184,12 @@ export class App {
   showCalender() {
     this.isCalendarOpen = !this.isCalendarOpen;
     console.log('date selected ', this.dualControl.value);
-
   }
   selectedDate(selectedDate: string) {
     console.log('date selected ', selectedDate);
-
   }
   onCloseCalender(isClose: boolean) {
-    console.log('calender close ', isClose)
-
-
+    console.log('calender close ', isClose);
   }
   private allUsers = [
     { id: 1, name: 'Alice Smith' },
@@ -285,6 +296,11 @@ export class App {
     console.log('Select change', e);
   }
 
+  onDynamicSelectClicked(e: { name: string; event: any }) {
+    alert();
+    console.log('Select change', e);
+  }
+
   onDynamicSwitchChange(e: { name: string; value: boolean }) {
     console.log('Switch change', e);
   }
@@ -307,7 +323,7 @@ export class App {
       console.warn(
         'Dynamic form invalid',
         this.dynamicFormGroup.errors,
-        this.dynamicFormGroup.value
+        this.dynamicFormGroup.value,
       );
       return;
     }
@@ -321,7 +337,6 @@ export class App {
   });
   addNewGroup(newGroup: string) {
     console.log('newGroup', newGroup);
-
   }
 
   dialogInputsMap: InputsMap = {
@@ -378,7 +393,11 @@ export class App {
         inputForm: this.dialogDynamicFormData,
       })
       .subscribe((confirmed) => {
-        console.log('✅ Dialog confirmed dynamic with form data:', confirmed, this.dialogFormGroup.value);
+        console.log(
+          '✅ Dialog confirmed dynamic with form data:',
+          confirmed,
+          this.dialogFormGroup.value,
+        );
 
         if (confirmed) {
           console.log('✅ Dialog confirmed with form data:', this.dialogFormGroup.value);
@@ -460,11 +479,14 @@ export class App {
         inputForm: this.dialogDynamicCancelFormData,
       })
       .subscribe((confirmed) => {
-
-        console.log('po up follow up with dynamic form ', confirmed, this.dialogCancelFollowUpFormGroup.value)
+        console.log(
+          'po up follow up with dynamic form ',
+          confirmed,
+          this.dialogCancelFollowUpFormGroup.value,
+        );
 
         if (confirmed) {
-          console.log('po up follow up with dynamic form ', confirmed)
+          console.log('po up follow up with dynamic form ', confirmed);
         }
       });
   }

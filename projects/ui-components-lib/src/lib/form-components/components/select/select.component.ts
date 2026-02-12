@@ -10,12 +10,12 @@ import {
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TranslatePipe } from '@ngx-translate/core';
 import { PrimeTemplate } from 'primeng/api';
+import { CheckboxModule } from 'primeng/checkbox';
 import { FloatLabelModule } from 'primeng/floatlabel';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { Select, SelectChangeEvent } from 'primeng/select';
 import { ValidationErrorsPipe } from '../../@utils/validations';
 import { BaseInputComponent } from '../base-input.component';
-import { CheckboxModule } from 'primeng/checkbox';
 
 @Component({
   selector: 'stc-select',
@@ -59,6 +59,8 @@ export class SelectComponent extends BaseInputComponent {
   @Input() variant: 'in' | 'over' | 'on' = 'over';
   // eslint-disable-next-line @angular-eslint/no-output-native
   @Output() change = new EventEmitter();
+  @Output() clicked = new EventEmitter();
+
   @Input() defaultColor = '#DFE0E6';
   allSelectd = false;
 
@@ -83,5 +85,9 @@ export class SelectComponent extends BaseInputComponent {
 
   onChange(e: SelectChangeEvent) {
     this.change.emit(e);
+  }
+
+  onClick(event: Event) {
+    this.clicked.emit(event);
   }
 }
