@@ -49,8 +49,9 @@ export interface InputsMapData {
 
   // Select dropdown
   selectOptions?: unknown[]; // Array of objects or primitives
-  translatable? : boolean;
+  translatable?: boolean;
   optionLabel?: string; // property name to display when options are objects
+  optionValue?: string; // property name to bind when options are objects
   filter?: boolean;
   multiple?: boolean;
   showClear?: boolean;
@@ -94,5 +95,5 @@ export enum FormFieldTypeEnum {
   SWITCH = 'switch',
   AUTO_COMPLETE = 'auto-complete',
   HIJRI_DATE_PICKER = 'hijri-date',
-  UPLOAD_FILE = 'upload-file'
+  UPLOAD_FILE = 'upload-file',
 }
