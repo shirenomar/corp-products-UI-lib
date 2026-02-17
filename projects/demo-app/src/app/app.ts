@@ -250,6 +250,7 @@ export class App {
       selectOptions: this.selectItemsTranslated,
       translatable: true,
       optionLabel: 'name',
+      optionValue: 'code',
       showClear: true,
       filter: false,
       variant: 'in',
@@ -297,7 +298,6 @@ export class App {
   }
 
   onDynamicSelectClicked(e: { name: string; event: any }) {
-    alert();
     console.log('Select change', e);
   }
 
