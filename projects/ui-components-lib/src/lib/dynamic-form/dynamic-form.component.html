@@ -48,11 +48,10 @@
         [disabled]="inputsMap[inputName].disabled || false" [options]="inputsMap[inputName].selectOptions || []"
         [optionLabel]="inputsMap[inputName]?.translatable
         ? ((inputsMap[inputName]?.optionLabel || 'label') | localizedLabel)
-        : (inputsMap[inputName]?.optionLabel || 'label')" [optionValue]="inputsMap[inputName]?.translatable
-        ? ((inputsMap[inputName]?.optionValue || 'value') | localizedLabel)
-        : (inputsMap[inputName]?.optionValue || 'value')" [filter]="inputsMap[inputName].filter || false"
-        [multiple]="inputsMap[inputName].multiple || false" [showClear]="inputsMap[inputName].showClear || false"
-        [checkmark]="inputsMap[inputName].checkmark ?? true" [filterBy]="inputsMap[inputName].filterBy || ''"
+        : (inputsMap[inputName]?.optionLabel || 'label')" [optionValue]="inputsMap[inputName]?.optionValue || 'value'"
+        [filter]="inputsMap[inputName].filter || false" [multiple]="inputsMap[inputName].multiple || false"
+        [showClear]="inputsMap[inputName].showClear || false" [checkmark]="inputsMap[inputName].checkmark ?? true"
+        [filterBy]="inputsMap[inputName].filterBy || ''"
         [selectedItemsLabel]="inputsMap[inputName].selectedItemsLabel || ''"
         [size]="inputsMap[inputName].size || 'small'" [variant]="inputsMap[inputName].variant || 'over'"
         (change)="selectChange.emit({ name: inputName, event: $event })"
