@@ -62,6 +62,13 @@
         [checked]="getFormControl(inputName, formGroup).value"
         (onChange)="getFormControl(inputName, formGroup).setValue(typeof $event === 'string' ? ($event === 'true') : $event); switchChange.emit({ name: inputName, value: (typeof $event === 'string' ? ($event === 'true') : $event) })" />
       }
+      @case (fieldType.CHECKBOX) {
+      <div class="flex items-center gap-2 my-3">
+        <p-checkbox [inputId]="inputsMap[inputName].inputId || inputName" [binary]="true"
+          [formControl]="getFormControl(inputName, formGroup)" [disabled]="inputsMap[inputName].disabled || false" />
+        <label [for]="inputsMap[inputName].inputId || inputName">{{ inputsMap[inputName].label }}</label>
+      </div>
+      }
       @case (fieldType.AUTO_COMPLETE) {
       <stc-auto-complete [control]="getFormControl(inputName, formGroup)" [id]="inputsMap[inputName].inputId"
         [name]="inputName" [label]="inputsMap[inputName].label" [placeholder]="inputsMap[inputName].placeholder || ''"

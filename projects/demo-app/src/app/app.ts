@@ -267,7 +267,7 @@ export class App {
     },
     notify: {
       label: 'Email Notifications',
-      fieldType: FormFieldTypeEnum.SWITCH,
+      fieldType: FormFieldTypeEnum.CHECKBOX,
       inputId: 'df-notify',
       rowSize: 'half',
     },

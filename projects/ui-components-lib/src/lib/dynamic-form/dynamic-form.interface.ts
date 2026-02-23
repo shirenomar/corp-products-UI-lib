@@ -96,4 +96,5 @@ export enum FormFieldTypeEnum {
   AUTO_COMPLETE = 'auto-complete',
   HIJRI_DATE_PICKER = 'hijri-date',
   UPLOAD_FILE = 'upload-file',
+  CHECKBOX = 'checkbox',
 }
