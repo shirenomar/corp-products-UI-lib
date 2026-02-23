@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
+import { CheckboxModule } from 'primeng/checkbox';
 import { LocalizedLabelPipe } from '../../pipes/translate-key.pipe';
 import { FileExtentions } from '../file-management/consts/accept-file-types';
 import { FileManagementComponent } from '../file-management/file-management.component';
@@ -35,6 +36,7 @@ import { DynamicFormData, FormFieldTypeEnum, InputsMap } from './dynamic-form.in
     AutoCompleteComponent,
     SwitchComponent,
     LocalizedLabelPipe,
+    CheckboxModule,
   ],
   templateUrl: './dynamic-form.component.html',
   styleUrl: './dynamic-form.component.scss',
