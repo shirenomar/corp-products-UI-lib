@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-inferrable-types */
 import { NgClass } from '@angular/common';
 import { Component, EventEmitter, Input, Output, ViewEncapsulation } from '@angular/core';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -74,8 +75,12 @@ export class DatePickerComponent extends BaseInputComponent {
     this.onAfterClearDate.emit();
   }
 
-  onDateChange(value: any) {
-    const dateOnly = value instanceof Date ? formatDate(value, 'yyyy-MM-dd', 'en-US') : value;
-    this.control.setValue(dateOnly, { emitEvent: true });
+  onDateChange(value: Date): void {
+    if (!value) return;
+    const dateValue = value instanceof Date ? value : new Date(value);
+    const format = this.withoutTime ? 'yyyy-MM-dd' : "yyyy-MM-ddTHH:mm:ss'Z'";
+    const timezone = this.withoutTime ? undefined : 'UTC';
+    const formattedDate = formatDate(dateValue, format, 'en-US', timezone);
+    this.control.setValue(formattedDate, { emitEvent: true });
   }
 }
