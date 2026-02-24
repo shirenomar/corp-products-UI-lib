@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-inferrable-types */
 import { NgClass } from '@angular/common';
 import { Component, EventEmitter, Input, Output, ViewEncapsulation } from '@angular/core';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -5,7 +6,8 @@ import { ValidationErrorsPipe } from '../../@utils/validations';
 import { DatePicker, DatePickerModule } from 'primeng/datepicker';
 import { FloatLabelModule } from 'primeng/floatlabel';
 import { BaseInputComponent } from '../base-input.component';
-import { formatDate } from '@angular/common';
+import { DateHandler } from '../../../../helper/date-handler';
+import { DateFormats } from '../../../../enums/date-formatter';
 
 @Component({
   selector: 'stc-date-picker',
@@ -74,8 +76,11 @@ export class DatePickerComponent extends BaseInputComponent {
     this.onAfterClearDate.emit();
   }
 
-  onDateChange(value: any) {
-    const dateOnly = value instanceof Date ? formatDate(value, 'yyyy-MM-dd', 'en-US') : value;
-    this.control.setValue(dateOnly, { emitEvent: true });
+  onDateChange(value: Date): void {
+  if (!value) return;
+    const dateValue = value instanceof Date ? value : new Date(value);
+    const formattedDate = this.withoutTime ?
+    DateHandler.formatDate(dateValue.toISOString(), DateFormats.DATE_ONLY) : DateHandler.getUTCDateTimeFromJsDate(dateValue);
+    this.control.setValue(formattedDate, { emitEvent: true });
   }
 }
