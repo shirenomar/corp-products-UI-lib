@@ -6,7 +6,8 @@ import { ValidationErrorsPipe } from '../../@utils/validations';
 import { DatePicker, DatePickerModule } from 'primeng/datepicker';
 import { FloatLabelModule } from 'primeng/floatlabel';
 import { BaseInputComponent } from '../base-input.component';
-import { formatDate } from '@angular/common';
+import { DateHandler } from '../../../../helper/date-handler';
+import { DateFormats } from '../../../../enums/date-formatter';
 
 @Component({
   selector: 'stc-date-picker',
@@ -76,11 +77,10 @@ export class DatePickerComponent extends BaseInputComponent {
   }
 
   onDateChange(value: Date): void {
-    if (!value) return;
+  if (!value) return;
     const dateValue = value instanceof Date ? value : new Date(value);
-    const format = this.withoutTime ? 'yyyy-MM-dd' : "yyyy-MM-ddTHH:mm:ss'Z'";
-    const timezone = this.withoutTime ? undefined : 'UTC';
-    const formattedDate = formatDate(dateValue, format, 'en-US', timezone);
+    const formattedDate = this.withoutTime ?
+    DateHandler.formatDate(dateValue.toISOString(), DateFormats.DATE_ONLY) : DateHandler.getUTCDateTimeFromJsDate(dateValue);
     this.control.setValue(formattedDate, { emitEvent: true });
   }
 }
