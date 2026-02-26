@@ -33,7 +33,7 @@ export interface InputsMapData {
   dateRange?: DateRangeInterface;
   isTimeOnly?: boolean;
   showIcon?: boolean;
-
+  withoutTime?: boolean;
   //select button
   selectButtonOptions?: LabelValue<any>[];
 

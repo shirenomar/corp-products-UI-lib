@@ -208,6 +208,7 @@ export class App {
       dateRange: { min: new Date(2020, 0, 1), max: new Date(2030, 11, 31) },
       showIcon: true,
       variant: 'in',
+      withoutTime: false,
     },
     file: {
       label: 'Start Date',
@@ -231,6 +232,7 @@ export class App {
       dateRange: { min: new Date(2020, 0, 1), max: new Date(2030, 11, 31) },
       showIcon: true,
       variant: 'in',
+      withoutTime: true,
     },
     fullName: {
       label: 'Full Name',
