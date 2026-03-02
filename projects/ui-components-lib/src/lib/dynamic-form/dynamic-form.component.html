@@ -1,5 +1,5 @@
 <form [formGroup]="formGroup" class="dynamic-form">
-  <div class="grid grid-cols-12 gap-x-2">
+  <div class="grid grid-cols-12 gap-x-2 dynamic-form__content">
     @for (inputName of inputsNames; track $index) {
     <div [ngClass]="inputsMap[inputName].rowSize">
       @switch (inputsMap[inputName].fieldType) {
@@ -14,7 +14,8 @@
         [hint]="inputsMap[inputName].hint"
         [readonly]="inputsMap[inputName].readonly || dynamicFormData.isReadOnlyForm || false"
         [disabled]="inputsMap[inputName].disabled || false" [variant]="inputsMap[inputName].variant || 'over'"
-        [showIcon]="inputsMap[inputName].showIcon !== false" [isTimeOnly]="inputsMap[inputName].isTimeOnly || false" />
+        [showIcon]="inputsMap[inputName].showIcon !== false" [isTimeOnly]="inputsMap[inputName].isTimeOnly || false"
+        [withoutTime]="inputsMap[inputName].withoutTime || false" />
       }
       @case (fieldType.SELECT_BUTTON) {
       <stc-select-button [control]="getFormControl(inputName, formGroup)" [id]="inputsMap[inputName].inputId"
@@ -48,18 +49,26 @@
         [disabled]="inputsMap[inputName].disabled || false" [options]="inputsMap[inputName].selectOptions || []"
         [optionLabel]="inputsMap[inputName]?.translatable
         ? ((inputsMap[inputName]?.optionLabel || 'label') | localizedLabel)
-        : (inputsMap[inputName]?.optionLabel || 'label')"
-        [filter]="inputsMap[inputName].filter || false"
-        [multiple]="inputsMap[inputName].multiple || false" [showClear]="inputsMap[inputName].showClear || false"
-        [checkmark]="inputsMap[inputName].checkmark ?? true" [filterBy]="inputsMap[inputName].filterBy || ''"
+        : (inputsMap[inputName]?.optionLabel || 'label')" [optionValue]="inputsMap[inputName]?.optionValue || ''"
+        [filter]="inputsMap[inputName].filter || false" [multiple]="inputsMap[inputName].multiple || false"
+        [showClear]="inputsMap[inputName].showClear || false" [checkmark]="inputsMap[inputName].checkmark ?? true"
+        [filterBy]="inputsMap[inputName].filterBy || ''"
         [selectedItemsLabel]="inputsMap[inputName].selectedItemsLabel || ''"
         [size]="inputsMap[inputName].size || 'small'" [variant]="inputsMap[inputName].variant || 'over'"
-        (change)="selectChange.emit({ name: inputName, event: $event })" />
+        (change)="selectChange.emit({ name: inputName, event: $event })"
+        (click)="selectClicked.emit({ name: inputName, event: $event })" />
       }
       @case (fieldType.SWITCH) {
       <stc-switch [label]="inputsMap[inputName].label" [key]="inputName"
         [checked]="getFormControl(inputName, formGroup).value"
         (onChange)="getFormControl(inputName, formGroup).setValue(typeof $event === 'string' ? ($event === 'true') : $event); switchChange.emit({ name: inputName, value: (typeof $event === 'string' ? ($event === 'true') : $event) })" />
+      }
+      @case (fieldType.CHECKBOX) {
+      <div class="flex items-center gap-2 my-3">
+        <p-checkbox [inputId]="inputsMap[inputName].inputId || inputName" [binary]="true"
+          [formControl]="getFormControl(inputName, formGroup)" [disabled]="inputsMap[inputName].disabled || false" />
+        <label [for]="inputsMap[inputName].inputId || inputName">{{ inputsMap[inputName].label }}</label>
+      </div>
       }
       @case (fieldType.AUTO_COMPLETE) {
       <stc-auto-complete [control]="getFormControl(inputName, formGroup)" [id]="inputsMap[inputName].inputId"
@@ -74,7 +83,8 @@
       }
       @case(fieldType.UPLOAD_FILE) {
       <app-file-management #fileManager #groupFileManager [maxFileSize]="262144000" [maxConcurrentUploads]="1"
-        [allowPreview]="true" (filesUploaded)="onFilesUploaded($event)" (fileDeleted)="onFileDeleted($event)" />
+        [allowPreview]="true" [acceptedTypes]="getAcceptedTypes()" (filesUploaded)="onFilesUploaded($event)"
+        [control]="getFormControl(inputName, formGroup)" (fileDeleted)="onFileDeleted($event)" />
       }
       }
     </div>

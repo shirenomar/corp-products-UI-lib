@@ -15,18 +15,18 @@ import { CommonModule } from '@angular/common';
 import { TranslatePipe } from '@ngx-translate/core';
 import { ButtonModule } from 'primeng/button';
 import { TooltipModule } from 'primeng/tooltip';
-import { Subject } from 'rxjs';
 
 import { FileSizePipe } from './pipes';
-import { Attachment, AttachmentFile, FileItem, UploadStatus } from './interfaces/file';
+import { Attachment, AttachmentFile, FileItem, UploadStatus } from './interfaces/file.interface';
+import { BaseInputComponent } from '../form-components/components/base-input.component';
 
 @Component({
   selector: 'app-file-management',
   imports: [CommonModule, TranslatePipe, ButtonModule, TooltipModule, FileSizePipe],
-  templateUrl: './file-management.component.html',
+templateUrl: './file-management.component.html',
   styleUrl: './file-management.component.scss',
 })
-export class FileManagementComponent implements OnDestroy {
+export class FileManagementComponent extends BaseInputComponent implements OnDestroy {
   // Inputs
   existingFiles = input<AttachmentFile[]>([]);
   acceptedTypes = input<string>('*');
@@ -49,7 +49,6 @@ export class FileManagementComponent implements OnDestroy {
 
   @ViewChild('fileInput') fileInput!: ElementRef<HTMLInputElement>;
 
-  private destroy$ = new Subject<void>();
 
   // State - separate new uploads from existing files
   isDragOver = signal(false);
@@ -87,20 +86,6 @@ export class FileManagementComponent implements OnDestroy {
   });
 
   // Table configuration
-
-
-  constructor() {
-    // Emit when new files change
-    effect(() => {
-      const newFilesList = this.newFiles();
-      this.newFilesChange.emit(newFilesList);
-    });
-  }
-
-  ngOnDestroy(): void {
-    this.destroy$.next();
-    this.destroy$.complete();
-  }
 
   // Drag & Drop handlers
   onDragOver(event: DragEvent): void {

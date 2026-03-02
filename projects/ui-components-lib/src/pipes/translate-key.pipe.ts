@@ -1,6 +1,5 @@
 import { Pipe, PipeTransform, inject } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { Language } from '@corp-products/app-core';
 
 @Pipe({
   name: 'localizedLabel',
@@ -12,7 +11,7 @@ export class LocalizedLabelPipe implements PipeTransform {
 
   transform(label: string): string {
     if (!label) return '';
-    const lang = this.translateService.getCurrentLang() || Language.AR;
+    const lang = this.translateService.getCurrentLang() || 'ar';
     const suffix = lang.charAt(0).toUpperCase() + lang.slice(1);
     const key = label + `${suffix}`;
     return key;
