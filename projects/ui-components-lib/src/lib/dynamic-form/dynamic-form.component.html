@@ -1,5 +1,5 @@
 <form [formGroup]="formGroup" class="dynamic-form">
-  <div class="grid grid-cols-12 gap-x-2 dynamic-form__content">
+  <div class="dynamic-form__content">
     @for (inputName of inputsNames; track $index) {
     <div [ngClass]="inputsMap[inputName].rowSize">
       @switch (inputsMap[inputName].fieldType) {
