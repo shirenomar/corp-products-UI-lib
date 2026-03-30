@@ -14,6 +14,7 @@ import {
   AppButtonComponent,
   AppDropdownMenuComponent,
   BottomSheetComponent,
+  dateRangeValidator,
   DropdownMenuItem,
   DualCalendarComponent,
   DynamicFormComponent,
@@ -169,18 +170,21 @@ export class App {
   ];
 
   // Dynamic form demo config and state
-  dynamicFormGroup = new FormGroup({
-    startDate: new FormControl<Date | null>(new Date(), [Validators.required]),
-    endDate: new FormControl<Date | null>(null, [Validators.required]),
-    hijriDate: new FormControl<Date | null>(null),
-    file: new FormControl<null>(null),
+  dynamicFormGroup = new FormGroup(
+    {
+      startDate: new FormControl<Date | null>(new Date(), [Validators.required]),
+      endDate: new FormControl<Date | null>(null, [Validators.required]),
+      hijriDate: new FormControl<Date | null>(null),
+      file: new FormControl<null>(null),
 
-    fullName: new FormControl<string>('', [Validators.required]),
-    role: new FormControl<any>(null, [Validators.required]),
-    status: new FormControl<string | null>(null),
-    notify: new FormControl<boolean>(false),
-    assignee: new FormControl<Array<any>>([], [Validators.required]),
-  });
+      fullName: new FormControl<string>('', [Validators.required]),
+      role: new FormControl<any>(null, [Validators.required]),
+      status: new FormControl<string | null>(null),
+      notify: new FormControl<boolean>(false),
+      assignee: new FormControl<Array<any>>([], [Validators.required]),
+    },
+    { validators: [dateRangeValidator('startDate', 'endDate')] },
+  );
   showCalender() {
     this.isCalendarOpen = !this.isCalendarOpen;
     console.log('date selected ', this.dualControl.value);
@@ -210,6 +214,16 @@ export class App {
       variant: 'in',
       withoutTime: false,
     },
+    endDate: {
+      label: 'End Date',
+      fieldType: FormFieldTypeEnum.DATE_PICKER,
+      inputId: 'df-end-date',
+      rowSize: 'half',
+      dateRange: { min: new Date(2020, 0, 1), max: new Date(2030, 11, 31) },
+      showIcon: true,
+      variant: 'in',
+      withoutTime: true,
+    },
     file: {
       label: 'Start Date',
       fieldType: FormFieldTypeEnum.UPLOAD_FILE,
@@ -223,16 +237,6 @@ export class App {
       fieldType: FormFieldTypeEnum.HIJRI_DATE_PICKER,
       rowSize: 'half',
       showIcon: true,
-    },
-    endDate: {
-      label: 'End Date',
-      fieldType: FormFieldTypeEnum.DATE_PICKER,
-      inputId: 'df-end-date',
-      rowSize: 'half',
-      dateRange: { min: new Date(2020, 0, 1), max: new Date(2030, 11, 31) },
-      showIcon: true,
-      variant: 'in',
-      withoutTime: true,
     },
     fullName: {
       label: 'Full Name',
@@ -321,6 +325,12 @@ export class App {
   onSubmitDynamicForm() {
     this.dynamicFormGroup.markAllAsTouched();
     this.dynamicFormGroup.updateValueAndValidity();
+    this.dynamicFormGroup.valueChanges.subscribe(() => {
+      const dateTo = this.dynamicFormGroup.get('endDate');
+      if (dateTo) {
+        dateTo.updateValueAndValidity({ emitEvent: false });
+      }
+    });
     if (this.dynamicFormGroup.invalid) {
       console.warn(
         'Dynamic form invalid',

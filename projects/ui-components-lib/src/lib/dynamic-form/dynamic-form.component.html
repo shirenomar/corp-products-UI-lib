@@ -15,7 +15,8 @@
         [readonly]="inputsMap[inputName].readonly || dynamicFormData.isReadOnlyForm || false"
         [disabled]="inputsMap[inputName].disabled || false" [variant]="inputsMap[inputName].variant || 'over'"
         [showIcon]="inputsMap[inputName].showIcon !== false" [isTimeOnly]="inputsMap[inputName].isTimeOnly || false"
-        [withoutTime]="inputsMap[inputName].withoutTime || false" />
+        [withoutTime]="inputsMap[inputName].withoutTime || false"
+        [showClear]="inputsMap[inputName].showClear || false" />
       }
       @case (fieldType.SELECT_BUTTON) {
       <stc-select-button [control]="getFormControl(inputName, formGroup)" [id]="inputsMap[inputName].inputId"
