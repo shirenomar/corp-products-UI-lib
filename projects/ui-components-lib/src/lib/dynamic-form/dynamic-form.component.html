@@ -15,7 +15,8 @@
         [readonly]="inputsMap[inputName].readonly || dynamicFormData.isReadOnlyForm || false"
         [disabled]="inputsMap[inputName].disabled || false" [variant]="inputsMap[inputName].variant || 'over'"
         [showIcon]="inputsMap[inputName].showIcon !== false" [isTimeOnly]="inputsMap[inputName].isTimeOnly || false"
-        [withoutTime]="inputsMap[inputName].withoutTime || false" />
+        [withoutTime]="inputsMap[inputName].withoutTime || false"
+        [showClear]="inputsMap[inputName].showClear || false" />
       }
       @case (fieldType.SELECT_BUTTON) {
       <stc-select-button [control]="getFormControl(inputName, formGroup)" [id]="inputsMap[inputName].inputId"
@@ -42,6 +43,35 @@
       </stc-input>
       }
       @case (fieldType.SELECT) {
+      <ng-template #optionTpl let-item>
+        @if (inputsMap[inputName].optionTemplate) {
+          <div class="flex items-center gap-3">
+            @if (inputsMap[inputName].optionTemplate!.imageKey && item[inputsMap[inputName].optionTemplate!.imageKey!]) {
+              <img [src]="item[inputsMap[inputName].optionTemplate!.imageKey!]" 
+                   [alt]="item[inputsMap[inputName].optionTemplate!.mainTextKey]"
+                   class="w-8 h-8 rounded-full object-cover flex-shrink-0" />
+            }
+            <div class="flex flex-col min-w-0">
+              <span class="font-medium truncate">{{ item[inputsMap[inputName].optionTemplate!.mainTextKey] }}</span>
+              @if (inputsMap[inputName].optionTemplate!.subTextKey && item[inputsMap[inputName].optionTemplate!.subTextKey!]) {
+                <span class="text-sm text-gray-500 truncate">{{ item[inputsMap[inputName].optionTemplate!.subTextKey!] }}</span>
+              }
+            </div>
+          </div>
+        }
+      </ng-template>
+      <ng-template #selectedTpl let-item>
+        @if (inputsMap[inputName].optionTemplate) {
+          <div class="flex items-center gap-2">
+            @if (inputsMap[inputName].optionTemplate!.imageKey && item[inputsMap[inputName].optionTemplate!.imageKey!]) {
+              <img [src]="item[inputsMap[inputName].optionTemplate!.imageKey!]" 
+                   [alt]="item[inputsMap[inputName].optionTemplate!.mainTextKey]"
+                   class="w-6 h-6 rounded-full object-cover flex-shrink-0" />
+            }
+            <span class="truncate">{{ item[inputsMap[inputName].optionTemplate!.mainTextKey] }}</span>
+          </div>
+        }
+      </ng-template>
       <stc-select [control]="getFormControl(inputName, formGroup)" [id]="inputsMap[inputName].inputId"
         [name]="inputName" [label]="inputsMap[inputName].label" [placeholder]="inputsMap[inputName].placeholder || ''"
         [hint]="inputsMap[inputName].hint"
@@ -55,6 +85,8 @@
         [filterBy]="inputsMap[inputName].filterBy || ''"
         [selectedItemsLabel]="inputsMap[inputName].selectedItemsLabel || ''"
         [size]="inputsMap[inputName].size || 'small'" [variant]="inputsMap[inputName].variant || 'over'"
+        [optionTemplate]="inputsMap[inputName].optionTemplate ? optionTpl : null"
+        [selectedItemTemplate]="inputsMap[inputName].optionTemplate ? selectedTpl : null"
         (change)="selectChange.emit({ name: inputName, event: $event })"
         (click)="selectClicked.emit({ name: inputName, event: $event })" />
       }
