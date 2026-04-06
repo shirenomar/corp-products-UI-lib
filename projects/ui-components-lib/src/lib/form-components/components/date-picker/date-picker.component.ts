@@ -33,6 +33,7 @@ export class DatePickerComponent extends BaseInputComponent {
   @Input() minDate: Date | undefined | null;
   @Input() maxDate: Date | undefined | null;
   @Input() hourFormat: '12' | '24' = '12';
+  @Input() appendTo = 'body'
   nowTime = new Date();
   @Input() selectionMode: 'single' | 'range' = 'single';
   @Output() onAfterClearDate = new EventEmitter<void>();
