@@ -141,6 +141,7 @@ export class DualCalendarComponent {
     this.gregorianUTC.emit(this.gregorianUTCValue);
     this.selectedDate = this.formatHijri(ngbDate);
     this.isShown = false;
+    this.onClose.emit(true)
   }
 
   showCalender(isOpen: boolean) {
