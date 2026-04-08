@@ -16,7 +16,7 @@
         [disabled]="inputsMap[inputName].disabled || false" [variant]="inputsMap[inputName].variant || 'over'"
         [showIcon]="inputsMap[inputName].showIcon !== false" [isTimeOnly]="inputsMap[inputName].isTimeOnly || false"
         [withoutTime]="inputsMap[inputName].withoutTime || false"
-        [showClear]="inputsMap[inputName].showClear || false" />
+        [showClear]="inputsMap[inputName].showClear || true" />
       }
       @case (fieldType.SELECT_BUTTON) {
       <stc-select-button [control]="getFormControl(inputName, formGroup)" [id]="inputsMap[inputName].inputId"
@@ -47,7 +47,7 @@
         @if (inputsMap[inputName].optionTemplate) {
           <div class="flex items-center gap-3">
             @if (inputsMap[inputName].optionTemplate!.imageKey && item[inputsMap[inputName].optionTemplate!.imageKey!]) {
-              <img [src]="item[inputsMap[inputName].optionTemplate!.imageKey!]" 
+              <img [src]="item[inputsMap[inputName].optionTemplate!.imageKey!]"
                    [alt]="item[inputsMap[inputName].optionTemplate!.mainTextKey]"
                    class="w-8 h-8 rounded-full object-cover flex-shrink-0" />
             }
@@ -64,7 +64,7 @@
         @if (inputsMap[inputName].optionTemplate) {
           <div class="flex items-center gap-2">
             @if (inputsMap[inputName].optionTemplate!.imageKey && item[inputsMap[inputName].optionTemplate!.imageKey!]) {
-              <img [src]="item[inputsMap[inputName].optionTemplate!.imageKey!]" 
+              <img [src]="item[inputsMap[inputName].optionTemplate!.imageKey!]"
                    [alt]="item[inputsMap[inputName].optionTemplate!.mainTextKey]"
                    class="w-6 h-6 rounded-full object-cover flex-shrink-0" />
             }
