@@ -5,7 +5,7 @@ import { FormValidationService } from "./form-validation.service";
 @Pipe({
   name: "validationErrors",
   standalone: true,
-  pure: true
+  pure: false
 })
 export class ValidationErrorsPipe implements PipeTransform {
   private formValidationService = inject(FormValidationService);
