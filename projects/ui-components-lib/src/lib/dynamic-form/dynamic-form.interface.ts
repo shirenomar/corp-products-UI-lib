@@ -33,7 +33,7 @@ export interface InputsMapData {
   dateRange?: DateRangeInterface;
   isTimeOnly?: boolean;
   showIcon?: boolean;
-
+  withoutTime?: boolean;
   //select button
   selectButtonOptions?: LabelValue<any>[];
 
@@ -58,6 +58,7 @@ export interface InputsMapData {
   checkmark?: boolean;
   filterBy?: string;
   selectedItemsLabel?: string;
+  optionTemplate?: OptionTemplateConfig; // Custom template config for rendering options with image, main text, and subtext
 
   // Auto-complete
   autoCompleteItems?: unknown[];
@@ -85,6 +86,12 @@ export interface DateRangeInterface {
   notAfterDateInput?: string; // For dynamic date range validation
   notBeforeOrSameDateInput?: string;
   notAfterOrSameDateInput?: string;
+}
+
+export interface OptionTemplateConfig {
+  imageKey?: string;
+  mainTextKey: string;
+  subTextKey?: string;
 }
 
 export enum FormFieldTypeEnum {

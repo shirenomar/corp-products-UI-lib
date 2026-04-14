@@ -37,6 +37,7 @@ export class DynamicSidebarComponent implements AfterViewInit, OnDestroy {
   @Input() position: 'left' | 'right' = 'left';
   @Input() styleClass = '';
   @Input() disabled = false;
+  @Input() hideActions = false;
 
   @Output() closed = new EventEmitter();
 

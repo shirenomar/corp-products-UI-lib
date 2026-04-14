@@ -13,7 +13,8 @@ export interface DynamicSidebarV2Config<T = any> {
   position?: 'left' | 'right';
   styleClass?: string;
   viewContainerRef?: ViewContainerRef;
-  actions?: SidebarV2Actions
+  actions?: SidebarV2Actions;
+  hideActions?: boolean;
 }
 
 export interface SidebarActionV2Config {

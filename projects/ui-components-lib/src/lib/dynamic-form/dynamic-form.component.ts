@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges } from '@angular/core';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
 import { CheckboxModule } from 'primeng/checkbox';
@@ -59,10 +59,21 @@ export class DynamicFormComponent implements OnInit {
   getFormControl = FormUtils.getFormControl;
 
   ngOnInit(): void {
+    this.updateFormState();
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['dynamicFormData'] && !changes['dynamicFormData'].isFirstChange()) {
+      this.updateFormState();
+    }
+  }
+
+  private updateFormState(): void {
     this.formGroup = this.dynamicFormData?.formGroup as FormGroup;
     this.inputsMap = this.dynamicFormData?.inputsMap as InputsMap;
     this.inputsNames = Object.keys(this.inputsMap || {});
   }
+
   getAcceptedTypes(): string {
     return FileExtentions.toString();
   }

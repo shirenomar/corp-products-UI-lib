@@ -25,6 +25,7 @@ export class DynamicSidebarV2Service {
     instance.component = options.component;
     instance.data = options.data ?? {};
     instance.actions = options.actions;
+    instance.hideActions = options.hideActions ?? false;
     instance.closed.subscribe(() => this.close());
 
     this.appRef.attachView(this.sidebarRef.hostView);

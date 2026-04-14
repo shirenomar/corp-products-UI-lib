@@ -42,7 +42,7 @@
 
   } @else {
   <p-floatLabel [variant]="variant">
-    <p-select [dataKey]="dataKey" [checkmark]="checkmark" [disabled]="disabled" [editable]="editable"
+    <p-select [appendTo]="appendTo" [dataKey]="dataKey" [checkmark]="checkmark" [disabled]="disabled" [editable]="editable"
       [filterBy]="filterBy" [filter]="filter" [formControl]="control" [id]="inputId" [name]="name"
       [ngClass]="{ 'p-invalid ng-dirty ng-invalid': isInvalid }"
       [emptyMessage]="emptyMessage || ('shared.no_results_found'|translate)" [optionLabel]="optionLabel"

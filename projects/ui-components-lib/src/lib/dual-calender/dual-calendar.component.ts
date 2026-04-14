@@ -87,7 +87,6 @@ export class DualCalendarComponent implements OnInit , OnChanges {
     this.setDate(this.control?.value);
   }
 
-
   ngAfterViewInit() {
     this.moveElementToBody();
   }
@@ -177,6 +176,7 @@ export class DualCalendarComponent implements OnInit , OnChanges {
     this.gregorianUTC.emit(this.gregorianUTCValue);
     this.selectedDate = this.formatHijri(ngbDate);
     this.isShown = false;
+    this.onClose.emit(true)
   }
 
   showCalender(isOpen: boolean) {

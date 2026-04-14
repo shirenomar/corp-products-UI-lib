@@ -16,7 +16,7 @@ export const dateRangeValidator =
     from.setHours(0, 0, 0, 0);
     to.setHours(0, 0, 0, 0);
 
-    return from > to ? { invalidDateRange: true } : null;
+    return from > to ? { endDateBeforeStartDate: true } : null;
   };
 
 export const notFutureDateValidator =
