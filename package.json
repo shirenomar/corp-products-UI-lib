@@ -7,7 +7,7 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "storybook": "ng run ui-components-lib:storybook"
+    "storybook": "npx compodoc -p projects/ui-components-lib/tsconfig.lib.json -e json -d . && ng run ui-components-lib:storybook"
   },
   "prettier": {
     "printWidth": 100,
@@ -28,11 +28,13 @@
     "@angular/compiler": "^20.2.0",
     "@angular/core": "^20.2.0",
     "@angular/forms": "^20.2.0",
+    "@angular/localize": "^21.2.8",
     "@angular/platform-browser": "^20.2.0",
     "@angular/router": "^20.2.0",
     "@ng-bootstrap/ng-bootstrap": "^19.0.1",
     "@ngx-translate/core": "^17.0.0",
     "@ngx-translate/http-loader": "^17.0.0",
+    "@popperjs/core": "^2.11.8",
     "@primeuix/themes": "^1.2.3",
     "luxon": "^3.7.2",
     "moment-hijri": "^3.0.0",

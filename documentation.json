@@ -289,6 +289,71 @@
             "sourceCode": "import { Pipe, PipeTransform } from '@angular/core';\r\n\r\n/**\r\n * Transforms file size from bytes to readable format (B, KB, MB, GB, TB).\r\n *\r\n * Usage:\r\n *   {{ fileSize | fileSize }}           // Default: auto unit, 2 decimals\r\n *   {{ fileSize | fileSize:0 }}         // Auto unit, 0 decimals\r\n *   {{ fileSize | fileSize:2:'MB' }}    // Force MB, 2 decimals\r\n *\r\n * @param value - File size in bytes\r\n * @param decimals - Number of decimal places (default: 2)\r\n * @param unit - Unit: 'B', 'KB', 'MB', 'GB', 'TB' (default: auto)\r\n */\r\n@Pipe({\r\n  name: 'fileSize',\r\n  standalone: true,\r\n})\r\nexport class FileSizePipe implements PipeTransform {\r\n  private readonly units = ['B', 'KB', 'MB', 'GB', 'TB'];\r\n  private readonly k = 1024;\r\n\r\n  transform(\r\n    bytes: number | null | undefined,\r\n    decimals = 2,\r\n    unit?: 'B' | 'KB' | 'MB' | 'GB' | 'TB',\r\n  ): string {\r\n    if (bytes === null || bytes === undefined || isNaN(bytes)) {\r\n      return '0 B';\r\n    }\r\n\r\n    if (bytes === 0) {\r\n      return '0 B';\r\n    }\r\n\r\n    // If a specific unit is requested\r\n    if (unit) {\r\n      const unitIndex = this.units.indexOf(unit);\r\n      if (unitIndex === -1) {\r\n        return this.autoFormat(bytes, decimals);\r\n      }\r\n      const divisor = Math.pow(this.k, unitIndex);\r\n      const value = bytes / divisor;\r\n      return `${this.formatNumber(value, decimals)} ${unit}`;\r\n    }\r\n\r\n    // Auto-detect the best unit\r\n    return this.autoFormat(bytes, decimals);\r\n  }\r\n\r\n  private autoFormat(bytes: number, decimals: number): string {\r\n    const i = Math.floor(Math.log(Math.abs(bytes)) / Math.log(this.k));\r\n    const unitIndex = Math.min(i, this.units.length - 1);\r\n    const value = bytes / Math.pow(this.k, unitIndex);\r\n    return `${this.formatNumber(value, decimals)} ${this.units[unitIndex]}`;\r\n  }\r\n\r\n  private formatNumber(value: number, decimals: number): string {\r\n    return parseFloat(value.toFixed(decimals)).toString();\r\n  }\r\n}\r\n"
         },
         {
+            "name": "LocalizedLabelPipe",
+            "id": "pipe-LocalizedLabelPipe-b5f03153096e44a8c83d676be1c1f55002dd3d10d59821643f4379916b0c148475ad947c20f3e6dc3f511bd09837fd1ad3357c79e039b3cb407cfa76880dea6b",
+            "file": "projects/ui-components-lib/src/pipes/translate-key.pipe.ts",
+            "type": "pipe",
+            "deprecated": false,
+            "deprecationMessage": "",
+            "description": "",
+            "rawdescription": "\n",
+            "properties": [
+                {
+                    "name": "translateService",
+                    "defaultValue": "inject(TranslateService)",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "unknown",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 10,
+                    "modifierKind": [
+                        123,
+                        148
+                    ]
+                }
+            ],
+            "methods": [
+                {
+                    "name": "transform",
+                    "args": [
+                        {
+                            "name": "label",
+                            "type": "string",
+                            "optional": false,
+                            "dotDotDotToken": false,
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "string",
+                    "typeParameters": [],
+                    "line": 12,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "label",
+                            "type": "string",
+                            "optional": false,
+                            "dotDotDotToken": false,
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                }
+            ],
+            "standalone": true,
+            "pure": false,
+            "ngname": "localizedLabel",
+            "sourceCode": "import { Pipe, PipeTransform, inject } from '@angular/core';\r\nimport { TranslateService } from '@ngx-translate/core';\r\n\r\n@Pipe({\r\n  name: 'localizedLabel',\r\n  standalone: true,\r\n  pure: false,\r\n})\r\nexport class LocalizedLabelPipe implements PipeTransform {\r\n  private readonly translateService = inject(TranslateService);\r\n\r\n  transform(label: string): string {\r\n    if (!label) return '';\r\n    const lang = this.translateService.getCurrentLang() || 'ar';\r\n    const suffix = lang.charAt(0).toUpperCase() + lang.slice(1);\r\n    const key = label + `${suffix}`;\r\n    return key;\r\n  }\r\n}\r\n"
+        },
+        {
             "name": "MenuPopupTextColorPipe",
             "id": "pipe-MenuPopupTextColorPipe-e711dd32ef5729c3a2477df842785ed3382542aca685521661a0d067ec80b7b37dbea53113ef687991a21af5692478c6f85853a8364f22ca6a9822a65d8ff2a0",
             "file": "projects/ui-components-lib/src/lib/app-dropdown-menu/menu-popup.pipe.ts",
@@ -5906,24 +5971,94 @@
     "interceptors": [],
     "classes": [
         {
-            "name": "FakeLoader",
-            "id": "class-FakeLoader-59aa5a6e0ad947320a6687e51e9a9ac9694c2fb2bf23735d204673fa504c376ba0f7e97c1049f4357094eaeb1b717aeee16d5f2c9de3609c486272d4730a6cd4",
-            "file": "projects/ui-components-lib/.storybook/preview.ts",
+            "name": "DateHandler",
+            "id": "class-DateHandler-c463f50b86b0897518c28d7a4771487d30453632620b215c4be37a9e4f16218e472de620a54fdb304e363a524eb9e346ba3ee69bda22ca3df95c00f98d900773",
+            "file": "projects/ui-components-lib/src/helper/date-handler.ts",
             "deprecated": false,
             "deprecationMessage": "",
             "type": "class",
-            "sourceCode": "import 'zone.js';\r\nimport { setCompodocJson } from '@storybook/addon-docs/angular';\r\nimport docJson from '../../../documentation.json';\r\nsetCompodocJson(docJson);\r\nimport { applicationConfig, Preview } from '@storybook/angular';\r\nimport { PrimeNG, providePrimeNG } from 'primeng/config';\r\nimport Aura from '@primeuix/themes/aura';\r\nimport { importProvidersFrom } from '@angular/core';\r\nimport { TranslateLoader, TranslateModule } from '@ngx-translate/core';\r\nimport { of } from 'rxjs';\r\nsetCompodocJson(docJson);\r\n\r\nclass FakeLoader implements TranslateLoader {\r\n  getTranslation(lang: string) {\r\n    return of({});\r\n  }\r\n}\r\n\r\nconst preview: Preview = {\r\n  decorators: [\r\n    applicationConfig({\r\n      providers: [\r\n        providePrimeNG({\r\n          theme: {\r\n            preset: Aura,\r\n            options: {\r\n              darkModeSelector: false,\r\n            },\r\n          },\r\n        }),\r\n        PrimeNG,\r\n        importProvidersFrom(\r\n          TranslateModule.forRoot({\r\n            loader: {\r\n              provide: TranslateLoader,\r\n              useClass: FakeLoader,\r\n            },\r\n          }),\r\n        ),\r\n      ],\r\n    }),\r\n  ],\r\n  parameters: {\r\n    controls: {\r\n      matchers: {\r\n        color: /(background|color)$/i,\r\n        date: /Date$/i,\r\n      },\r\n    },\r\n  },\r\n};\r\n\r\nexport default preview;\r\n",
+            "sourceCode": "import { DateTime, DateTimeMaybeValid, DateTimeOptions, LocaleOptions } from 'luxon';\r\nimport { DateFormats, TimeFormats } from '../enums/date-formatter';\r\n\r\nexport class DateHandler {\r\n  /**\r\n   * @param date `ISO string`\r\n   * @param format `format string`\r\n   * @param localeOptions `opts to override the configuration options on this DateTime` - default is system's locale\r\n   * @param isConvertedToUTC\r\n   * @description Returns a string representation of this DateTime formatted according to the specified format string.\r\n   */\r\n  static formatDate(\r\n    date: string,\r\n    format: DateFormats = DateFormats.DATE_TIME_FULL,\r\n    localeOptions?: LocaleOptions,\r\n    isConvertedToUTC?: boolean\r\n  ): string {\r\n    if (!date) {\r\n      return '';\r\n    }\r\n    return this.getDateTimeFromISO(date, isConvertedToUTC ? { zone: 'utc' } : {})\r\n      ?.toFormat(format, localeOptions)\r\n      .toLocaleString();\r\n  }\r\n\r\n  static getDateTimeFromISO(\r\n    date: string,\r\n    dateTimeOptions: DateTimeOptions = {}\r\n  ): DateTime<true> | DateTime<false> {\r\n    return DateTime.fromISO(date, dateTimeOptions);\r\n  }\r\n\r\n  static getJSDateFromISO(date: string): Date {\r\n    const dateTime = this.getDateTimeFromISO(date, { zone: 'utc' }); // Ensure it's in UTC\r\n    if (!dateTime.isValid) {\r\n      throw new Error('Invalid date format');\r\n    }\r\n    return new Date(\r\n      dateTime.year,\r\n      dateTime.month - 1,\r\n      dateTime.day,\r\n      dateTime.hour,\r\n      dateTime.minute,\r\n      dateTime.second,\r\n      dateTime.millisecond\r\n    );\r\n  }\r\n\r\n  static getUTCDateTime(date: string): string {\r\n    return this.getDateTimeFromISO(date)?.toUTC()?.toISO() as string;\r\n  }\r\n\r\n  static getUTCDateTimeFromJsDate(date: Date): string {\r\n    return this.getDateFromJsDate(new Date(date))?.toUTC()?.toISO() as string;\r\n  }\r\n\r\n  static getCurrentUTCDateTime(): string {\r\n    return DateTime.utc().toISO();\r\n  }\r\n\r\n  static getDateFromJsDate(date: Date): DateTimeMaybeValid {\r\n    return DateTime.fromJSDate(date);\r\n  }\r\n\r\n  static checkIfTwoDatesEqual(startDate: Date, endDate: Date): boolean {\r\n    return DateTime.fromJSDate(startDate).equals(DateTime.fromJSDate(endDate));\r\n  }\r\n\r\n  static getCurrentDateTime() {\r\n    return DateTime;\r\n  }\r\n\r\n  static constructDateTime(date: Date, time: Date, isConvertedToUTC?: boolean) {\r\n    const dateYear = this.getPartialDateOrTime(date, DateFormats.YEAR);\r\n    const dateMonth = this.getPartialDateOrTime(date, DateFormats.MONTH);\r\n    const dateDay = this.getPartialDateOrTime(date, DateFormats.DAY);\r\n\r\n    const dateHours = this.getPartialDateOrTime(time, TimeFormats.HOURS24Format, isConvertedToUTC);\r\n    const dateMinutes = this.getPartialDateOrTime(time, TimeFormats.MINUTES, isConvertedToUTC);\r\n    const dateSeconds = this.getPartialDateOrTime(time, TimeFormats.SECONDS, isConvertedToUTC);\r\n\r\n    return DateTime.utc(+dateYear, +dateMonth, +dateDay, +dateHours, +dateMinutes, +dateSeconds)\r\n      .toUTC()\r\n      .toISO();\r\n  }\r\n\r\n  static getPartialDateOrTime(\r\n    date: Date,\r\n    format: TimeFormats | DateFormats,\r\n    isConvertedToUTC?: boolean\r\n  ) {\r\n    return DateTime.fromJSDate(date, isConvertedToUTC ? { zone: 'utc' } : {}).toFormat(format);\r\n  }\r\n\r\n  static getValueFromJSDate(date: Date, unit: 'year' | 'month' | 'day'): number {\r\n    const dt = DateTime.fromJSDate(date);\r\n    switch (unit) {\r\n      case 'year':\r\n        return dt.year;\r\n      case 'month':\r\n        return dt.month;\r\n      case 'day':\r\n        return dt.day;\r\n      default:\r\n        throw new Error(`Unsupported unit: ${unit}`);\r\n    }\r\n  }\r\n\r\n  static getValueFromLocalDateTime(unit: 'hour' | 'minute' | 'second'): number {\r\n    const now = DateTime.local();\r\n    switch (unit) {\r\n      case 'hour':\r\n        return now.hour;\r\n      case 'minute':\r\n        return now.minute;\r\n      case 'second':\r\n        return now.second;\r\n      default:\r\n        throw new Error(`Unsupported unit: ${unit}`);\r\n    }\r\n  }\r\n\r\n  static getISODateTime(date: Date): string {\r\n    if (!date) {\r\n      throw new Error('Invalid date: date is null or undefined');\r\n    }\r\n\r\n    // Create a DateTime instance from the JS Date, preserving the date parts\r\n    // but using local time for the time parts\r\n    const dt = DateTime.local().set({\r\n      year: DateTime.fromJSDate(date).year,\r\n      month: DateTime.fromJSDate(date).month,\r\n      day: DateTime.fromJSDate(date).day,\r\n      hour: DateTime.local().hour,\r\n      minute: DateTime.local().minute,\r\n      second: DateTime.local().second,\r\n      millisecond: DateTime.local().millisecond,\r\n    });\r\n\r\n    return dt.toISO() as string;\r\n  }\r\n}\r\n",
             "inputsClass": [],
             "outputsClass": [],
             "properties": [],
             "methods": [
                 {
-                    "name": "getTranslation",
+                    "name": "checkIfTwoDatesEqual",
                     "args": [
                         {
-                            "name": "lang",
-                            "type": "string",
+                            "name": "startDate",
+                            "type": "Date",
                             "optional": false,
+                            "dotDotDotToken": false,
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        },
+                        {
+                            "name": "endDate",
+                            "type": "Date",
+                            "optional": false,
+                            "dotDotDotToken": false,
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "boolean",
+                    "typeParameters": [],
+                    "line": 65,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "modifierKind": [
+                        126
+                    ],
+                    "jsdoctags": [
+                        {
+                            "name": "startDate",
+                            "type": "Date",
+                            "optional": false,
+                            "dotDotDotToken": false,
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        },
+                        {
+                            "name": "endDate",
+                            "type": "Date",
+                            "optional": false,
+                            "dotDotDotToken": false,
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "constructDateTime",
+                    "args": [
+                        {
+                            "name": "date",
+                            "type": "Date",
+                            "optional": false,
+                            "dotDotDotToken": false,
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        },
+                        {
+                            "name": "time",
+                            "type": "Date",
+                            "optional": false,
+                            "dotDotDotToken": false,
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        },
+                        {
+                            "name": "isConvertedToUTC",
+                            "type": "boolean",
+                            "optional": true,
                             "dotDotDotToken": false,
                             "deprecated": false,
                             "deprecationMessage": ""
@@ -5932,13 +6067,613 @@
                     "optional": false,
                     "returnType": "any",
                     "typeParameters": [],
-                    "line": 14,
+                    "line": 73,
                     "deprecated": false,
                     "deprecationMessage": "",
+                    "modifierKind": [
+                        126
+                    ],
                     "jsdoctags": [
                         {
-                            "name": "lang",
+                            "name": "date",
+                            "type": "Date",
+                            "optional": false,
+                            "dotDotDotToken": false,
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        },
+                        {
+                            "name": "time",
+                            "type": "Date",
+                            "optional": false,
+                            "dotDotDotToken": false,
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        },
+                        {
+                            "name": "isConvertedToUTC",
+                            "type": "boolean",
+                            "optional": true,
+                            "dotDotDotToken": false,
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "formatDate",
+                    "args": [
+                        {
+                            "name": "date",
                             "type": "string",
+                            "optional": false,
+                            "dotDotDotToken": false,
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        },
+                        {
+                            "name": "format",
+                            "type": "DateFormats",
+                            "optional": false,
+                            "dotDotDotToken": false,
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "defaultValue": "DateFormats.DATE_TIME_FULL"
+                        },
+                        {
+                            "name": "localeOptions",
+                            "type": "LocaleOptions",
+                            "optional": true,
+                            "dotDotDotToken": false,
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        },
+                        {
+                            "name": "isConvertedToUTC",
+                            "type": "boolean",
+                            "optional": true,
+                            "dotDotDotToken": false,
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "string",
+                    "typeParameters": [],
+                    "line": 12,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "rawdescription": "\n\n",
+                    "description": "",
+                    "modifierKind": [
+                        126
+                    ],
+                    "jsdoctags": [
+                        {
+                            "name": {
+                                "pos": 205,
+                                "end": 209,
+                                "kind": 80,
+                                "id": 0,
+                                "flags": 16842752,
+                                "transformFlags": 0,
+                                "escapedText": "date"
+                            },
+                            "type": "string",
+                            "optional": false,
+                            "dotDotDotToken": false,
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "pos": 199,
+                                "end": 204,
+                                "kind": 80,
+                                "id": 0,
+                                "flags": 16842752,
+                                "transformFlags": 0,
+                                "escapedText": "param"
+                            },
+                            "comment": "<p><code>ISO string</code></p>\n"
+                        },
+                        {
+                            "name": {
+                                "pos": 236,
+                                "end": 242,
+                                "kind": 80,
+                                "id": 0,
+                                "flags": 16842752,
+                                "transformFlags": 0,
+                                "escapedText": "format"
+                            },
+                            "type": "DateFormats",
+                            "optional": false,
+                            "dotDotDotToken": false,
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "defaultValue": "DateFormats.DATE_TIME_FULL",
+                            "tagName": {
+                                "pos": 230,
+                                "end": 235,
+                                "kind": 80,
+                                "id": 0,
+                                "flags": 16842752,
+                                "transformFlags": 0,
+                                "escapedText": "param"
+                            },
+                            "comment": "<p><code>format string</code></p>\n"
+                        },
+                        {
+                            "name": {
+                                "pos": 272,
+                                "end": 285,
+                                "kind": 80,
+                                "id": 0,
+                                "flags": 16842752,
+                                "transformFlags": 0,
+                                "escapedText": "localeOptions"
+                            },
+                            "type": "LocaleOptions",
+                            "optional": true,
+                            "dotDotDotToken": false,
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "pos": 266,
+                                "end": 271,
+                                "kind": 80,
+                                "id": 0,
+                                "flags": 16842752,
+                                "transformFlags": 0,
+                                "escapedText": "param"
+                            },
+                            "comment": "<p><code>opts to override the configuration options on this DateTime</code> - default is system&#39;s locale</p>\n"
+                        },
+                        {
+                            "name": {
+                                "pos": 390,
+                                "end": 406,
+                                "kind": 80,
+                                "id": 0,
+                                "flags": 16842752,
+                                "transformFlags": 0,
+                                "escapedText": "isConvertedToUTC"
+                            },
+                            "type": "boolean",
+                            "optional": true,
+                            "dotDotDotToken": false,
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "pos": 384,
+                                "end": 389,
+                                "kind": 80,
+                                "id": 0,
+                                "flags": 16842752,
+                                "transformFlags": 0,
+                                "escapedText": "param"
+                            },
+                            "comment": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "getCurrentDateTime",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "any",
+                    "typeParameters": [],
+                    "line": 69,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "modifierKind": [
+                        126
+                    ]
+                },
+                {
+                    "name": "getCurrentUTCDateTime",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "string",
+                    "typeParameters": [],
+                    "line": 57,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "modifierKind": [
+                        126
+                    ]
+                },
+                {
+                    "name": "getDateFromJsDate",
+                    "args": [
+                        {
+                            "name": "date",
+                            "type": "Date",
+                            "optional": false,
+                            "dotDotDotToken": false,
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "DateTimeMaybeValid",
+                    "typeParameters": [],
+                    "line": 61,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "modifierKind": [
+                        126
+                    ],
+                    "jsdoctags": [
+                        {
+                            "name": "date",
+                            "type": "Date",
+                            "optional": false,
+                            "dotDotDotToken": false,
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "getDateTimeFromISO",
+                    "args": [
+                        {
+                            "name": "date",
+                            "type": "string",
+                            "optional": false,
+                            "dotDotDotToken": false,
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        },
+                        {
+                            "name": "dateTimeOptions",
+                            "type": "DateTimeOptions",
+                            "optional": false,
+                            "dotDotDotToken": false,
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "defaultValue": "{}"
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "DateTime | DateTime",
+                    "typeParameters": [],
+                    "line": 26,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "modifierKind": [
+                        126
+                    ],
+                    "jsdoctags": [
+                        {
+                            "name": "date",
+                            "type": "string",
+                            "optional": false,
+                            "dotDotDotToken": false,
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        },
+                        {
+                            "name": "dateTimeOptions",
+                            "type": "DateTimeOptions",
+                            "optional": false,
+                            "dotDotDotToken": false,
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "defaultValue": "{}",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "getISODateTime",
+                    "args": [
+                        {
+                            "name": "date",
+                            "type": "Date",
+                            "optional": false,
+                            "dotDotDotToken": false,
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "string",
+                    "typeParameters": [],
+                    "line": 123,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "modifierKind": [
+                        126
+                    ],
+                    "jsdoctags": [
+                        {
+                            "name": "date",
+                            "type": "Date",
+                            "optional": false,
+                            "dotDotDotToken": false,
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "getJSDateFromISO",
+                    "args": [
+                        {
+                            "name": "date",
+                            "type": "string",
+                            "optional": false,
+                            "dotDotDotToken": false,
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "Date",
+                    "typeParameters": [],
+                    "line": 33,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "modifierKind": [
+                        126
+                    ],
+                    "jsdoctags": [
+                        {
+                            "name": "date",
+                            "type": "string",
+                            "optional": false,
+                            "dotDotDotToken": false,
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "getPartialDateOrTime",
+                    "args": [
+                        {
+                            "name": "date",
+                            "type": "Date",
+                            "optional": false,
+                            "dotDotDotToken": false,
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        },
+                        {
+                            "name": "format",
+                            "type": "TimeFormats | DateFormats",
+                            "optional": false,
+                            "dotDotDotToken": false,
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        },
+                        {
+                            "name": "isConvertedToUTC",
+                            "type": "boolean",
+                            "optional": true,
+                            "dotDotDotToken": false,
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "any",
+                    "typeParameters": [],
+                    "line": 87,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "modifierKind": [
+                        126
+                    ],
+                    "jsdoctags": [
+                        {
+                            "name": "date",
+                            "type": "Date",
+                            "optional": false,
+                            "dotDotDotToken": false,
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        },
+                        {
+                            "name": "format",
+                            "type": "TimeFormats | DateFormats",
+                            "optional": false,
+                            "dotDotDotToken": false,
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        },
+                        {
+                            "name": "isConvertedToUTC",
+                            "type": "boolean",
+                            "optional": true,
+                            "dotDotDotToken": false,
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "getUTCDateTime",
+                    "args": [
+                        {
+                            "name": "date",
+                            "type": "string",
+                            "optional": false,
+                            "dotDotDotToken": false,
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "string",
+                    "typeParameters": [],
+                    "line": 49,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "modifierKind": [
+                        126
+                    ],
+                    "jsdoctags": [
+                        {
+                            "name": "date",
+                            "type": "string",
+                            "optional": false,
+                            "dotDotDotToken": false,
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "getUTCDateTimeFromJsDate",
+                    "args": [
+                        {
+                            "name": "date",
+                            "type": "Date",
+                            "optional": false,
+                            "dotDotDotToken": false,
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "string",
+                    "typeParameters": [],
+                    "line": 53,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "modifierKind": [
+                        126
+                    ],
+                    "jsdoctags": [
+                        {
+                            "name": "date",
+                            "type": "Date",
+                            "optional": false,
+                            "dotDotDotToken": false,
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "getValueFromJSDate",
+                    "args": [
+                        {
+                            "name": "date",
+                            "type": "Date",
+                            "optional": false,
+                            "dotDotDotToken": false,
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        },
+                        {
+                            "name": "unit",
+                            "type": "\"year\" | \"month\" | \"day\"",
+                            "optional": false,
+                            "dotDotDotToken": false,
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "number",
+                    "typeParameters": [],
+                    "line": 95,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "modifierKind": [
+                        126
+                    ],
+                    "jsdoctags": [
+                        {
+                            "name": "date",
+                            "type": "Date",
+                            "optional": false,
+                            "dotDotDotToken": false,
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        },
+                        {
+                            "name": "unit",
+                            "type": "\"year\" | \"month\" | \"day\"",
+                            "optional": false,
+                            "dotDotDotToken": false,
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "getValueFromLocalDateTime",
+                    "args": [
+                        {
+                            "name": "unit",
+                            "type": "\"hour\" | \"minute\" | \"second\"",
+                            "optional": false,
+                            "dotDotDotToken": false,
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "number",
+                    "typeParameters": [],
+                    "line": 109,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "modifierKind": [
+                        126
+                    ],
+                    "jsdoctags": [
+                        {
+                            "name": "unit",
+                            "type": "\"hour\" | \"minute\" | \"second\"",
                             "optional": false,
                             "dotDotDotToken": false,
                             "deprecated": false,
@@ -5953,10 +6688,7 @@
             "indexSignatures": [],
             "extends": [],
             "hostBindings": [],
-            "hostListeners": [],
-            "implements": [
-                "TranslateLoader"
-            ]
+            "hostListeners": []
         },
         {
             "name": "FormUtils",
@@ -14026,21 +14758,21 @@
                 "name": "meta",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/ui-components-lib/src/lib/dual-calender/dual-calendar.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Meta<DualCalendarComponent>",
-                "defaultValue": "{\r\n  title: 'MyLibrary/dualCalendar',\r\n  component: DualCalendarComponent,\r\n  tags: ['autodocs'],\r\n  argTypes: {},\r\n  decorators: [\r\n    moduleMetadata({\r\n      imports: [\r\n        NgbDatepickerModule,\r\n        FormsModule,\r\n        ReactiveFormsModule,\r\n        DatePickerModule,\r\n        FloatLabelModule,\r\n        HijriCalendarComponent,\r\n        DatePickerSwitcherComponent,\r\n        TranslatePipe,\r\n        GregorianCalendarComponent,\r\n      ],\r\n      providers: [{ provide: NgbCalendar, useClass: NgbCalendarIslamicUmalqura }],\r\n    }),\r\n  ],\r\n}"
-            },
-            {
-                "name": "meta",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
                 "file": "projects/ui-components-lib/src/lib/confirmation-dialog/confirmation-dialog.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Meta<ConfirmationDialogComponent>",
                 "defaultValue": "{\r\n  title: 'MyLibrary/ConfirmationDialog',\r\n  component: ConfirmationDialogComponent,\r\n  tags: ['autodocs'],\r\n  argTypes: {},\r\n  decorators: [\r\n    moduleMetadata({\r\n      imports: [\r\n        AppButtonComponent,\r\n        AvatarModule,\r\n        DynamicDialogModule,\r\n        DynamicFormComponent,\r\n        TranslatePipe,\r\n      ],\r\n      providers: [\r\n        DialogService,\r\n        DynamicDialogStyle,\r\n        DynamicDialogConfig,\r\n        DynamicDialogRef,\r\n        TranslateService,\r\n      ],\r\n    }),\r\n  ],\r\n}"
+            },
+            {
+                "name": "meta",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/ui-components-lib/src/lib/dual-calender/dual-calendar.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Meta<DualCalendarComponent>",
+                "defaultValue": "{\r\n  title: 'MyLibrary/dualCalendar',\r\n  component: DualCalendarComponent,\r\n  tags: ['autodocs'],\r\n  argTypes: {},\r\n  decorators: [\r\n    moduleMetadata({\r\n      imports: [\r\n        NgbDatepickerModule,\r\n        FormsModule,\r\n        ReactiveFormsModule,\r\n        DatePickerModule,\r\n        FloatLabelModule,\r\n        HijriCalendarComponent,\r\n        DatePickerSwitcherComponent,\r\n        TranslatePipe,\r\n        GregorianCalendarComponent,\r\n      ],\r\n      providers: [{ provide: NgbCalendar, useClass: NgbCalendarIslamicUmalqura }],\r\n    }),\r\n  ],\r\n}"
             },
             {
                 "name": "MONTHS_GREGORIAN",
@@ -14071,16 +14803,6 @@
                 "deprecationMessage": "",
                 "type": "unknown",
                 "defaultValue": "(dateKey: string): ValidatorFn =>\r\n  (control: AbstractControl): ValidationErrors | null => {\r\n    const dateControl = control.get?.(dateKey);\r\n\r\n    if (!dateControl?.value) {\r\n      return null;\r\n    }\r\n\r\n    const valueDate = new Date(dateControl.value);\r\n    valueDate.setHours(0, 0, 0, 0);\r\n\r\n    const today = new Date();\r\n    today.setHours(0, 0, 0, 0);\r\n\r\n    return valueDate > today ? { futureDate: true } : null;\r\n  }"
-            },
-            {
-                "name": "preview",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "projects/ui-components-lib/.storybook/preview.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Preview",
-                "defaultValue": "{\r\n  decorators: [\r\n    applicationConfig({\r\n      providers: [\r\n        providePrimeNG({\r\n          theme: {\r\n            preset: Aura,\r\n            options: {\r\n              darkModeSelector: false,\r\n            },\r\n          },\r\n        }),\r\n        PrimeNG,\r\n        importProvidersFrom(\r\n          TranslateModule.forRoot({\r\n            loader: {\r\n              provide: TranslateLoader,\r\n              useClass: FakeLoader,\r\n            },\r\n          }),\r\n        ),\r\n      ],\r\n    }),\r\n  ],\r\n  parameters: {\r\n    controls: {\r\n      matchers: {\r\n        color: /(background|color)$/i,\r\n        date: /Date$/i,\r\n      },\r\n    },\r\n  },\r\n}"
             },
             {
                 "name": "ROUTES_NAME",
@@ -14481,8 +15203,8 @@
                 "name": "Story",
                 "ctype": "miscellaneous",
                 "subtype": "typealias",
-                "rawtype": "StoryObj<DualCalendarComponent>",
-                "file": "projects/ui-components-lib/src/lib/dual-calender/dual-calendar.stories.ts",
+                "rawtype": "StoryObj<ConfirmationDialogComponent>",
+                "file": "projects/ui-components-lib/src/lib/confirmation-dialog/confirmation-dialog.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "description": "",
@@ -14492,8 +15214,8 @@
                 "name": "Story",
                 "ctype": "miscellaneous",
                 "subtype": "typealias",
-                "rawtype": "StoryObj<ConfirmationDialogComponent>",
-                "file": "projects/ui-components-lib/src/lib/confirmation-dialog/confirmation-dialog.stories.ts",
+                "rawtype": "StoryObj<DualCalendarComponent>",
+                "file": "projects/ui-components-lib/src/lib/dual-calender/dual-calendar.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "description": "",
@@ -14595,6 +15317,95 @@
                 "deprecationMessage": "",
                 "description": "",
                 "file": "projects/ui-components-lib/src/lib/form-components/@utils/validations/error-keys.enum.ts"
+            },
+            {
+                "name": "DateFormats",
+                "childs": [
+                    {
+                        "name": "DATE_ONLY",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "value": "yyyy-MM-dd"
+                    },
+                    {
+                        "name": "DATE_UTC",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "value": "yyyy-MM-dd'T'HH:mm:ss'Z'"
+                    },
+                    {
+                        "name": "DATE_TIME_FULL",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "value": "dd MMMM yyyy - hh:mm a"
+                    },
+                    {
+                        "name": "DATE_TIME_SEMI",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "value": "yyyy/MM/dd - hh:mm a"
+                    },
+                    {
+                        "name": "DATE",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "value": "dd MMMM yyyy"
+                    },
+                    {
+                        "name": "DATE_TWO",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "value": "yyyy/MM/dd"
+                    },
+                    {
+                        "name": "DAY_ONLY",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "value": "cccc"
+                    },
+                    {
+                        "name": "TIME_ONLY",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "value": "hh:mm"
+                    },
+                    {
+                        "name": "AM_PM",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "value": "a"
+                    },
+                    {
+                        "name": "TIME",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "value": "hh:mm a"
+                    },
+                    {
+                        "name": "YEAR",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "value": "yyyy"
+                    },
+                    {
+                        "name": "MONTH",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "value": "MM"
+                    },
+                    {
+                        "name": "DAY",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "value": "dd"
+                    }
+                ],
+                "ctype": "miscellaneous",
+                "subtype": "enum",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "file": "projects/ui-components-lib/src/enums/date-formatter.ts"
             },
             {
                 "name": "ErrorsWithValuesKeysEnum",
@@ -14760,6 +15571,41 @@
                 "deprecationMessage": "",
                 "description": "",
                 "file": "projects/ui-components-lib/src/lib/side-bar-dynamic/side-bar-utils.ts"
+            },
+            {
+                "name": "TimeFormats",
+                "childs": [
+                    {
+                        "name": "HOURS12Format",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "value": "hh"
+                    },
+                    {
+                        "name": "HOURS24Format",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "value": "HH"
+                    },
+                    {
+                        "name": "MINUTES",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "value": "mm"
+                    },
+                    {
+                        "name": "SECONDS",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "value": "ss"
+                    }
+                ],
+                "ctype": "miscellaneous",
+                "subtype": "enum",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "file": "projects/ui-components-lib/src/enums/date-formatter.ts"
             },
             {
                 "name": "UploadStatus",
@@ -14994,18 +15840,6 @@
                     "deprecationMessage": "",
                     "type": "object",
                     "defaultValue": "{\r\n  ar: ['ن', 'ث', 'ر', 'خ', 'ج', 'س', 'ح'],\r\n  en: ['M', 'T', 'W', 'T', 'F', 'S', 'S']\r\n}"
-                }
-            ],
-            "projects/ui-components-lib/.storybook/preview.ts": [
-                {
-                    "name": "preview",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "projects/ui-components-lib/.storybook/preview.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "Preview",
-                    "defaultValue": "{\r\n  decorators: [\r\n    applicationConfig({\r\n      providers: [\r\n        providePrimeNG({\r\n          theme: {\r\n            preset: Aura,\r\n            options: {\r\n              darkModeSelector: false,\r\n            },\r\n          },\r\n        }),\r\n        PrimeNG,\r\n        importProvidersFrom(\r\n          TranslateModule.forRoot({\r\n            loader: {\r\n              provide: TranslateLoader,\r\n              useClass: FakeLoader,\r\n            },\r\n          }),\r\n        ),\r\n      ],\r\n    }),\r\n  ],\r\n  parameters: {\r\n    controls: {\r\n      matchers: {\r\n        color: /(background|color)$/i,\r\n        date: /Date$/i,\r\n      },\r\n    },\r\n  },\r\n}"
                 }
             ],
             "projects/ui-components-lib/src/lib/app-side-menu/routes-names.ts": [
@@ -15413,6 +16247,132 @@
                     "file": "projects/ui-components-lib/src/lib/form-components/@utils/validations/error-keys.enum.ts"
                 }
             ],
+            "projects/ui-components-lib/src/enums/date-formatter.ts": [
+                {
+                    "name": "DateFormats",
+                    "childs": [
+                        {
+                            "name": "DATE_ONLY",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "value": "yyyy-MM-dd"
+                        },
+                        {
+                            "name": "DATE_UTC",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "value": "yyyy-MM-dd'T'HH:mm:ss'Z'"
+                        },
+                        {
+                            "name": "DATE_TIME_FULL",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "value": "dd MMMM yyyy - hh:mm a"
+                        },
+                        {
+                            "name": "DATE_TIME_SEMI",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "value": "yyyy/MM/dd - hh:mm a"
+                        },
+                        {
+                            "name": "DATE",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "value": "dd MMMM yyyy"
+                        },
+                        {
+                            "name": "DATE_TWO",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "value": "yyyy/MM/dd"
+                        },
+                        {
+                            "name": "DAY_ONLY",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "value": "cccc"
+                        },
+                        {
+                            "name": "TIME_ONLY",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "value": "hh:mm"
+                        },
+                        {
+                            "name": "AM_PM",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "value": "a"
+                        },
+                        {
+                            "name": "TIME",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "value": "hh:mm a"
+                        },
+                        {
+                            "name": "YEAR",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "value": "yyyy"
+                        },
+                        {
+                            "name": "MONTH",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "value": "MM"
+                        },
+                        {
+                            "name": "DAY",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "value": "dd"
+                        }
+                    ],
+                    "ctype": "miscellaneous",
+                    "subtype": "enum",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "file": "projects/ui-components-lib/src/enums/date-formatter.ts"
+                },
+                {
+                    "name": "TimeFormats",
+                    "childs": [
+                        {
+                            "name": "HOURS12Format",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "value": "hh"
+                        },
+                        {
+                            "name": "HOURS24Format",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "value": "HH"
+                        },
+                        {
+                            "name": "MINUTES",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "value": "mm"
+                        },
+                        {
+                            "name": "SECONDS",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "value": "ss"
+                        }
+                    ],
+                    "ctype": "miscellaneous",
+                    "subtype": "enum",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "file": "projects/ui-components-lib/src/enums/date-formatter.ts"
+                }
+            ],
             "projects/ui-components-lib/src/lib/dynamic-form/dynamic-form.interface.ts": [
                 {
                     "name": "FormFieldTypeEnum",
@@ -15716,19 +16676,6 @@
                     "kind": 184
                 }
             ],
-            "projects/ui-components-lib/src/lib/dual-calender/dual-calendar.stories.ts": [
-                {
-                    "name": "Story",
-                    "ctype": "miscellaneous",
-                    "subtype": "typealias",
-                    "rawtype": "StoryObj<DualCalendarComponent>",
-                    "file": "projects/ui-components-lib/src/lib/dual-calender/dual-calendar.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "description": "",
-                    "kind": 184
-                }
-            ],
             "projects/ui-components-lib/src/lib/confirmation-dialog/confirmation-dialog.stories.ts": [
                 {
                     "name": "Story",
@@ -15736,6 +16683,19 @@
                     "subtype": "typealias",
                     "rawtype": "StoryObj<ConfirmationDialogComponent>",
                     "file": "projects/ui-components-lib/src/lib/confirmation-dialog/confirmation-dialog.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 184
+                }
+            ],
+            "projects/ui-components-lib/src/lib/dual-calender/dual-calendar.stories.ts": [
+                {
+                    "name": "Story",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "StoryObj<DualCalendarComponent>",
+                    "file": "projects/ui-components-lib/src/lib/dual-calender/dual-calendar.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "description": "",
@@ -15754,22 +16714,12 @@
         "status": "low",
         "files": [
             {
-                "filePath": "projects/ui-components-lib/.storybook/preview.ts",
+                "filePath": "projects/ui-components-lib/src/helper/date-handler.ts",
                 "type": "class",
                 "linktype": "classe",
-                "name": "FakeLoader",
+                "name": "DateHandler",
                 "coveragePercent": 0,
-                "coverageCount": "0/2",
-                "status": "low"
-            },
-            {
-                "filePath": "projects/ui-components-lib/.storybook/preview.ts",
-                "type": "variable",
-                "linktype": "miscellaneous",
-                "linksubtype": "variable",
-                "name": "preview",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
+                "coverageCount": "0/15",
                 "status": "low"
             },
             {
@@ -16908,6 +17858,15 @@
                 "name": "UserInfoComponent",
                 "coveragePercent": 0,
                 "coverageCount": "0/3",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/ui-components-lib/src/pipes/translate-key.pipe.ts",
+                "type": "pipe",
+                "linktype": "pipe",
+                "name": "LocalizedLabelPipe",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
                 "status": "low"
             }
         ]

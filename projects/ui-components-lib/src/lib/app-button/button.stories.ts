@@ -8,6 +8,7 @@ const meta: Meta<AppButtonComponent> = {
   title: 'MyLibrary/Button',
   component: AppButtonComponent,
   tags: ['autodocs'],
+  argTypes: {},
   decorators: [
     moduleMetadata({
       imports: [CommonModule, ButtonModule],
@@ -17,9 +18,9 @@ const meta: Meta<AppButtonComponent> = {
 };
 
 export default meta;
-type Story = StoryObj<AppButtonComponent>;
+type Story = StoryObj<AppButtonComponent>; // Leave this empty!
 
-export const Primary: Story = {
+export const Default: Story = {
   args: {
     label: 'Click Me',
     severity: 'warn',
