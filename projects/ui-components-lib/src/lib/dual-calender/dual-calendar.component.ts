@@ -1,4 +1,4 @@
-import { Component, effect, ElementRef, EventEmitter, HostListener, Input, Output, signal, ViewChild, ViewEncapsulation } from '@angular/core';
+import { Component, effect, ElementRef, EventEmitter, HostListener, inject, Input, Output, Renderer2, signal, ViewChild, ViewEncapsulation } from '@angular/core';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbCalendar, NgbDateStruct, NgbCalendarIslamicUmalqura, NgbDatepickerModule, NgbDate } from '@ng-bootstrap/ng-bootstrap';
 import { HijriCalendarComponent } from './hijri-calendar/hijri-calendar.component';
@@ -51,6 +51,7 @@ import { TranslatePipe } from '@ngx-translate/core';
   encapsulation: ViewEncapsulation.None
 })
 export class DualCalendarComponent {
+  @ViewChild('calendarWrapper') calendarWrapper!: ElementRef;
   selectedDate = ''
   @Input() control: FormControl<any> = new FormControl({ value: null, disabled: false }, []);
   @Input() label = '';
@@ -68,6 +69,7 @@ export class DualCalendarComponent {
   @Input() isShown =  false
   @ViewChild('calendarContainer') calendarContainer!: ElementRef;
   hijriCal = new NgbCalendarIslamicUmalqura();
+  renderer = inject(Renderer2);
   constructor() {
     effect(() => {
       this.currentLang(); // 👈 track signal
@@ -78,6 +80,24 @@ export class DualCalendarComponent {
     this.setDate(this.control?.value);
 
   }
+
+  ngAfterViewInit() {
+    this.moveElementToBody();
+  }
+
+  moveElementToBody() { //this function same as appendTo="body"
+  const el = this.calendarWrapper.nativeElement;
+  const rect = el.getBoundingClientRect();
+
+  this.renderer.appendChild(document.body, el);
+
+  this.renderer.setStyle(el, 'position', 'absolute');
+
+  this.renderer.setStyle(el, 'top', `${rect.top + window.scrollY}px`);
+  this.renderer.setStyle(el, 'left', `${rect.left}px`);
+  this.renderer.setStyle(el, 'width', `${rect.width}px`);
+  this.renderer.setStyle(el, 'z-index', '9999');
+}
   setDate(value: string | null) {
     if (!value) return;
 
