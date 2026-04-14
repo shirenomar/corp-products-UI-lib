@@ -163,6 +163,7 @@ export class DualCalendarComponent implements OnInit , OnChanges {
 
     this.selectedDate = this.formatHijri(this.structToNgbDate(this.hijriModel)); //input
     this.isShown = false;
+    this.wrapperHidden();
   }
 
   onSelectHijri(date: NgbDateStruct) {
@@ -180,11 +181,17 @@ export class DualCalendarComponent implements OnInit , OnChanges {
     this.gregorianUTC.emit(this.gregorianUTCValue);
     this.selectedDate = this.formatHijri(ngbDate);
     this.isShown = false;
+    this.wrapperHidden();
     this.onClose.emit(true)
   }
 
   showCalender(isOpen: boolean) {
     this.isShown = isOpen;
+    if(isOpen) {
+      this.wrapperVisible();
+    } else {
+      this.wrapperHidden();
+    }
   }
 
   formatHijri(h: NgbDate): string {
