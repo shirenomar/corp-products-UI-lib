@@ -1,4 +1,4 @@
-import { Component, effect, ElementRef, EventEmitter, HostListener, inject, Input, Output, Renderer2, signal, ViewChild, ViewEncapsulation } from '@angular/core';
+import { Component, effect, ElementRef, EventEmitter, HostListener, inject, Input, OnChanges, OnInit, Output, Renderer2, signal, SimpleChanges, ViewChild, ViewEncapsulation } from '@angular/core';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbCalendar, NgbDateStruct, NgbCalendarIslamicUmalqura, NgbDatepickerModule, NgbDate } from '@ng-bootstrap/ng-bootstrap';
 import { HijriCalendarComponent } from './hijri-calendar/hijri-calendar.component';
@@ -50,7 +50,7 @@ import { TranslatePipe } from '@ngx-translate/core';
   styleUrl: './dual-calendar.component.scss',
   encapsulation: ViewEncapsulation.None
 })
-export class DualCalendarComponent {
+export class DualCalendarComponent implements OnInit , OnChanges {
   @ViewChild('calendarWrapper') calendarWrapper!: ElementRef;
   selectedDate = ''
   @Input() control: FormControl<any> = new FormControl({ value: null, disabled: false }, []);
@@ -76,9 +76,15 @@ export class DualCalendarComponent {
       this.setDate(this.gregorianUTCValue)
     });
   }
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['isShown']?.currentValue) {
+      this.moveElementToBody();
+    }else {
+      this.removeFromBody();
+    }
+  }
   ngOnInit() {
     this.setDate(this.control?.value);
-
   }
 
   ngAfterViewInit() {
@@ -86,18 +92,27 @@ export class DualCalendarComponent {
   }
 
   moveElementToBody() { //this function same as appendTo="body"
-  const el = this.calendarWrapper.nativeElement;
-  const rect = el.getBoundingClientRect();
+    const el = this.calendarWrapper.nativeElement;
+    const rect = el.getBoundingClientRect();
 
-  this.renderer.appendChild(document.body, el);
+    this.renderer.appendChild(document.body, el);
 
-  this.renderer.setStyle(el, 'position', 'absolute');
+    this.renderer.setStyle(el, 'position', 'absolute');
 
-  this.renderer.setStyle(el, 'top', `${rect.top + window.scrollY}px`);
-  this.renderer.setStyle(el, 'left', `${rect.left}px`);
-  this.renderer.setStyle(el, 'width', `${rect.width}px`);
-  this.renderer.setStyle(el, 'z-index', '9999');
-}
+    this.renderer.setStyle(el, 'top', `${rect.top + window.scrollY}px`);
+    this.renderer.setStyle(el, 'left', `${rect.left}px`);
+    this.renderer.setStyle(el, 'width', `${rect.width}px`);
+    this.renderer.setStyle(el, 'z-index', '9999');
+    this.renderer.setStyle(el, 'visibility', 'visible');
+  }
+
+  removeFromBody() {
+   const el = this.calendarWrapper?.nativeElement;
+    if (el) {
+      this.renderer.setStyle(el, 'visibility', 'hidden');
+    }
+  }
+
   setDate(value: string | null) {
     if (!value) return;
 
