@@ -66,10 +66,12 @@ export class DualCalendarComponent implements OnInit , OnChanges {
   @Output() onClose = new EventEmitter<boolean>();
 
   gregorianUTCValue  = ''
-  @Input() isShown =  false
+  @Input() isShown =  false;
+  @Input() appedToBody = false;
   @ViewChild('calendarContainer') calendarContainer!: ElementRef;
   hijriCal = new NgbCalendarIslamicUmalqura();
   renderer = inject(Renderer2);
+
   constructor() {
     effect(() => {
       this.currentLang(); // 👈 track signal
@@ -92,6 +94,7 @@ export class DualCalendarComponent implements OnInit , OnChanges {
   }
 
   moveElementToBody() { //this function same as appendTo="body"
+    if (!this.appedToBody) return;
     const el = this.calendarWrapper.nativeElement;
     const rect = el.getBoundingClientRect();
 
@@ -107,11 +110,13 @@ export class DualCalendarComponent implements OnInit , OnChanges {
   }
 
   wrapperVisible() {
+    if (!this.appedToBody) return;
     if (!this.calendarWrapper) return;
     this.renderer.setStyle(this.calendarWrapper.nativeElement, 'visibility', 'visible');
   }
 
   wrapperHidden() {
+    if (!this.appedToBody) return;
     if (!this.calendarWrapper) return;
     this.renderer.setStyle(this.calendarWrapper.nativeElement, 'visibility', 'hidden');
   }
