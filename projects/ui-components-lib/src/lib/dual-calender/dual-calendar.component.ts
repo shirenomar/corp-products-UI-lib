@@ -78,9 +78,9 @@ export class DualCalendarComponent implements OnInit , OnChanges {
   }
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['isShown']?.currentValue) {
-      this.moveElementToBody();
+      this.wrapperVisible();
     }else {
-      this.removeFromBody();
+      this.wrapperHidden();
     }
   }
   ngOnInit() {
@@ -106,11 +106,14 @@ export class DualCalendarComponent implements OnInit , OnChanges {
     this.renderer.setStyle(el, 'visibility', 'visible');
   }
 
-  removeFromBody() {
-   const el = this.calendarWrapper?.nativeElement;
-    if (el) {
-      this.renderer.setStyle(el, 'visibility', 'hidden');
-    }
+  wrapperVisible() {
+    if (!this.calendarWrapper) return;
+    this.renderer.setStyle(this.calendarWrapper.nativeElement, 'visibility', 'visible');
+  }
+
+  wrapperHidden() {
+    if (!this.calendarWrapper) return;
+    this.renderer.setStyle(this.calendarWrapper.nativeElement, 'visibility', 'hidden');
   }
 
   setDate(value: string | null) {
@@ -136,6 +139,7 @@ export class DualCalendarComponent implements OnInit , OnChanges {
     this.onClose.emit(!clickedInside)
     if (!clickedInside) {
       this.isShown = false;
+      this.wrapperHidden();
     }
   }
   private structToNgbDate(d: NgbDateStruct): NgbDate {
