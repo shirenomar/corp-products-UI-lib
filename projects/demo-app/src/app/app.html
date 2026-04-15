@@ -12,11 +12,10 @@
 <form [formGroup]="form2">
   <button (click)="showCalender()">open dual </button>
 
-
-  <app-dual-calendar [isDatePickerShow]="false" (onClose)="onCloseCalender($event)" [isShown]="isCalendarOpen"
+  @if(isCalendarOpen){
+     <app-dual-calendar [appedToBody]="true" [isDatePickerShow]="false" (onClose)="onCloseCalender($event)" [isShown]="isCalendarOpen"
     (gregorianUTC)="selectedDate($event)"></app-dual-calendar>
-
-
+  }
 
   <!-- <stc-input [variant]="'in'" [contentType]="'text'" [label]="'Label'" [hideOptionalLabel]="true" [type]="'text'"
     [defaultColor]="'#DFE0E6'" [inputId]="'input-id'" [control]="inputControl">
