@@ -14026,21 +14026,21 @@
                 "name": "meta",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/ui-components-lib/src/lib/dual-calender/dual-calendar.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Meta<DualCalendarComponent>",
-                "defaultValue": "{\r\n  title: 'MyLibrary/dualCalendar',\r\n  component: DualCalendarComponent,\r\n  tags: ['autodocs'],\r\n  argTypes: {},\r\n  decorators: [\r\n    moduleMetadata({\r\n      imports: [\r\n        NgbDatepickerModule,\r\n        FormsModule,\r\n        ReactiveFormsModule,\r\n        DatePickerModule,\r\n        FloatLabelModule,\r\n        HijriCalendarComponent,\r\n        DatePickerSwitcherComponent,\r\n        TranslatePipe,\r\n        GregorianCalendarComponent,\r\n      ],\r\n      providers: [{ provide: NgbCalendar, useClass: NgbCalendarIslamicUmalqura }],\r\n    }),\r\n  ],\r\n}"
-            },
-            {
-                "name": "meta",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
                 "file": "projects/ui-components-lib/src/lib/confirmation-dialog/confirmation-dialog.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Meta<ConfirmationDialogComponent>",
                 "defaultValue": "{\r\n  title: 'MyLibrary/ConfirmationDialog',\r\n  component: ConfirmationDialogComponent,\r\n  tags: ['autodocs'],\r\n  argTypes: {},\r\n  decorators: [\r\n    moduleMetadata({\r\n      imports: [\r\n        AppButtonComponent,\r\n        AvatarModule,\r\n        DynamicDialogModule,\r\n        DynamicFormComponent,\r\n        TranslatePipe,\r\n      ],\r\n      providers: [\r\n        DialogService,\r\n        DynamicDialogStyle,\r\n        DynamicDialogConfig,\r\n        DynamicDialogRef,\r\n        TranslateService,\r\n      ],\r\n    }),\r\n  ],\r\n}"
+            },
+            {
+                "name": "meta",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/ui-components-lib/src/lib/dual-calender/dual-calendar.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Meta<DualCalendarComponent>",
+                "defaultValue": "{\r\n  title: 'MyLibrary/dualCalendar',\r\n  component: DualCalendarComponent,\r\n  tags: ['autodocs'],\r\n  argTypes: {},\r\n  decorators: [\r\n    moduleMetadata({\r\n      imports: [\r\n        NgbDatepickerModule,\r\n        FormsModule,\r\n        ReactiveFormsModule,\r\n        DatePickerModule,\r\n        FloatLabelModule,\r\n        HijriCalendarComponent,\r\n        DatePickerSwitcherComponent,\r\n        TranslatePipe,\r\n        GregorianCalendarComponent,\r\n      ],\r\n      providers: [{ provide: NgbCalendar, useClass: NgbCalendarIslamicUmalqura }],\r\n    }),\r\n  ],\r\n}"
             },
             {
                 "name": "MONTHS_GREGORIAN",
@@ -14481,8 +14481,8 @@
                 "name": "Story",
                 "ctype": "miscellaneous",
                 "subtype": "typealias",
-                "rawtype": "StoryObj<DualCalendarComponent>",
-                "file": "projects/ui-components-lib/src/lib/dual-calender/dual-calendar.stories.ts",
+                "rawtype": "StoryObj<ConfirmationDialogComponent>",
+                "file": "projects/ui-components-lib/src/lib/confirmation-dialog/confirmation-dialog.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "description": "",
@@ -14492,8 +14492,8 @@
                 "name": "Story",
                 "ctype": "miscellaneous",
                 "subtype": "typealias",
-                "rawtype": "StoryObj<ConfirmationDialogComponent>",
-                "file": "projects/ui-components-lib/src/lib/confirmation-dialog/confirmation-dialog.stories.ts",
+                "rawtype": "StoryObj<DualCalendarComponent>",
+                "file": "projects/ui-components-lib/src/lib/dual-calender/dual-calendar.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "description": "",
@@ -15716,19 +15716,6 @@
                     "kind": 184
                 }
             ],
-            "projects/ui-components-lib/src/lib/dual-calender/dual-calendar.stories.ts": [
-                {
-                    "name": "Story",
-                    "ctype": "miscellaneous",
-                    "subtype": "typealias",
-                    "rawtype": "StoryObj<DualCalendarComponent>",
-                    "file": "projects/ui-components-lib/src/lib/dual-calender/dual-calendar.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "description": "",
-                    "kind": 184
-                }
-            ],
             "projects/ui-components-lib/src/lib/confirmation-dialog/confirmation-dialog.stories.ts": [
                 {
                     "name": "Story",
@@ -15736,6 +15723,19 @@
                     "subtype": "typealias",
                     "rawtype": "StoryObj<ConfirmationDialogComponent>",
                     "file": "projects/ui-components-lib/src/lib/confirmation-dialog/confirmation-dialog.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 184
+                }
+            ],
+            "projects/ui-components-lib/src/lib/dual-calender/dual-calendar.stories.ts": [
+                {
+                    "name": "Story",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "StoryObj<DualCalendarComponent>",
+                    "file": "projects/ui-components-lib/src/lib/dual-calender/dual-calendar.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "description": "",
