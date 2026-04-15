@@ -47,7 +47,6 @@
 }
 
 .tabs {
-
   background: #f0f0f5;
   padding: 3px;
   border-radius: 2px;
@@ -92,7 +91,6 @@
   border: none;
   cursor: pointer;
   padding: 4px;
-
 }
 
 /* Weekdays Row */
@@ -106,12 +104,10 @@
   text-align: center;
 }
 
-
-
 /* Today style */
 .custom-day.today {
   border: 1px solid #6a41d8;
-  border-radius: 8px;
+  padding: 5px;
 }
 
 /* Outside month */
@@ -140,11 +136,11 @@
   overflow: hidden;
 }
 
-
 .ngb-datepicker {
   width: 100%;
 
-  .ngb-dp-month {}
+  .ngb-dp-month {
+  }
 }
 
 .custom-day {
@@ -158,15 +154,14 @@
 }
 
 .custom-day.today {
-  color: #4F008D;
-  border: 0 !important;
-
+  color: #4f008d;
+  // border: 1px solid #4f008d !important;
 }
 
 .ngb-dp-day:has(.selected) {
-  background-color: #EDE6F4 !important;
+  background-color: #ede6f4 !important;
   border: 0 !important;
-  color: #4F008D !important;
+  color: #4f008d !important;
   border-radius: 2px;
 }
 
@@ -201,7 +196,7 @@
 .ngb-dp-arrow-btn {
   margin-inline-end: 0 !important;
   outline: 0 !important;
-   padding: 0 !important;
+  padding: 0 !important;
   margin: 0 !important;
 }
 
@@ -244,7 +239,7 @@
   }
 }
 
-.ngb-datepicker-navigation-select>.form-select {
+.ngb-datepicker-navigation-select > .form-select {
   font-size: 14px;
   font-weight: bold;
 }
@@ -256,10 +251,8 @@
   -moz-appearance: none;
 }
 
-
-
 .ngb-dp-navigation-chevron {
   font-size: 18px;
-  border-width: .1em .1em 0 0 !important;
+  border-width: 0.1em 0.1em 0 0 !important;
   border-color: #000;
 }
