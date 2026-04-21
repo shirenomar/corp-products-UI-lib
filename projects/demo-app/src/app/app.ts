@@ -4,8 +4,6 @@ import { Component, inject, signal, ViewEncapsulation } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 
 import { DialogService } from 'primeng/dynamicdialog';
-import { BreadcrumbItem } from '../../../ui-components-lib/src/lib/app-breadcrumb/app-breadcrumb.interface';
-import { ConfirmationDialogService } from './../../../ui-components-lib/src/lib/confirmation-dialog/confirmation-dialog.service';
 import { SideBar } from './side-bar/side-bar';
 
 import { animate, state, style, transition, trigger } from '@angular/animations';
@@ -14,11 +12,14 @@ import {
   AppButtonComponent,
   AppDropdownMenuComponent,
   BottomSheetComponent,
+  BreadcrumbItem,
+  ConfirmationDialogService,
   dateRangeValidator,
   DropdownMenuItem,
   DualCalendarComponent,
   DynamicFormComponent,
   DynamicFormData,
+  emailStcValidator,
   FormFieldTypeEnum,
   InputsMap,
 } from '@corp-products/ui-components';
@@ -29,6 +30,7 @@ import {
   SidebarConfig,
   SidebarConfigDefaults,
 } from './../../../ui-components-lib/src/lib/side-bar-dynamic/sidebar-config';
+import { allowedDomains } from './email-stc-domains.const';
 @Component({
   selector: 'app-root',
   animations: [
@@ -181,7 +183,7 @@ export class App {
       role: new FormControl<any>(null, [Validators.required]),
       status: new FormControl<string | null>(null),
       notify: new FormControl<boolean>(false),
-      assignee: new FormControl<Array<any>>([], [Validators.required]),
+      assignee: new FormControl<Array<any>>([], [Validators.required , emailStcValidator(allowedDomains)]),
     },
     { validators: [dateRangeValidator('startDate', 'endDate')] },
   );
@@ -285,6 +287,7 @@ export class App {
       // autoCompleteItems: this.allUsers,
       variant: 'in',
       placeholder: 'Type to search users',
+      allowedDomains : allowedDomains
     },
   };
 
