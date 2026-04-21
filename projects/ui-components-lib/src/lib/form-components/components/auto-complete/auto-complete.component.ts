@@ -81,10 +81,10 @@ export class AutoCompleteComponent extends BaseInputComponent {
   }
 
   isItemInvalid(item: string): boolean {
-    if (this.control.errors!['emailDomain']) {
-      const tempControl = new FormControl(item , emailStcValidator(this.allowedDomains as string[]));
-      return tempControl.invalid;
-    }
-    return false;
+  if (this.control.errors?.['emailDomain']) {
+    const tempControl = new FormControl(item, emailStcValidator(this.allowedDomains as string[]) );
+    return tempControl.invalid;
   }
+  return false;
+}
 }
