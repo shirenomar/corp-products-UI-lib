@@ -42,7 +42,6 @@ export function emailStcValidator(allowedDomains : string[]): ValidatorFn {
     // Single email validation (must match pattern AND be from allowed domain)
     const isValid = typeof value === 'string' && validateEmail(value);
     const allowed = typeof value === 'string' && isFromAllowedDomain(value);
-
     return isValid && allowed ? null : { emailDomain: true };
   };
 }

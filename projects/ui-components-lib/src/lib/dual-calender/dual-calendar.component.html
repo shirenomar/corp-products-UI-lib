@@ -6,7 +6,7 @@
   }
 
   <!-- calender.html -->
-  <div [dir]="currentLang() === 'ar' ? 'rtl' : 'ltr'" class="p-2 calendar-wrapper " [@slideDown]="isShown ? 'open' : 'closed'"  #calendarWrapper>
+  <div (click)="$event.stopPropagation()" [dir]="currentLang() === 'ar' ? 'rtl' : 'ltr'" class="p-2 calendar-wrapper " [@slideDown]="isShown ? 'open' : 'closed'"  #calendarWrapper>
     <div class="header-tabs">
       <div class="header-label">{{'calender.calender_type' | translate}}</div>
       <div class="tabs">
