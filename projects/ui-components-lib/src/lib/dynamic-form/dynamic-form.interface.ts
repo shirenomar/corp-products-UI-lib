@@ -64,6 +64,7 @@ export interface InputsMapData {
   autoCompleteItems?: unknown[];
   minLengthToSearch?: number;
   delay?: number;
+  allowedDomains?: string[] | undefined;
 }
 
 export interface InputsMap {
