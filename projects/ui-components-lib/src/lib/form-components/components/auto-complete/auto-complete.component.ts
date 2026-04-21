@@ -1,6 +1,6 @@
 import { JsonPipe, NgClass, NgIf, NgTemplateOutlet } from '@angular/common';
 import { Component, EventEmitter, Input, Output, TemplateRef, ViewEncapsulation } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { TranslatePipe } from '@ngx-translate/core';
 import { PrimeTemplate } from 'primeng/api';
 import {
@@ -11,6 +11,7 @@ import {
 import { FloatLabel } from 'primeng/floatlabel';
 import { ValidationErrorsPipe } from '../../@utils/validations/validation-message.pipe';
 import { BaseInputComponent } from '../base-input.component';
+import { emailStcValidator } from '../../@utils/validations/email-stc.validator';
 
 @Component({
   selector: 'stc-auto-complete',
@@ -79,4 +80,11 @@ export class AutoCompleteComponent extends BaseInputComponent {
     input.value = '';
   }
 
+  isItemInvalid(item: string): boolean {
+    if (this.control.errors!['email']) {
+      const tempControl = new FormControl(item , emailStcValidator());
+      return tempControl.invalid;
+    }
+    return false;
+  }
 }
