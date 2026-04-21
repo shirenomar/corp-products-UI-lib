@@ -111,7 +111,8 @@
         [minLengthToSearch]="inputsMap[inputName].minLengthToSearch || 2" [delay]="inputsMap[inputName].delay || 300"
         (onSearch)="autoCompleteSearch.emit({ name: inputName, query: $event })"
         (selectOption)="autoCompleteSelect.emit({ name: inputName, event: $event })"
-        [variant]="inputsMap[inputName].variant || 'over'" />
+        [variant]="inputsMap[inputName].variant || 'over'"
+        [allowedDomains]="inputsMap[inputName]?.allowedDomains" />
       }
       @case(fieldType.UPLOAD_FILE) {
       <app-file-management #fileManager #groupFileManager [maxFileSize]="262144000" [maxConcurrentUploads]="1"

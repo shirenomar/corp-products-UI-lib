@@ -13,11 +13,16 @@
         <ng-container [ngTemplateOutletContext]="{ $implicit: item }" [ngTemplateOutlet]="selectedItemTemplate" />
         }
       </ng-template>
+      <ng-template let-item pTemplate="selectedItem">
+        <span [class.text-red]="isItemInvalid(item)">
+          {{ item }}
+        </span>
+      </ng-template>
     </p-auto-complete>
     <label [for]="inputId">
       {{ label }}
       @if (required) {
-      <span [class.text-required]="isInvalid">*</span>
+      <span [class.text-red]="isInvalid">*</span>
       }
     </label>
   </p-floatlabel>
