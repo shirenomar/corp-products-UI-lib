@@ -1,4 +1,4 @@
-import { AbstractControl, ValidationErrors, ValidatorFn } from '@angular/forms';
+import { AbstractControl, ValidationErrors, ValidatorFn } from "@angular/forms";
 
 /**
  * Validator function to check if the control value is a valid email address.
