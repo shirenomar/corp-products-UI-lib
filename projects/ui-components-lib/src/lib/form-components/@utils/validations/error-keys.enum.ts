@@ -13,6 +13,7 @@ export enum BasicErrorKeysEnum {
   fileSelected = 'FILE_SELECTED',
   default = 'DEFAULT',
   numbersOnly = 'NUMBERS_ONLY',
+  invalidSaudiPhoneNumber = 'INVALID_SAUDI_PHONE_NUMBER',
 }
 export enum ErrorsWithValuesKeysEnum {
   minlength = 'MIN_LENGTH',
