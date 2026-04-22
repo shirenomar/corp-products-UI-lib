@@ -1,7 +1,7 @@
 import { AbstractControl, ValidationErrors, ValidatorFn } from '@angular/forms';
 /**
  * Validator to check if the control value is a valid Saudi phone number.
- * Valid format: 05XXXXXXXX (10 digits)
+ * Valid formats: 05XXXXXXXX (10 digits) or 009665XXXXXXXX (14 digits)
  */
 export function saudiPhoneValidator(): ValidatorFn {
   return (control: AbstractControl): ValidationErrors | null => {
@@ -12,8 +12,8 @@ export function saudiPhoneValidator(): ValidatorFn {
     // Convert to string and trim spaces
     value = value.toString().trim();
 
-    // Regex: starts with 05 and total 10 digits
-    const saudiPhoneRegex = /^05\d{8}$/;
+    // Regex: accepts 05XXXXXXXX or 009665XXXXXXXX
+    const saudiPhoneRegex = /^(?:05\d{8}|009665\d{8})$/;
 
     if (!saudiPhoneRegex.test(value)) {
       return { invalidSaudiPhoneNumber: true };
