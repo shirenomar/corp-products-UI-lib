@@ -22,6 +22,7 @@ import {
   emailStcValidator,
   FormFieldTypeEnum,
   InputsMap,
+  maxRepeatedCharsValidator,
   saudiPhoneValidator,
 } from '@corp-products/ui-components';
 import { ConfirmationDialogComponent } from './../../../ui-components-lib/src/lib/confirmation-dialog/confirmation-dialog.component';
@@ -184,6 +185,7 @@ export class App {
       role: new FormControl<any>(null, [Validators.required]),
       status: new FormControl<string | null>(null),
       notify: new FormControl<boolean>(false),
+      subject: new FormControl<string>('', [Validators.required, maxRepeatedCharsValidator(4)]),
       assignee: new FormControl<Array<any>>(
         [],
         [Validators.required, emailStcValidator(allowedDomains)],
@@ -275,6 +277,16 @@ export class App {
       optionValue: 'code',
       showClear: true,
       filter: false,
+      variant: 'in',
+    },
+    subject: {
+      label: 'Subject',
+      fieldType: FormFieldTypeEnum.INPUT,
+      inputId: 'df-subject',
+      rowSize: 'full',
+      inputType: 'text',
+      contentType: 'text',
+      placeholder: 'Enter subject',
       variant: 'in',
     },
     status: {
