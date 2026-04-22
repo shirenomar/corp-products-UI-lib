@@ -1,4 +1,4 @@
-import { Component, effect, ElementRef, EventEmitter, HostListener, Input, Output, signal, ViewChild, ViewEncapsulation } from '@angular/core';
+import { Component, effect, ElementRef, EventEmitter, HostListener, inject, Input, OnChanges, OnDestroy, OnInit, Output, Renderer2, signal, SimpleChanges, ViewChild, ViewEncapsulation } from '@angular/core';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbCalendar, NgbDateStruct, NgbCalendarIslamicUmalqura, NgbDatepickerModule, NgbDate } from '@ng-bootstrap/ng-bootstrap';
 import { HijriCalendarComponent } from './hijri-calendar/hijri-calendar.component';
@@ -50,7 +50,8 @@ import { TranslatePipe } from '@ngx-translate/core';
   styleUrl: './dual-calendar.component.scss',
   encapsulation: ViewEncapsulation.None
 })
-export class DualCalendarComponent {
+export class DualCalendarComponent implements OnInit , OnChanges , OnDestroy {
+  @ViewChild('calendarWrapper') calendarWrapper!: ElementRef;
   selectedDate = ''
   @Input() control: FormControl<any> = new FormControl({ value: null, disabled: false }, []);
   @Input() label = '';
@@ -65,19 +66,61 @@ export class DualCalendarComponent {
   @Output() onClose = new EventEmitter<boolean>();
 
   gregorianUTCValue  = ''
-  @Input() isShown =  false
+  @Input() isShown =  false;
+  @Input() appedToBody = false;
   @ViewChild('calendarContainer') calendarContainer!: ElementRef;
   hijriCal = new NgbCalendarIslamicUmalqura();
+  renderer = inject(Renderer2);
+
   constructor() {
     effect(() => {
       this.currentLang(); // 👈 track signal
       this.setDate(this.gregorianUTCValue)
     });
   }
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['isShown']?.currentValue) {
+      this.wrapperVisible();
+    }else {
+      this.wrapperHidden();
+    }
+  }
   ngOnInit() {
     this.setDate(this.control?.value);
-
   }
+
+  ngAfterViewInit() {
+    this.moveElementToBody();
+  }
+
+  moveElementToBody() { //this function same as appendTo="body"
+    if (!this.appedToBody) return;
+    const el = this.calendarWrapper.nativeElement;
+    const rect = el.getBoundingClientRect();
+
+    this.renderer.appendChild(document.body, el);
+
+    this.renderer.setStyle(el, 'position', 'absolute');
+
+    this.renderer.setStyle(el, 'top', `${rect.top + window.scrollY}px`);
+    this.renderer.setStyle(el, 'left', `${rect.left}px`);
+    this.renderer.setStyle(el, 'width', `${rect.width}px`);
+    this.renderer.setStyle(el, 'z-index', '9999');
+    this.renderer.setStyle(el, 'visibility', 'visible');
+  }
+
+  wrapperVisible() {
+    if (!this.appedToBody) return;
+    if (!this.calendarWrapper) return;
+    this.renderer.setStyle(this.calendarWrapper.nativeElement, 'visibility', 'visible');
+  }
+
+  wrapperHidden() {
+    if (!this.appedToBody) return;
+    if (!this.calendarWrapper) return;
+    this.renderer.setStyle(this.calendarWrapper.nativeElement, 'visibility', 'hidden');
+  }
+
   setDate(value: string | null) {
     if (!value) return;
 
@@ -101,6 +144,7 @@ export class DualCalendarComponent {
     this.onClose.emit(!clickedInside)
     if (!clickedInside) {
       this.isShown = false;
+      this.wrapperHidden();
     }
   }
   private structToNgbDate(d: NgbDateStruct): NgbDate {
@@ -124,6 +168,7 @@ export class DualCalendarComponent {
 
     this.selectedDate = this.formatHijri(this.structToNgbDate(this.hijriModel)); //input
     this.isShown = false;
+    this.wrapperHidden();
   }
 
   onSelectHijri(date: NgbDateStruct) {
@@ -141,11 +186,17 @@ export class DualCalendarComponent {
     this.gregorianUTC.emit(this.gregorianUTCValue);
     this.selectedDate = this.formatHijri(ngbDate);
     this.isShown = false;
+    this.wrapperHidden();
     this.onClose.emit(true)
   }
 
   showCalender(isOpen: boolean) {
     this.isShown = isOpen;
+    if(isOpen) {
+      this.wrapperVisible();
+    } else {
+      this.wrapperHidden();
+    }
   }
 
   formatHijri(h: NgbDate): string {
@@ -158,6 +209,12 @@ export class DualCalendarComponent {
       getGregorianMonthName(this.currentLang(), greg.getMonth() + 1);
     const gregorianYear = greg.getFullYear();
     return `${gregorianDay} ${gregorianMonth} ${gregorianYear} - ${hijriDay} ${hijriMonth} ${hijriYear}`;
+  }
+
+  ngOnDestroy(): void {
+    if (this.appedToBody && this.calendarWrapper) {
+      this.renderer.removeChild(document.body, this.calendarWrapper.nativeElement);
+    }
   }
 
 }
