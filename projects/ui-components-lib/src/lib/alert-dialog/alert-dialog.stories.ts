@@ -3,23 +3,46 @@ import { moduleMetadata } from '@storybook/angular';
 import { AlertDialogComponent } from './alert-dialog.component';
 import { AppButtonComponent } from '../app-button';
 import { AvatarModule } from 'primeng/avatar';
-import { DynamicDialogModule, DynamicDialogStyle } from 'primeng/dynamicdialog';
+import {
+  DialogService,
+  DynamicDialogConfig,
+  DynamicDialogModule,
+  DynamicDialogRef,
+  DynamicDialogStyle,
+} from 'primeng/dynamicdialog';
 import { TranslatePipe } from '@ngx-translate/core';
+import { AlertDialogService } from './alert-dialog.service';
+import { Component } from '@angular/core';
 
-const meta: Meta<AlertDialogComponent> = {
+@Component({
+  selector: 'dialog-wrapper',
+  template: `<button (click)="open()">Show Dialog</button>`,
+})
+class DialogWrapper {
+  constructor(private dialogService: AlertDialogService) {}
+  open() {
+    this.dialogService.open({ header: 'Hello!', message: 'Hello Hello' });
+  }
+}
+
+const meta: Meta<DialogWrapper> = {
   title: 'MyLibrary/AlertDialog',
-  component: `AlertDialogComponent`,
+  component: DialogWrapper,
   tags: ['autodocs'],
-  argTypes: {},
   decorators: [
     moduleMetadata({
       imports: [AppButtonComponent, AvatarModule, DynamicDialogModule, TranslatePipe],
-      providers: [DynamicDialogStyle],
+      providers: [
+        AlertDialogService,
+        DialogService,
+        { provide: DynamicDialogConfig, useValue: { data: { title: 'Alert' } } },
+        { provide: DynamicDialogRef, useValue: {} },
+      ],
     }),
   ],
 };
 
 export default meta;
-type Story = StoryObj<AlertDialogComponent>; // Leave this empty!
+type Story = StoryObj<DialogWrapper>; // Leave this empty!
 
 export const Default: Story = {};

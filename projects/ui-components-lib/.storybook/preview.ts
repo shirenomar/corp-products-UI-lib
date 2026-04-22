@@ -8,6 +8,8 @@ import Aura from '@primeuix/themes/aura';
 import { importProvidersFrom } from '@angular/core';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { of } from 'rxjs';
+import { BrowserModule } from '@angular/platform-browser';
+
 setCompodocJson(docJson);
 
 class FakeLoader implements TranslateLoader {
@@ -29,6 +31,7 @@ const preview: Preview = {
           },
         }),
         PrimeNG,
+        BrowserModule,
         importProvidersFrom(
           TranslateModule.forRoot({
             loader: {

@@ -6035,7 +6035,7 @@
     "components": [
         {
             "name": "AlertDialogComponent",
-            "id": "component-AlertDialogComponent-4067e99f92382dc0799605378b9cdfbf06a95a3862b13f0a33a0b5a349034f94333f2bd202e665c2b5e0f28d5bae1baf766b4ad3ca3ce3b303c98408a6e7a378",
+            "id": "component-AlertDialogComponent-63e64ebcfcf6348de6c13c32e800bde1beacbc56b404cb10dffbe83ecbf0312e04a034a86cc163268198815be2d0d6183e21043eb6c238abf1483be6ef3e4b46",
             "file": "projects/ui-components-lib/src/lib/alert-dialog/alert-dialog.component.ts",
             "encapsulation": [
                 "ViewEncapsulation.None"
@@ -6070,7 +6070,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 30,
+                    "line": 25,
                     "modifierKind": [
                         123,
                         148
@@ -6085,7 +6085,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 31,
+                    "line": 26,
                     "modifierKind": [
                         123,
                         148
@@ -6100,7 +6100,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 29,
+                    "line": 24,
                     "modifierKind": [
                         148
                     ]
@@ -6114,7 +6114,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 28,
+                    "line": 23,
                     "modifierKind": [
                         123,
                         148
@@ -6128,7 +6128,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 41,
+                    "line": 36,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "modifierKind": [
@@ -6141,7 +6141,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 33,
+                    "line": 28,
                     "deprecated": false,
                     "deprecationMessage": ""
                 }
@@ -6172,7 +6172,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component, DestroyRef, inject, OnInit, ViewEncapsulation } from '@angular/core';\r\nimport { takeUntilDestroyed } from '@angular/core/rxjs-interop';\r\nimport { Router } from '@angular/router';\r\nimport { TranslatePipe } from '@ngx-translate/core';\r\nimport { AvatarModule } from 'primeng/avatar';\r\nimport {\r\n  DynamicDialogConfig,\r\n  DynamicDialogModule,\r\n  DynamicDialogRef,\r\n  DynamicDialogStyle\r\n} from 'primeng/dynamicdialog';\r\nimport { AppButtonComponent } from '../app-button';\r\n@Component({\r\n  selector: 'app-alert-dialog',\r\n  templateUrl: './alert-dialog.component.html',\r\n  styleUrls: ['./alert-dialog.component.scss'],\r\n  encapsulation: ViewEncapsulation.None,\r\n  standalone: true,\r\n  imports: [\r\n    AppButtonComponent,\r\n    AvatarModule,\r\n    DynamicDialogModule,\r\n    TranslatePipe,\r\n  ],\r\n  providers: [DynamicDialogStyle],\r\n})\r\nexport class AlertDialogComponent extends DynamicDialogRef implements OnInit {\r\n  private readonly router = inject(Router);\r\n  readonly dynamicDialogConfig = inject(DynamicDialogConfig);\r\n  private readonly _destroyRef = inject(DestroyRef);\r\n  private readonly _ref = inject(DynamicDialogRef);\r\n\r\n  ngOnInit() {\r\n    this.router.events.pipe(takeUntilDestroyed(this._destroyRef)).subscribe(() => {\r\n      if (this.dynamicDialogConfig) {\r\n        this._ref.close(false);\r\n      }\r\n    })\r\n  }\r\n\r\n  override close() {\r\n    this._ref.close(false);\r\n  }\r\n}\r\n",
+            "sourceCode": "import { Component, DestroyRef, inject, OnInit, ViewEncapsulation } from '@angular/core';\r\nimport { takeUntilDestroyed } from '@angular/core/rxjs-interop';\r\nimport { Router } from '@angular/router';\r\nimport { TranslatePipe } from '@ngx-translate/core';\r\nimport { AvatarModule } from 'primeng/avatar';\r\nimport {\r\n  DynamicDialogConfig,\r\n  DynamicDialogModule,\r\n  DynamicDialogRef,\r\n  DynamicDialogStyle,\r\n} from 'primeng/dynamicdialog';\r\nimport { AppButtonComponent } from '../app-button';\r\n@Component({\r\n  selector: 'app-alert-dialog',\r\n  templateUrl: './alert-dialog.component.html',\r\n  styleUrls: ['./alert-dialog.component.scss'],\r\n  encapsulation: ViewEncapsulation.None,\r\n  standalone: true,\r\n  imports: [AppButtonComponent, AvatarModule, DynamicDialogModule, TranslatePipe],\r\n  providers: [DynamicDialogStyle],\r\n})\r\nexport class AlertDialogComponent extends DynamicDialogRef implements OnInit {\r\n  private readonly router = inject(Router);\r\n  readonly dynamicDialogConfig = inject(DynamicDialogConfig);\r\n  private readonly _destroyRef = inject(DestroyRef);\r\n  private readonly _ref = inject(DynamicDialogRef);\r\n\r\n  ngOnInit() {\r\n    this.router.events.pipe(takeUntilDestroyed(this._destroyRef)).subscribe(() => {\r\n      //if (this.dynamicDialogConfig) {\r\n      //  this._ref.close(false);\r\n      //}\r\n    });\r\n  }\r\n\r\n  override close() {\r\n    this._ref.close(false);\r\n  }\r\n}\r\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
@@ -9209,6 +9209,82 @@
                 "OnChanges"
             ],
             "templateData": "<div class=\"field flex flex-col gap-2 my-3 relative\">\r\n    <p-floatlabel [variant]=\"variant\">\r\n    <input [id]=\"inputId\" [type]=\"'text-float-label'\" [formControl]=\"control\" [readonly]=\"true\" (focus)=\"openCalendar(true)\"\r\n      (click)=\"openCalendar(true)\" [pSize]=\"'small'\"\r\n      [class]=\"\r\n        'w-full border border-[' + defaultColor + '] rounded-none focus:outline-[' + defaultColor + '] focus:border-[' + defaultColor + '] hover:border-[' + defaultColor + '] disabled:opacity-50'\r\n        \" [disabled]=\"disabled\" [name]=\"name\" pInputText\r\n      class=\"w-full\"\r\n      [ngClass]=\"{ 'p-invalid ng-dirty ng-invalid': isInvalid, 'basic-style': basicInput, 'no-style':noStyle}\" />\r\n    <label [for]=\"inputId\">\r\n      {{ label }}\r\n      @if (required) {\r\n      <span [class.text-required]=\"required\">*</span>\r\n      }\r\n    </label>\r\n  </p-floatlabel>\r\n  @if (hint) {\r\n  <small class=\"p-mt-1\">{{ hint }}</small>\r\n  }\r\n  @if (isInvalid && (control.dirty || control.touched)) {\r\n  <small class=\"p-error\">\r\n    @for (error of control.errors | validationErrors; track error) {\r\n    {{ error }}<br>\r\n    }\r\n  </small>\r\n  }\r\n</div>\r\n"
+        },
+        {
+            "name": "DialogWrapper",
+            "id": "component-DialogWrapper-3f430d3cb15d1d8a4ffdbac55b50fc285794210845a57a98a883477b427e21c96877ffd7a739f33bf0051890a48845dd381ef16172d6ab4db8aa6e025c814b86",
+            "file": "projects/ui-components-lib/src/lib/alert-dialog/alert-dialog.stories.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "dialog-wrapper",
+            "styleUrls": [],
+            "styles": [],
+            "template": "<button (click)=\"open()\">Show Dialog</button>",
+            "templateUrl": [],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [],
+            "outputsClass": [],
+            "propertiesClass": [],
+            "methodsClass": [
+                {
+                    "name": "open",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 23,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                }
+            ],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "standalone": false,
+            "imports": [],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import type { Meta, StoryObj } from '@storybook/angular';\r\nimport { moduleMetadata } from '@storybook/angular';\r\nimport { AlertDialogComponent } from './alert-dialog.component';\r\nimport { AppButtonComponent } from '../app-button';\r\nimport { AvatarModule } from 'primeng/avatar';\r\nimport {\r\n  DialogService,\r\n  DynamicDialogConfig,\r\n  DynamicDialogModule,\r\n  DynamicDialogRef,\r\n  DynamicDialogStyle,\r\n} from 'primeng/dynamicdialog';\r\nimport { TranslatePipe } from '@ngx-translate/core';\r\nimport { AlertDialogService } from './alert-dialog.service';\r\nimport { Component } from '@angular/core';\r\n\r\n@Component({\r\n  selector: 'dialog-wrapper',\r\n  template: `<button (click)=\"open()\">Show Dialog</button>`,\r\n})\r\nclass DialogWrapper {\r\n  constructor(private dialogService: AlertDialogService) {}\r\n  open() {\r\n    this.dialogService.open({ header: 'Hello!', message: 'Hello Hello' });\r\n  }\r\n}\r\n\r\nconst meta: Meta<DialogWrapper> = {\r\n  title: 'MyLibrary/AlertDialog',\r\n  component: DialogWrapper,\r\n  tags: ['autodocs'],\r\n  decorators: [\r\n    moduleMetadata({\r\n      imports: [AppButtonComponent, AvatarModule, DynamicDialogModule, TranslatePipe],\r\n      providers: [DynamicDialogStyle, DynamicDialogConfig, DynamicDialogRef, DialogService],\r\n    }),\r\n  ],\r\n};\r\n\r\nexport default meta;\r\ntype Story = StoryObj<DialogWrapper>; // Leave this empty!\r\n\r\nexport const Default: Story = {};\r\n",
+            "assetsDirs": [],
+            "styleUrlsData": "",
+            "stylesData": "",
+            "constructorObj": {
+                "name": "constructor",
+                "description": "",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "args": [
+                    {
+                        "name": "dialogService",
+                        "type": "AlertDialogService",
+                        "optional": false,
+                        "dotDotDotToken": false,
+                        "deprecated": false,
+                        "deprecationMessage": ""
+                    }
+                ],
+                "line": 21,
+                "jsdoctags": [
+                    {
+                        "name": "dialogService",
+                        "type": "AlertDialogService",
+                        "optional": false,
+                        "dotDotDotToken": false,
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "tagName": {
+                            "text": "param"
+                        }
+                    }
+                ]
+            },
+            "extends": []
         },
         {
             "name": "DualCalendarComponent",
@@ -13999,8 +14075,8 @@
                 "file": "projects/ui-components-lib/src/lib/alert-dialog/alert-dialog.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
-                "type": "Meta<AlertDialogComponent>",
-                "defaultValue": "{\r\n  title: 'MyLibrary/AlertDialog',\r\n  component: `AlertDialogComponent`,\r\n  tags: ['autodocs'],\r\n  argTypes: {},\r\n  decorators: [\r\n    moduleMetadata({\r\n      imports: [AppButtonComponent, AvatarModule, DynamicDialogModule, TranslatePipe],\r\n      providers: [DynamicDialogStyle],\r\n    }),\r\n  ],\r\n}"
+                "type": "Meta<DialogWrapper>",
+                "defaultValue": "{\r\n  title: 'MyLibrary/AlertDialog',\r\n  component: DialogWrapper,\r\n  tags: ['autodocs'],\r\n  decorators: [\r\n    moduleMetadata({\r\n      imports: [AppButtonComponent, AvatarModule, DynamicDialogModule, TranslatePipe],\r\n      providers: [DynamicDialogStyle, DynamicDialogConfig, DynamicDialogRef, DialogService],\r\n    }),\r\n  ],\r\n}"
             },
             {
                 "name": "meta",
@@ -14448,7 +14524,7 @@
                 "name": "Story",
                 "ctype": "miscellaneous",
                 "subtype": "typealias",
-                "rawtype": "StoryObj<AlertDialogComponent>",
+                "rawtype": "StoryObj<DialogWrapper>",
                 "file": "projects/ui-components-lib/src/lib/alert-dialog/alert-dialog.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
@@ -14850,8 +14926,8 @@
                     "file": "projects/ui-components-lib/src/lib/alert-dialog/alert-dialog.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "type": "Meta<AlertDialogComponent>",
-                    "defaultValue": "{\r\n  title: 'MyLibrary/AlertDialog',\r\n  component: `AlertDialogComponent`,\r\n  tags: ['autodocs'],\r\n  argTypes: {},\r\n  decorators: [\r\n    moduleMetadata({\r\n      imports: [AppButtonComponent, AvatarModule, DynamicDialogModule, TranslatePipe],\r\n      providers: [DynamicDialogStyle],\r\n    }),\r\n  ],\r\n}"
+                    "type": "Meta<DialogWrapper>",
+                    "defaultValue": "{\r\n  title: 'MyLibrary/AlertDialog',\r\n  component: DialogWrapper,\r\n  tags: ['autodocs'],\r\n  decorators: [\r\n    moduleMetadata({\r\n      imports: [AppButtonComponent, AvatarModule, DynamicDialogModule, TranslatePipe],\r\n      providers: [DynamicDialogStyle, DynamicDialogConfig, DynamicDialogRef, DialogService],\r\n    }),\r\n  ],\r\n}"
                 }
             ],
             "projects/ui-components-lib/src/lib/app-button/button.stories.ts": [
@@ -15682,7 +15758,7 @@
                     "name": "Story",
                     "ctype": "miscellaneous",
                     "subtype": "typealias",
-                    "rawtype": "StoryObj<AlertDialogComponent>",
+                    "rawtype": "StoryObj<DialogWrapper>",
                     "file": "projects/ui-components-lib/src/lib/alert-dialog/alert-dialog.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
@@ -15795,6 +15871,15 @@
                 "type": "injectable",
                 "linktype": "injectable",
                 "name": "AlertDialogService",
+                "coveragePercent": 0,
+                "coverageCount": "0/3",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/ui-components-lib/src/lib/alert-dialog/alert-dialog.stories.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "DialogWrapper",
                 "coveragePercent": 0,
                 "coverageCount": "0/3",
                 "status": "low"
