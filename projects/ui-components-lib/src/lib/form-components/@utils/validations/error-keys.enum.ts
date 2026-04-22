@@ -14,7 +14,6 @@ export enum BasicErrorKeysEnum {
   default = 'DEFAULT',
   numbersOnly = 'NUMBERS_ONLY',
   invalidSaudiPhoneNumber = 'INVALID_SAUDI_PHONE_NUMBER',
-  maxRepeatedChars = 'MAX_REPEATED_CHARS',
 }
 export enum ErrorsWithValuesKeysEnum {
   minlength = 'MIN_LENGTH',
@@ -24,4 +23,5 @@ export enum ErrorsWithValuesKeysEnum {
   maxSize = 'MAX_SIZE',
   maxFiles = 'MAX_FILES',
   allowedTypes = 'ALLOWED_TYPES',
+  maxRepeatedChars = 'MAX_REPEATED_CHARS',
 }

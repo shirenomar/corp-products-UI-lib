@@ -185,7 +185,7 @@ export class App {
       role: new FormControl<any>(null, [Validators.required]),
       status: new FormControl<string | null>(null),
       notify: new FormControl<boolean>(false),
-      subject: new FormControl<string>('', [Validators.required, maxRepeatedCharsValidator(4)]),
+      subject: new FormControl<string>('', [Validators.required, maxRepeatedCharsValidator(3)]),
       assignee: new FormControl<Array<any>>(
         [],
         [Validators.required, emailStcValidator(allowedDomains)],

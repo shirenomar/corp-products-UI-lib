@@ -14,7 +14,7 @@ export function maxRepeatedCharsValidator(maxRepeats = 3): ValidatorFn {
       if (str[i] === str[i - 1]) {
         count++;
         if (count > maxRepeats) {
-          return { maxRepeatedChars: true };
+          return { maxRepeatedChars: { maxRepeats } };
         }
       } else {
         count = 1;
