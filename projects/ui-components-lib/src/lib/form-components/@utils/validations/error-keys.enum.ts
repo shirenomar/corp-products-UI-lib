@@ -23,5 +23,6 @@ export enum ErrorsWithValuesKeysEnum {
   maxSize = 'MAX_SIZE',
   maxFiles = 'MAX_FILES',
   allowedTypes = 'ALLOWED_TYPES',
+  emailDomain = 'EMAIL_DOMAIN',
   maxRepeatedChars = 'MAX_REPEATED_CHARS',
 }
