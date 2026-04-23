@@ -1,6 +1,11 @@
 <!-- <app-breadcrumb
       [items]="items">
 </app-breadcrumb> -->
+
+<stc-date-picker [variant]="'in'" [label]="'Select Date'" id="dateId" [control]="dateControl2"
+    [selectionMode]="'single'" [showClear]="true" [showIcon]="true">
+  </stc-date-picker>
+
 <h4>open pup up with file</h4>
 <app-button class="w-full" title="open pup up with file" severity="danger" iconPos="left" icon="pi pi-plus"
   (onClick)="openCancelFollowUp()"></app-button>
@@ -25,9 +30,7 @@
     [optionValue]="'code'" [showClear]="true">
   </stc-select>
 
-  <!-- <stc-date-picker [variant]="'in'" [label]="'Select Date'" id="dateId" [control]="dateControl"
-    [selectionMode]="'single'" [showIcon]="true">
-  </stc-date-picker> -->
+
   <app-button [label]="'Submit'" [severity]="'primary'" [raised]="true"></app-button>
 </form>
 <!-- input component test input with float label and textarea -->
@@ -50,6 +53,8 @@
 
 <hr class="my-8" />
 
+<button (click)="patchStartDate()">patch startDate</button>
+
 <!-- Dynamic Form Demo -->
 <section class="p-4 border rounded-md mt-4">
   <h2 class="text-lg font-semibold mb-4">Dynamic Form Demo</h2>
@@ -65,3 +70,5 @@
   </div>
   <pre class="mt-4 bg-gray-100 p-2 rounded">{{ dynamicFormGroup.value | json }}</pre>
 </section>
+
+
