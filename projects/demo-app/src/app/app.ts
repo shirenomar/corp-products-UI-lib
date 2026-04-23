@@ -22,6 +22,8 @@ import {
   emailStcValidator,
   FormFieldTypeEnum,
   InputsMap,
+  maxRepeatedCharsValidator,
+  saudiPhoneValidator,
 } from '@corp-products/ui-components';
 import { ConfirmationDialogComponent } from './../../../ui-components-lib/src/lib/confirmation-dialog/confirmation-dialog.component';
 import { SelectComponent } from './../../../ui-components-lib/src/lib/form-components/components/select/select.component';
@@ -178,12 +180,16 @@ export class App {
       endDate: new FormControl<Date | null>(null, [Validators.required]),
       hijriDate: new FormControl<Date | null>(null),
       file: new FormControl<null>(null),
-
+      phone: new FormControl<string>('', [saudiPhoneValidator()]),
       fullName: new FormControl<string>('', [Validators.required]),
       role: new FormControl<any>(null, [Validators.required]),
       status: new FormControl<string | null>(null),
       notify: new FormControl<boolean>(false),
-      assignee: new FormControl<Array<any>>([], [Validators.required , emailStcValidator(allowedDomains)]),
+      subject: new FormControl<string>('', [Validators.required, maxRepeatedCharsValidator(3)]),
+      assignee: new FormControl<Array<any>>(
+        [],
+        [Validators.required, emailStcValidator(allowedDomains)],
+      ),
     },
     { validators: [dateRangeValidator('startDate', 'endDate')] },
   );
@@ -206,6 +212,16 @@ export class App {
   ];
 
   dynamicInputsMap: InputsMap = {
+    phone: {
+      label: 'Phone Number',
+      fieldType: FormFieldTypeEnum.INPUT,
+      inputId: 'df-phone',
+      rowSize: 'half',
+      inputType: 'text',
+      contentType: 'text',
+      placeholder: 'Enter Saudi phone number',
+      variant: 'in',
+    },
     startDate: {
       label: 'Start Date',
       fieldType: FormFieldTypeEnum.DATE_PICKER,
@@ -263,6 +279,16 @@ export class App {
       filter: false,
       variant: 'in',
     },
+    subject: {
+      label: 'Subject',
+      fieldType: FormFieldTypeEnum.INPUT,
+      inputId: 'df-subject',
+      rowSize: 'full',
+      inputType: 'text',
+      contentType: 'text',
+      placeholder: 'Enter subject',
+      variant: 'in',
+    },
     status: {
       label: 'Status',
       fieldType: FormFieldTypeEnum.SELECT_BUTTON,
@@ -287,7 +313,7 @@ export class App {
       // autoCompleteItems: this.allUsers,
       variant: 'in',
       placeholder: 'Type to search users',
-      allowedDomains : allowedDomains
+      allowedDomains: allowedDomains,
     },
   };
 

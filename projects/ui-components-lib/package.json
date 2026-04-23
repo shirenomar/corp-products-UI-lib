@@ -1,6 +1,6 @@
 {
   "name": "@corp-products/ui-components",
-  "version": "4.0.0",
+  "version": "4.1.6",
   "author": "shireen Omar",
   "description": "shared UI components across our apps",
   "peerDependencies": {

@@ -13,6 +13,7 @@ export enum BasicErrorKeysEnum {
   fileSelected = 'FILE_SELECTED',
   default = 'DEFAULT',
   numbersOnly = 'NUMBERS_ONLY',
+  invalidSaudiPhoneNumber = 'INVALID_SAUDI_PHONE_NUMBER',
 }
 export enum ErrorsWithValuesKeysEnum {
   minlength = 'MIN_LENGTH',
@@ -22,5 +23,6 @@ export enum ErrorsWithValuesKeysEnum {
   maxSize = 'MAX_SIZE',
   maxFiles = 'MAX_FILES',
   allowedTypes = 'ALLOWED_TYPES',
-  emailDomain = 'EMAIL_DOMAIN'
+  emailDomain = 'EMAIL_DOMAIN',
+  maxRepeatedChars = 'MAX_REPEATED_CHARS',
 }
