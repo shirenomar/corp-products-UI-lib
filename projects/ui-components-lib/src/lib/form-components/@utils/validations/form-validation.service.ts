@@ -61,6 +61,7 @@ export class FormValidationService {
         this.getTranslation(ErrorsWithValuesKeysEnum.maxFiles, { size: val?.requiredLength }),
       allowedTypes: (val) =>
         this.getTranslation(ErrorsWithValuesKeysEnum.allowedTypes, { types: val?.join(', ') }),
+      emailDomain: () => this.getTranslation(ErrorsWithValuesKeysEnum.emailDomain),
     };
 
     return messages[errorKey](errorValue);
