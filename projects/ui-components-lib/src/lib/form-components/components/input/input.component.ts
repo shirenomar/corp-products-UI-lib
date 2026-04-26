@@ -28,7 +28,7 @@ import { InputIcon } from 'primeng/inputicon';
   styleUrl: './input.component.scss',
 })
 export class InputComponent extends BaseInputComponent {
-  @Input() type: 'text' | 'textarea' | 'withIcon' = 'text';
+  @Input() type: 'text' | 'textarea' | 'withIcon' | 'number' = 'text';
   @Input() contentType: 'text' | 'email' | 'number' = 'text';
   @Input() size: 'small' | 'large' = "small";
   @Input() prefix: string;
