@@ -1,7 +1,7 @@
 import { FormGroup } from '@angular/forms';
 import { LabelValue } from '../form-components';
 
-export type InputType = 'text' | 'textarea';
+export type InputType = 'text' | 'textarea' | 'number';
 export type InputContentType = 'text' | 'email' | 'number';
 
 export interface Dropdown<T = unknown> {
