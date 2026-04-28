@@ -1,6 +1,15 @@
 <!-- <app-breadcrumb
       [items]="items">
 </app-breadcrumb> -->
+
+<app-dual-calendar
+                      [control]="dateControl"
+                      [label]="
+                        'Select Date'
+                      "
+                      [withTime]="true"
+                    ></app-dual-calendar>
+
 <h4>open pup up with file</h4>
 <app-button class="w-full" title="open pup up with file" severity="danger" iconPos="left" icon="pi pi-plus"
   (onClick)="openCancelFollowUp()"></app-button>
