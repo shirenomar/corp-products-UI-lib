@@ -2,6 +2,13 @@
       [items]="items">
 </app-breadcrumb> -->
 
+<app-dual-calendar
+                      [control]="dateControl"
+                      [label]="
+                        'Select Date'
+                      "
+                      [withTime]="true"
+                    ></app-dual-calendar>
 <stc-date-picker [variant]="'in'" [label]="'Select Date'" id="dateId" [control]="dateControl2"
     [selectionMode]="'single'" [showClear]="true" [showIcon]="true">
   </stc-date-picker>
