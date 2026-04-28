@@ -7,6 +7,9 @@ import { FloatLabelModule } from 'primeng/floatlabel';
 import { ValidationErrorsPipe } from '../../form-components/@utils/validations/validation-message.pipe';
 import { BaseInputComponent } from '../../form-components/components/base-input.component';
 import { InputText } from 'primeng/inputtext';
+import { IconFieldModule } from 'primeng/iconfield';
+import { InputIconModule } from 'primeng/inputicon';
+
 @Component({
   selector: 'stc-date-picker-switcher',
   standalone: true,
@@ -19,6 +22,8 @@ import { InputText } from 'primeng/inputtext';
     ValidationErrorsPipe,
     TranslatePipe,
     FloatLabelModule,
+    InputIconModule,
+    IconFieldModule
   ],
   templateUrl: './date-picker-switcher.component.html',
   styleUrl: './date-picker-switcher.component.scss',

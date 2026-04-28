@@ -176,7 +176,7 @@ export class App {
   // Dynamic form demo config and state
   dynamicFormGroup = new FormGroup(
     {
-      startDate: new FormControl<Date | null>(new Date(), [Validators.required]),
+      startDate: new FormControl<any>((new Date()).toISOString(), [Validators.required]),
       endDate: new FormControl<Date | null>(null, [Validators.required]),
       hijriDate: new FormControl<Date | null>(null),
       file: new FormControl<null>(null),
