@@ -14,6 +14,7 @@ import {
   BottomSheetComponent,
   BreadcrumbItem,
   ConfirmationDialogService,
+  DatePickerComponent,
   dateRangeValidator,
   DropdownMenuItem,
   DualCalendarComponent,
@@ -66,6 +67,7 @@ import { allowedDomains } from './email-stc-domains.const';
     DualCalendarComponent,
     CommonModule,
     AppDropdownMenuComponent,
+    DatePickerComponent
   ],
   providers: [DialogService, ConfirmationDialogService],
   templateUrl: './app.html',
@@ -134,7 +136,8 @@ export class App {
   sidebarDynamicService = inject(DynamicSidebarService);
 
   sideBarData: SidebarConfig = SidebarConfigDefaults;
-  dateControl: FormControl<any> = new FormControl({ value: null, disabled: false }, []);
+  dateControl: FormControl<any> = new FormControl({ value: new Date(), disabled: false }, []);
+  dateControl2: FormControl<any> = new FormControl({ value: new Date().toISOString(), disabled: false }, []);
   inputControl: FormControl<any> = new FormControl('', [Validators.required]);
   selectControl: FormControl<any> = new FormControl(null, []);
   dualControl: FormControl<any> = new FormControl(null);
@@ -193,6 +196,10 @@ export class App {
     },
     { validators: [dateRangeValidator('startDate', 'endDate')] },
   );
+
+  patchStartDate(){
+    this.dynamicFormGroup.get('startDate')?.setValue(new Date());
+  }
   showCalender() {
     this.isCalendarOpen = !this.isCalendarOpen;
     console.log('date selected ', this.dualControl.value);
@@ -217,8 +224,8 @@ export class App {
       fieldType: FormFieldTypeEnum.INPUT,
       inputId: 'df-phone',
       rowSize: 'half',
-      inputType: 'text',
-      contentType: 'text',
+      inputType: 'number',
+      //contentType: 'number',
       placeholder: 'Enter Saudi phone number',
       variant: 'in',
     },
