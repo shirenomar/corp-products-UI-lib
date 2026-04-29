@@ -134,6 +134,7 @@ export class App {
   ];
 
   sidebarDynamicService = inject(DynamicSidebarService);
+  testDate : FormControl<any> = new FormControl({ value: new Date().toISOString(), disabled: false }, []);
 
   sideBarData: SidebarConfig = SidebarConfigDefaults;
   dateControl: FormControl<any> = new FormControl({ value: new Date(), disabled: false }, []);
@@ -203,6 +204,10 @@ export class App {
   showCalender() {
     this.isCalendarOpen = !this.isCalendarOpen;
     console.log('date selected ', this.dualControl.value);
+  }
+
+  changeDate() {
+    this.testDate.setValue(new Date(Date.now() + 24 * 60 * 60 * 1000));
   }
   selectedDate(selectedDate: string) {
     console.log('date selected ', selectedDate);

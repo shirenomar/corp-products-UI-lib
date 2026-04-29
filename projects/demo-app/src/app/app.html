@@ -2,16 +2,18 @@
       [items]="items">
 </app-breadcrumb> -->
 
-<app-dual-calendar
+<!-- <app-dual-calendar
                       [control]="dateControl"
                       [label]="
                         'Select Date'
                       "
                       [withTime]="true"
-                    ></app-dual-calendar>
-<stc-date-picker [variant]="'in'" [label]="'Select Date'" id="dateId" [control]="dateControl2"
+                    ></app-dual-calendar> -->
+<stc-date-picker [variant]="'in'" [label]="'Select Date'" id="dateId" [control]="testDate"
     [selectionMode]="'single'" [showClear]="true" [showIcon]="true">
-  </stc-date-picker>
+</stc-date-picker>
+
+<button (click)="changeDate()">Change Date</button>
 
 <h4>open pup up with file</h4>
 <app-button class="w-full" title="open pup up with file" severity="danger" iconPos="left" icon="pi pi-plus"

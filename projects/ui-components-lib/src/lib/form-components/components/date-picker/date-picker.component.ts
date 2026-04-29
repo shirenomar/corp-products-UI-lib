@@ -53,6 +53,7 @@ export class DatePickerComponent extends BaseInputComponent implements AfterView
     }
 
     this.control.valueChanges.subscribe((value) => {
+      this.innerControl.setValue(new Date(value), { emitEvent: false });
       if (!value) this.innerControl.reset();
     });
   }
