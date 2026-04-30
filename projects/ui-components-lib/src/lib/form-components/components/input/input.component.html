@@ -42,15 +42,30 @@
 
   </p-iconfield>
   }
+  @case ('number'){
+    <p-floatlabel [variant]="variant">
+    <p-inputnumber [id]="inputId"
+        [showButtons]="true" inputId="minmax-buttons" [showClear]="true"
+     [formControl]="control" [readonly]="readonly"
+      [class]="
+        'w-full border border-[' + defaultColor + '] rounded-none focus:outline-[' + defaultColor + '] focus:border-[' + defaultColor + '] hover:border-[' + defaultColor + '] disabled:opacity-50'
+        " [disabled]="disabled" [name]="name"  [ngStyle]="{'direction': inputDirection || 'inherit'}"
+      class="w-full"
+      [ngClass]="{ 'p-invalid ng-dirty ng-invalid': isInvalid, 'basic-style': basicInput, 'no-style':noStyle}" />
+    <label [for]="inputId">
+      {{ label }}
+      @if (required) {
+      <span [class.text-required]="required">*</span>
+      }
+    </label>
+  </p-floatlabel>
+  }
   @default {
   <p-floatlabel [variant]="variant">
     <!-- <input pInputText id="value2" [(ngModel)]="value2" [invalid]="!value2" autocomplete="off" /> -->
     <input [id]="inputId"
      [type]="type"
 
-     [attr.autocomplete]="type === 'number' ? 'nop' : 'on'"
-     [name]="type === 'number' ? name + '_' + inputId : name"
-     (wheel)="type === 'number' ? $event.preventDefault() : null"
 
      [formControl]="control" [readonly]="readonly" [pSize]="size"
       [class]="

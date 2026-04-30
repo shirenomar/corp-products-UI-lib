@@ -9,6 +9,8 @@ import { ValidationErrorsPipe } from '../../@utils/validations/validation-messag
 import { BaseInputComponent } from '../base-input.component';
 import { IconField } from 'primeng/iconfield';
 import { InputIcon } from 'primeng/inputicon';
+import { InputNumberModule } from 'primeng/inputnumber';
+
 @Component({
   selector: 'stc-input',
   standalone: true,
@@ -23,6 +25,7 @@ import { InputIcon } from 'primeng/inputicon';
     FloatLabelModule,
     InputIcon,
     IconField,
+    InputNumberModule,
   ],
   templateUrl: './input.component.html',
   styleUrl: './input.component.scss',
