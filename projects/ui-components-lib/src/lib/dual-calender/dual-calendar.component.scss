@@ -137,8 +137,7 @@
 .ngb-datepicker {
   width: 100%;
 
-  .ngb-dp-month {
-  }
+  .ngb-dp-month {}
 }
 
 .custom-day {
@@ -236,7 +235,7 @@
   }
 }
 
-.ngb-datepicker-navigation-select > .form-select {
+.ngb-datepicker-navigation-select>.form-select {
   font-size: 14px;
   font-weight: bold;
 }
