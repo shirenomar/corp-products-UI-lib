@@ -78,6 +78,7 @@ export class DualCalendarComponent implements OnInit , OnChanges , OnDestroy {
   @ViewChild('calendarContainer') calendarContainer!: ElementRef;
   hijriCal = new NgbCalendarIslamicUmalqura();
   renderer = inject(Renderer2);
+  private hostEl = inject(ElementRef);
 
   constructor() {
     effect(() => {
@@ -130,10 +131,12 @@ export class DualCalendarComponent implements OnInit , OnChanges , OnDestroy {
   }
 
   private positionCalendar(): void {
-    if (!this.calendarContainer || !this.calendarWrapper) return;
-    const triggerRect = this.calendarContainer.nativeElement.getBoundingClientRect();
+    if (!this.calendarWrapper) return;
+    const anchor = this.hostEl.nativeElement.previousElementSibling || this.hostEl.nativeElement;
+    const triggerRect = anchor.getBoundingClientRect();
     const el = this.calendarWrapper.nativeElement;
     const calendarHeight = el.scrollHeight || 370;
+    const calendarWidth = el.scrollWidth || 375;
     const spaceBelow = window.innerHeight - triggerRect.bottom;
     const spaceAbove = triggerRect.top;
 
@@ -144,7 +147,11 @@ export class DualCalendarComponent implements OnInit , OnChanges , OnDestroy {
       el.style.bottom = `${window.innerHeight - triggerRect.top}px`;
       el.style.top = 'auto';
     }
-    el.style.left = `${triggerRect.left}px`;
+
+    let left = triggerRect.right - calendarWidth;
+    if (left < 8) left = 8;
+    if (left + calendarWidth > window.innerWidth - 8) left = window.innerWidth - calendarWidth - 8;
+    el.style.left = `${left}px`;
   }
 
   setDate(value: string | null) {
