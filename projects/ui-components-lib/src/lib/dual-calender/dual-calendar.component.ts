@@ -1,6 +1,12 @@
 import { Component, effect, ElementRef, EventEmitter, HostListener, inject, Input, OnChanges, OnDestroy, OnInit, Output, Renderer2, signal, SimpleChanges, ViewChild, ViewEncapsulation } from '@angular/core';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { NgbCalendar, NgbDateStruct, NgbCalendarIslamicUmalqura, NgbDatepickerModule, NgbDate } from '@ng-bootstrap/ng-bootstrap';
+import {
+  NgbCalendar,
+  NgbDateStruct,
+  NgbCalendarIslamicUmalqura,
+  NgbDatepickerModule,
+  NgbDate,
+} from '@ng-bootstrap/ng-bootstrap';
 import { HijriCalendarComponent } from './hijri-calendar/hijri-calendar.component';
 import { GregorianCalendarComponent } from './gregorian-calendar/gregorian-calendar.component';
 import { FloatLabelModule } from 'primeng/floatlabel';
@@ -17,14 +23,16 @@ import { TranslatePipe } from '@ngx-translate/core';
   animations: [
     trigger('slideDown', [
       state('closed', style({
-        height: '0px',
-        opacity: 0,
-        overflow: 'hidden'
+          height: '0px',
+          opacity: 0,
+          overflow: 'hidden',
+          pointerEvents: 'none',
       })),
       state('open', style({
-        height: '*',
-        opacity: 1,
-        overflow: 'hidden'
+          height: '*',
+          opacity: 1,
+        overflow: 'hidden',
+        pointerEvents: 'auto',
       })),
       transition('closed <=> open', [
         animate('300ms ease')
@@ -33,7 +41,6 @@ import { TranslatePipe } from '@ngx-translate/core';
   ],
   imports: [
     NgbDatepickerModule,
-    FormsModule,
     FormsModule,
     ReactiveFormsModule,
     DatePickerModule,
@@ -81,6 +88,7 @@ export class DualCalendarComponent implements OnInit , OnChanges , OnDestroy {
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['isShown']?.currentValue) {
       this.wrapperVisible();
+      setTimeout(() => this.positionCalendar());
     }else {
       this.wrapperHidden();
     }
@@ -121,6 +129,24 @@ export class DualCalendarComponent implements OnInit , OnChanges , OnDestroy {
     this.renderer.setStyle(this.calendarWrapper.nativeElement, 'visibility', 'hidden');
   }
 
+  private positionCalendar(): void {
+    if (!this.calendarContainer || !this.calendarWrapper) return;
+    const triggerRect = this.calendarContainer.nativeElement.getBoundingClientRect();
+    const el = this.calendarWrapper.nativeElement;
+    const calendarHeight = el.scrollHeight || 370;
+    const spaceBelow = window.innerHeight - triggerRect.bottom;
+    const spaceAbove = triggerRect.top;
+
+    if (spaceBelow >= calendarHeight || spaceBelow >= spaceAbove) {
+      el.style.top = `${triggerRect.bottom}px`;
+      el.style.bottom = 'auto';
+    } else {
+      el.style.bottom = `${window.innerHeight - triggerRect.top}px`;
+      el.style.top = 'auto';
+    }
+    el.style.left = `${triggerRect.left}px`;
+  }
+
   setDate(value: string | null) {
     if (!value) return;
 
@@ -139,7 +165,7 @@ export class DualCalendarComponent implements OnInit , OnChanges , OnDestroy {
   @HostListener('document:click', ['$event'])
   onDocumentClick(event: MouseEvent) {
     event.stopPropagation()
-    if (!this.calendarContainer) return;
+    if (!this.calendarContainer || !this.isShown) return;
     const clickedInside = this.calendarContainer.nativeElement.contains(event.target);
     this.onClose.emit(!clickedInside)
     if (!clickedInside) {
@@ -194,6 +220,7 @@ export class DualCalendarComponent implements OnInit , OnChanges , OnDestroy {
     this.isShown = isOpen;
     if(isOpen) {
       this.wrapperVisible();
+      setTimeout(() => this.positionCalendar());
     } else {
       this.wrapperHidden();
     }
