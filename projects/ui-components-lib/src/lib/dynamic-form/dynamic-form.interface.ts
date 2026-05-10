@@ -1,7 +1,7 @@
 import { FormGroup } from '@angular/forms';
 import { LabelValue } from '../form-components';
 
-export type InputType = 'text' | 'textarea';
+export type InputType = 'text' | 'textarea' | 'number';
 export type InputContentType = 'text' | 'email' | 'number';
 
 export interface Dropdown<T = unknown> {
@@ -33,7 +33,7 @@ export interface InputsMapData {
   dateRange?: DateRangeInterface;
   isTimeOnly?: boolean;
   showIcon?: boolean;
-
+  withoutTime?: boolean;
   //select button
   selectButtonOptions?: LabelValue<any>[];
 
@@ -49,18 +49,22 @@ export interface InputsMapData {
 
   // Select dropdown
   selectOptions?: unknown[]; // Array of objects or primitives
+  translatable?: boolean;
   optionLabel?: string; // property name to display when options are objects
+  optionValue?: string; // property name to bind when options are objects
   filter?: boolean;
   multiple?: boolean;
   showClear?: boolean;
   checkmark?: boolean;
   filterBy?: string;
   selectedItemsLabel?: string;
+  optionTemplate?: OptionTemplateConfig; // Custom template config for rendering options with image, main text, and subtext
 
   // Auto-complete
   autoCompleteItems?: unknown[];
   minLengthToSearch?: number;
   delay?: number;
+  allowedDomains?: string[] | undefined;
 }
 
 export interface InputsMap {
@@ -85,6 +89,12 @@ export interface DateRangeInterface {
   notAfterOrSameDateInput?: string;
 }
 
+export interface OptionTemplateConfig {
+  imageKey?: string;
+  mainTextKey: string;
+  subTextKey?: string;
+}
+
 export enum FormFieldTypeEnum {
   DATE_PICKER = 'date-picker',
   SELECT_BUTTON = 'select-button',
@@ -92,5 +102,7 @@ export enum FormFieldTypeEnum {
   SELECT = 'select',
   SWITCH = 'switch',
   AUTO_COMPLETE = 'auto-complete',
-  HIJRI_DATE_PICKER = 'hijri-date'
+  HIJRI_DATE_PICKER = 'hijri-date',
+  UPLOAD_FILE = 'upload-file',
+  CHECKBOX = 'checkbox',
 }

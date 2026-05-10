@@ -1,16 +1,44 @@
 .calendar-wrapper {
   max-width: 375px;
   padding: 15px;
+  position: fixed;
+  z-index: 9999;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  background-color: #fff;
+  border-radius: 4px;
+  overflow: hidden;
+
+  .ngb-dp-header {
+    .ngb-dp-arrow.ngb-dp-arrow-next {
+      margin: 0 10px;
+      max-width: 20px;
+    }
+  }
 
   .rtl {
     .ngb-dp-header {
       .ngb-dp-arrow.ngb-dp-arrow-next {
         inset-inline-end: -6px;
         transform: rotate(180deg);
+        margin: 0 10px;
+        max-width: 20px;
       }
+
       .ngb-dp-arrow.ngb-dp-arrow-prev {
-          inset-inline-end: 6px;
-         transform: rotate(180deg);
+        inset-inline-end: 22px;
+        transform: rotate(180deg);
+      }
+    }
+  }
+
+  .ltr {
+    .ngb-dp-header {
+      .ngb-dp-arrow.ngb-dp-arrow-next {
+        inset-inline-end: -4px;
+      }
+
+      .ngb-dp-arrow.ngb-dp-arrow-prev {
+        inset-inline-end: 11px;
       }
     }
   }
@@ -25,7 +53,6 @@
 }
 
 .tabs {
-
   background: #f0f0f5;
   padding: 3px;
   border-radius: 2px;
@@ -83,12 +110,13 @@
   text-align: center;
 }
 
-
-
 /* Today style */
 .custom-day.today {
   border: 1px solid #6a41d8;
-  border-radius: 8px;
+  width: 100%;
+  height: 100%;
+  border-radius: 4px;
+  margin: 0;
 }
 
 /* Outside month */
@@ -105,18 +133,6 @@
 .calender-content {
   position: relative;
 }
-
-.calendar-wrapper {
-  position: absolute;
-  top: 100%;
-  left: 0;
-  z-index: 50;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-  background-color: #fff;
-  border-radius: 4px;
-  overflow: hidden;
-}
-
 
 .ngb-datepicker {
   width: 100%;
@@ -135,15 +151,13 @@
 }
 
 .custom-day.today {
-  color: #4F008D;
-  border: 0 !important;
-
+  color: #4f008d;
 }
 
 .ngb-dp-day:has(.selected) {
-  background-color: #EDE6F4 !important;
+  background-color: #ede6f4 !important;
   border: 0 !important;
-  color: #4F008D !important;
+  color: #4f008d !important;
   border-radius: 2px;
 }
 
@@ -159,8 +173,8 @@
 .ngb-dp-day,
 .ngb-dp-weekday,
 .ngb-dp-week-number {
-  width: 38px !important;
-  height: 44px !important;
+  width: 32px !important;
+  height: 32px !important;
   display: flex;
   margin: 5px;
   justify-content: center;
@@ -178,6 +192,8 @@
 .ngb-dp-arrow-btn {
   margin-inline-end: 0 !important;
   outline: 0 !important;
+  padding: 0 !important;
+  margin: 0 !important;
 }
 
 .ngb-dp-header {
@@ -231,10 +247,8 @@
   -moz-appearance: none;
 }
 
-
-
 .ngb-dp-navigation-chevron {
   font-size: 18px;
-  border-width: .1em .1em 0 0 !important;
+  border-width: 0.1em 0.1em 0 0 !important;
   border-color: #000;
 }

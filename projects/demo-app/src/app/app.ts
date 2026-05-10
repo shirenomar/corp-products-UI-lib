@@ -4,36 +4,70 @@ import { Component, inject, signal, ViewEncapsulation } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 
 import { DialogService } from 'primeng/dynamicdialog';
-import { BreadcrumbItem } from '../../../ui-components-lib/src/lib/app-breadcrumb/app-breadcrumb.interface';
-import { ConfirmationDialogService } from './../../../ui-components-lib/src/lib/confirmation-dialog/confirmation-dialog.service';
 import { SideBar } from './side-bar/side-bar';
 
+import { animate, state, style, transition, trigger } from '@angular/animations';
 import {
   AppBreadcrumbComponent,
   AppButtonComponent,
+  AppDropdownMenuComponent,
   BottomSheetComponent,
+  BreadcrumbItem,
+  ConfirmationDialogService,
+  DatePickerComponent,
+  dateRangeValidator,
+  DropdownMenuItem,
+  DualCalendarComponent,
   DynamicFormComponent,
   DynamicFormData,
+  emailStcValidator,
   FormFieldTypeEnum,
   InputsMap,
+  maxRepeatedCharsValidator,
+  saudiPhoneValidator,
 } from '@corp-products/ui-components';
 import { ConfirmationDialogComponent } from './../../../ui-components-lib/src/lib/confirmation-dialog/confirmation-dialog.component';
+import { SelectComponent } from './../../../ui-components-lib/src/lib/form-components/components/select/select.component';
 import { DynamicSidebarService } from './../../../ui-components-lib/src/lib/side-bar-dynamic/dynamic-sidebar.service';
 import {
   SidebarConfig,
   SidebarConfigDefaults,
 } from './../../../ui-components-lib/src/lib/side-bar-dynamic/sidebar-config';
-import { SelectComponent } from './../../../ui-components-lib/src/lib/form-components/components/select/select.component';
+import { allowedDomains } from './email-stc-domains.const';
 @Component({
   selector: 'app-root',
+  animations: [
+    trigger('slideDown', [
+      state(
+        'closed',
+        style({
+          height: '0px',
+          opacity: 0,
+          overflow: 'hidden',
+        }),
+      ),
+      state(
+        'open',
+        style({
+          height: '*',
+          opacity: 1,
+          overflow: 'hidden',
+        }),
+      ),
+      transition('closed <=> open', [animate('300ms ease')]),
+    ]),
+  ],
   imports: [
-AppBreadcrumbComponent,
+    AppBreadcrumbComponent,
     ReactiveFormsModule,
     AppButtonComponent,
     BottomSheetComponent,
     DynamicFormComponent,
     SelectComponent,
+    DualCalendarComponent,
     CommonModule,
+    AppDropdownMenuComponent,
+    DatePickerComponent
   ],
   providers: [DialogService, ConfirmationDialogService],
   templateUrl: './app.html',
@@ -49,6 +83,7 @@ export class App {
   });
   confirmationDialogService = inject(ConfirmationDialogService);
   dialogService = inject(DialogService);
+  isCalendarOpen = false;
   items: BreadcrumbItem[] = [
     {
       notClickable: false,
@@ -99,11 +134,15 @@ export class App {
   ];
 
   sidebarDynamicService = inject(DynamicSidebarService);
+  testDate : FormControl<any> = new FormControl({ value: new Date().toISOString(), disabled: false }, []);
 
   sideBarData: SidebarConfig = SidebarConfigDefaults;
-  dateControl: FormControl<any> = new FormControl({ value: null, disabled: false }, []);
+  dateControl: FormControl<any> = new FormControl({ value: new Date(), disabled: false }, []);
+  dateControl2: FormControl<any> = new FormControl({ value: new Date().toISOString(), disabled: false }, []);
   inputControl: FormControl<any> = new FormControl('', [Validators.required]);
   selectControl: FormControl<any> = new FormControl(null, []);
+  dualControl: FormControl<any> = new FormControl(null);
+
   form: FormGroup = new FormGroup({
     inputControl: this.inputControl,
     dateControl: this.dateControl,
@@ -124,20 +163,58 @@ export class App {
     { name: 'Item 4', code: '4' },
     { name: 'Item 5', code: '5' },
   ];
+  selectItemsTranslated = [
+    { nameAr: 'Item 1 Ar', nameEn: 'Item 1 En', code: '1' },
+    { nameAr: 'Item 2 Ar', nameEn: 'Item 1 En', code: '2' },
+    { nameAr: 'Item 3 Ar', nameEn: 'Item 1 En', code: '3' },
+    { nameAr: 'Item 4 Ar', nameEn: 'Item 1 En', code: '4' },
+    { nameAr: 'Item 5 Ar', nameEn: 'Item 1 En', code: '5' },
+  ];
+
+  attachmentActionsMenu: DropdownMenuItem[] = [
+    { title: 'attachments.add_correspondences', show: false },
+    { title: 'attachments.add_attachments', show: true },
+    { title: 'attachments.add_receipts', show: true },
+  ];
 
   // Dynamic form demo config and state
-  dynamicFormGroup = new FormGroup({
-    startDate: new FormControl<Date | null>(new Date(), [Validators.required]),
-    endDate: new FormControl<Date | null>(null, [Validators.required]),
-    hijriDate: new FormControl<Date | null>(null ),
+  dynamicFormGroup = new FormGroup(
+    {
+      startDate: new FormControl<any>((new Date()).toISOString(), [Validators.required]),
+      endDate: new FormControl<Date | null>(null, [Validators.required]),
+      hijriDate: new FormControl<Date | null>(null),
+      file: new FormControl<null>(null),
+      phone: new FormControl<string>('', [saudiPhoneValidator()]),
+      fullName: new FormControl<string>('', [Validators.required]),
+      role: new FormControl<any>(null, [Validators.required]),
+      status: new FormControl<string | null>(null),
+      notify: new FormControl<boolean>(false),
+      subject: new FormControl<string>('', [Validators.required, maxRepeatedCharsValidator(3)]),
+      assignee: new FormControl<Array<any>>(
+        [],
+        [Validators.required, emailStcValidator(allowedDomains)],
+      ),
+    },
+    { validators: [dateRangeValidator('startDate', 'endDate')] },
+  );
 
-    fullName: new FormControl<string>('', [Validators.required]),
-    role: new FormControl<any>(null, [Validators.required]),
-    status: new FormControl<string | null>(null),
-    notify: new FormControl<boolean>(false),
-    assignee: new FormControl<Array<any>>([], [Validators.required]),
-  });
+  patchStartDate(){
+    this.dynamicFormGroup.get('startDate')?.setValue(new Date());
+  }
+  showCalender() {
+    this.isCalendarOpen = !this.isCalendarOpen;
+    console.log('date selected ', this.dualControl.value);
+  }
 
+  changeDate() {
+    this.testDate.setValue(new Date(Date.now() + 24 * 60 * 60 * 1000));
+  }
+  selectedDate(selectedDate: string) {
+    console.log('date selected ', selectedDate);
+  }
+  onCloseCalender(isClose: boolean) {
+    console.log('calender close ', isClose);
+  }
   private allUsers = [
     { id: 1, name: 'Alice Smith' },
     { id: 2, name: 'Bob Johnson' },
@@ -147,6 +224,16 @@ export class App {
   ];
 
   dynamicInputsMap: InputsMap = {
+    phone: {
+      label: 'Phone Number',
+      fieldType: FormFieldTypeEnum.INPUT,
+      inputId: 'df-phone',
+      rowSize: 'half',
+      inputType: 'number',
+      //contentType: 'number',
+      placeholder: 'Enter Saudi phone number',
+      variant: 'in',
+    },
     startDate: {
       label: 'Start Date',
       fieldType: FormFieldTypeEnum.DATE_PICKER,
@@ -155,12 +242,7 @@ export class App {
       dateRange: { min: new Date(2020, 0, 1), max: new Date(2030, 11, 31) },
       showIcon: true,
       variant: 'in',
-    },
-    hijriDate: {
-      label: 'Hijri Date',
-      fieldType: FormFieldTypeEnum.HIJRI_DATE_PICKER,
-      rowSize: 'half',
-      showIcon: true,
+      withoutTime: false,
     },
     endDate: {
       label: 'End Date',
@@ -170,6 +252,21 @@ export class App {
       dateRange: { min: new Date(2020, 0, 1), max: new Date(2030, 11, 31) },
       showIcon: true,
       variant: 'in',
+      withoutTime: true,
+    },
+    file: {
+      label: 'Start Date',
+      fieldType: FormFieldTypeEnum.UPLOAD_FILE,
+      inputId: 'df-file-date',
+      rowSize: 'half',
+      showIcon: true,
+      variant: 'in',
+    },
+    hijriDate: {
+      label: 'Hijri Date',
+      fieldType: FormFieldTypeEnum.HIJRI_DATE_PICKER,
+      rowSize: 'half',
+      showIcon: true,
     },
     fullName: {
       label: 'Full Name',
@@ -186,10 +283,22 @@ export class App {
       fieldType: FormFieldTypeEnum.SELECT,
       inputId: 'df-role',
       rowSize: 'half',
-      selectOptions: this.selectItems,
+      selectOptions: this.selectItemsTranslated,
+      translatable: true,
       optionLabel: 'name',
+      optionValue: 'code',
       showClear: true,
       filter: false,
+      variant: 'in',
+    },
+    subject: {
+      label: 'Subject',
+      fieldType: FormFieldTypeEnum.INPUT,
+      inputId: 'df-subject',
+      rowSize: 'full',
+      inputType: 'text',
+      contentType: 'text',
+      placeholder: 'Enter subject',
       variant: 'in',
     },
     status: {
@@ -204,7 +313,7 @@ export class App {
     },
     notify: {
       label: 'Email Notifications',
-      fieldType: FormFieldTypeEnum.SWITCH,
+      fieldType: FormFieldTypeEnum.CHECKBOX,
       inputId: 'df-notify',
       rowSize: 'half',
     },
@@ -216,6 +325,7 @@ export class App {
       // autoCompleteItems: this.allUsers,
       variant: 'in',
       placeholder: 'Type to search users',
+      allowedDomains: allowedDomains,
     },
   };
 
@@ -231,6 +341,10 @@ export class App {
   }
 
   onDynamicSelectChange(e: { name: string; event: any }) {
+    console.log('Select change', e);
+  }
+
+  onDynamicSelectClicked(e: { name: string; event: any }) {
     console.log('Select change', e);
   }
 
@@ -252,11 +366,17 @@ export class App {
   onSubmitDynamicForm() {
     this.dynamicFormGroup.markAllAsTouched();
     this.dynamicFormGroup.updateValueAndValidity();
+    this.dynamicFormGroup.valueChanges.subscribe(() => {
+      const dateTo = this.dynamicFormGroup.get('endDate');
+      if (dateTo) {
+        dateTo.updateValueAndValidity({ emitEvent: false });
+      }
+    });
     if (this.dynamicFormGroup.invalid) {
       console.warn(
         'Dynamic form invalid',
         this.dynamicFormGroup.errors,
-        this.dynamicFormGroup.value
+        this.dynamicFormGroup.value,
       );
       return;
     }
@@ -270,7 +390,6 @@ export class App {
   });
   addNewGroup(newGroup: string) {
     console.log('newGroup', newGroup);
-
   }
 
   dialogInputsMap: InputsMap = {
@@ -327,6 +446,12 @@ export class App {
         inputForm: this.dialogDynamicFormData,
       })
       .subscribe((confirmed) => {
+        console.log(
+          '✅ Dialog confirmed dynamic with form data:',
+          confirmed,
+          this.dialogFormGroup.value,
+        );
+
         if (confirmed) {
           console.log('✅ Dialog confirmed with form data:', this.dialogFormGroup.value);
         } else {
@@ -353,7 +478,71 @@ export class App {
       console.log(res);
     });
   }
+  dialogCancelFollowUpFormGroup = new FormGroup({
+    dateFollowUP: new FormControl<null>(null),
+    file: new FormControl<null>(null),
+    comment: new FormControl<string>('', [Validators.required, Validators.maxLength(2000)]),
+  });
+  dialogCloseFollowUpInputsMap: InputsMap = {
+    dateFollowUP: {
+      label: 'file.created_at',
+      fieldType: FormFieldTypeEnum.DATE_PICKER,
+      inputId: 'df-start-date',
+      rowSize: 'full',
+      inputType: 'text',
+      showIcon: true,
+      variant: 'in',
+    },
+    file: {
+      label: 'upload file',
+      fieldType: FormFieldTypeEnum.UPLOAD_FILE,
+      inputId: 'df-file-date',
+      rowSize: 'half',
+      showIcon: true,
+      variant: 'in',
+    },
+    comment: {
+      label: 'follow_up.comment',
+      fieldType: FormFieldTypeEnum.INPUT,
+      inputId: 'cancel-follow-up',
+      rowSize: 'full',
+      inputType: 'textarea',
+      placeholder: 'follow_up.write_comment',
+      variant: 'in',
+      rows: 3,
+      maxLength: 2000,
+    },
+  };
+  dialogDynamicCancelFormData: DynamicFormData = {
+    formGroup: this.dialogCancelFollowUpFormGroup,
+    inputsMap: this.dialogCloseFollowUpInputsMap,
+    title: 'Confirm Action',
+    isReadOnlyForm: false,
+  };
+  openCancelFollowUp() {
+    this.confirmationDialogService
+      .open({
+        header: 'follow_up.cancel_follow_up',
+        message: 'follow_up.do_you_cancel_this_note',
+        cancelBtnLabel: 'shared.buttons.cancel',
+        hint: 'follow_up.note_will_cancel_this_follow_up',
+        confirmBtnLabel: 'follow_up.cancel_follow_up',
+        confirmBtnId: 'follow_up-date-modify',
+        cancelBtnId: 'follow_up-date-cancel',
+        inputForm: this.dialogDynamicCancelFormData,
+      })
+      .subscribe((confirmed) => {
+        console.log(
+          'po up follow up with dynamic form ',
+          confirmed,
+          this.dialogCancelFollowUpFormGroup.value,
+        );
 
+        if (confirmed) {
+          console.log('po up follow up with dynamic form ', confirmed);
+        }
+      });
+  }
   openSideBar() {
     // this.openDialogConfirmation()
     this.sidebarDynamicService.open(SideBar, {

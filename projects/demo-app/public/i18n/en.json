@@ -4,10 +4,12 @@
   "actions": {
     "save": "Save",
     "cancel": "Cancel",
-    "submit": "Submit"
+    "submit": "Submit",
+    "close": "Close"
   },
   "shared": {
-    "no_results_found": "No results found"
+    "no_results_found": "No results found",
+    "Items_Selected": "{{count}} Items Selected"
   },
   "forms": {
     "config": {
@@ -18,6 +20,15 @@
     "calender_type": "Calender type",
     "gregorian": "Gregorian",
     "hijri": "Hijri"
-
+  },
+  "VALIDATION": {
+    "required": "This field is required",
+    "email": "Please enter a valid email address",
+    "minlength": "Minimum length is {{requiredLength}} characters",
+    "maxlength": "Maximum length is {{requiredLength}} characters",
+    "pattern": "Please match the requested format",
+    "numbersOnly": "Only numbers are allowed",
+    "invalidSaudiPhoneNumber": "Please enter a valid Saudi phone number",
+    "MAX_REPEATED_CHARS": "No more than {{maxRepeats}} repeated characters are allowed"
   }
 }

@@ -1,0 +1,22 @@
+@if (dynamicDialogConfig.data) {
+  <div class="alert-dialog">
+    <div class="dialog-wrapper">
+      @if (dynamicDialogConfig.data) {
+        <div class="alert-dialog__content my-4">
+          @if (dynamicDialogConfig.data.dialogIcon) {
+            <em [class]="dynamicDialogConfig.data.dialogIcon"></em>
+          }
+          <p class="alert-dialog__message mb-2">
+            {{ dynamicDialogConfig.data.message }}
+          </p>
+        </div>
+      }
+      <div class="alert-dialog__actions flex gap-2 mt-4">
+        <app-button [severity]="'primary'" variant="outlined"
+          [label]="dynamicDialogConfig.data.cancelBtnLabel??('actions.close' | translate)"
+          [id]="dynamicDialogConfig.data.cancelBtnId??'button_close_alert'" [styleClass]="'cancel-btn alert-btn'"
+          (click)="close()" />
+      </div>
+    </div>
+  </div>
+}

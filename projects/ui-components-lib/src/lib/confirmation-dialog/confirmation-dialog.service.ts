@@ -11,7 +11,7 @@ import { ConfirmationDialogData } from './confirmation-dialog.interface';
 export class ConfirmationDialogService {
   constructor(private dialogService: DialogService) { }
 
-  open(data: ConfirmationDialogData): Observable<boolean> {
+  open(data: ConfirmationDialogData): Observable<any> {
     const ref: DynamicDialogRef | null = this.dialogService.open(ConfirmationDialogComponent, {
       data,
       header: data.header,
@@ -28,7 +28,7 @@ export class ConfirmationDialogService {
     // Emit true/false when dialog closes
     return ref.onClose.pipe(
       filter((res) => res !== undefined),
-      map((res) => !!res)
+      map((res) => res)
     );
   }
 }
