@@ -9,6 +9,8 @@ import { importProvidersFrom } from '@angular/core';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { of } from 'rxjs';
 import { BrowserModule } from '@angular/platform-browser';
+import { provideAnimations } from '@angular/platform-browser/animations';
+import { CommonModule } from '@angular/common';
 
 setCompodocJson(docJson);
 
@@ -22,6 +24,8 @@ const preview: Preview = {
   decorators: [
     applicationConfig({
       providers: [
+        provideAnimations(),
+        CommonModule,
         providePrimeNG({
           theme: {
             preset: Aura,
