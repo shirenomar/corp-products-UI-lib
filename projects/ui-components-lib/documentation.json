@@ -5917,12 +5917,12 @@
     "classes": [
         {
             "name": "FakeLoader",
-            "id": "class-FakeLoader-589420d9cf4192fe2edb138900ae2fe17f347fee93bfb29ff394739fcd157b18ceb5bc748c389ebb6ed4b07772c3915e5f2f63a504c4dc0ca67806c2113dbdb7",
+            "id": "class-FakeLoader-8b661138df24e12d20ea61f0ceb93a71159fb5e20ada90a7937455a48f5e8c27e0c2612fe92f2fbb27d43305722d38eb20667b5729fe7388f2a43e920d822596",
             "file": "projects/ui-components-lib/.storybook/preview.ts",
             "deprecated": false,
             "deprecationMessage": "",
             "type": "class",
-            "sourceCode": "import 'zone.js';\nimport { setCompodocJson } from '@storybook/addon-docs/angular';\nimport docJson from '../../../documentation.json';\nsetCompodocJson(docJson);\nimport { applicationConfig, Preview } from '@storybook/angular';\nimport { PrimeNG, providePrimeNG } from 'primeng/config';\nimport Aura from '@primeuix/themes/aura';\nimport { importProvidersFrom } from '@angular/core';\nimport { TranslateLoader, TranslateModule } from '@ngx-translate/core';\nimport { of } from 'rxjs';\nimport { BrowserModule } from '@angular/platform-browser';\n\nsetCompodocJson(docJson);\n\nclass FakeLoader implements TranslateLoader {\n  getTranslation(lang: string) {\n    return of({});\n  }\n}\n\nconst preview: Preview = {\n  decorators: [\n    applicationConfig({\n      providers: [\n        providePrimeNG({\n          theme: {\n            preset: Aura,\n            options: {\n              darkModeSelector: false,\n            },\n          },\n        }),\n        PrimeNG,\n        BrowserModule,\n        importProvidersFrom(\n          TranslateModule.forRoot({\n            loader: {\n              provide: TranslateLoader,\n              useClass: FakeLoader,\n            },\n          }),\n        ),\n      ],\n    }),\n  ],\n  parameters: {\n    controls: {\n      matchers: {\n        color: /(background|color)$/i,\n        date: /Date$/i,\n      },\n    },\n  },\n};\n\nexport default preview;\n",
+            "sourceCode": "import 'zone.js';\nimport { setCompodocJson } from '@storybook/addon-docs/angular';\nimport docJson from '../../../documentation.json';\nsetCompodocJson(docJson);\nimport { applicationConfig, Preview } from '@storybook/angular';\nimport { PrimeNG, providePrimeNG } from 'primeng/config';\nimport Aura from '@primeuix/themes/aura';\nimport { importProvidersFrom } from '@angular/core';\nimport { TranslateLoader, TranslateModule } from '@ngx-translate/core';\nimport { of } from 'rxjs';\nimport { BrowserModule } from '@angular/platform-browser';\nimport { provideAnimations } from '@angular/platform-browser/animations';\nimport { CommonModule } from '@angular/common';\n\nsetCompodocJson(docJson);\n\nclass FakeLoader implements TranslateLoader {\n  getTranslation(lang: string) {\n    return of({});\n  }\n}\n\nconst preview: Preview = {\n  decorators: [\n    applicationConfig({\n      providers: [\n        provideAnimations(),\n        CommonModule,\n        providePrimeNG({\n          theme: {\n            preset: Aura,\n            options: {\n              darkModeSelector: false,\n            },\n          },\n        }),\n        PrimeNG,\n        BrowserModule,\n        importProvidersFrom(\n          TranslateModule.forRoot({\n            loader: {\n              provide: TranslateLoader,\n              useClass: FakeLoader,\n            },\n          }),\n        ),\n      ],\n    }),\n  ],\n  parameters: {\n    controls: {\n      matchers: {\n        color: /(background|color)$/i,\n        date: /Date$/i,\n      },\n    },\n  },\n};\n\nexport default preview;\n",
             "inputsClass": [],
             "outputsClass": [],
             "properties": [],
@@ -5942,7 +5942,7 @@
                     "optional": false,
                     "returnType": "any",
                     "typeParameters": [],
-                    "line": 16,
+                    "line": 18,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "jsdoctags": [
@@ -13888,6 +13888,40 @@
             "templateData": "<p-drawer (onHide)=\"dynamicSidebarService.close()\" [(visible)]=\"sidebarConfig.visible\"\n  [closable]=\"sidebarConfig.closable\" [closeOnEscape]=\"sidebarConfig.closeOnEscape\"\n  [dismissible]=\"sidebarConfig.dismissible\" [ngClass]=\"{ show: sidebarConfig.show }\" [position]=\"'left'\" appendTo=\"body\"\n  id=\"main-drawer\"\n  styleClass=\"p-drawer-{{ sidebarConfig.sidebarSize }} custom-content bg-white {{ sidebarConfig.styleClass }}\">\n  <ng-template pTemplate=\"header\">{{ sidebarConfig.title }}</ng-template>\n  <ng-template pTemplate=\"content\">\n    <ng-container [ngComponentOutletInjector]=\"dynamicSidebarService.contentComponentData | dataInjector\"\n      [ngComponentOutlet]=\"dynamicSidebarService.contentComponentRef\"></ng-container>\n  </ng-template>\n  @if (sidebarConfig.showSaveBtn || sidebarConfig.showSaveAndMoreBtn || sidebarConfig.showCancelBtn) {\n  <ng-template pTemplate=\"footer\">\n    <section class=\"flex justify-between bg-gray-200 py-4\" id=\"sidebar-footer\">\n      <div class=\"flex gap-2\">\n        @if (sidebarConfig.showSaveBtn) {\n        <app-button (clickEmitter)=\"dynamicSidebarService.submit(true)\"\n          [disabled]=\"dynamicSidebarService.isButtonDisabled()\"\n          [icon]=\"sidebarConfig!.actions!.save!.icon || 'font-icon-plus'\"\n          [iconPos]=\"sidebarConfig!.actions!.save!.iconPos || 'right'\"\n          [styleClass]=\"sidebarConfig!.actions!.save!.style || 'danger'\"\n          [title]=\"sidebarConfig!.actions!.save!.title || ('actions.save' | translate)\"\n          [variant]=\"sidebarConfig!.actions!.save!.variant\" />\n        }\n        @if (sidebarConfig.showSaveAndMoreBtn) {\n        <app-button (clickEmitter)=\"dynamicSidebarService.submit()\"\n          [disabled]=\"dynamicSidebarService.isButtonDisabled()\"\n          [icon]=\"sidebarConfig!.actions!.saveAndMore!.icon || 'font-icon-plus'\"\n          [iconPos]=\"sidebarConfig!.actions!.saveAndMore!.iconPos || 'right'\"\n          [styleClass]=\"sidebarConfig!.actions!.saveAndMore!.style || 'danger'\"\n          [title]=\"sidebarConfig!.actions!.saveAndMore!.title || ('actions.save_and_and_more' | translate)\"\n          [variant]=\"sidebarConfig!.actions!.saveAndMore!.variant\" />\n\n        }\n      </div>\n      @if (sidebarConfig.showCancelBtn) {\n      <app-button (clickEmitter)=\"dynamicSidebarService.cancel()\" [styleClass]=\"'secondary'\"\n        [title]=\"'actions.cancel' | translate\" />\n      }\n    </section>\n  </ng-template>\n  }\n</p-drawer>"
         },
         {
+            "name": "StoryRouterStubComponent",
+            "id": "component-StoryRouterStubComponent-909ec3e561574de847b200e3600c3540385a99cebf49b73aad207c516612840115362d376057bbebfb6293b11c5ffd3dbce71c55cba775b92a6a4190302c4c60",
+            "file": "projects/ui-components-lib/src/lib/app-breadcrumb/breadcrumb.stories.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "styleUrls": [],
+            "styles": [],
+            "template": "",
+            "templateUrl": [],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [],
+            "outputsClass": [],
+            "propertiesClass": [],
+            "methodsClass": [],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "standalone": true,
+            "imports": [],
+            "description": "",
+            "rawdescription": "",
+            "type": "component",
+            "sourceCode": "import type { Meta, StoryObj } from '@storybook/angular';\nimport { applicationConfig, moduleMetadata } from '@storybook/angular';\nimport { Component } from '@angular/core';\nimport { ActivatedRouteSnapshot, provideRouter, Routes } from '@angular/router';\nimport { AppBreadcrumbComponent } from './app-breadcrumb.component';\n\n/** Empty outlet targets so `routerLink` in breadcrumb items can resolve in Storybook */\n@Component({ standalone: true, template: '' })\nclass StoryRouterStubComponent {}\n\nconst storyRoutes: Routes = [\n  { path: '', pathMatch: 'full', redirectTo: 'home' },\n  { path: 'home', component: StoryRouterStubComponent },\n  { path: 'payments', component: StoryRouterStubComponent },\n];\n\nconst meta: Meta<AppBreadcrumbComponent> = {\n  title: 'MyLibrary/Breadcrumb',\n  component: AppBreadcrumbComponent,\n  tags: ['autodocs'],\n  decorators: [\n    applicationConfig({\n      providers: [\n        provideRouter(storyRoutes),\n        {\n          provide: ActivatedRouteSnapshot,\n          useValue: {\n            children: [\n              {\n                data: {\n                  breadcrumb: 'Home',\n                  notClickableBreadcrumb: false,\n                  isShown: true,\n                  extraBreadcrumbs: [],\n                },\n              },\n            ],\n\n          }\n        }\n      ],\n    }),\n    moduleMetadata({\n      imports: [AppBreadcrumbComponent],\n    }),\n  ],\n  args: {\n    items: [\n      {\n        notClickable: false,\n        label: 'Home',\n        routerLink: '/home',\n        isShown: true,\n        extraBreadcrumbs: [\n          {\n            label: 'Payment',\n            routerLink: '/payments',\n            isShown: true,\n            position: 'after',\n          },\n        ],\n      },\n      {\n        notClickable: false,\n        label: 'Payment',\n        routerLink: '/payments',\n        isShown: true,\n        extraBreadcrumbs: [\n          {\n            position: 'before',\n            label: 'Payment',\n            routerLink: '/payments',\n          },\n        ],\n      },\n    ],\n  },\n  argTypes: {\n    items: {\n      items: {\n        type: 'object',\n        properties: {\n          notClickable: { type: 'boolean' },\n          label: { type: 'string' },\n          routerLink: { type: 'string' },\n          isShown: { type: 'boolean' },\n          extraBreadcrumbs: {\n            type: 'array',\n            items: {\n              type: 'object',\n              properties: {\n                label: { type: 'string' },\n                routerLink: { type: 'string' },\n                isShown: { type: 'boolean' },\n                position: { type: 'string' },\n              },\n            },\n          },\n        },\n      },\n    },\n    ngOnInit: { table: { disable: true }, control: false },\n    isShown: { table: { disable: true }, control: false },\n    _checkEmpty: { table: { disable: true }, control: false },\n    _checkHiddenBreadcrumb: { table: { disable: true }, control: false },\n    _createBreadcrumbs: { table: { disable: true }, control: false },\n    _getRecursiveKey: { table: { disable: true }, control: false },\n  } as Meta<AppBreadcrumbComponent>['argTypes'],\n};\n\nexport default meta;\ntype Story = StoryObj<AppBreadcrumbComponent>;\n\nexport const Default: Story = {\n  args: {\n    items: [\n      {\n        notClickable: false,\n        label: 'Home',\n        routerLink: '/home',\n        isShown: true,\n        extraBreadcrumbs: [\n          {\n            label: 'Payment',\n            routerLink: '/payments',\n            isShown: true,\n            position: 'after',\n          },\n        ],\n      },\n      {\n        notClickable: false,\n        label: 'Payment',\n        routerLink: '/payments',\n        isShown: true,\n        extraBreadcrumbs: [\n          {\n            position: 'before',\n            label: 'Payment',\n            routerLink: '/payments',\n          },\n        ],\n      },\n    ],\n  },\n};\n",
+            "assetsDirs": [],
+            "styleUrlsData": "",
+            "stylesData": "",
+            "extends": []
+        },
+        {
             "name": "SwitchComponent",
             "id": "component-SwitchComponent-d8050e847736ae9adacc113d59cd0cd9e4ae4dd4b4098a7757fa96d10fefe9ea81c5685f52224297b744a6d8e50b8a033ae7ae7589e855abceb963e7d4b6e0c6",
             "file": "projects/ui-components-lib/src/lib/form-components/components/switcher/switch.component.ts",
@@ -14209,6 +14243,16 @@
                 "name": "Default",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
+                "file": "projects/ui-components-lib/src/lib/app-breadcrumb/breadcrumb.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  args: {\n    items: [\n      {\n        notClickable: false,\n        label: 'Home',\n        routerLink: '/home',\n        isShown: true,\n        extraBreadcrumbs: [\n          {\n            label: 'Payment',\n            routerLink: '/payments',\n            isShown: true,\n            position: 'after',\n          },\n        ],\n      },\n      {\n        notClickable: false,\n        label: 'Payment',\n        routerLink: '/payments',\n        isShown: true,\n        extraBreadcrumbs: [\n          {\n            position: 'before',\n            label: 'Payment',\n            routerLink: '/payments',\n          },\n        ],\n      },\n    ],\n  },\n}"
+            },
+            {
+                "name": "Default",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
                 "file": "projects/ui-components-lib/src/lib/bottom-sheet/bottom-sheet.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
@@ -14263,7 +14307,17 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Meta<AppButtonComponent>",
-                "defaultValue": "{\n  title: 'MyLibrary/Button',\n  component: AppButtonComponent,\n  tags: ['autodocs'],\n  decorators: [\n    moduleMetadata({\n      imports: [CommonModule, ButtonModule],\n      providers: [ButtonStyle],\n    }),\n  ],\n  argTypes: {\n    label: {\n      control: 'text',\n      description: 'The label of the button',\n      args: {\n        values: 'Click Me',\n      }\n    },\n    severity: {\n      control: 'select',\n      description: 'The severity of the button',\n      options: ['primary', 'secondary', 'success', 'info', 'warn', 'danger'],\n      args: {\n        values: 'primary',\n      }\n    },\n    loading: {\n      control: 'boolean',\n      description: 'Whether the button is in loading state',\n      args:{\n        default: false,\n        value: false,\n      },\n    },\n    loadingIcon: {\n      control: 'text',\n      description: 'The icon to display when the button is in loading state (pi pi-spinner)',\n      args:{\n        value: 'pi pi-spinner',\n      },\n    },\n    disabled: {\n      control: 'boolean',\n      description: 'Whether the button is disabled',\n     args:{\n      value: false,\n     },\n    },\n    outlined: {\n      control: 'boolean',\n      description: 'Whether the button is filled color or not',\n      args:{\n        value: false,\n      },\n    },\n    rounded: {\n      control: 'boolean',\n      description: 'Whether the button borders is rounded',\n      args:{\n        value: false,\n      },\n    },\n    raised: {\n      control: 'boolean',\n      description: ' Whether the button is raised (has shadow effect) or not ',\n      args:{\n        value: false,\n      },\n    },\n    text: {\n      control: 'boolean',\n      description: 'Whether the button is text (no background color) or border',\n      args:{\n        value: false,\n      },\n    },\n    plain: {\n      control: 'boolean',\n      description: 'Whether the button is plain',\n      args:{\n        value: false,\n      },\n    },\n    link: {\n      control: 'boolean',\n      description: 'Whether the button is a link',\n      args:{\n        value: false,\n      },\n    },\n    autofocus: {\n      control: 'boolean',\n      description: 'Whether the button is focused automatically when the page loads',\n      args:{\n        value: false,\n      },\n    },\n    icon: {\n      control: 'text',\n      description: 'Which icon to display on the button (pi pi-star) if no icon provided remove it',\n      args:{\n        value: 'pi pi-minus',\n      },\n    },\n    iconPos: {\n      control: 'select',\n      description: 'The position of the icon in the table',\n      options: ['left', 'right'],\n      args:{\n        value: 'left',\n      },\n    },\n    size: {\n      control: 'select',\n      description: 'The size of the button',\n      options: ['small', 'medium', 'large'],\n      args:{\n        value: 'medium',\n      },\n    },\n    style: {\n      control: 'object',\n      description: 'The style of the button',\n      args:{\n        value: {},\n      },\n    },\n  }\n}"
+                "defaultValue": "{\n  title: 'MyLibrary/Button',\n  component: AppButtonComponent,\n  tags: ['autodocs'],\n  decorators: [\n    moduleMetadata({\n      imports: [CommonModule, ButtonModule],\n      providers: [ButtonStyle],\n    }),\n  ],\n  args: {\n    label: 'Button',\n    severity: 'primary',\n    loading: false,\n    loadingIcon: 'pi pi-spinner',\n    disabled: false,\n    outlined: false,\n    rounded: false,\n    raised: false,\n    text: false,\n    plain: false,\n    link: false,\n    autofocus: false,\n    icon: '',\n    iconPos: 'left',\n    style: {},\n  },\n  argTypes: {\n    label: {\n      control: 'text',\n      description: 'The label of the button',\n    },\n    severity: {\n      control: 'select',\n      description: 'The severity of the button',\n      options: [\n        'primary',\n        'secondary',\n        'success',\n        'info',\n        'warn',\n        'danger',\n        'help',\n        'contrast',\n      ],\n    },\n    loading: {\n      control: 'boolean',\n      description: 'Whether the button is in loading state',\n    },\n    loadingIcon: {\n      control: 'text',\n      description:\n        'The icon to display when the button is in loading state (e.g. pi pi-spinner)',\n    },\n    disabled: {\n      control: 'boolean',\n      description: 'Whether the button is disabled',\n    },\n    outlined: {\n      control: 'boolean',\n      description: 'Whether the button uses the outlined style',\n    },\n    rounded: {\n      control: 'boolean',\n      description: 'Whether the button has fully rounded borders',\n    },\n    raised: {\n      control: 'boolean',\n      description: 'Whether the button is raised (shadow)',\n    },\n    text: {\n      control: 'boolean',\n      description: 'Text-only style (no solid background)',\n    },\n    plain: {\n      control: 'boolean',\n      description: 'Whether the button uses the plain style',\n    },\n    link: {\n      control: 'boolean',\n      description: 'Whether the button is rendered as a link',\n    },\n    autofocus: {\n      control: 'boolean',\n      description: 'Whether the button is focused when the page loads',\n    },\n    icon: {\n      control: 'text',\n      description:\n        'Icon class on the button (e.g. pi pi-star). Leave empty to hide the icon',\n    },\n    iconPos: {\n      control: 'select',\n      description: 'Position of the icon relative to the label',\n      options: ['left', 'right', 'top', 'bottom'],\n    },\n    size: {\n      control: 'select',\n      description: 'The size of the button',\n      options: ['small', 'large'],\n    },\n    variant: {\n      control: 'select',\n      description: 'PrimeNG variant (outlined / text)',\n      options: ['outlined', 'text'],\n    },\n    styleClass: {\n      control: 'text',\n      description: 'Optional CSS class string on the root button',\n    },\n    style: {\n      control: 'object',\n      description: 'Inline style map for the button',\n    },\n  },\n}"
+            },
+            {
+                "name": "meta",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/ui-components-lib/src/lib/app-breadcrumb/breadcrumb.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Meta<AppBreadcrumbComponent>",
+                "defaultValue": "{\n  title: 'MyLibrary/Breadcrumb',\n  component: AppBreadcrumbComponent,\n  tags: ['autodocs'],\n  decorators: [\n    applicationConfig({\n      providers: [\n        provideRouter(storyRoutes),\n        {\n          provide: ActivatedRouteSnapshot,\n          useValue: {\n            children: [\n              {\n                data: {\n                  breadcrumb: 'Home',\n                  notClickableBreadcrumb: false,\n                  isShown: true,\n                  extraBreadcrumbs: [],\n                },\n              },\n            ],\n\n          }\n        }\n      ],\n    }),\n    moduleMetadata({\n      imports: [AppBreadcrumbComponent],\n    }),\n  ],\n  args: {\n    items: [\n      {\n        notClickable: false,\n        label: 'Home',\n        routerLink: '/home',\n        isShown: true,\n        extraBreadcrumbs: [\n          {\n            label: 'Payment',\n            routerLink: '/payments',\n            isShown: true,\n            position: 'after',\n          },\n        ],\n      },\n      {\n        notClickable: false,\n        label: 'Payment',\n        routerLink: '/payments',\n        isShown: true,\n        extraBreadcrumbs: [\n          {\n            position: 'before',\n            label: 'Payment',\n            routerLink: '/payments',\n          },\n        ],\n      },\n    ],\n  },\n  argTypes: {\n    items: {\n      items: {\n        type: 'object',\n        properties: {\n          notClickable: { type: 'boolean' },\n          label: { type: 'string' },\n          routerLink: { type: 'string' },\n          isShown: { type: 'boolean' },\n          extraBreadcrumbs: {\n            type: 'array',\n            items: {\n              type: 'object',\n              properties: {\n                label: { type: 'string' },\n                routerLink: { type: 'string' },\n                isShown: { type: 'boolean' },\n                position: { type: 'string' },\n              },\n            },\n          },\n        },\n      },\n    },\n    ngOnInit: { table: { disable: true }, control: false },\n    isShown: { table: { disable: true }, control: false },\n    _checkEmpty: { table: { disable: true }, control: false },\n    _checkHiddenBreadcrumb: { table: { disable: true }, control: false },\n    _createBreadcrumbs: { table: { disable: true }, control: false },\n    _getRecursiveKey: { table: { disable: true }, control: false },\n  } as Meta<AppBreadcrumbComponent>['argTypes'],\n}"
             },
             {
                 "name": "meta",
@@ -14333,7 +14387,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Preview",
-                "defaultValue": "{\n  decorators: [\n    applicationConfig({\n      providers: [\n        providePrimeNG({\n          theme: {\n            preset: Aura,\n            options: {\n              darkModeSelector: false,\n            },\n          },\n        }),\n        PrimeNG,\n        BrowserModule,\n        importProvidersFrom(\n          TranslateModule.forRoot({\n            loader: {\n              provide: TranslateLoader,\n              useClass: FakeLoader,\n            },\n          }),\n        ),\n      ],\n    }),\n  ],\n  parameters: {\n    controls: {\n      matchers: {\n        color: /(background|color)$/i,\n        date: /Date$/i,\n      },\n    },\n  },\n}"
+                "defaultValue": "{\n  decorators: [\n    applicationConfig({\n      providers: [\n        provideAnimations(),\n        CommonModule,\n        providePrimeNG({\n          theme: {\n            preset: Aura,\n            options: {\n              darkModeSelector: false,\n            },\n          },\n        }),\n        PrimeNG,\n        BrowserModule,\n        importProvidersFrom(\n          TranslateModule.forRoot({\n            loader: {\n              provide: TranslateLoader,\n              useClass: FakeLoader,\n            },\n          }),\n        ),\n      ],\n    }),\n  ],\n  parameters: {\n    controls: {\n      matchers: {\n        color: /(background|color)$/i,\n        date: /Date$/i,\n      },\n    },\n  },\n}"
             },
             {
                 "name": "ROUTES_NAME",
@@ -14763,6 +14817,17 @@
                 "name": "Story",
                 "ctype": "miscellaneous",
                 "subtype": "typealias",
+                "rawtype": "StoryObj<AppBreadcrumbComponent>",
+                "file": "projects/ui-components-lib/src/lib/app-breadcrumb/breadcrumb.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "kind": 184
+            },
+            {
+                "name": "Story",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
                 "rawtype": "StoryObj<BottomSheetComponent>",
                 "file": "projects/ui-components-lib/src/lib/bottom-sheet/bottom-sheet.stories.ts",
                 "deprecated": false,
@@ -15172,7 +15237,29 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Meta<AppButtonComponent>",
-                    "defaultValue": "{\n  title: 'MyLibrary/Button',\n  component: AppButtonComponent,\n  tags: ['autodocs'],\n  decorators: [\n    moduleMetadata({\n      imports: [CommonModule, ButtonModule],\n      providers: [ButtonStyle],\n    }),\n  ],\n  argTypes: {\n    label: {\n      control: 'text',\n      description: 'The label of the button',\n      args: {\n        values: 'Click Me',\n      }\n    },\n    severity: {\n      control: 'select',\n      description: 'The severity of the button',\n      options: ['primary', 'secondary', 'success', 'info', 'warn', 'danger'],\n      args: {\n        values: 'primary',\n      }\n    },\n    loading: {\n      control: 'boolean',\n      description: 'Whether the button is in loading state',\n      args:{\n        default: false,\n        value: false,\n      },\n    },\n    loadingIcon: {\n      control: 'text',\n      description: 'The icon to display when the button is in loading state (pi pi-spinner)',\n      args:{\n        value: 'pi pi-spinner',\n      },\n    },\n    disabled: {\n      control: 'boolean',\n      description: 'Whether the button is disabled',\n     args:{\n      value: false,\n     },\n    },\n    outlined: {\n      control: 'boolean',\n      description: 'Whether the button is filled color or not',\n      args:{\n        value: false,\n      },\n    },\n    rounded: {\n      control: 'boolean',\n      description: 'Whether the button borders is rounded',\n      args:{\n        value: false,\n      },\n    },\n    raised: {\n      control: 'boolean',\n      description: ' Whether the button is raised (has shadow effect) or not ',\n      args:{\n        value: false,\n      },\n    },\n    text: {\n      control: 'boolean',\n      description: 'Whether the button is text (no background color) or border',\n      args:{\n        value: false,\n      },\n    },\n    plain: {\n      control: 'boolean',\n      description: 'Whether the button is plain',\n      args:{\n        value: false,\n      },\n    },\n    link: {\n      control: 'boolean',\n      description: 'Whether the button is a link',\n      args:{\n        value: false,\n      },\n    },\n    autofocus: {\n      control: 'boolean',\n      description: 'Whether the button is focused automatically when the page loads',\n      args:{\n        value: false,\n      },\n    },\n    icon: {\n      control: 'text',\n      description: 'Which icon to display on the button (pi pi-star) if no icon provided remove it',\n      args:{\n        value: 'pi pi-minus',\n      },\n    },\n    iconPos: {\n      control: 'select',\n      description: 'The position of the icon in the table',\n      options: ['left', 'right'],\n      args:{\n        value: 'left',\n      },\n    },\n    size: {\n      control: 'select',\n      description: 'The size of the button',\n      options: ['small', 'medium', 'large'],\n      args:{\n        value: 'medium',\n      },\n    },\n    style: {\n      control: 'object',\n      description: 'The style of the button',\n      args:{\n        value: {},\n      },\n    },\n  }\n}"
+                    "defaultValue": "{\n  title: 'MyLibrary/Button',\n  component: AppButtonComponent,\n  tags: ['autodocs'],\n  decorators: [\n    moduleMetadata({\n      imports: [CommonModule, ButtonModule],\n      providers: [ButtonStyle],\n    }),\n  ],\n  args: {\n    label: 'Button',\n    severity: 'primary',\n    loading: false,\n    loadingIcon: 'pi pi-spinner',\n    disabled: false,\n    outlined: false,\n    rounded: false,\n    raised: false,\n    text: false,\n    plain: false,\n    link: false,\n    autofocus: false,\n    icon: '',\n    iconPos: 'left',\n    style: {},\n  },\n  argTypes: {\n    label: {\n      control: 'text',\n      description: 'The label of the button',\n    },\n    severity: {\n      control: 'select',\n      description: 'The severity of the button',\n      options: [\n        'primary',\n        'secondary',\n        'success',\n        'info',\n        'warn',\n        'danger',\n        'help',\n        'contrast',\n      ],\n    },\n    loading: {\n      control: 'boolean',\n      description: 'Whether the button is in loading state',\n    },\n    loadingIcon: {\n      control: 'text',\n      description:\n        'The icon to display when the button is in loading state (e.g. pi pi-spinner)',\n    },\n    disabled: {\n      control: 'boolean',\n      description: 'Whether the button is disabled',\n    },\n    outlined: {\n      control: 'boolean',\n      description: 'Whether the button uses the outlined style',\n    },\n    rounded: {\n      control: 'boolean',\n      description: 'Whether the button has fully rounded borders',\n    },\n    raised: {\n      control: 'boolean',\n      description: 'Whether the button is raised (shadow)',\n    },\n    text: {\n      control: 'boolean',\n      description: 'Text-only style (no solid background)',\n    },\n    plain: {\n      control: 'boolean',\n      description: 'Whether the button uses the plain style',\n    },\n    link: {\n      control: 'boolean',\n      description: 'Whether the button is rendered as a link',\n    },\n    autofocus: {\n      control: 'boolean',\n      description: 'Whether the button is focused when the page loads',\n    },\n    icon: {\n      control: 'text',\n      description:\n        'Icon class on the button (e.g. pi pi-star). Leave empty to hide the icon',\n    },\n    iconPos: {\n      control: 'select',\n      description: 'Position of the icon relative to the label',\n      options: ['left', 'right', 'top', 'bottom'],\n    },\n    size: {\n      control: 'select',\n      description: 'The size of the button',\n      options: ['small', 'large'],\n    },\n    variant: {\n      control: 'select',\n      description: 'PrimeNG variant (outlined / text)',\n      options: ['outlined', 'text'],\n    },\n    styleClass: {\n      control: 'text',\n      description: 'Optional CSS class string on the root button',\n    },\n    style: {\n      control: 'object',\n      description: 'Inline style map for the button',\n    },\n  },\n}"
+                }
+            ],
+            "projects/ui-components-lib/src/lib/app-breadcrumb/breadcrumb.stories.ts": [
+                {
+                    "name": "Default",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/ui-components-lib/src/lib/app-breadcrumb/breadcrumb.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  args: {\n    items: [\n      {\n        notClickable: false,\n        label: 'Home',\n        routerLink: '/home',\n        isShown: true,\n        extraBreadcrumbs: [\n          {\n            label: 'Payment',\n            routerLink: '/payments',\n            isShown: true,\n            position: 'after',\n          },\n        ],\n      },\n      {\n        notClickable: false,\n        label: 'Payment',\n        routerLink: '/payments',\n        isShown: true,\n        extraBreadcrumbs: [\n          {\n            position: 'before',\n            label: 'Payment',\n            routerLink: '/payments',\n          },\n        ],\n      },\n    ],\n  },\n}"
+                },
+                {
+                    "name": "meta",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/ui-components-lib/src/lib/app-breadcrumb/breadcrumb.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Meta<AppBreadcrumbComponent>",
+                    "defaultValue": "{\n  title: 'MyLibrary/Breadcrumb',\n  component: AppBreadcrumbComponent,\n  tags: ['autodocs'],\n  decorators: [\n    applicationConfig({\n      providers: [\n        provideRouter(storyRoutes),\n        {\n          provide: ActivatedRouteSnapshot,\n          useValue: {\n            children: [\n              {\n                data: {\n                  breadcrumb: 'Home',\n                  notClickableBreadcrumb: false,\n                  isShown: true,\n                  extraBreadcrumbs: [],\n                },\n              },\n            ],\n\n          }\n        }\n      ],\n    }),\n    moduleMetadata({\n      imports: [AppBreadcrumbComponent],\n    }),\n  ],\n  args: {\n    items: [\n      {\n        notClickable: false,\n        label: 'Home',\n        routerLink: '/home',\n        isShown: true,\n        extraBreadcrumbs: [\n          {\n            label: 'Payment',\n            routerLink: '/payments',\n            isShown: true,\n            position: 'after',\n          },\n        ],\n      },\n      {\n        notClickable: false,\n        label: 'Payment',\n        routerLink: '/payments',\n        isShown: true,\n        extraBreadcrumbs: [\n          {\n            position: 'before',\n            label: 'Payment',\n            routerLink: '/payments',\n          },\n        ],\n      },\n    ],\n  },\n  argTypes: {\n    items: {\n      items: {\n        type: 'object',\n        properties: {\n          notClickable: { type: 'boolean' },\n          label: { type: 'string' },\n          routerLink: { type: 'string' },\n          isShown: { type: 'boolean' },\n          extraBreadcrumbs: {\n            type: 'array',\n            items: {\n              type: 'object',\n              properties: {\n                label: { type: 'string' },\n                routerLink: { type: 'string' },\n                isShown: { type: 'boolean' },\n                position: { type: 'string' },\n              },\n            },\n          },\n        },\n      },\n    },\n    ngOnInit: { table: { disable: true }, control: false },\n    isShown: { table: { disable: true }, control: false },\n    _checkEmpty: { table: { disable: true }, control: false },\n    _checkHiddenBreadcrumb: { table: { disable: true }, control: false },\n    _createBreadcrumbs: { table: { disable: true }, control: false },\n    _getRecursiveKey: { table: { disable: true }, control: false },\n  } as Meta<AppBreadcrumbComponent>['argTypes'],\n}"
                 }
             ],
             "projects/ui-components-lib/src/lib/bottom-sheet/bottom-sheet.stories.ts": [
@@ -15294,7 +15381,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Preview",
-                    "defaultValue": "{\n  decorators: [\n    applicationConfig({\n      providers: [\n        providePrimeNG({\n          theme: {\n            preset: Aura,\n            options: {\n              darkModeSelector: false,\n            },\n          },\n        }),\n        PrimeNG,\n        BrowserModule,\n        importProvidersFrom(\n          TranslateModule.forRoot({\n            loader: {\n              provide: TranslateLoader,\n              useClass: FakeLoader,\n            },\n          }),\n        ),\n      ],\n    }),\n  ],\n  parameters: {\n    controls: {\n      matchers: {\n        color: /(background|color)$/i,\n        date: /Date$/i,\n      },\n    },\n  },\n}"
+                    "defaultValue": "{\n  decorators: [\n    applicationConfig({\n      providers: [\n        provideAnimations(),\n        CommonModule,\n        providePrimeNG({\n          theme: {\n            preset: Aura,\n            options: {\n              darkModeSelector: false,\n            },\n          },\n        }),\n        PrimeNG,\n        BrowserModule,\n        importProvidersFrom(\n          TranslateModule.forRoot({\n            loader: {\n              provide: TranslateLoader,\n              useClass: FakeLoader,\n            },\n          }),\n        ),\n      ],\n    }),\n  ],\n  parameters: {\n    controls: {\n      matchers: {\n        color: /(background|color)$/i,\n        date: /Date$/i,\n      },\n    },\n  },\n}"
                 }
             ],
             "projects/ui-components-lib/src/lib/app-side-menu/routes-names.ts": [
@@ -16052,6 +16139,19 @@
                     "kind": 184
                 }
             ],
+            "projects/ui-components-lib/src/lib/app-breadcrumb/breadcrumb.stories.ts": [
+                {
+                    "name": "Story",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "StoryObj<AppBreadcrumbComponent>",
+                    "file": "projects/ui-components-lib/src/lib/app-breadcrumb/breadcrumb.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 184
+                }
+            ],
             "projects/ui-components-lib/src/lib/bottom-sheet/bottom-sheet.stories.ts": [
                 {
                     "name": "Story",
@@ -16096,7 +16196,20 @@
     "routes": {
         "name": "<root>",
         "kind": "module",
-        "children": []
+        "children": [
+            {
+                "name": "StoryRouterStubComponent",
+                "kind": "component",
+                "path": "home",
+                "filename": "projects/ui-components-lib/src/lib/app-breadcrumb/breadcrumb.stories.ts"
+            },
+            {
+                "name": "StoryRouterStubComponent",
+                "kind": "component",
+                "path": "payments",
+                "filename": "projects/ui-components-lib/src/lib/app-breadcrumb/breadcrumb.stories.ts"
+            }
+        ]
     },
     "coverage": {
         "count": 2,
@@ -16229,6 +16342,45 @@
                 "linktype": "miscellaneous",
                 "linksubtype": "typealias",
                 "name": "BreadCrumbExtraData",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/ui-components-lib/src/lib/app-breadcrumb/breadcrumb.stories.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "StoryRouterStubComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/ui-components-lib/src/lib/app-breadcrumb/breadcrumb.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Default",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/ui-components-lib/src/lib/app-breadcrumb/breadcrumb.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "meta",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/ui-components-lib/src/lib/app-breadcrumb/breadcrumb.stories.ts",
+                "type": "type alias",
+                "linktype": "miscellaneous",
+                "linksubtype": "typealias",
+                "name": "Story",
                 "coveragePercent": 0,
                 "coverageCount": "0/1",
                 "status": "low"
