@@ -8356,7 +8356,7 @@
         },
         {
             "name": "ConfirmationDialogStoryWrapper",
-            "id": "component-ConfirmationDialogStoryWrapper-932fd30f9575a9d0ca197ad3310293377a4a29f257488cbf7a23a7307404ac812556808891658cd555d1efb487faf163e38af950f90ec05aad962abcbaad5c33",
+            "id": "component-ConfirmationDialogStoryWrapper-dc99a86446c5eb96d9feb89e5fd08bd2d7a597b8ed1bd04facdae51a92a4d817e26ba2a7e4c2ae578917094b24f031aa9455a56c7a6598ac9548542d3697e602",
             "file": "projects/ui-components-lib/src/lib/confirmation-dialog/confirmation-dialog.stories.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -8523,7 +8523,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import type { Meta, StoryObj } from '@storybook/angular';\nimport { applicationConfig, moduleMetadata } from '@storybook/angular';\nimport { Component, DestroyRef, EventEmitter, Output } from '@angular/core';\nimport { provideRouter } from '@angular/router';\nimport { AvatarModule } from 'primeng/avatar';\nimport { DialogService, DynamicDialogModule, DynamicDialogStyle } from 'primeng/dynamicdialog';\nimport { AppButtonComponent } from '../app-button';\nimport { ConfirmationDialogComponent } from './confirmation-dialog.component';\nimport { ConfirmationDialogService } from './confirmation-dialog.service';\nimport { takeUntilDestroyed } from '@angular/core/rxjs-interop';\nimport { DynamicFormComponent } from '@corp-products/ui-components';\n\n@Component({\n  selector: 'confirmation-dialog-story-wrapper',\n  standalone: true,\n  imports: [AppButtonComponent],\n  template: `\n    <app-button label=\"Open confirmation dialog\" severity=\"primary\" (click)=\"open()\" />\n  `,\n})\nclass ConfirmationDialogStoryWrapper {\n  header = 'Confirm action';\n  message = 'Are you sure you want to continue?';\n  hint?: string;\n  confirmBtnId = 'story-confirm';\n  cancelBtnId = 'story-cancel';\n  confirmBtnLabel?: string;\n  cancelBtnLabel?: string;\n  breakpoints?: any;\n  inputForm?: any;\n  confirmBtnIcon?: string;\n  confirmBtnPosition?: string;\n\n  @Output() readonly dialogClosed = new EventEmitter<unknown>();\n\n  constructor(\n    private readonly confirmationDialog: ConfirmationDialogService,\n    private readonly _destroyRef: DestroyRef,\n  ) {}\n\n  open(): void {\n    this.confirmationDialog\n      .open({\n        header: this.header,\n        message: this.message,\n        confirmBtnId: this.confirmBtnId,\n        cancelBtnId: this.cancelBtnId,\n        cancelBtnLabel: this.cancelBtnLabel,\n        confirmBtnLabel: this.confirmBtnLabel,\n        hint: this.hint,\n        confirmBtnIcon: this.confirmBtnIcon,\n        confirmBtnPosition: this.confirmBtnPosition,\n        inputForm: this.inputForm,\n        breakpoints: this.breakpoints,\n      })\n      .pipe(takeUntilDestroyed(this._destroyRef))\n      .subscribe((result) => this.dialogClosed.emit(result));\n  }\n}\n\nconst meta: Meta<ConfirmationDialogStoryWrapper> = {\n  title: 'MyLibrary/ConfirmationDialog',\n  component: ConfirmationDialogStoryWrapper,\n  subcomponents: { ConfirmationDialogComponent },\n  tags: ['autodocs'],\n  decorators: [\n    applicationConfig({\n      providers: [provideRouter([])],\n    }),\n    moduleMetadata({\n      imports: [AppButtonComponent, AvatarModule, DynamicDialogModule, DynamicFormComponent],\n      providers: [ConfirmationDialogService, DialogService, DynamicDialogStyle],\n    }),\n  ],\n  args: {\n    header: 'Confirm action',\n    message: 'Are you sure you want to continue?',\n    hint: undefined,\n    confirmBtnId: 'story-confirm',\n    cancelBtnId: 'story-cancel',\n    confirmBtnLabel: 'Confirm',\n    cancelBtnLabel: 'Cancel',\n    breakpoints: {\n      '1024px': {\n        width: '600px',\n        height: '400px',\n      },\n    },\n    inputForm: {\n      name: 'name',\n      label: 'Name',\n      type: 'text',\n      required: true,\n    },\n    confirmBtnIcon: 'pi pi-check',\n    confirmBtnPosition: 'left',\n  },\n  argTypes: {\n      header: { control: 'text' },\n      message: { control: 'text' },\n      hint: { control: 'text' },\n      confirmBtnId: { control: 'text' },\n      cancelBtnId: { control: 'text' },\n      confirmBtnLabel: { control: 'text' },\n      cancelBtnLabel: { control: 'text' },\n      breakpoints: { control: false },\n      inputForm: { control: false },\n      confirmBtnIcon: { control: 'text' },\n      confirmBtnPosition: { control: 'text' },\n      dialogClosed: {\n        action: 'dialogClosed',\n        table: { disable: true },\n      },\n  },\n};\n\nexport default meta;\ntype Story = StoryObj<ConfirmationDialogStoryWrapper>;\n\nexport const Default: Story = {};\n",
+            "sourceCode": "import type { Meta, StoryObj } from '@storybook/angular';\nimport { applicationConfig, moduleMetadata } from '@storybook/angular';\nimport { Component, DestroyRef, EventEmitter, Output } from '@angular/core';\nimport { provideRouter } from '@angular/router';\nimport { AvatarModule } from 'primeng/avatar';\nimport { DialogService, DynamicDialogModule, DynamicDialogStyle } from 'primeng/dynamicdialog';\nimport { AppButtonComponent } from '../app-button';\nimport { ConfirmationDialogComponent } from './confirmation-dialog.component';\nimport { ConfirmationDialogService } from './confirmation-dialog.service';\nimport { takeUntilDestroyed } from '@angular/core/rxjs-interop';\nimport { DynamicFormComponent } from '@corp-products/ui-components';\n\n@Component({\n  selector: 'confirmation-dialog-story-wrapper',\n  standalone: true,\n  imports: [AppButtonComponent],\n  template: `\n    <app-button label=\"Open confirmation dialog\" severity=\"primary\" (click)=\"open()\" />\n  `,\n})\nclass ConfirmationDialogStoryWrapper {\n  header = 'Confirm action';\n  message = 'Are you sure you want to continue?';\n  hint?: string;\n  confirmBtnId = 'story-confirm';\n  cancelBtnId = 'story-cancel';\n  confirmBtnLabel?: string;\n  cancelBtnLabel?: string;\n  breakpoints?: any;\n  inputForm?: any;\n  confirmBtnIcon?: string;\n  confirmBtnPosition?: string;\n\n  @Output() readonly dialogClosed = new EventEmitter<unknown>();\n\n  constructor(\n    private readonly confirmationDialog: ConfirmationDialogService,\n    private readonly _destroyRef: DestroyRef,\n  ) {}\n\n  open(): void {\n    this.confirmationDialog\n      .open({\n        header: this.header,\n        message: this.message,\n        confirmBtnId: this.confirmBtnId,\n        cancelBtnId: this.cancelBtnId,\n        cancelBtnLabel: this.cancelBtnLabel,\n        confirmBtnLabel: this.confirmBtnLabel,\n        hint: this.hint,\n        confirmBtnIcon: this.confirmBtnIcon,\n        confirmBtnPosition: this.confirmBtnPosition,\n        inputForm: this.inputForm,\n        breakpoints: this.breakpoints,\n      })\n      .pipe(takeUntilDestroyed(this._destroyRef))\n      .subscribe((result) => this.dialogClosed.emit(result));\n  }\n}\n\nconst meta: Meta<ConfirmationDialogStoryWrapper> = {\n  title: 'MyLibrary/ConfirmationDialog',\n  component: ConfirmationDialogStoryWrapper,\n  subcomponents: { ConfirmationDialogComponent },\n  tags: ['autodocs'],\n  decorators: [\n    applicationConfig({\n      providers: [provideRouter([])],\n    }),\n    moduleMetadata({\n      imports: [AppButtonComponent, AvatarModule, DynamicDialogModule, DynamicFormComponent],\n      providers: [ConfirmationDialogService, DialogService, DynamicDialogStyle],\n    }),\n  ],\n  args: {\n    header: 'Confirm action',\n    message: 'Are you sure you want to continue?',\n    hint: undefined,\n    confirmBtnId: 'story-confirm',\n    cancelBtnId: 'story-cancel',\n    confirmBtnLabel: 'Confirm',\n    cancelBtnLabel: 'Cancel',\n    breakpoints: {\n      '1024px': {\n        width: '600px',\n        height: '400px',\n      },\n    },\n    // TODO: Add input form data\n    inputForm: undefined,\n    confirmBtnIcon: 'pi pi-check',\n    confirmBtnPosition: 'left',\n  },\n  argTypes: {\n      header: { control: 'text' },\n      message: { control: 'text' },\n      hint: { control: 'text' },\n      confirmBtnId: { control: 'text' },\n      cancelBtnId: { control: 'text' },\n      confirmBtnLabel: { control: 'text' },\n      cancelBtnLabel: { control: 'text' },\n      breakpoints: { control: 'object' },\n      inputForm: { control: 'object' },\n      confirmBtnIcon: { control: 'text' },\n      confirmBtnPosition: { control: 'text' },\n      dialogClosed: {\n        action: 'dialogClosed',\n        table: { disable: true },\n      },\n  },\n};\n\nexport default meta;\ntype Story = StoryObj<ConfirmationDialogStoryWrapper>;\n\nexport const Default: Story = {};\n",
             "assetsDirs": [],
             "styleUrlsData": "",
             "stylesData": "",
@@ -9487,7 +9487,7 @@
         },
         {
             "name": "DialogWrapper",
-            "id": "component-DialogWrapper-3beca4f7da4dd1e1cd68dc1058b507301715b67657c46289e2522a818ba8159de0739fb2023f6c91f40e9cb8e7b5c597c3af0685c9cfdaa6cc352ebb83e4651c",
+            "id": "component-DialogWrapper-470408330ee8b2b997175bf0958a090bf71e1023b4384097771d954908ba8b4cf0ae23bb9a16dfb5a97bb78a433f33719f387d6449e20a2aa8eceabc6f1e012a",
             "file": "projects/ui-components-lib/src/lib/alert-dialog/alert-dialog.stories.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -9497,7 +9497,7 @@
             "selector": "dialog-wrapper",
             "styleUrls": [],
             "styles": [],
-            "template": "<button (click)=\"open()\">Show Dialog</button>",
+            "template": "<app-button button (click)=\"open()\">Show Dialog</app-button>",
             "templateUrl": [],
             "viewProviders": [],
             "hostDirectives": [],
@@ -9511,7 +9511,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 23,
+                    "line": 24,
                     "deprecated": false,
                     "deprecationMessage": ""
                 }
@@ -9525,7 +9525,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import type { Meta, StoryObj } from '@storybook/angular';\nimport { moduleMetadata } from '@storybook/angular';\nimport { AlertDialogComponent } from './alert-dialog.component';\nimport { AppButtonComponent } from '../app-button';\nimport { AvatarModule } from 'primeng/avatar';\nimport {\n  DialogService,\n  DynamicDialogConfig,\n  DynamicDialogModule,\n  DynamicDialogRef,\n  DynamicDialogStyle,\n} from 'primeng/dynamicdialog';\nimport { TranslatePipe } from '@ngx-translate/core';\nimport { AlertDialogService } from './alert-dialog.service';\nimport { Component } from '@angular/core';\n\n@Component({\n  selector: 'dialog-wrapper',\n  template: `<button (click)=\"open()\">Show Dialog</button>`,\n})\nclass DialogWrapper {\n  constructor(private dialogService: AlertDialogService) {}\n  open() {\n    this.dialogService.open({ header: 'Hello!', message: 'Hello Hello' });\n  }\n}\n\nconst meta: Meta<DialogWrapper> = {\n  title: 'MyLibrary/AlertDialog',\n  component: DialogWrapper,\n  tags: ['autodocs'],\n  decorators: [\n    moduleMetadata({\n      imports: [AppButtonComponent, AvatarModule, DynamicDialogModule, TranslatePipe],\n      providers: [\n        AlertDialogService,\n        DialogService,\n        { provide: DynamicDialogConfig, useValue: { data: { title: 'Alert' } } },\n        { provide: DynamicDialogRef, useValue: {} },\n      ],\n    }),\n  ],\n};\n\nexport default meta;\ntype Story = StoryObj<DialogWrapper>; // Leave this empty!\n\nexport const Default: Story = {};\n",
+            "sourceCode": "import type { Meta, StoryObj } from '@storybook/angular';\nimport { moduleMetadata } from '@storybook/angular';\nimport { AlertDialogComponent } from './alert-dialog.component';\nimport { AppButtonComponent } from '../app-button';\nimport { AvatarModule } from 'primeng/avatar';\nimport {\n  DialogService,\n  DynamicDialogConfig,\n  DynamicDialogModule,\n  DynamicDialogRef,\n  DynamicDialogStyle,\n} from 'primeng/dynamicdialog';\nimport { TranslatePipe } from '@ngx-translate/core';\nimport { AlertDialogService } from './alert-dialog.service';\nimport { Component } from '@angular/core';\nimport { ButtonStyle } from 'primeng/button';\n\n@Component({\n  selector: 'dialog-wrapper',\n  template: `<app-button button (click)=\"open()\">Show Dialog</app-button>`,\n})\nclass DialogWrapper {\n  constructor(private dialogService: AlertDialogService) {}\n  open() {\n    this.dialogService.open({ header: 'Hello!', message: 'Hello Hello' });\n  }\n}\n\nconst meta: Meta<DialogWrapper> = {\n  title: 'MyLibrary/AlertDialog',\n  component: DialogWrapper,\n  tags: ['autodocs'],\n  decorators: [\n    moduleMetadata({\n      imports: [AppButtonComponent, AvatarModule, DynamicDialogModule,AppButtonComponent, TranslatePipe],\n      providers: [\n        ButtonStyle,\n        AlertDialogService,\n        DialogService,\n        { provide: DynamicDialogConfig, useValue: { data: { title: 'Alert' } } },\n        { provide: DynamicDialogRef, useValue: {} },\n      ],\n    }),\n  ],\n};\n\nexport default meta;\ntype Story = StoryObj<DialogWrapper>; // Leave this empty!\n\nexport const Default: Story = {};\n",
             "assetsDirs": [],
             "styleUrlsData": "",
             "stylesData": "",
@@ -9544,7 +9544,7 @@
                         "deprecationMessage": ""
                     }
                 ],
-                "line": 21,
+                "line": 22,
                 "jsdoctags": [
                     {
                         "name": "dialogService",
@@ -14504,6 +14504,16 @@
                 "defaultValue": "{\n  args: {\n    iconName: 'font-icon-plus',\n    iconClass: 'text-2xl text-primary',\n    iconPathCount: 0,\n  },\n}"
             },
             {
+                "name": "Default",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/ui-components-lib/src/lib/read-more/read-more.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{}"
+            },
+            {
                 "name": "Dual",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
@@ -14531,7 +14541,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Meta<DialogWrapper>",
-                "defaultValue": "{\n  title: 'MyLibrary/AlertDialog',\n  component: DialogWrapper,\n  tags: ['autodocs'],\n  decorators: [\n    moduleMetadata({\n      imports: [AppButtonComponent, AvatarModule, DynamicDialogModule, TranslatePipe],\n      providers: [\n        AlertDialogService,\n        DialogService,\n        { provide: DynamicDialogConfig, useValue: { data: { title: 'Alert' } } },\n        { provide: DynamicDialogRef, useValue: {} },\n      ],\n    }),\n  ],\n}"
+                "defaultValue": "{\n  title: 'MyLibrary/AlertDialog',\n  component: DialogWrapper,\n  tags: ['autodocs'],\n  decorators: [\n    moduleMetadata({\n      imports: [AppButtonComponent, AvatarModule, DynamicDialogModule,AppButtonComponent, TranslatePipe],\n      providers: [\n        ButtonStyle,\n        AlertDialogService,\n        DialogService,\n        { provide: DynamicDialogConfig, useValue: { data: { title: 'Alert' } } },\n        { provide: DynamicDialogRef, useValue: {} },\n      ],\n    }),\n  ],\n}"
             },
             {
                 "name": "meta",
@@ -14571,7 +14581,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Meta<ConfirmationDialogStoryWrapper>",
-                "defaultValue": "{\n  title: 'MyLibrary/ConfirmationDialog',\n  component: ConfirmationDialogStoryWrapper,\n  subcomponents: { ConfirmationDialogComponent },\n  tags: ['autodocs'],\n  decorators: [\n    applicationConfig({\n      providers: [provideRouter([])],\n    }),\n    moduleMetadata({\n      imports: [AppButtonComponent, AvatarModule, DynamicDialogModule, DynamicFormComponent],\n      providers: [ConfirmationDialogService, DialogService, DynamicDialogStyle],\n    }),\n  ],\n  args: {\n    header: 'Confirm action',\n    message: 'Are you sure you want to continue?',\n    hint: undefined,\n    confirmBtnId: 'story-confirm',\n    cancelBtnId: 'story-cancel',\n    confirmBtnLabel: 'Confirm',\n    cancelBtnLabel: 'Cancel',\n    breakpoints: {\n      '1024px': {\n        width: '600px',\n        height: '400px',\n      },\n    },\n    inputForm: {\n      name: 'name',\n      label: 'Name',\n      type: 'text',\n      required: true,\n    },\n    confirmBtnIcon: 'pi pi-check',\n    confirmBtnPosition: 'left',\n  },\n  argTypes: {\n      header: { control: 'text' },\n      message: { control: 'text' },\n      hint: { control: 'text' },\n      confirmBtnId: { control: 'text' },\n      cancelBtnId: { control: 'text' },\n      confirmBtnLabel: { control: 'text' },\n      cancelBtnLabel: { control: 'text' },\n      breakpoints: { control: false },\n      inputForm: { control: false },\n      confirmBtnIcon: { control: 'text' },\n      confirmBtnPosition: { control: 'text' },\n      dialogClosed: {\n        action: 'dialogClosed',\n        table: { disable: true },\n      },\n  },\n}"
+                "defaultValue": "{\n  title: 'MyLibrary/ConfirmationDialog',\n  component: ConfirmationDialogStoryWrapper,\n  subcomponents: { ConfirmationDialogComponent },\n  tags: ['autodocs'],\n  decorators: [\n    applicationConfig({\n      providers: [provideRouter([])],\n    }),\n    moduleMetadata({\n      imports: [AppButtonComponent, AvatarModule, DynamicDialogModule, DynamicFormComponent],\n      providers: [ConfirmationDialogService, DialogService, DynamicDialogStyle],\n    }),\n  ],\n  args: {\n    header: 'Confirm action',\n    message: 'Are you sure you want to continue?',\n    hint: undefined,\n    confirmBtnId: 'story-confirm',\n    cancelBtnId: 'story-cancel',\n    confirmBtnLabel: 'Confirm',\n    cancelBtnLabel: 'Cancel',\n    breakpoints: {\n      '1024px': {\n        width: '600px',\n        height: '400px',\n      },\n    },\n    // TODO: Add input form data\n    inputForm: undefined,\n    confirmBtnIcon: 'pi pi-check',\n    confirmBtnPosition: 'left',\n  },\n  argTypes: {\n      header: { control: 'text' },\n      message: { control: 'text' },\n      hint: { control: 'text' },\n      confirmBtnId: { control: 'text' },\n      cancelBtnId: { control: 'text' },\n      confirmBtnLabel: { control: 'text' },\n      cancelBtnLabel: { control: 'text' },\n      breakpoints: { control: 'object' },\n      inputForm: { control: 'object' },\n      confirmBtnIcon: { control: 'text' },\n      confirmBtnPosition: { control: 'text' },\n      dialogClosed: {\n        action: 'dialogClosed',\n        table: { disable: true },\n      },\n  },\n}"
             },
             {
                 "name": "meta",
@@ -14592,6 +14602,16 @@
                 "deprecationMessage": "",
                 "type": "Meta<IcoMoonIconComponent>",
                 "defaultValue": "{\n  title: 'MyLibrary/Icons',\n  component: IcoMoonIconComponent,\n  tags: ['autodocs'],\n  decorators: [\n    moduleMetadata({\n      imports: [IcoMoonIconComponent],\n    }),\n  ],\n  args: {\n    iconName: 'font-icon-plus',\n    iconClass: 'text-2xl text-primary',\n    iconPathCount: 0,\n  },\n  argTypes: {\n    iconName: {\n      control: 'text',\n      description: 'The name of the icon',\n    },\n    iconClass: {\n      control: 'text',\n      description: 'The class of the icon',\n    },\n    iconPathCount: {\n      control: 'number',\n      description: 'The number of paths in the icon',\n    },\n  } as Meta<IcoMoonIconComponent>['argTypes'],\n}"
+            },
+            {
+                "name": "meta",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/ui-components-lib/src/lib/read-more/read-more.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Meta<ReadMoreComponent>",
+                "defaultValue": "{\n  title: 'MyLibrary/ReadMore',\n  component: ReadMoreComponent,\n  tags: ['autodocs'],\n  decorators: [\n    moduleMetadata({\n      imports: [ReadMoreComponent],\n    }),\n  ],\n  args: {\n    text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',\n    styleClass: 'text-2xl text-primary',\n    maxCharacters: 100,\n  },\n  argTypes: {\n    text: {\n      control: 'text',\n      description: 'The text to display',\n    },\n    styleClass: {\n      control: 'text',\n      description: 'The class of the style',\n    },\n    maxCharacters: {\n      control: 'number',\n      description: 'The number of characters to display',\n    },\n  },\n\n}"
             },
             {
                 "name": "MONTHS_GREGORIAN",
@@ -15111,6 +15131,17 @@
                 "deprecationMessage": "",
                 "description": "",
                 "kind": 184
+            },
+            {
+                "name": "Story",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
+                "rawtype": "StoryObj<ReadMoreComponent>",
+                "file": "projects/ui-components-lib/src/lib/read-more/read-more.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "kind": 184
             }
         ],
         "enumerations": [
@@ -15470,7 +15501,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Meta<DialogWrapper>",
-                    "defaultValue": "{\n  title: 'MyLibrary/AlertDialog',\n  component: DialogWrapper,\n  tags: ['autodocs'],\n  decorators: [\n    moduleMetadata({\n      imports: [AppButtonComponent, AvatarModule, DynamicDialogModule, TranslatePipe],\n      providers: [\n        AlertDialogService,\n        DialogService,\n        { provide: DynamicDialogConfig, useValue: { data: { title: 'Alert' } } },\n        { provide: DynamicDialogRef, useValue: {} },\n      ],\n    }),\n  ],\n}"
+                    "defaultValue": "{\n  title: 'MyLibrary/AlertDialog',\n  component: DialogWrapper,\n  tags: ['autodocs'],\n  decorators: [\n    moduleMetadata({\n      imports: [AppButtonComponent, AvatarModule, DynamicDialogModule,AppButtonComponent, TranslatePipe],\n      providers: [\n        ButtonStyle,\n        AlertDialogService,\n        DialogService,\n        { provide: DynamicDialogConfig, useValue: { data: { title: 'Alert' } } },\n        { provide: DynamicDialogRef, useValue: {} },\n      ],\n    }),\n  ],\n}"
                 }
             ],
             "projects/ui-components-lib/src/lib/app-breadcrumb/breadcrumb.stories.ts": [
@@ -15558,7 +15589,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Meta<ConfirmationDialogStoryWrapper>",
-                    "defaultValue": "{\n  title: 'MyLibrary/ConfirmationDialog',\n  component: ConfirmationDialogStoryWrapper,\n  subcomponents: { ConfirmationDialogComponent },\n  tags: ['autodocs'],\n  decorators: [\n    applicationConfig({\n      providers: [provideRouter([])],\n    }),\n    moduleMetadata({\n      imports: [AppButtonComponent, AvatarModule, DynamicDialogModule, DynamicFormComponent],\n      providers: [ConfirmationDialogService, DialogService, DynamicDialogStyle],\n    }),\n  ],\n  args: {\n    header: 'Confirm action',\n    message: 'Are you sure you want to continue?',\n    hint: undefined,\n    confirmBtnId: 'story-confirm',\n    cancelBtnId: 'story-cancel',\n    confirmBtnLabel: 'Confirm',\n    cancelBtnLabel: 'Cancel',\n    breakpoints: {\n      '1024px': {\n        width: '600px',\n        height: '400px',\n      },\n    },\n    inputForm: {\n      name: 'name',\n      label: 'Name',\n      type: 'text',\n      required: true,\n    },\n    confirmBtnIcon: 'pi pi-check',\n    confirmBtnPosition: 'left',\n  },\n  argTypes: {\n      header: { control: 'text' },\n      message: { control: 'text' },\n      hint: { control: 'text' },\n      confirmBtnId: { control: 'text' },\n      cancelBtnId: { control: 'text' },\n      confirmBtnLabel: { control: 'text' },\n      cancelBtnLabel: { control: 'text' },\n      breakpoints: { control: false },\n      inputForm: { control: false },\n      confirmBtnIcon: { control: 'text' },\n      confirmBtnPosition: { control: 'text' },\n      dialogClosed: {\n        action: 'dialogClosed',\n        table: { disable: true },\n      },\n  },\n}"
+                    "defaultValue": "{\n  title: 'MyLibrary/ConfirmationDialog',\n  component: ConfirmationDialogStoryWrapper,\n  subcomponents: { ConfirmationDialogComponent },\n  tags: ['autodocs'],\n  decorators: [\n    applicationConfig({\n      providers: [provideRouter([])],\n    }),\n    moduleMetadata({\n      imports: [AppButtonComponent, AvatarModule, DynamicDialogModule, DynamicFormComponent],\n      providers: [ConfirmationDialogService, DialogService, DynamicDialogStyle],\n    }),\n  ],\n  args: {\n    header: 'Confirm action',\n    message: 'Are you sure you want to continue?',\n    hint: undefined,\n    confirmBtnId: 'story-confirm',\n    cancelBtnId: 'story-cancel',\n    confirmBtnLabel: 'Confirm',\n    cancelBtnLabel: 'Cancel',\n    breakpoints: {\n      '1024px': {\n        width: '600px',\n        height: '400px',\n      },\n    },\n    // TODO: Add input form data\n    inputForm: undefined,\n    confirmBtnIcon: 'pi pi-check',\n    confirmBtnPosition: 'left',\n  },\n  argTypes: {\n      header: { control: 'text' },\n      message: { control: 'text' },\n      hint: { control: 'text' },\n      confirmBtnId: { control: 'text' },\n      cancelBtnId: { control: 'text' },\n      confirmBtnLabel: { control: 'text' },\n      cancelBtnLabel: { control: 'text' },\n      breakpoints: { control: 'object' },\n      inputForm: { control: 'object' },\n      confirmBtnIcon: { control: 'text' },\n      confirmBtnPosition: { control: 'text' },\n      dialogClosed: {\n        action: 'dialogClosed',\n        table: { disable: true },\n      },\n  },\n}"
                 }
             ],
             "projects/ui-components-lib/src/lib/ico-moon-icon/ico-moon.stories.ts": [
@@ -15581,6 +15612,28 @@
                     "deprecationMessage": "",
                     "type": "Meta<IcoMoonIconComponent>",
                     "defaultValue": "{\n  title: 'MyLibrary/Icons',\n  component: IcoMoonIconComponent,\n  tags: ['autodocs'],\n  decorators: [\n    moduleMetadata({\n      imports: [IcoMoonIconComponent],\n    }),\n  ],\n  args: {\n    iconName: 'font-icon-plus',\n    iconClass: 'text-2xl text-primary',\n    iconPathCount: 0,\n  },\n  argTypes: {\n    iconName: {\n      control: 'text',\n      description: 'The name of the icon',\n    },\n    iconClass: {\n      control: 'text',\n      description: 'The class of the icon',\n    },\n    iconPathCount: {\n      control: 'number',\n      description: 'The number of paths in the icon',\n    },\n  } as Meta<IcoMoonIconComponent>['argTypes'],\n}"
+                }
+            ],
+            "projects/ui-components-lib/src/lib/read-more/read-more.stories.ts": [
+                {
+                    "name": "Default",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/ui-components-lib/src/lib/read-more/read-more.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{}"
+                },
+                {
+                    "name": "meta",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/ui-components-lib/src/lib/read-more/read-more.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Meta<ReadMoreComponent>",
+                    "defaultValue": "{\n  title: 'MyLibrary/ReadMore',\n  component: ReadMoreComponent,\n  tags: ['autodocs'],\n  decorators: [\n    moduleMetadata({\n      imports: [ReadMoreComponent],\n    }),\n  ],\n  args: {\n    text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',\n    styleClass: 'text-2xl text-primary',\n    maxCharacters: 100,\n  },\n  argTypes: {\n    text: {\n      control: 'text',\n      description: 'The text to display',\n    },\n    styleClass: {\n      control: 'text',\n      description: 'The class of the style',\n    },\n    maxCharacters: {\n      control: 'number',\n      description: 'The number of characters to display',\n    },\n  },\n\n}"
                 }
             ],
             "projects/ui-components-lib/src/lib/dual-calender/dual-calendar.stories.ts": [
@@ -16475,6 +16528,19 @@
                     "subtype": "typealias",
                     "rawtype": "StoryObj<IcoMoonIconComponent>",
                     "file": "projects/ui-components-lib/src/lib/ico-moon-icon/ico-moon.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 184
+                }
+            ],
+            "projects/ui-components-lib/src/lib/read-more/read-more.stories.ts": [
+                {
+                    "name": "Story",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "StoryObj<ReadMoreComponent>",
+                    "file": "projects/ui-components-lib/src/lib/read-more/read-more.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "description": "",
@@ -17646,6 +17712,36 @@
                 "name": "ReadMoreComponent",
                 "coveragePercent": 0,
                 "coverageCount": "0/6",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/ui-components-lib/src/lib/read-more/read-more.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Default",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/ui-components-lib/src/lib/read-more/read-more.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "meta",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/ui-components-lib/src/lib/read-more/read-more.stories.ts",
+                "type": "type alias",
+                "linktype": "miscellaneous",
+                "linksubtype": "typealias",
+                "name": "Story",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
                 "status": "low"
             },
             {
