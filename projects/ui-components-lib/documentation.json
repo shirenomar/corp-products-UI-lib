@@ -8355,6 +8355,230 @@
             "templateData": "@if (dynamicDialogConfig.data) {\n<div class=\"confirmation-dialog\">\n  <div class=\"dialog-wrapper\">\n    @if (dynamicDialogConfig.data) {\n    <div class=\"confirmation-dialog__content my-4\">\n      @if (dynamicDialogConfig.data.dialogIcon) {\n      <em [class]=\"dynamicDialogConfig.data.dialogIcon\"></em>\n      }\n      <p class=\"confirmation-dialog__message text-xl mb-2\">\n        {{ dynamicDialogConfig.data.message }}\n      </p>\n      @if (dynamicDialogConfig.data.hint) {\n      <p class=\"confirmation-dialog__hint font-normal text-base\">\n        {{ dynamicDialogConfig.data.hint }}\n      </p>\n      }\n      @if (dynamicDialogConfig.data.inputForm) {\n      <app-dynamic-form [dynamicFormData]=\"dialogFormData\"  (popUpFilesUploaded)=\"onPopFilesUploaded($event)\" (fileDeleted)=\"onFileDeleted($event)\" ></app-dynamic-form>\n      }\n    </div>\n    }\n    <div class=\"confirmation-dialog__actions flex gap-2 mt-4\">\n      <app-button [title]=\"dynamicDialogConfig.data?.confirmLabel || ('actions.confirm' | translate)\"\n        [disabled]=\"!!(dialogFormData && dialogFormData.formGroup?.invalid)\" [severity]=\"'primary'\"\n        [id]=\"dynamicDialogConfig.data.confirmBtnId\" [icon]=\"dynamicDialogConfig.data.confirmBtnIcon || ''\"\n        [label]=\"dynamicDialogConfig.data.confirmBtnLabel\"\n        [iconPos]=\"dynamicDialogConfig.data.confirmBtnPosition || 'left'\" [styleClass]=\"'confirmation-btn'\"\n        (click)=\"submit()\" />\n      <app-button [title]=\"dynamicDialogConfig.data?.closeLabel ||  ('actions.cancel' | translate)\"\n        [severity]=\"'primary'\" variant=\"outlined\" [label]=\"dynamicDialogConfig.data.cancelBtnLabel\"\n        [id]=\"dynamicDialogConfig.data.cancelBtnId\" [styleClass]=\"'cancel-btn confirmation-btn cancel-btn'\"\n        (click)=\"close()\" />\n    </div>\n  </div>\n\n</div>\n}\n"
         },
         {
+            "name": "ConfirmationDialogStoryWrapper",
+            "id": "component-ConfirmationDialogStoryWrapper-932fd30f9575a9d0ca197ad3310293377a4a29f257488cbf7a23a7307404ac812556808891658cd555d1efb487faf163e38af950f90ec05aad962abcbaad5c33",
+            "file": "projects/ui-components-lib/src/lib/confirmation-dialog/confirmation-dialog.stories.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "confirmation-dialog-story-wrapper",
+            "styleUrls": [],
+            "styles": [],
+            "template": "<app-button label=\"Open confirmation dialog\" severity=\"primary\" (click)=\"open()\" />\n",
+            "templateUrl": [],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [],
+            "outputsClass": [
+                {
+                    "name": "dialogClosed",
+                    "defaultValue": "new EventEmitter<unknown>()",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 34,
+                    "type": "EventEmitter"
+                }
+            ],
+            "propertiesClass": [
+                {
+                    "name": "breakpoints",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "any",
+                    "indexKey": "",
+                    "optional": true,
+                    "description": "",
+                    "line": 29
+                },
+                {
+                    "name": "cancelBtnId",
+                    "defaultValue": "'story-cancel'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 26
+                },
+                {
+                    "name": "cancelBtnLabel",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "indexKey": "",
+                    "optional": true,
+                    "description": "",
+                    "line": 28
+                },
+                {
+                    "name": "confirmBtnIcon",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "indexKey": "",
+                    "optional": true,
+                    "description": "",
+                    "line": 31
+                },
+                {
+                    "name": "confirmBtnId",
+                    "defaultValue": "'story-confirm'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 25
+                },
+                {
+                    "name": "confirmBtnLabel",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "indexKey": "",
+                    "optional": true,
+                    "description": "",
+                    "line": 27
+                },
+                {
+                    "name": "confirmBtnPosition",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "indexKey": "",
+                    "optional": true,
+                    "description": "",
+                    "line": 32
+                },
+                {
+                    "name": "header",
+                    "defaultValue": "'Confirm action'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 22
+                },
+                {
+                    "name": "hint",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "indexKey": "",
+                    "optional": true,
+                    "description": "",
+                    "line": 24
+                },
+                {
+                    "name": "inputForm",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "any",
+                    "indexKey": "",
+                    "optional": true,
+                    "description": "",
+                    "line": 30
+                },
+                {
+                    "name": "message",
+                    "defaultValue": "'Are you sure you want to continue?'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 23
+                }
+            ],
+            "methodsClass": [
+                {
+                    "name": "open",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 41,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                }
+            ],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "standalone": true,
+            "imports": [
+                {
+                    "name": "AppButtonComponent",
+                    "type": "component"
+                }
+            ],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import type { Meta, StoryObj } from '@storybook/angular';\nimport { applicationConfig, moduleMetadata } from '@storybook/angular';\nimport { Component, DestroyRef, EventEmitter, Output } from '@angular/core';\nimport { provideRouter } from '@angular/router';\nimport { AvatarModule } from 'primeng/avatar';\nimport { DialogService, DynamicDialogModule, DynamicDialogStyle } from 'primeng/dynamicdialog';\nimport { AppButtonComponent } from '../app-button';\nimport { ConfirmationDialogComponent } from './confirmation-dialog.component';\nimport { ConfirmationDialogService } from './confirmation-dialog.service';\nimport { takeUntilDestroyed } from '@angular/core/rxjs-interop';\nimport { DynamicFormComponent } from '@corp-products/ui-components';\n\n@Component({\n  selector: 'confirmation-dialog-story-wrapper',\n  standalone: true,\n  imports: [AppButtonComponent],\n  template: `\n    <app-button label=\"Open confirmation dialog\" severity=\"primary\" (click)=\"open()\" />\n  `,\n})\nclass ConfirmationDialogStoryWrapper {\n  header = 'Confirm action';\n  message = 'Are you sure you want to continue?';\n  hint?: string;\n  confirmBtnId = 'story-confirm';\n  cancelBtnId = 'story-cancel';\n  confirmBtnLabel?: string;\n  cancelBtnLabel?: string;\n  breakpoints?: any;\n  inputForm?: any;\n  confirmBtnIcon?: string;\n  confirmBtnPosition?: string;\n\n  @Output() readonly dialogClosed = new EventEmitter<unknown>();\n\n  constructor(\n    private readonly confirmationDialog: ConfirmationDialogService,\n    private readonly _destroyRef: DestroyRef,\n  ) {}\n\n  open(): void {\n    this.confirmationDialog\n      .open({\n        header: this.header,\n        message: this.message,\n        confirmBtnId: this.confirmBtnId,\n        cancelBtnId: this.cancelBtnId,\n        cancelBtnLabel: this.cancelBtnLabel,\n        confirmBtnLabel: this.confirmBtnLabel,\n        hint: this.hint,\n        confirmBtnIcon: this.confirmBtnIcon,\n        confirmBtnPosition: this.confirmBtnPosition,\n        inputForm: this.inputForm,\n        breakpoints: this.breakpoints,\n      })\n      .pipe(takeUntilDestroyed(this._destroyRef))\n      .subscribe((result) => this.dialogClosed.emit(result));\n  }\n}\n\nconst meta: Meta<ConfirmationDialogStoryWrapper> = {\n  title: 'MyLibrary/ConfirmationDialog',\n  component: ConfirmationDialogStoryWrapper,\n  subcomponents: { ConfirmationDialogComponent },\n  tags: ['autodocs'],\n  decorators: [\n    applicationConfig({\n      providers: [provideRouter([])],\n    }),\n    moduleMetadata({\n      imports: [AppButtonComponent, AvatarModule, DynamicDialogModule, DynamicFormComponent],\n      providers: [ConfirmationDialogService, DialogService, DynamicDialogStyle],\n    }),\n  ],\n  args: {\n    header: 'Confirm action',\n    message: 'Are you sure you want to continue?',\n    hint: undefined,\n    confirmBtnId: 'story-confirm',\n    cancelBtnId: 'story-cancel',\n    confirmBtnLabel: 'Confirm',\n    cancelBtnLabel: 'Cancel',\n    breakpoints: {\n      '1024px': {\n        width: '600px',\n        height: '400px',\n      },\n    },\n    inputForm: {\n      name: 'name',\n      label: 'Name',\n      type: 'text',\n      required: true,\n    },\n    confirmBtnIcon: 'pi pi-check',\n    confirmBtnPosition: 'left',\n  },\n  argTypes: {\n      header: { control: 'text' },\n      message: { control: 'text' },\n      hint: { control: 'text' },\n      confirmBtnId: { control: 'text' },\n      cancelBtnId: { control: 'text' },\n      confirmBtnLabel: { control: 'text' },\n      cancelBtnLabel: { control: 'text' },\n      breakpoints: { control: false },\n      inputForm: { control: false },\n      confirmBtnIcon: { control: 'text' },\n      confirmBtnPosition: { control: 'text' },\n      dialogClosed: {\n        action: 'dialogClosed',\n        table: { disable: true },\n      },\n  },\n};\n\nexport default meta;\ntype Story = StoryObj<ConfirmationDialogStoryWrapper>;\n\nexport const Default: Story = {};\n",
+            "assetsDirs": [],
+            "styleUrlsData": "",
+            "stylesData": "",
+            "constructorObj": {
+                "name": "constructor",
+                "description": "",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "args": [
+                    {
+                        "name": "confirmationDialog",
+                        "type": "ConfirmationDialogService",
+                        "optional": false,
+                        "dotDotDotToken": false,
+                        "deprecated": false,
+                        "deprecationMessage": ""
+                    },
+                    {
+                        "name": "_destroyRef",
+                        "type": "DestroyRef",
+                        "optional": false,
+                        "dotDotDotToken": false,
+                        "deprecated": false,
+                        "deprecationMessage": ""
+                    }
+                ],
+                "line": 34,
+                "jsdoctags": [
+                    {
+                        "name": "confirmationDialog",
+                        "type": "ConfirmationDialogService",
+                        "optional": false,
+                        "dotDotDotToken": false,
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "tagName": {
+                            "text": "param"
+                        }
+                    },
+                    {
+                        "name": "_destroyRef",
+                        "type": "DestroyRef",
+                        "optional": false,
+                        "dotDotDotToken": false,
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "tagName": {
+                            "text": "param"
+                        }
+                    }
+                ]
+            },
+            "extends": []
+        },
+        {
             "name": "DatePickerComponent",
             "id": "component-DatePickerComponent-658145fd23cbe46f5056b41d6aa20b8d2247ce790d06a6ae21071ccc1502774e50caec128bbc9256500339da451965f5225e152a379516fc86d319797875c559",
             "file": "projects/ui-components-lib/src/lib/form-components/components/date-picker/date-picker.component.ts",
@@ -14223,21 +14447,21 @@
                 "name": "Default",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/ui-components-lib/src/lib/app-breadcrumb/breadcrumb.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story",
-                "defaultValue": "{\n  args: {\n    items: [\n      {\n        notClickable: false,\n        label: 'Home',\n        routerLink: '/home',\n        isShown: true,\n        extraBreadcrumbs: [\n          {\n            label: 'Payment',\n            routerLink: '/payments',\n            isShown: true,\n            position: 'after',\n          },\n        ],\n      },\n      {\n        notClickable: false,\n        label: 'Payment',\n        routerLink: '/payments',\n        isShown: true,\n        extraBreadcrumbs: [\n          {\n            position: 'before',\n            label: 'Payment',\n            routerLink: '/payments',\n          },\n        ],\n      },\n    ],\n  },\n}"
-            },
-            {
-                "name": "Default",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
                 "file": "projects/ui-components-lib/src/lib/alert-dialog/alert-dialog.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
                 "defaultValue": "{}"
+            },
+            {
+                "name": "Default",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/ui-components-lib/src/lib/app-breadcrumb/breadcrumb.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  args: {\n    items: [\n      {\n        notClickable: false,\n        label: 'Home',\n        routerLink: '/home',\n        isShown: true,\n        extraBreadcrumbs: [\n          {\n            label: 'Payment',\n            routerLink: '/payments',\n            isShown: true,\n            position: 'after',\n          },\n        ],\n      },\n      {\n        notClickable: false,\n        label: 'Payment',\n        routerLink: '/payments',\n        isShown: true,\n        extraBreadcrumbs: [\n          {\n            position: 'before',\n            label: 'Payment',\n            routerLink: '/payments',\n          },\n        ],\n      },\n    ],\n  },\n}"
             },
             {
                 "name": "Default",
@@ -14273,7 +14497,7 @@
                 "name": "Default",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/ui-components-lib/src/lib/ico-moon-icon/ico-moon.story.ts",
+                "file": "projects/ui-components-lib/src/lib/ico-moon-icon/ico-moon.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
@@ -14303,21 +14527,21 @@
                 "name": "meta",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/ui-components-lib/src/lib/app-breadcrumb/breadcrumb.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Meta<AppBreadcrumbComponent>",
-                "defaultValue": "{\n  title: 'MyLibrary/Breadcrumb',\n  component: AppBreadcrumbComponent,\n  tags: ['autodocs'],\n  decorators: [\n    applicationConfig({\n      providers: [\n        provideRouter(storyRoutes),\n        {\n          provide: ActivatedRouteSnapshot,\n          useValue: {\n            children: [\n              {\n                data: {\n                  breadcrumb: 'Home',\n                  notClickableBreadcrumb: true,\n                  isShown: true,\n                  extraBreadcrumbs: [],\n                },\n              },\n            ],\n          }\n        }\n      ],\n    }),\n    moduleMetadata({\n      imports: [AppBreadcrumbComponent],\n    }),\n  ],\n  args: {\n    items: [\n      {\n        notClickable: false,\n        label: 'Home',\n        routerLink: '/home',\n        isShown: true,\n        extraBreadcrumbs: [\n          {\n            label: 'Payment',\n            routerLink: '/payments',\n            isShown: true,\n            position: 'after',\n          },\n        ],\n      },\n      {\n        notClickable: false,\n        label: 'Payment',\n        routerLink: '/payments',\n        isShown: true,\n        extraBreadcrumbs: [\n          {\n            position: 'before',\n            label: 'Payment',\n            routerLink: '/payments',\n          },\n        ],\n      },\n    ],\n  },\n  argTypes: {\n    items: {\n      items: {\n        type: 'object',\n        properties: {\n          notClickable: { type: 'boolean' },\n          label: { type: 'string' },\n          routerLink: { type: 'string' },\n          isShown: { type: 'boolean' },\n          extraBreadcrumbs: {\n            type: 'array',\n            items: {\n              type: 'object',\n              properties: {\n                label: { type: 'string' },\n                routerLink: { type: 'string' },\n                isShown: { type: 'boolean' },\n                position: { type: 'string' },\n              },\n            },\n          },\n        },\n      },\n    },\n    ngOnInit: { table: { disable: true }, control: false },\n    isShown: { table: { disable: true }, control: false },\n    _checkEmpty: { table: { disable: true }, control: false },\n    _checkHiddenBreadcrumb: { table: { disable: true }, control: false },\n    _createBreadcrumbs: { table: { disable: true }, control: false },\n    _getRecursiveKey: { table: { disable: true }, control: false },\n  } as Meta<AppBreadcrumbComponent>['argTypes'],\n}"
-            },
-            {
-                "name": "meta",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
                 "file": "projects/ui-components-lib/src/lib/alert-dialog/alert-dialog.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Meta<DialogWrapper>",
                 "defaultValue": "{\n  title: 'MyLibrary/AlertDialog',\n  component: DialogWrapper,\n  tags: ['autodocs'],\n  decorators: [\n    moduleMetadata({\n      imports: [AppButtonComponent, AvatarModule, DynamicDialogModule, TranslatePipe],\n      providers: [\n        AlertDialogService,\n        DialogService,\n        { provide: DynamicDialogConfig, useValue: { data: { title: 'Alert' } } },\n        { provide: DynamicDialogRef, useValue: {} },\n      ],\n    }),\n  ],\n}"
+            },
+            {
+                "name": "meta",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/ui-components-lib/src/lib/app-breadcrumb/breadcrumb.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Meta<AppBreadcrumbComponent>",
+                "defaultValue": "{\n  title: 'MyLibrary/Breadcrumb',\n  component: AppBreadcrumbComponent,\n  tags: ['autodocs'],\n  decorators: [\n    applicationConfig({\n      providers: [\n        provideRouter(storyRoutes),\n        {\n          provide: ActivatedRouteSnapshot,\n          useValue: {\n            children: [\n              {\n                data: {\n                  breadcrumb: 'Home',\n                  notClickableBreadcrumb: true,\n                  isShown: true,\n                  extraBreadcrumbs: [],\n                },\n              },\n            ],\n          }\n        }\n      ],\n    }),\n    moduleMetadata({\n      imports: [AppBreadcrumbComponent],\n    }),\n  ],\n  args: {\n    items: [\n      {\n        notClickable: false,\n        label: 'Home',\n        routerLink: '/home',\n        isShown: true,\n        extraBreadcrumbs: [\n          {\n            label: 'Payment',\n            routerLink: '/payments',\n            isShown: true,\n            position: 'after',\n          },\n        ],\n      },\n      {\n        notClickable: false,\n        label: 'Payment',\n        routerLink: '/payments',\n        isShown: true,\n        extraBreadcrumbs: [\n          {\n            position: 'before',\n            label: 'Payment',\n            routerLink: '/payments',\n          },\n        ],\n      },\n    ],\n  },\n  argTypes: {\n    items: {\n      items: {\n        type: 'object',\n        properties: {\n          notClickable: { type: 'boolean' },\n          label: { type: 'string' },\n          routerLink: { type: 'string' },\n          isShown: { type: 'boolean' },\n          extraBreadcrumbs: {\n            type: 'array',\n            items: {\n              type: 'object',\n              properties: {\n                label: { type: 'string' },\n                routerLink: { type: 'string' },\n                isShown: { type: 'boolean' },\n                position: { type: 'string' },\n              },\n            },\n          },\n        },\n      },\n    },\n    ngOnInit: { table: { disable: true }, control: false },\n    isShown: { table: { disable: true }, control: false },\n    _checkEmpty: { table: { disable: true }, control: false },\n    _checkHiddenBreadcrumb: { table: { disable: true }, control: false },\n    _createBreadcrumbs: { table: { disable: true }, control: false },\n    _getRecursiveKey: { table: { disable: true }, control: false },\n  } as Meta<AppBreadcrumbComponent>['argTypes'],\n}"
             },
             {
                 "name": "meta",
@@ -14346,8 +14570,8 @@
                 "file": "projects/ui-components-lib/src/lib/confirmation-dialog/confirmation-dialog.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
-                "type": "Meta<ConfirmationDialogComponent>",
-                "defaultValue": "{\n  title: 'MyLibrary/ConfirmationDialog',\n  component: ConfirmationDialogComponent,\n  tags: ['autodocs'],\n  argTypes: {},\n  decorators: [\n    moduleMetadata({\n      imports: [\n        AppButtonComponent,\n        AvatarModule,\n        DynamicDialogModule,\n        DynamicFormComponent,\n        TranslatePipe,\n      ],\n      providers: [\n        DialogService,\n        DynamicDialogStyle,\n        DynamicDialogConfig,\n        DynamicDialogRef,\n        TranslateService,\n      ],\n    }),\n  ],\n}"
+                "type": "Meta<ConfirmationDialogStoryWrapper>",
+                "defaultValue": "{\n  title: 'MyLibrary/ConfirmationDialog',\n  component: ConfirmationDialogStoryWrapper,\n  subcomponents: { ConfirmationDialogComponent },\n  tags: ['autodocs'],\n  decorators: [\n    applicationConfig({\n      providers: [provideRouter([])],\n    }),\n    moduleMetadata({\n      imports: [AppButtonComponent, AvatarModule, DynamicDialogModule, DynamicFormComponent],\n      providers: [ConfirmationDialogService, DialogService, DynamicDialogStyle],\n    }),\n  ],\n  args: {\n    header: 'Confirm action',\n    message: 'Are you sure you want to continue?',\n    hint: undefined,\n    confirmBtnId: 'story-confirm',\n    cancelBtnId: 'story-cancel',\n    confirmBtnLabel: 'Confirm',\n    cancelBtnLabel: 'Cancel',\n    breakpoints: {\n      '1024px': {\n        width: '600px',\n        height: '400px',\n      },\n    },\n    inputForm: {\n      name: 'name',\n      label: 'Name',\n      type: 'text',\n      required: true,\n    },\n    confirmBtnIcon: 'pi pi-check',\n    confirmBtnPosition: 'left',\n  },\n  argTypes: {\n      header: { control: 'text' },\n      message: { control: 'text' },\n      hint: { control: 'text' },\n      confirmBtnId: { control: 'text' },\n      cancelBtnId: { control: 'text' },\n      confirmBtnLabel: { control: 'text' },\n      cancelBtnLabel: { control: 'text' },\n      breakpoints: { control: false },\n      inputForm: { control: false },\n      confirmBtnIcon: { control: 'text' },\n      confirmBtnPosition: { control: 'text' },\n      dialogClosed: {\n        action: 'dialogClosed',\n        table: { disable: true },\n      },\n  },\n}"
             },
             {
                 "name": "meta",
@@ -14363,11 +14587,11 @@
                 "name": "meta",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/ui-components-lib/src/lib/ico-moon-icon/ico-moon.story.ts",
+                "file": "projects/ui-components-lib/src/lib/ico-moon-icon/ico-moon.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Meta<IcoMoonIconComponent>",
-                "defaultValue": "{\n  title: 'MyLibrary/Icons',\n  component: IcoMoonIconComponent,\n  tags: ['autodocs'],\n  decorators: [\n    moduleMetadata({\n      imports: [CommonModule, IcoMoonIconComponent],\n    }),\n  ],\n  args: {\n    iconName: 'font-icon-plus',\n    iconClass: 'text-2xl text-primary',\n    iconPathCount: 0,\n  },\n  argTypes: {\n    iconName: {\n      control: 'text',\n      description: 'The name of the icon',\n    },\n    iconClass: {\n      control: 'text',\n      description: 'The class of the icon',\n    },\n    iconPathCount: {\n      control: 'number',\n      description: 'The number of paths in the icon',\n    },\n  } as Meta<IcoMoonIconComponent>['argTypes'],\n}"
+                "defaultValue": "{\n  title: 'MyLibrary/Icons',\n  component: IcoMoonIconComponent,\n  tags: ['autodocs'],\n  decorators: [\n    moduleMetadata({\n      imports: [IcoMoonIconComponent],\n    }),\n  ],\n  args: {\n    iconName: 'font-icon-plus',\n    iconClass: 'text-2xl text-primary',\n    iconPathCount: 0,\n  },\n  argTypes: {\n    iconName: {\n      control: 'text',\n      description: 'The name of the icon',\n    },\n    iconClass: {\n      control: 'text',\n      description: 'The class of the icon',\n    },\n    iconPathCount: {\n      control: 'number',\n      description: 'The number of paths in the icon',\n    },\n  } as Meta<IcoMoonIconComponent>['argTypes'],\n}"
             },
             {
                 "name": "MONTHS_GREGORIAN",
@@ -14815,8 +15039,8 @@
                 "name": "Story",
                 "ctype": "miscellaneous",
                 "subtype": "typealias",
-                "rawtype": "StoryObj<AppBreadcrumbComponent>",
-                "file": "projects/ui-components-lib/src/lib/app-breadcrumb/breadcrumb.stories.ts",
+                "rawtype": "StoryObj<DialogWrapper>",
+                "file": "projects/ui-components-lib/src/lib/alert-dialog/alert-dialog.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "description": "",
@@ -14826,8 +15050,8 @@
                 "name": "Story",
                 "ctype": "miscellaneous",
                 "subtype": "typealias",
-                "rawtype": "StoryObj<DialogWrapper>",
-                "file": "projects/ui-components-lib/src/lib/alert-dialog/alert-dialog.stories.ts",
+                "rawtype": "StoryObj<AppBreadcrumbComponent>",
+                "file": "projects/ui-components-lib/src/lib/app-breadcrumb/breadcrumb.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "description": "",
@@ -14859,7 +15083,7 @@
                 "name": "Story",
                 "ctype": "miscellaneous",
                 "subtype": "typealias",
-                "rawtype": "StoryObj<ConfirmationDialogComponent>",
+                "rawtype": "StoryObj<ConfirmationDialogStoryWrapper>",
                 "file": "projects/ui-components-lib/src/lib/confirmation-dialog/confirmation-dialog.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
@@ -14882,7 +15106,7 @@
                 "ctype": "miscellaneous",
                 "subtype": "typealias",
                 "rawtype": "StoryObj<IcoMoonIconComponent>",
-                "file": "projects/ui-components-lib/src/lib/ico-moon-icon/ico-moon.story.ts",
+                "file": "projects/ui-components-lib/src/lib/ico-moon-icon/ico-moon.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "description": "",
@@ -15227,28 +15451,6 @@
                     "defaultValue": "(dateKey: string): ValidatorFn =>\n  (control: AbstractControl): ValidationErrors | null => {\n    const dateControl = control.get?.(dateKey);\n\n    if (!dateControl?.value) {\n      return null;\n    }\n\n    const valueDate = new Date(dateControl.value);\n    valueDate.setHours(0, 0, 0, 0);\n\n    const today = new Date();\n    today.setHours(0, 0, 0, 0);\n\n    return valueDate > today ? { futureDate: true } : null;\n  }"
                 }
             ],
-            "projects/ui-components-lib/src/lib/app-breadcrumb/breadcrumb.stories.ts": [
-                {
-                    "name": "Default",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "projects/ui-components-lib/src/lib/app-breadcrumb/breadcrumb.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "Story",
-                    "defaultValue": "{\n  args: {\n    items: [\n      {\n        notClickable: false,\n        label: 'Home',\n        routerLink: '/home',\n        isShown: true,\n        extraBreadcrumbs: [\n          {\n            label: 'Payment',\n            routerLink: '/payments',\n            isShown: true,\n            position: 'after',\n          },\n        ],\n      },\n      {\n        notClickable: false,\n        label: 'Payment',\n        routerLink: '/payments',\n        isShown: true,\n        extraBreadcrumbs: [\n          {\n            position: 'before',\n            label: 'Payment',\n            routerLink: '/payments',\n          },\n        ],\n      },\n    ],\n  },\n}"
-                },
-                {
-                    "name": "meta",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "projects/ui-components-lib/src/lib/app-breadcrumb/breadcrumb.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "Meta<AppBreadcrumbComponent>",
-                    "defaultValue": "{\n  title: 'MyLibrary/Breadcrumb',\n  component: AppBreadcrumbComponent,\n  tags: ['autodocs'],\n  decorators: [\n    applicationConfig({\n      providers: [\n        provideRouter(storyRoutes),\n        {\n          provide: ActivatedRouteSnapshot,\n          useValue: {\n            children: [\n              {\n                data: {\n                  breadcrumb: 'Home',\n                  notClickableBreadcrumb: true,\n                  isShown: true,\n                  extraBreadcrumbs: [],\n                },\n              },\n            ],\n          }\n        }\n      ],\n    }),\n    moduleMetadata({\n      imports: [AppBreadcrumbComponent],\n    }),\n  ],\n  args: {\n    items: [\n      {\n        notClickable: false,\n        label: 'Home',\n        routerLink: '/home',\n        isShown: true,\n        extraBreadcrumbs: [\n          {\n            label: 'Payment',\n            routerLink: '/payments',\n            isShown: true,\n            position: 'after',\n          },\n        ],\n      },\n      {\n        notClickable: false,\n        label: 'Payment',\n        routerLink: '/payments',\n        isShown: true,\n        extraBreadcrumbs: [\n          {\n            position: 'before',\n            label: 'Payment',\n            routerLink: '/payments',\n          },\n        ],\n      },\n    ],\n  },\n  argTypes: {\n    items: {\n      items: {\n        type: 'object',\n        properties: {\n          notClickable: { type: 'boolean' },\n          label: { type: 'string' },\n          routerLink: { type: 'string' },\n          isShown: { type: 'boolean' },\n          extraBreadcrumbs: {\n            type: 'array',\n            items: {\n              type: 'object',\n              properties: {\n                label: { type: 'string' },\n                routerLink: { type: 'string' },\n                isShown: { type: 'boolean' },\n                position: { type: 'string' },\n              },\n            },\n          },\n        },\n      },\n    },\n    ngOnInit: { table: { disable: true }, control: false },\n    isShown: { table: { disable: true }, control: false },\n    _checkEmpty: { table: { disable: true }, control: false },\n    _checkHiddenBreadcrumb: { table: { disable: true }, control: false },\n    _createBreadcrumbs: { table: { disable: true }, control: false },\n    _getRecursiveKey: { table: { disable: true }, control: false },\n  } as Meta<AppBreadcrumbComponent>['argTypes'],\n}"
-                }
-            ],
             "projects/ui-components-lib/src/lib/alert-dialog/alert-dialog.stories.ts": [
                 {
                     "name": "Default",
@@ -15269,6 +15471,28 @@
                     "deprecationMessage": "",
                     "type": "Meta<DialogWrapper>",
                     "defaultValue": "{\n  title: 'MyLibrary/AlertDialog',\n  component: DialogWrapper,\n  tags: ['autodocs'],\n  decorators: [\n    moduleMetadata({\n      imports: [AppButtonComponent, AvatarModule, DynamicDialogModule, TranslatePipe],\n      providers: [\n        AlertDialogService,\n        DialogService,\n        { provide: DynamicDialogConfig, useValue: { data: { title: 'Alert' } } },\n        { provide: DynamicDialogRef, useValue: {} },\n      ],\n    }),\n  ],\n}"
+                }
+            ],
+            "projects/ui-components-lib/src/lib/app-breadcrumb/breadcrumb.stories.ts": [
+                {
+                    "name": "Default",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/ui-components-lib/src/lib/app-breadcrumb/breadcrumb.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  args: {\n    items: [\n      {\n        notClickable: false,\n        label: 'Home',\n        routerLink: '/home',\n        isShown: true,\n        extraBreadcrumbs: [\n          {\n            label: 'Payment',\n            routerLink: '/payments',\n            isShown: true,\n            position: 'after',\n          },\n        ],\n      },\n      {\n        notClickable: false,\n        label: 'Payment',\n        routerLink: '/payments',\n        isShown: true,\n        extraBreadcrumbs: [\n          {\n            position: 'before',\n            label: 'Payment',\n            routerLink: '/payments',\n          },\n        ],\n      },\n    ],\n  },\n}"
+                },
+                {
+                    "name": "meta",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/ui-components-lib/src/lib/app-breadcrumb/breadcrumb.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Meta<AppBreadcrumbComponent>",
+                    "defaultValue": "{\n  title: 'MyLibrary/Breadcrumb',\n  component: AppBreadcrumbComponent,\n  tags: ['autodocs'],\n  decorators: [\n    applicationConfig({\n      providers: [\n        provideRouter(storyRoutes),\n        {\n          provide: ActivatedRouteSnapshot,\n          useValue: {\n            children: [\n              {\n                data: {\n                  breadcrumb: 'Home',\n                  notClickableBreadcrumb: true,\n                  isShown: true,\n                  extraBreadcrumbs: [],\n                },\n              },\n            ],\n          }\n        }\n      ],\n    }),\n    moduleMetadata({\n      imports: [AppBreadcrumbComponent],\n    }),\n  ],\n  args: {\n    items: [\n      {\n        notClickable: false,\n        label: 'Home',\n        routerLink: '/home',\n        isShown: true,\n        extraBreadcrumbs: [\n          {\n            label: 'Payment',\n            routerLink: '/payments',\n            isShown: true,\n            position: 'after',\n          },\n        ],\n      },\n      {\n        notClickable: false,\n        label: 'Payment',\n        routerLink: '/payments',\n        isShown: true,\n        extraBreadcrumbs: [\n          {\n            position: 'before',\n            label: 'Payment',\n            routerLink: '/payments',\n          },\n        ],\n      },\n    ],\n  },\n  argTypes: {\n    items: {\n      items: {\n        type: 'object',\n        properties: {\n          notClickable: { type: 'boolean' },\n          label: { type: 'string' },\n          routerLink: { type: 'string' },\n          isShown: { type: 'boolean' },\n          extraBreadcrumbs: {\n            type: 'array',\n            items: {\n              type: 'object',\n              properties: {\n                label: { type: 'string' },\n                routerLink: { type: 'string' },\n                isShown: { type: 'boolean' },\n                position: { type: 'string' },\n              },\n            },\n          },\n        },\n      },\n    },\n    ngOnInit: { table: { disable: true }, control: false },\n    isShown: { table: { disable: true }, control: false },\n    _checkEmpty: { table: { disable: true }, control: false },\n    _checkHiddenBreadcrumb: { table: { disable: true }, control: false },\n    _createBreadcrumbs: { table: { disable: true }, control: false },\n    _getRecursiveKey: { table: { disable: true }, control: false },\n  } as Meta<AppBreadcrumbComponent>['argTypes'],\n}"
                 }
             ],
             "projects/ui-components-lib/src/lib/app-button/button.stories.ts": [
@@ -15333,16 +15557,16 @@
                     "file": "projects/ui-components-lib/src/lib/confirmation-dialog/confirmation-dialog.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "type": "Meta<ConfirmationDialogComponent>",
-                    "defaultValue": "{\n  title: 'MyLibrary/ConfirmationDialog',\n  component: ConfirmationDialogComponent,\n  tags: ['autodocs'],\n  argTypes: {},\n  decorators: [\n    moduleMetadata({\n      imports: [\n        AppButtonComponent,\n        AvatarModule,\n        DynamicDialogModule,\n        DynamicFormComponent,\n        TranslatePipe,\n      ],\n      providers: [\n        DialogService,\n        DynamicDialogStyle,\n        DynamicDialogConfig,\n        DynamicDialogRef,\n        TranslateService,\n      ],\n    }),\n  ],\n}"
+                    "type": "Meta<ConfirmationDialogStoryWrapper>",
+                    "defaultValue": "{\n  title: 'MyLibrary/ConfirmationDialog',\n  component: ConfirmationDialogStoryWrapper,\n  subcomponents: { ConfirmationDialogComponent },\n  tags: ['autodocs'],\n  decorators: [\n    applicationConfig({\n      providers: [provideRouter([])],\n    }),\n    moduleMetadata({\n      imports: [AppButtonComponent, AvatarModule, DynamicDialogModule, DynamicFormComponent],\n      providers: [ConfirmationDialogService, DialogService, DynamicDialogStyle],\n    }),\n  ],\n  args: {\n    header: 'Confirm action',\n    message: 'Are you sure you want to continue?',\n    hint: undefined,\n    confirmBtnId: 'story-confirm',\n    cancelBtnId: 'story-cancel',\n    confirmBtnLabel: 'Confirm',\n    cancelBtnLabel: 'Cancel',\n    breakpoints: {\n      '1024px': {\n        width: '600px',\n        height: '400px',\n      },\n    },\n    inputForm: {\n      name: 'name',\n      label: 'Name',\n      type: 'text',\n      required: true,\n    },\n    confirmBtnIcon: 'pi pi-check',\n    confirmBtnPosition: 'left',\n  },\n  argTypes: {\n      header: { control: 'text' },\n      message: { control: 'text' },\n      hint: { control: 'text' },\n      confirmBtnId: { control: 'text' },\n      cancelBtnId: { control: 'text' },\n      confirmBtnLabel: { control: 'text' },\n      cancelBtnLabel: { control: 'text' },\n      breakpoints: { control: false },\n      inputForm: { control: false },\n      confirmBtnIcon: { control: 'text' },\n      confirmBtnPosition: { control: 'text' },\n      dialogClosed: {\n        action: 'dialogClosed',\n        table: { disable: true },\n      },\n  },\n}"
                 }
             ],
-            "projects/ui-components-lib/src/lib/ico-moon-icon/ico-moon.story.ts": [
+            "projects/ui-components-lib/src/lib/ico-moon-icon/ico-moon.stories.ts": [
                 {
                     "name": "Default",
                     "ctype": "miscellaneous",
                     "subtype": "variable",
-                    "file": "projects/ui-components-lib/src/lib/ico-moon-icon/ico-moon.story.ts",
+                    "file": "projects/ui-components-lib/src/lib/ico-moon-icon/ico-moon.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Story",
@@ -15352,11 +15576,11 @@
                     "name": "meta",
                     "ctype": "miscellaneous",
                     "subtype": "variable",
-                    "file": "projects/ui-components-lib/src/lib/ico-moon-icon/ico-moon.story.ts",
+                    "file": "projects/ui-components-lib/src/lib/ico-moon-icon/ico-moon.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Meta<IcoMoonIconComponent>",
-                    "defaultValue": "{\n  title: 'MyLibrary/Icons',\n  component: IcoMoonIconComponent,\n  tags: ['autodocs'],\n  decorators: [\n    moduleMetadata({\n      imports: [CommonModule, IcoMoonIconComponent],\n    }),\n  ],\n  args: {\n    iconName: 'font-icon-plus',\n    iconClass: 'text-2xl text-primary',\n    iconPathCount: 0,\n  },\n  argTypes: {\n    iconName: {\n      control: 'text',\n      description: 'The name of the icon',\n    },\n    iconClass: {\n      control: 'text',\n      description: 'The class of the icon',\n    },\n    iconPathCount: {\n      control: 'number',\n      description: 'The number of paths in the icon',\n    },\n  } as Meta<IcoMoonIconComponent>['argTypes'],\n}"
+                    "defaultValue": "{\n  title: 'MyLibrary/Icons',\n  component: IcoMoonIconComponent,\n  tags: ['autodocs'],\n  decorators: [\n    moduleMetadata({\n      imports: [IcoMoonIconComponent],\n    }),\n  ],\n  args: {\n    iconName: 'font-icon-plus',\n    iconClass: 'text-2xl text-primary',\n    iconPathCount: 0,\n  },\n  argTypes: {\n    iconName: {\n      control: 'text',\n      description: 'The name of the icon',\n    },\n    iconClass: {\n      control: 'text',\n      description: 'The class of the icon',\n    },\n    iconPathCount: {\n      control: 'number',\n      description: 'The number of paths in the icon',\n    },\n  } as Meta<IcoMoonIconComponent>['argTypes'],\n}"
                 }
             ],
             "projects/ui-components-lib/src/lib/dual-calender/dual-calendar.stories.ts": [
@@ -16166,19 +16390,6 @@
                     "kind": 193
                 }
             ],
-            "projects/ui-components-lib/src/lib/app-breadcrumb/breadcrumb.stories.ts": [
-                {
-                    "name": "Story",
-                    "ctype": "miscellaneous",
-                    "subtype": "typealias",
-                    "rawtype": "StoryObj<AppBreadcrumbComponent>",
-                    "file": "projects/ui-components-lib/src/lib/app-breadcrumb/breadcrumb.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "description": "",
-                    "kind": 184
-                }
-            ],
             "projects/ui-components-lib/src/lib/alert-dialog/alert-dialog.stories.ts": [
                 {
                     "name": "Story",
@@ -16186,6 +16397,19 @@
                     "subtype": "typealias",
                     "rawtype": "StoryObj<DialogWrapper>",
                     "file": "projects/ui-components-lib/src/lib/alert-dialog/alert-dialog.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 184
+                }
+            ],
+            "projects/ui-components-lib/src/lib/app-breadcrumb/breadcrumb.stories.ts": [
+                {
+                    "name": "Story",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "StoryObj<AppBreadcrumbComponent>",
+                    "file": "projects/ui-components-lib/src/lib/app-breadcrumb/breadcrumb.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "description": "",
@@ -16223,7 +16447,7 @@
                     "name": "Story",
                     "ctype": "miscellaneous",
                     "subtype": "typealias",
-                    "rawtype": "StoryObj<ConfirmationDialogComponent>",
+                    "rawtype": "StoryObj<ConfirmationDialogStoryWrapper>",
                     "file": "projects/ui-components-lib/src/lib/confirmation-dialog/confirmation-dialog.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
@@ -16244,13 +16468,13 @@
                     "kind": 184
                 }
             ],
-            "projects/ui-components-lib/src/lib/ico-moon-icon/ico-moon.story.ts": [
+            "projects/ui-components-lib/src/lib/ico-moon-icon/ico-moon.stories.ts": [
                 {
                     "name": "Story",
                     "ctype": "miscellaneous",
                     "subtype": "typealias",
                     "rawtype": "StoryObj<IcoMoonIconComponent>",
-                    "file": "projects/ui-components-lib/src/lib/ico-moon-icon/ico-moon.story.ts",
+                    "file": "projects/ui-components-lib/src/lib/ico-moon-icon/ico-moon.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "description": "",
@@ -16733,6 +16957,15 @@
                 "name": "ConfirmationDialogService",
                 "coveragePercent": 0,
                 "coverageCount": "0/3",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/ui-components-lib/src/lib/confirmation-dialog/confirmation-dialog.stories.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "ConfirmationDialogStoryWrapper",
+                "coveragePercent": 0,
+                "coverageCount": "0/15",
                 "status": "low"
             },
             {
@@ -17377,7 +17610,7 @@
                 "status": "low"
             },
             {
-                "filePath": "projects/ui-components-lib/src/lib/ico-moon-icon/ico-moon.story.ts",
+                "filePath": "projects/ui-components-lib/src/lib/ico-moon-icon/ico-moon.stories.ts",
                 "type": "variable",
                 "linktype": "miscellaneous",
                 "linksubtype": "variable",
@@ -17387,7 +17620,7 @@
                 "status": "low"
             },
             {
-                "filePath": "projects/ui-components-lib/src/lib/ico-moon-icon/ico-moon.story.ts",
+                "filePath": "projects/ui-components-lib/src/lib/ico-moon-icon/ico-moon.stories.ts",
                 "type": "variable",
                 "linktype": "miscellaneous",
                 "linksubtype": "variable",
@@ -17397,7 +17630,7 @@
                 "status": "low"
             },
             {
-                "filePath": "projects/ui-components-lib/src/lib/ico-moon-icon/ico-moon.story.ts",
+                "filePath": "projects/ui-components-lib/src/lib/ico-moon-icon/ico-moon.stories.ts",
                 "type": "type alias",
                 "linktype": "miscellaneous",
                 "linksubtype": "typealias",
