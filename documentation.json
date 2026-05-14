@@ -8814,6 +8814,77 @@
             "templateData": "<p-drawer\n  (onHide)=\"hideBottomSheet()\"\n  (onShow)=\"onShow.emit($event)\"\n  [(visible)]=\"show\"\n  [closable]=\"false\"\n  [ngClass]=\"{ show: show }\"\n  [position]=\"'bottom'\"\n  appendTo=\"body\"\n  >\n  <ng-template pTemplate=\"header\">\n    <div class=\"band\"></div>\n  </ng-template>\n  @if (contentTemplate) {\n    <ng-template pTemplate=\"content\">\n      <ng-container *ngTemplateOutlet=\"contentTemplate\"></ng-container>\n    </ng-template>\n  }\n</p-drawer>\n"
         },
         {
+            "name": "BottomSheetStoryHost",
+            "id": "component-BottomSheetStoryHost-464e6ded4ea2833e0f06dc6956c9e6a6feb0c0f26389f129f0dd8b0cf725f08bc4ac9fd27c6f3ce21c6064107e17f20b589b5a3861204c4a5bf1c97bd0cb633e",
+            "file": "projects/ui-components-lib/src/lib/bottom-sheet/bottom-sheet.stories.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "bottom-sheet-story-host",
+            "styleUrls": [],
+            "styles": [],
+            "template": "<ng-template #sheetBody>\n  <div style=\"padding: 1rem\">\n    <p>Sample content passed via <code>TemplateRef</code> from the story host.</p>\n  </div>\n</ng-template>\n<app-button (click)=\"show = !show\">show bottom sheet</app-button>\n<app-bottom-sheet\n  [show]=\"show\"\n  [contentTemplate]=\"sheetBody\"\n  (onHide)=\"show = false; onHide.emit($event)\"\n  (onShow)=\"show = true; onShow.emit($event)\"\n/>\n",
+            "templateUrl": [],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [
+                {
+                    "name": "show",
+                    "defaultValue": "false",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 26,
+                    "type": "boolean",
+                    "decorators": []
+                }
+            ],
+            "outputsClass": [
+                {
+                    "name": "onHide",
+                    "defaultValue": "new EventEmitter<boolean>()",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 28,
+                    "type": "EventEmitter"
+                },
+                {
+                    "name": "onShow",
+                    "defaultValue": "new EventEmitter<boolean>()",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 29,
+                    "type": "EventEmitter"
+                }
+            ],
+            "propertiesClass": [],
+            "methodsClass": [],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "standalone": true,
+            "imports": [
+                {
+                    "name": "BottomSheetComponent",
+                    "type": "component"
+                },
+                {
+                    "name": "AppButtonComponent",
+                    "type": "component"
+                }
+            ],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import type { Meta, StoryObj } from '@storybook/angular';\nimport { Component, EventEmitter, Input, Output } from '@angular/core';\nimport { BottomSheetComponent } from './bottom-sheet.component';\nimport { AppButtonComponent } from '../app-button';\n\n@Component({\n  selector: 'bottom-sheet-story-host',\n  standalone: true,\n  imports: [BottomSheetComponent, AppButtonComponent],\n  template: `\n    <ng-template #sheetBody>\n      <div style=\"padding: 1rem\">\n        <p>Sample content passed via <code>TemplateRef</code> from the story host.</p>\n      </div>\n    </ng-template>\n    <app-button (click)=\"show = !show\">show bottom sheet</app-button>\n    <app-bottom-sheet\n      [show]=\"show\"\n      [contentTemplate]=\"sheetBody\"\n      (onHide)=\"show = false; onHide.emit($event)\"\n      (onShow)=\"show = true; onShow.emit($event)\"\n    />\n  `,\n})\nclass BottomSheetStoryHost {\n  @Input() show = false;\n\n  @Output() readonly onHide = new EventEmitter<boolean>();\n  @Output() readonly onShow = new EventEmitter<boolean>();\n}\n\nconst meta: Meta<BottomSheetStoryHost> = {\n  title: 'MyLibrary/BottomSheet',\n  component: BottomSheetStoryHost,\n  subcomponents: { BottomSheetComponent },\n  tags: ['autodocs'],\n  argTypes: {\n    show: { control: 'boolean' },\n    onHide: {\n      action: 'onHide',\n      table: { disable: true },\n    },\n    onShow: {\n      action: 'onShow',\n      table: { disable: true },\n    },\n    /** Subcomponent `BottomSheetComponent` — hide METHODS row in autodocs */\n    hideBottomSheet: {\n      table: { disable: true },\n      control: false,\n    },\n  } as Meta<BottomSheetStoryHost>['argTypes'],\n  args: {\n    show: false,\n  },\n};\n\nexport default meta;\ntype Story = StoryObj<BottomSheetStoryHost>;\n\nexport const Default: Story = {};\n",
+            "assetsDirs": [],
+            "styleUrlsData": "",
+            "stylesData": "",
+            "extends": []
+        },
+        {
             "name": "ConfirmationDialogComponent",
             "id": "component-ConfirmationDialogComponent-19eb6c753efc1b68a29186fa2ec8ff6223a92f7fba4dfba7b2737848ff736404d2671125e5ee938aca2b2c4d71318438d613ad0c30a30a1ff5effbac7e2b1d0b",
             "file": "projects/ui-components-lib/src/lib/confirmation-dialog/confirmation-dialog.component.ts",
@@ -9085,6 +9156,171 @@
                 "OnDestroy"
             ],
             "templateData": "@if (dynamicDialogConfig.data) {\n<div class=\"confirmation-dialog\">\n  <div class=\"dialog-wrapper\">\n    @if (dynamicDialogConfig.data) {\n    <div class=\"confirmation-dialog__content my-4\">\n      @if (dynamicDialogConfig.data.dialogIcon) {\n      <em [class]=\"dynamicDialogConfig.data.dialogIcon\"></em>\n      }\n      <p class=\"confirmation-dialog__message text-xl mb-2\">\n        {{ dynamicDialogConfig.data.message }}\n      </p>\n      @if (dynamicDialogConfig.data.hint) {\n      <p class=\"confirmation-dialog__hint font-normal text-base\">\n        {{ dynamicDialogConfig.data.hint }}\n      </p>\n      }\n      @if (dynamicDialogConfig.data.inputForm) {\n      <app-dynamic-form [dynamicFormData]=\"dialogFormData\"  (popUpFilesUploaded)=\"onPopFilesUploaded($event)\" (fileDeleted)=\"onFileDeleted($event)\" ></app-dynamic-form>\n      }\n    </div>\n    }\n    <div class=\"confirmation-dialog__actions flex gap-2 mt-4\">\n      <app-button [title]=\"dynamicDialogConfig.data?.confirmLabel || ('actions.confirm' | translate)\"\n        [disabled]=\"!!(dialogFormData && dialogFormData.formGroup?.invalid)\" [severity]=\"'primary'\"\n        [id]=\"dynamicDialogConfig.data.confirmBtnId\" [icon]=\"dynamicDialogConfig.data.confirmBtnIcon || ''\"\n        [label]=\"dynamicDialogConfig.data.confirmBtnLabel\"\n        [iconPos]=\"dynamicDialogConfig.data.confirmBtnPosition || 'left'\" [styleClass]=\"'confirmation-btn'\"\n        (click)=\"submit()\" />\n      <app-button [title]=\"dynamicDialogConfig.data?.closeLabel ||  ('actions.cancel' | translate)\"\n        [severity]=\"'primary'\" variant=\"outlined\" [label]=\"dynamicDialogConfig.data.cancelBtnLabel\"\n        [id]=\"dynamicDialogConfig.data.cancelBtnId\" [styleClass]=\"'cancel-btn confirmation-btn cancel-btn'\"\n        (click)=\"close()\" />\n    </div>\n  </div>\n\n</div>\n}\n"
+        },
+        {
+            "name": "ConfirmationDialogStoryWrapper",
+            "id": "component-ConfirmationDialogStoryWrapper-b56a48ed64f3851817ce212100e26550b8879b526cf510a4b876e3343165e9dccb29942827c1a0c72757db1d5f97db576b0e153a045d93310bcddb265ef682f2",
+            "file": "projects/ui-components-lib/src/lib/confirmation-dialog/confirmation-dialog.stories.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "confirmation-dialog-story-wrapper",
+            "styleUrls": [],
+            "styles": [],
+            "template": "<app-button\n  label=\"Open confirmation dialog\"\n  severity=\"primary\"\n  (click)=\"open()\"\n/>\n",
+            "templateUrl": [],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [],
+            "outputsClass": [
+                {
+                    "name": "dialogClosed",
+                    "defaultValue": "new EventEmitter<unknown>()",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 33,
+                    "type": "EventEmitter"
+                }
+            ],
+            "propertiesClass": [
+                {
+                    "name": "cancelBtnId",
+                    "defaultValue": "'story-cancel'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 29
+                },
+                {
+                    "name": "cancelBtnLabel",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "indexKey": "",
+                    "optional": true,
+                    "description": "",
+                    "line": 31
+                },
+                {
+                    "name": "confirmBtnId",
+                    "defaultValue": "'story-confirm'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 28
+                },
+                {
+                    "name": "confirmBtnLabel",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "indexKey": "",
+                    "optional": true,
+                    "description": "",
+                    "line": 30
+                },
+                {
+                    "name": "header",
+                    "defaultValue": "'Confirm action'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 25
+                },
+                {
+                    "name": "hint",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "indexKey": "",
+                    "optional": true,
+                    "description": "",
+                    "line": 27
+                },
+                {
+                    "name": "message",
+                    "defaultValue": "'Are you sure you want to continue?'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 26
+                }
+            ],
+            "methodsClass": [
+                {
+                    "name": "open",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 37,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                }
+            ],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "standalone": true,
+            "imports": [
+                {
+                    "name": "AppButtonComponent",
+                    "type": "component"
+                }
+            ],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import type { Meta, StoryObj } from '@storybook/angular';\nimport { applicationConfig, moduleMetadata } from '@storybook/angular';\nimport { Component, EventEmitter, Output } from '@angular/core';\nimport { provideRouter } from '@angular/router';\nimport { TranslatePipe } from '@ngx-translate/core';\nimport { AvatarModule } from 'primeng/avatar';\nimport { DialogService, DynamicDialogModule, DynamicDialogStyle } from 'primeng/dynamicdialog';\nimport { AppButtonComponent } from '../app-button';\nimport { ConfirmationDialogComponent } from './confirmation-dialog.component';\nimport { ConfirmationDialogService } from './confirmation-dialog.service';\n\n@Component({\n  selector: 'confirmation-dialog-story-wrapper',\n  standalone: true,\n  imports: [AppButtonComponent],\n  template: `\n    <app-button\n      label=\"Open confirmation dialog\"\n      severity=\"primary\"\n      (click)=\"open()\"\n    />\n  `,\n})\nclass ConfirmationDialogStoryWrapper {\n  header = 'Confirm action';\n  message = 'Are you sure you want to continue?';\n  hint?: string;\n  confirmBtnId = 'story-confirm';\n  cancelBtnId = 'story-cancel';\n  confirmBtnLabel?: string;\n  cancelBtnLabel?: string;\n\n  @Output() readonly dialogClosed = new EventEmitter<unknown>();\n\n  constructor(private readonly confirmationDialog: ConfirmationDialogService) {}\n\n  open(): void {\n    this.confirmationDialog\n      .open({\n        header: this.header,\n        message: this.message,\n        confirmBtnId: this.confirmBtnId,\n        cancelBtnId: this.cancelBtnId,\n        cancelBtnLabel: this.cancelBtnLabel,\n        confirmBtnLabel: this.confirmBtnLabel,\n        hint: this.hint,\n      })\n      .subscribe((result) => this.dialogClosed.emit(result));\n  }\n}\n\nconst meta: Meta<ConfirmationDialogStoryWrapper> = {\n  title: 'MyLibrary/ConfirmationDialog',\n  component: ConfirmationDialogStoryWrapper,\n  subcomponents: { ConfirmationDialogComponent },\n  tags: ['autodocs'],\n  decorators: [\n    applicationConfig({\n      providers: [provideRouter([])],\n    }),\n    moduleMetadata({\n      imports: [AppButtonComponent, AvatarModule, DynamicDialogModule, TranslatePipe],\n      providers: [ConfirmationDialogService, DialogService, DynamicDialogStyle],\n    }),\n  ],\n  args: {\n    header: 'Confirm action',\n    message: 'Are you sure you want to continue?',\n    hint: undefined,\n    confirmBtnId: 'story-confirm',\n    cancelBtnId: 'story-cancel',\n    confirmBtnLabel: 'Confirm',\n    cancelBtnLabel: 'Cancel',\n  },\n  argTypes: {\n    header: { control: 'text' },\n    message: { control: 'text' },\n    hint: { control: 'text' },\n    confirmBtnId: { control: 'text' },\n    cancelBtnId: { control: 'text' },\n    confirmBtnLabel: { control: 'text' },\n    cancelBtnLabel: { control: 'text' },\n    dialogClosed: {\n      action: 'dialogClosed',\n      table: { disable: true },\n    },\n  },\n};\n\nexport default meta;\ntype Story = StoryObj<ConfirmationDialogStoryWrapper>;\n\nexport const Default: Story = {};\n",
+            "assetsDirs": [],
+            "styleUrlsData": "",
+            "stylesData": "",
+            "constructorObj": {
+                "name": "constructor",
+                "description": "",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "args": [
+                    {
+                        "name": "confirmationDialog",
+                        "type": "ConfirmationDialogService",
+                        "optional": false,
+                        "dotDotDotToken": false,
+                        "deprecated": false,
+                        "deprecationMessage": ""
+                    }
+                ],
+                "line": 33,
+                "jsdoctags": [
+                    {
+                        "name": "confirmationDialog",
+                        "type": "ConfirmationDialogService",
+                        "optional": false,
+                        "dotDotDotToken": false,
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "tagName": {
+                            "text": "param"
+                        }
+                    }
+                ]
+            },
+            "extends": []
         },
         {
             "name": "DatePickerComponent",
@@ -14931,11 +15167,31 @@
                 "name": "Default",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
+                "file": "projects/ui-components-lib/src/lib/app-accordion/accordion.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  args: {\n    iconName: 'people',\n    iconClass: 'text-[24px] text-secondary',\n    iconPathCount: 1,\n    title: 'Accordion Title',\n    contentBorderTop: true,\n    accordionPanelBorder: true,\n  },\n}"
+            },
+            {
+                "name": "Default",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
                 "file": "projects/ui-components-lib/src/lib/app-button/button.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
                 "defaultValue": "{\n  args: {\n    label: 'Button',\n  },\n}"
+            },
+            {
+                "name": "Default",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/ui-components-lib/src/lib/app-dropdown-menu/dropdown.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  args: {\n    buttonTitle: 'Dropdown Button',\n    menuItems: [\n      {\n        title: 'Item 1',\n        routerLink: '/item1',\n        callback: () => {\n          console.log('Callback function called item1');\n        },\n        icon: \"pi pi-check\",\n        show: true,\n        iconPosition:'left',\n        textColor: 'purple',\n      },\n      {\n        title: 'Item 2',\n        routerLink: '/item2',\n        callback: () => {\n          console.log('Callback function called item2');\n        },\n        icon: \"pi pi-check\",\n        show: true,\n        iconPosition:'left',\n        textColor: 'purple',\n      },\n      {\n        title: 'Item 3',\n        routerLink: '/item3',\n        callback: () => {\n          console.log('Callback function called item3');\n        },\n        icon: \"pi pi-check\",\n        show: true,\n        iconPosition:'left',\n        textColor: 'purple',\n      },\n    ],\n    popupMenuStyle: 'purple',\n    buttonIcon: 'pi pi-ellipsis-v',\n    buttonClass: 'p-button-primary',\n    buttonStyle: 'p-button-primary',\n    buttonSeverity: 'primary',\n    buttonIconPosition: 'left',\n  },\n}"
             },
             {
                 "name": "Default",
@@ -14991,11 +15247,31 @@
                 "name": "meta",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
+                "file": "projects/ui-components-lib/src/lib/app-accordion/accordion.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Meta<AppAccordionComponent>",
+                "defaultValue": "{\n  title: 'MyLibrary/Accordion',\n  component: AppAccordionComponent,\n  tags: ['autodocs'],\n  decorators: [\n    moduleMetadata({\n      imports: [Popover, AccordionModule, , IcoMoonIconComponent],\n      providers: [AccordionStyle],\n    }),\n  ],\n  args: {\n    iconName: 'people',\n    iconClass: 'text-[24px] text-secondary',\n    iconPathCount: 1,\n    title: 'Accordion Title',\n    contentBorderTop: true,\n    accordionPanelBorder: true,\n  },\n  argTypes: {\n    iconName: { control: 'text' },\n    iconClass: { control: 'text' },\n    iconPathCount: { control: 'number' },\n    title: { control: 'text' },\n    contentBorderTop: { control: 'boolean' },\n    accordionPanelBorder: { control: 'boolean' },\n  },\n}"
+            },
+            {
+                "name": "meta",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
                 "file": "projects/ui-components-lib/src/lib/app-button/button.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Meta<AppButtonComponent>",
-                "defaultValue": "{\n  title: 'MyLibrary/Button',\n  component: AppButtonComponent,\n  tags: ['autodocs'],\n  decorators: [\n    moduleMetadata({\n      imports: [CommonModule, ButtonModule],\n      providers: [ButtonStyle],\n    }),\n  ],\n  argTypes: {\n    label: {\n      control: 'text',\n      description: 'The label of the button',\n      args: {\n        values: 'Click Me',\n      }\n    },\n    severity: {\n      control: 'select',\n      description: 'The severity of the button',\n      options: ['primary', 'secondary', 'success', 'info', 'warn', 'danger'],\n      args: {\n        values: 'primary',\n      }\n    },\n    loading: {\n      control: 'boolean',\n      description: 'Whether the button is in loading state',\n      args:{\n        default: false,\n        value: false,\n      },\n    },\n    loadingIcon: {\n      control: 'text',\n      description: 'The icon to display when the button is in loading state (pi pi-spinner)',\n      args:{\n        value: 'pi pi-spinner',\n      },\n    },\n    disabled: {\n      control: 'boolean',\n      description: 'Whether the button is disabled',\n     args:{\n      value: false,\n     },\n    },\n    outlined: {\n      control: 'boolean',\n      description: 'Whether the button is filled color or not',\n      args:{\n        value: false,\n      },\n    },\n    rounded: {\n      control: 'boolean',\n      description: 'Whether the button borders is rounded',\n      args:{\n        value: false,\n      },\n    },\n    raised: {\n      control: 'boolean',\n      description: ' Whether the button is raised (has shadow effect) or not ',\n      args:{\n        value: false,\n      },\n    },\n    text: {\n      control: 'boolean',\n      description: 'Whether the button is text (no background color) or border',\n      args:{\n        value: false,\n      },\n    },\n    plain: {\n      control: 'boolean',\n      description: 'Whether the button is plain',\n      args:{\n        value: false,\n      },\n    },\n    link: {\n      control: 'boolean',\n      description: 'Whether the button is a link',\n      args:{\n        value: false,\n      },\n    },\n    autofocus: {\n      control: 'boolean',\n      description: 'Whether the button is focused automatically when the page loads',\n      args:{\n        value: false,\n      },\n    },\n    icon: {\n      control: 'text',\n      description: 'Which icon to display on the button (pi pi-star) if no icon provided remove it',\n      args:{\n        value: 'pi pi-minus',\n      },\n    },\n    iconPos: {\n      control: 'select',\n      description: 'The position of the icon in the table',\n      options: ['left', 'right'],\n      args:{\n        value: 'left',\n      },\n    },\n    size: {\n      control: 'select',\n      description: 'The size of the button',\n      options: ['small', 'medium', 'large'],\n      args:{\n        value: 'medium',\n      },\n    },\n    style: {\n      control: 'object',\n      description: 'The style of the button',\n      args:{\n        value: {},\n      },\n    },\n  }\n}"
+                "defaultValue": "{\n  title: 'MyLibrary/Button',\n  component: AppButtonComponent,\n  tags: ['autodocs'],\n  decorators: [\n    moduleMetadata({\n      imports: [CommonModule, ButtonModule],\n      providers: [ButtonStyle],\n    }),\n  ],\n  args: {\n    label: 'Button',\n    severity: 'primary',\n    loading: false,\n    loadingIcon: 'pi pi-spinner',\n    disabled: false,\n    outlined: false,\n    rounded: false,\n    raised: false,\n    text: false,\n    plain: false,\n    link: false,\n    autofocus: false,\n    icon: '',\n    iconPos: 'left',\n    style: {},\n  },\n  argTypes: {\n    label: {\n      control: 'text',\n      description: 'The label of the button',\n    },\n    severity: {\n      control: 'select',\n      description: 'The severity of the button',\n      options: [\n        'primary',\n        'secondary',\n        'success',\n        'info',\n        'warn',\n        'danger',\n        'help',\n        'contrast',\n      ],\n    },\n    loading: {\n      control: 'boolean',\n      description: 'Whether the button is in loading state',\n    },\n    loadingIcon: {\n      control: 'text',\n      description:\n        'The icon to display when the button is in loading state (e.g. pi pi-spinner)',\n    },\n    disabled: {\n      control: 'boolean',\n      description: 'Whether the button is disabled',\n    },\n    outlined: {\n      control: 'boolean',\n      description: 'Whether the button uses the outlined style',\n    },\n    rounded: {\n      control: 'boolean',\n      description: 'Whether the button has fully rounded borders',\n    },\n    raised: {\n      control: 'boolean',\n      description: 'Whether the button is raised (shadow)',\n    },\n    text: {\n      control: 'boolean',\n      description: 'Text-only style (no solid background)',\n    },\n    plain: {\n      control: 'boolean',\n      description: 'Whether the button uses the plain style',\n    },\n    link: {\n      control: 'boolean',\n      description: 'Whether the button is rendered as a link',\n    },\n    autofocus: {\n      control: 'boolean',\n      description: 'Whether the button is focused when the page loads',\n    },\n    icon: {\n      control: 'text',\n      description:\n        'Icon class on the button (e.g. pi pi-star). Leave empty to hide the icon',\n    },\n    iconPos: {\n      control: 'select',\n      description: 'Position of the icon relative to the label',\n      options: ['left', 'right', 'top', 'bottom'],\n    },\n    size: {\n      control: 'select',\n      description: 'The size of the button',\n      options: ['small', 'large'],\n    },\n    variant: {\n      control: 'select',\n      description: 'PrimeNG variant (outlined / text)',\n      options: ['outlined', 'text'],\n    },\n    styleClass: {\n      control: 'text',\n      description: 'Optional CSS class string on the root button',\n    },\n    style: {\n      control: 'object',\n      description: 'Inline style map for the button',\n    },\n  },\n}"
+            },
+            {
+                "name": "meta",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/ui-components-lib/src/lib/app-dropdown-menu/dropdown.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Meta<AppDropdownMenuComponent>",
+                "defaultValue": "{\n  title: 'MyLibrary/Dropdown',\n  component: AppDropdownMenuComponent,\n  tags: ['autodocs'],\n  decorators: [\n    moduleMetadata({\n      imports: [Popover, ButtonModule, AppButtonComponent],\n      providers: [ButtonStyle],\n    }),\n  ],\n  args: {\n    buttonTitle: 'Dropdown Button',\n    menuItems: [\n      {\n        title: 'Item 1',\n        routerLink: '/item1',\n        callback: () => {\n          console.log('Callback function called');\n        },\n        icon: \"pi pi-check\",\n        show: true,\n        iconPosition:'left',\n        textColor: 'purple',\n      },\n    ],\n    popupMenuStyle: 'purple',\n    buttonIcon: 'pi pi-ellipsis-v',\n    buttonClass: 'p-button-primary',\n    buttonStyle: 'p-button-primary',\n    buttonSeverity: 'primary',\n    buttonIconPosition: 'left',\n  },\n  argTypes: {\n    buttonTitle: { control: 'text' },\n    menuItems: { control: 'object' },\n    popupMenuStyle: { control: 'select', options: ['purple', 'white'] },\n    buttonIcon: { control: 'text' },\n    buttonClass: { control: 'text' },\n    buttonStyle: { control: 'text' },\n    buttonSeverity: { control: 'select', options: ['primary', 'secondary', 'success', 'info', 'warning', 'danger'] },\n    buttonIconPosition: { control: 'select', options: ['left', 'right'] },\n  },\n}"
             },
             {
                 "name": "meta",
@@ -15004,8 +15280,8 @@
                 "file": "projects/ui-components-lib/src/lib/bottom-sheet/bottom-sheet.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
-                "type": "Meta<BottomSheetComponent>",
-                "defaultValue": "{\n  title: 'MyLibrary/BottomSheet',\n  component: BottomSheetComponent,\n  tags: ['autodocs'],\n  argTypes: {},\n  decorators: [\n    moduleMetadata({\n      imports: [PrimeTemplate, Drawer, NgClass, NgTemplateOutlet, TooltipModule, CommonModule],\n    }),\n  ],\n}"
+                "type": "Meta<BottomSheetStoryHost>",
+                "defaultValue": "{\n  title: 'MyLibrary/BottomSheet',\n  component: BottomSheetStoryHost,\n  subcomponents: { BottomSheetComponent },\n  tags: ['autodocs'],\n  argTypes: {\n    show: { control: 'boolean' },\n    onHide: {\n      action: 'onHide',\n      table: { disable: true },\n    },\n    onShow: {\n      action: 'onShow',\n      table: { disable: true },\n    },\n    /** Subcomponent `BottomSheetComponent` — hide METHODS row in autodocs */\n    hideBottomSheet: {\n      table: { disable: true },\n      control: false,\n    },\n  } as Meta<BottomSheetStoryHost>['argTypes'],\n  args: {\n    show: false,\n  },\n}"
             },
             {
                 "name": "meta",
@@ -15014,8 +15290,8 @@
                 "file": "projects/ui-components-lib/src/lib/confirmation-dialog/confirmation-dialog.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
-                "type": "Meta<ConfirmationDialogComponent>",
-                "defaultValue": "{\n  title: 'MyLibrary/ConfirmationDialog',\n  component: ConfirmationDialogComponent,\n  tags: ['autodocs'],\n  argTypes: {},\n  decorators: [\n    moduleMetadata({\n      imports: [\n        AppButtonComponent,\n        AvatarModule,\n        DynamicDialogModule,\n        DynamicFormComponent,\n        TranslatePipe,\n      ],\n      providers: [\n        DialogService,\n        DynamicDialogStyle,\n        DynamicDialogConfig,\n        DynamicDialogRef,\n        TranslateService,\n      ],\n    }),\n  ],\n}"
+                "type": "Meta<ConfirmationDialogStoryWrapper>",
+                "defaultValue": "{\n  title: 'MyLibrary/ConfirmationDialog',\n  component: ConfirmationDialogStoryWrapper,\n  subcomponents: { ConfirmationDialogComponent },\n  tags: ['autodocs'],\n  decorators: [\n    applicationConfig({\n      providers: [provideRouter([])],\n    }),\n    moduleMetadata({\n      imports: [AppButtonComponent, AvatarModule, DynamicDialogModule, TranslatePipe],\n      providers: [ConfirmationDialogService, DialogService, DynamicDialogStyle],\n    }),\n  ],\n  args: {\n    header: 'Confirm action',\n    message: 'Are you sure you want to continue?',\n    hint: undefined,\n    confirmBtnId: 'story-confirm',\n    cancelBtnId: 'story-cancel',\n    confirmBtnLabel: 'Confirm',\n    cancelBtnLabel: 'Cancel',\n  },\n  argTypes: {\n    header: { control: 'text' },\n    message: { control: 'text' },\n    hint: { control: 'text' },\n    confirmBtnId: { control: 'text' },\n    cancelBtnId: { control: 'text' },\n    confirmBtnLabel: { control: 'text' },\n    cancelBtnLabel: { control: 'text' },\n    dialogClosed: {\n      action: 'dialogClosed',\n      table: { disable: true },\n    },\n  },\n}"
             },
             {
                 "name": "meta",
@@ -15474,6 +15750,17 @@
                 "name": "Story",
                 "ctype": "miscellaneous",
                 "subtype": "typealias",
+                "rawtype": "StoryObj<AppAccordionComponent>",
+                "file": "projects/ui-components-lib/src/lib/app-accordion/accordion.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "kind": 184
+            },
+            {
+                "name": "Story",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
                 "rawtype": "StoryObj<AppButtonComponent>",
                 "file": "projects/ui-components-lib/src/lib/app-button/button.stories.ts",
                 "deprecated": false,
@@ -15485,7 +15772,18 @@
                 "name": "Story",
                 "ctype": "miscellaneous",
                 "subtype": "typealias",
-                "rawtype": "StoryObj<BottomSheetComponent>",
+                "rawtype": "StoryObj<AppDropdownMenuComponent>",
+                "file": "projects/ui-components-lib/src/lib/app-dropdown-menu/dropdown.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "kind": 184
+            },
+            {
+                "name": "Story",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
+                "rawtype": "StoryObj<BottomSheetStoryHost>",
                 "file": "projects/ui-components-lib/src/lib/bottom-sheet/bottom-sheet.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
@@ -15496,7 +15794,7 @@
                 "name": "Story",
                 "ctype": "miscellaneous",
                 "subtype": "typealias",
-                "rawtype": "StoryObj<ConfirmationDialogComponent>",
+                "rawtype": "StoryObj<ConfirmationDialogStoryWrapper>",
                 "file": "projects/ui-components-lib/src/lib/confirmation-dialog/confirmation-dialog.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
@@ -15999,6 +16297,28 @@
                     "defaultValue": "{\n  title: 'MyLibrary/AlertDialog',\n  component: DialogWrapper,\n  tags: ['autodocs'],\n  decorators: [\n    moduleMetadata({\n      imports: [AppButtonComponent, AvatarModule, DynamicDialogModule, TranslatePipe],\n      providers: [\n        AlertDialogService,\n        DialogService,\n        { provide: DynamicDialogConfig, useValue: { data: { title: 'Alert' } } },\n        { provide: DynamicDialogRef, useValue: {} },\n      ],\n    }),\n  ],\n}"
                 }
             ],
+            "projects/ui-components-lib/src/lib/app-accordion/accordion.stories.ts": [
+                {
+                    "name": "Default",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/ui-components-lib/src/lib/app-accordion/accordion.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  args: {\n    iconName: 'people',\n    iconClass: 'text-[24px] text-secondary',\n    iconPathCount: 1,\n    title: 'Accordion Title',\n    contentBorderTop: true,\n    accordionPanelBorder: true,\n  },\n}"
+                },
+                {
+                    "name": "meta",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/ui-components-lib/src/lib/app-accordion/accordion.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Meta<AppAccordionComponent>",
+                    "defaultValue": "{\n  title: 'MyLibrary/Accordion',\n  component: AppAccordionComponent,\n  tags: ['autodocs'],\n  decorators: [\n    moduleMetadata({\n      imports: [Popover, AccordionModule, , IcoMoonIconComponent],\n      providers: [AccordionStyle],\n    }),\n  ],\n  args: {\n    iconName: 'people',\n    iconClass: 'text-[24px] text-secondary',\n    iconPathCount: 1,\n    title: 'Accordion Title',\n    contentBorderTop: true,\n    accordionPanelBorder: true,\n  },\n  argTypes: {\n    iconName: { control: 'text' },\n    iconClass: { control: 'text' },\n    iconPathCount: { control: 'number' },\n    title: { control: 'text' },\n    contentBorderTop: { control: 'boolean' },\n    accordionPanelBorder: { control: 'boolean' },\n  },\n}"
+                }
+            ],
             "projects/ui-components-lib/src/lib/app-button/button.stories.ts": [
                 {
                     "name": "Default",
@@ -16018,7 +16338,29 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Meta<AppButtonComponent>",
-                    "defaultValue": "{\n  title: 'MyLibrary/Button',\n  component: AppButtonComponent,\n  tags: ['autodocs'],\n  decorators: [\n    moduleMetadata({\n      imports: [CommonModule, ButtonModule],\n      providers: [ButtonStyle],\n    }),\n  ],\n  argTypes: {\n    label: {\n      control: 'text',\n      description: 'The label of the button',\n      args: {\n        values: 'Click Me',\n      }\n    },\n    severity: {\n      control: 'select',\n      description: 'The severity of the button',\n      options: ['primary', 'secondary', 'success', 'info', 'warn', 'danger'],\n      args: {\n        values: 'primary',\n      }\n    },\n    loading: {\n      control: 'boolean',\n      description: 'Whether the button is in loading state',\n      args:{\n        default: false,\n        value: false,\n      },\n    },\n    loadingIcon: {\n      control: 'text',\n      description: 'The icon to display when the button is in loading state (pi pi-spinner)',\n      args:{\n        value: 'pi pi-spinner',\n      },\n    },\n    disabled: {\n      control: 'boolean',\n      description: 'Whether the button is disabled',\n     args:{\n      value: false,\n     },\n    },\n    outlined: {\n      control: 'boolean',\n      description: 'Whether the button is filled color or not',\n      args:{\n        value: false,\n      },\n    },\n    rounded: {\n      control: 'boolean',\n      description: 'Whether the button borders is rounded',\n      args:{\n        value: false,\n      },\n    },\n    raised: {\n      control: 'boolean',\n      description: ' Whether the button is raised (has shadow effect) or not ',\n      args:{\n        value: false,\n      },\n    },\n    text: {\n      control: 'boolean',\n      description: 'Whether the button is text (no background color) or border',\n      args:{\n        value: false,\n      },\n    },\n    plain: {\n      control: 'boolean',\n      description: 'Whether the button is plain',\n      args:{\n        value: false,\n      },\n    },\n    link: {\n      control: 'boolean',\n      description: 'Whether the button is a link',\n      args:{\n        value: false,\n      },\n    },\n    autofocus: {\n      control: 'boolean',\n      description: 'Whether the button is focused automatically when the page loads',\n      args:{\n        value: false,\n      },\n    },\n    icon: {\n      control: 'text',\n      description: 'Which icon to display on the button (pi pi-star) if no icon provided remove it',\n      args:{\n        value: 'pi pi-minus',\n      },\n    },\n    iconPos: {\n      control: 'select',\n      description: 'The position of the icon in the table',\n      options: ['left', 'right'],\n      args:{\n        value: 'left',\n      },\n    },\n    size: {\n      control: 'select',\n      description: 'The size of the button',\n      options: ['small', 'medium', 'large'],\n      args:{\n        value: 'medium',\n      },\n    },\n    style: {\n      control: 'object',\n      description: 'The style of the button',\n      args:{\n        value: {},\n      },\n    },\n  }\n}"
+                    "defaultValue": "{\n  title: 'MyLibrary/Button',\n  component: AppButtonComponent,\n  tags: ['autodocs'],\n  decorators: [\n    moduleMetadata({\n      imports: [CommonModule, ButtonModule],\n      providers: [ButtonStyle],\n    }),\n  ],\n  args: {\n    label: 'Button',\n    severity: 'primary',\n    loading: false,\n    loadingIcon: 'pi pi-spinner',\n    disabled: false,\n    outlined: false,\n    rounded: false,\n    raised: false,\n    text: false,\n    plain: false,\n    link: false,\n    autofocus: false,\n    icon: '',\n    iconPos: 'left',\n    style: {},\n  },\n  argTypes: {\n    label: {\n      control: 'text',\n      description: 'The label of the button',\n    },\n    severity: {\n      control: 'select',\n      description: 'The severity of the button',\n      options: [\n        'primary',\n        'secondary',\n        'success',\n        'info',\n        'warn',\n        'danger',\n        'help',\n        'contrast',\n      ],\n    },\n    loading: {\n      control: 'boolean',\n      description: 'Whether the button is in loading state',\n    },\n    loadingIcon: {\n      control: 'text',\n      description:\n        'The icon to display when the button is in loading state (e.g. pi pi-spinner)',\n    },\n    disabled: {\n      control: 'boolean',\n      description: 'Whether the button is disabled',\n    },\n    outlined: {\n      control: 'boolean',\n      description: 'Whether the button uses the outlined style',\n    },\n    rounded: {\n      control: 'boolean',\n      description: 'Whether the button has fully rounded borders',\n    },\n    raised: {\n      control: 'boolean',\n      description: 'Whether the button is raised (shadow)',\n    },\n    text: {\n      control: 'boolean',\n      description: 'Text-only style (no solid background)',\n    },\n    plain: {\n      control: 'boolean',\n      description: 'Whether the button uses the plain style',\n    },\n    link: {\n      control: 'boolean',\n      description: 'Whether the button is rendered as a link',\n    },\n    autofocus: {\n      control: 'boolean',\n      description: 'Whether the button is focused when the page loads',\n    },\n    icon: {\n      control: 'text',\n      description:\n        'Icon class on the button (e.g. pi pi-star). Leave empty to hide the icon',\n    },\n    iconPos: {\n      control: 'select',\n      description: 'Position of the icon relative to the label',\n      options: ['left', 'right', 'top', 'bottom'],\n    },\n    size: {\n      control: 'select',\n      description: 'The size of the button',\n      options: ['small', 'large'],\n    },\n    variant: {\n      control: 'select',\n      description: 'PrimeNG variant (outlined / text)',\n      options: ['outlined', 'text'],\n    },\n    styleClass: {\n      control: 'text',\n      description: 'Optional CSS class string on the root button',\n    },\n    style: {\n      control: 'object',\n      description: 'Inline style map for the button',\n    },\n  },\n}"
+                }
+            ],
+            "projects/ui-components-lib/src/lib/app-dropdown-menu/dropdown.stories.ts": [
+                {
+                    "name": "Default",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/ui-components-lib/src/lib/app-dropdown-menu/dropdown.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  args: {\n    buttonTitle: 'Dropdown Button',\n    menuItems: [\n      {\n        title: 'Item 1',\n        routerLink: '/item1',\n        callback: () => {\n          console.log('Callback function called item1');\n        },\n        icon: \"pi pi-check\",\n        show: true,\n        iconPosition:'left',\n        textColor: 'purple',\n      },\n      {\n        title: 'Item 2',\n        routerLink: '/item2',\n        callback: () => {\n          console.log('Callback function called item2');\n        },\n        icon: \"pi pi-check\",\n        show: true,\n        iconPosition:'left',\n        textColor: 'purple',\n      },\n      {\n        title: 'Item 3',\n        routerLink: '/item3',\n        callback: () => {\n          console.log('Callback function called item3');\n        },\n        icon: \"pi pi-check\",\n        show: true,\n        iconPosition:'left',\n        textColor: 'purple',\n      },\n    ],\n    popupMenuStyle: 'purple',\n    buttonIcon: 'pi pi-ellipsis-v',\n    buttonClass: 'p-button-primary',\n    buttonStyle: 'p-button-primary',\n    buttonSeverity: 'primary',\n    buttonIconPosition: 'left',\n  },\n}"
+                },
+                {
+                    "name": "meta",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/ui-components-lib/src/lib/app-dropdown-menu/dropdown.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Meta<AppDropdownMenuComponent>",
+                    "defaultValue": "{\n  title: 'MyLibrary/Dropdown',\n  component: AppDropdownMenuComponent,\n  tags: ['autodocs'],\n  decorators: [\n    moduleMetadata({\n      imports: [Popover, ButtonModule, AppButtonComponent],\n      providers: [ButtonStyle],\n    }),\n  ],\n  args: {\n    buttonTitle: 'Dropdown Button',\n    menuItems: [\n      {\n        title: 'Item 1',\n        routerLink: '/item1',\n        callback: () => {\n          console.log('Callback function called');\n        },\n        icon: \"pi pi-check\",\n        show: true,\n        iconPosition:'left',\n        textColor: 'purple',\n      },\n    ],\n    popupMenuStyle: 'purple',\n    buttonIcon: 'pi pi-ellipsis-v',\n    buttonClass: 'p-button-primary',\n    buttonStyle: 'p-button-primary',\n    buttonSeverity: 'primary',\n    buttonIconPosition: 'left',\n  },\n  argTypes: {\n    buttonTitle: { control: 'text' },\n    menuItems: { control: 'object' },\n    popupMenuStyle: { control: 'select', options: ['purple', 'white'] },\n    buttonIcon: { control: 'text' },\n    buttonClass: { control: 'text' },\n    buttonStyle: { control: 'text' },\n    buttonSeverity: { control: 'select', options: ['primary', 'secondary', 'success', 'info', 'warning', 'danger'] },\n    buttonIconPosition: { control: 'select', options: ['left', 'right'] },\n  },\n}"
                 }
             ],
             "projects/ui-components-lib/src/lib/bottom-sheet/bottom-sheet.stories.ts": [
@@ -16039,8 +16381,8 @@
                     "file": "projects/ui-components-lib/src/lib/bottom-sheet/bottom-sheet.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "type": "Meta<BottomSheetComponent>",
-                    "defaultValue": "{\n  title: 'MyLibrary/BottomSheet',\n  component: BottomSheetComponent,\n  tags: ['autodocs'],\n  argTypes: {},\n  decorators: [\n    moduleMetadata({\n      imports: [PrimeTemplate, Drawer, NgClass, NgTemplateOutlet, TooltipModule, CommonModule],\n    }),\n  ],\n}"
+                    "type": "Meta<BottomSheetStoryHost>",
+                    "defaultValue": "{\n  title: 'MyLibrary/BottomSheet',\n  component: BottomSheetStoryHost,\n  subcomponents: { BottomSheetComponent },\n  tags: ['autodocs'],\n  argTypes: {\n    show: { control: 'boolean' },\n    onHide: {\n      action: 'onHide',\n      table: { disable: true },\n    },\n    onShow: {\n      action: 'onShow',\n      table: { disable: true },\n    },\n    /** Subcomponent `BottomSheetComponent` — hide METHODS row in autodocs */\n    hideBottomSheet: {\n      table: { disable: true },\n      control: false,\n    },\n  } as Meta<BottomSheetStoryHost>['argTypes'],\n  args: {\n    show: false,\n  },\n}"
                 }
             ],
             "projects/ui-components-lib/src/lib/confirmation-dialog/confirmation-dialog.stories.ts": [
@@ -16061,8 +16403,8 @@
                     "file": "projects/ui-components-lib/src/lib/confirmation-dialog/confirmation-dialog.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "type": "Meta<ConfirmationDialogComponent>",
-                    "defaultValue": "{\n  title: 'MyLibrary/ConfirmationDialog',\n  component: ConfirmationDialogComponent,\n  tags: ['autodocs'],\n  argTypes: {},\n  decorators: [\n    moduleMetadata({\n      imports: [\n        AppButtonComponent,\n        AvatarModule,\n        DynamicDialogModule,\n        DynamicFormComponent,\n        TranslatePipe,\n      ],\n      providers: [\n        DialogService,\n        DynamicDialogStyle,\n        DynamicDialogConfig,\n        DynamicDialogRef,\n        TranslateService,\n      ],\n    }),\n  ],\n}"
+                    "type": "Meta<ConfirmationDialogStoryWrapper>",
+                    "defaultValue": "{\n  title: 'MyLibrary/ConfirmationDialog',\n  component: ConfirmationDialogStoryWrapper,\n  subcomponents: { ConfirmationDialogComponent },\n  tags: ['autodocs'],\n  decorators: [\n    applicationConfig({\n      providers: [provideRouter([])],\n    }),\n    moduleMetadata({\n      imports: [AppButtonComponent, AvatarModule, DynamicDialogModule, TranslatePipe],\n      providers: [ConfirmationDialogService, DialogService, DynamicDialogStyle],\n    }),\n  ],\n  args: {\n    header: 'Confirm action',\n    message: 'Are you sure you want to continue?',\n    hint: undefined,\n    confirmBtnId: 'story-confirm',\n    cancelBtnId: 'story-cancel',\n    confirmBtnLabel: 'Confirm',\n    cancelBtnLabel: 'Cancel',\n  },\n  argTypes: {\n    header: { control: 'text' },\n    message: { control: 'text' },\n    hint: { control: 'text' },\n    confirmBtnId: { control: 'text' },\n    cancelBtnId: { control: 'text' },\n    confirmBtnLabel: { control: 'text' },\n    cancelBtnLabel: { control: 'text' },\n    dialogClosed: {\n      action: 'dialogClosed',\n      table: { disable: true },\n    },\n  },\n}"
                 }
             ],
             "projects/ui-components-lib/src/lib/dual-calender/dual-calendar.stories.ts": [
@@ -16999,6 +17341,19 @@
                     "kind": 184
                 }
             ],
+            "projects/ui-components-lib/src/lib/app-accordion/accordion.stories.ts": [
+                {
+                    "name": "Story",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "StoryObj<AppAccordionComponent>",
+                    "file": "projects/ui-components-lib/src/lib/app-accordion/accordion.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 184
+                }
+            ],
             "projects/ui-components-lib/src/lib/app-button/button.stories.ts": [
                 {
                     "name": "Story",
@@ -17012,12 +17367,25 @@
                     "kind": 184
                 }
             ],
+            "projects/ui-components-lib/src/lib/app-dropdown-menu/dropdown.stories.ts": [
+                {
+                    "name": "Story",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "StoryObj<AppDropdownMenuComponent>",
+                    "file": "projects/ui-components-lib/src/lib/app-dropdown-menu/dropdown.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 184
+                }
+            ],
             "projects/ui-components-lib/src/lib/bottom-sheet/bottom-sheet.stories.ts": [
                 {
                     "name": "Story",
                     "ctype": "miscellaneous",
                     "subtype": "typealias",
-                    "rawtype": "StoryObj<BottomSheetComponent>",
+                    "rawtype": "StoryObj<BottomSheetStoryHost>",
                     "file": "projects/ui-components-lib/src/lib/bottom-sheet/bottom-sheet.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
@@ -17030,7 +17398,7 @@
                     "name": "Story",
                     "ctype": "miscellaneous",
                     "subtype": "typealias",
-                    "rawtype": "StoryObj<ConfirmationDialogComponent>",
+                    "rawtype": "StoryObj<ConfirmationDialogStoryWrapper>",
                     "file": "projects/ui-components-lib/src/lib/confirmation-dialog/confirmation-dialog.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
@@ -17129,6 +17497,36 @@
             },
             {
                 "filePath": "projects/ui-components-lib/src/lib/alert-dialog/alert-dialog.stories.ts",
+                "type": "type alias",
+                "linktype": "miscellaneous",
+                "linksubtype": "typealias",
+                "name": "Story",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/ui-components-lib/src/lib/app-accordion/accordion.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Default",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/ui-components-lib/src/lib/app-accordion/accordion.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "meta",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/ui-components-lib/src/lib/app-accordion/accordion.stories.ts",
                 "type": "type alias",
                 "linktype": "miscellaneous",
                 "linksubtype": "typealias",
@@ -17291,6 +17689,36 @@
                 "status": "low"
             },
             {
+                "filePath": "projects/ui-components-lib/src/lib/app-dropdown-menu/dropdown.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Default",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/ui-components-lib/src/lib/app-dropdown-menu/dropdown.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "meta",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/ui-components-lib/src/lib/app-dropdown-menu/dropdown.stories.ts",
+                "type": "type alias",
+                "linktype": "miscellaneous",
+                "linksubtype": "typealias",
+                "name": "Story",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
                 "filePath": "projects/ui-components-lib/src/lib/app-dropdown-menu/menu-popup.pipe.ts",
                 "type": "pipe",
                 "linktype": "pipe",
@@ -17412,6 +17840,15 @@
             },
             {
                 "filePath": "projects/ui-components-lib/src/lib/bottom-sheet/bottom-sheet.stories.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "BottomSheetStoryHost",
+                "coveragePercent": 0,
+                "coverageCount": "0/4",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/ui-components-lib/src/lib/bottom-sheet/bottom-sheet.stories.ts",
                 "type": "variable",
                 "linktype": "miscellaneous",
                 "linksubtype": "variable",
@@ -17465,6 +17902,15 @@
                 "name": "ConfirmationDialogService",
                 "coveragePercent": 0,
                 "coverageCount": "0/3",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/ui-components-lib/src/lib/confirmation-dialog/confirmation-dialog.stories.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "ConfirmationDialogStoryWrapper",
+                "coveragePercent": 0,
+                "coverageCount": "0/11",
                 "status": "low"
             },
             {
