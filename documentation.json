@@ -14621,7 +14621,7 @@
         },
         {
             "name": "StoryRouterStubComponent",
-            "id": "component-StoryRouterStubComponent-909ec3e561574de847b200e3600c3540385a99cebf49b73aad207c516612840115362d376057bbebfb6293b11c5ffd3dbce71c55cba775b92a6a4190302c4c60",
+            "id": "component-StoryRouterStubComponent-182e6ccea3dad249f3c8608db7e5e3f042cd508d0125b85d2e71e0eba25c623981b13b88b38a20706fa28aacb5a8a20e37699f1c351f6b3e0efbee3c8bce739f",
             "file": "projects/ui-components-lib/src/lib/app-breadcrumb/breadcrumb.stories.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -14647,7 +14647,7 @@
             "description": "",
             "rawdescription": "",
             "type": "component",
-            "sourceCode": "import type { Meta, StoryObj } from '@storybook/angular';\nimport { applicationConfig, moduleMetadata } from '@storybook/angular';\nimport { Component } from '@angular/core';\nimport { ActivatedRouteSnapshot, provideRouter, Routes } from '@angular/router';\nimport { AppBreadcrumbComponent } from './app-breadcrumb.component';\n\n/** Empty outlet targets so `routerLink` in breadcrumb items can resolve in Storybook */\n@Component({ standalone: true, template: '' })\nclass StoryRouterStubComponent {}\n\nconst storyRoutes: Routes = [\n  { path: '', pathMatch: 'full', redirectTo: 'home' },\n  { path: 'home', component: StoryRouterStubComponent },\n  { path: 'payments', component: StoryRouterStubComponent },\n];\n\nconst meta: Meta<AppBreadcrumbComponent> = {\n  title: 'MyLibrary/Breadcrumb',\n  component: AppBreadcrumbComponent,\n  tags: ['autodocs'],\n  decorators: [\n    applicationConfig({\n      providers: [\n        provideRouter(storyRoutes),\n        {\n          provide: ActivatedRouteSnapshot,\n          useValue: {\n            children: [\n              {\n                data: {\n                  breadcrumb: 'Home',\n                  notClickableBreadcrumb: false,\n                  isShown: true,\n                  extraBreadcrumbs: [],\n                },\n              },\n            ],\n\n          }\n        }\n      ],\n    }),\n    moduleMetadata({\n      imports: [AppBreadcrumbComponent],\n    }),\n  ],\n  args: {\n    items: [\n      {\n        notClickable: false,\n        label: 'Home',\n        routerLink: '/home',\n        isShown: true,\n        extraBreadcrumbs: [\n          {\n            label: 'Payment',\n            routerLink: '/payments',\n            isShown: true,\n            position: 'after',\n          },\n        ],\n      },\n      {\n        notClickable: false,\n        label: 'Payment',\n        routerLink: '/payments',\n        isShown: true,\n        extraBreadcrumbs: [\n          {\n            position: 'before',\n            label: 'Payment',\n            routerLink: '/payments',\n          },\n        ],\n      },\n    ],\n  },\n  argTypes: {\n    items: {\n      items: {\n        type: 'object',\n        properties: {\n          notClickable: { type: 'boolean' },\n          label: { type: 'string' },\n          routerLink: { type: 'string' },\n          isShown: { type: 'boolean' },\n          extraBreadcrumbs: {\n            type: 'array',\n            items: {\n              type: 'object',\n              properties: {\n                label: { type: 'string' },\n                routerLink: { type: 'string' },\n                isShown: { type: 'boolean' },\n                position: { type: 'string' },\n              },\n            },\n          },\n        },\n      },\n    },\n    ngOnInit: { table: { disable: true }, control: false },\n    isShown: { table: { disable: true }, control: false },\n    _checkEmpty: { table: { disable: true }, control: false },\n    _checkHiddenBreadcrumb: { table: { disable: true }, control: false },\n    _createBreadcrumbs: { table: { disable: true }, control: false },\n    _getRecursiveKey: { table: { disable: true }, control: false },\n  } as Meta<AppBreadcrumbComponent>['argTypes'],\n};\n\nexport default meta;\ntype Story = StoryObj<AppBreadcrumbComponent>;\n\nexport const Default: Story = {\n  args: {\n    items: [\n      {\n        notClickable: false,\n        label: 'Home',\n        routerLink: '/home',\n        isShown: true,\n        extraBreadcrumbs: [\n          {\n            label: 'Payment',\n            routerLink: '/payments',\n            isShown: true,\n            position: 'after',\n          },\n        ],\n      },\n      {\n        notClickable: false,\n        label: 'Payment',\n        routerLink: '/payments',\n        isShown: true,\n        extraBreadcrumbs: [\n          {\n            position: 'before',\n            label: 'Payment',\n            routerLink: '/payments',\n          },\n        ],\n      },\n    ],\n  },\n};\n",
+            "sourceCode": "import type { Meta, StoryObj } from '@storybook/angular';\nimport { applicationConfig, moduleMetadata } from '@storybook/angular';\nimport { Component } from '@angular/core';\nimport { ActivatedRouteSnapshot, provideRouter, Routes } from '@angular/router';\nimport { AppBreadcrumbComponent } from './app-breadcrumb.component';\n\n/** Empty outlet targets so `routerLink` in breadcrumb items can resolve in Storybook */\n@Component({ standalone: true, template: '' })\nclass StoryRouterStubComponent {}\n\nconst storyRoutes: Routes = [\n  { path: '', pathMatch: 'full', redirectTo: 'home' },\n  { path: 'home', component: StoryRouterStubComponent },\n  { path: 'payments', component: StoryRouterStubComponent },\n];\n\nconst meta: Meta<AppBreadcrumbComponent> = {\n  title: 'MyLibrary/Breadcrumb',\n  component: AppBreadcrumbComponent,\n  tags: ['autodocs'],\n  decorators: [\n    applicationConfig({\n      providers: [\n        provideRouter(storyRoutes),\n        {\n          provide: ActivatedRouteSnapshot,\n          useValue: {\n            children: [\n              {\n                data: {\n                  breadcrumb: 'Home',\n                  notClickableBreadcrumb: true,\n                  isShown: true,\n                  extraBreadcrumbs: [],\n                },\n              },\n            ],\n          }\n        }\n      ],\n    }),\n    moduleMetadata({\n      imports: [AppBreadcrumbComponent],\n    }),\n  ],\n  args: {\n    items: [\n      {\n        notClickable: false,\n        label: 'Home',\n        routerLink: '/home',\n        isShown: true,\n        extraBreadcrumbs: [\n          {\n            label: 'Payment',\n            routerLink: '/payments',\n            isShown: true,\n            position: 'after',\n          },\n        ],\n      },\n      {\n        notClickable: false,\n        label: 'Payment',\n        routerLink: '/payments',\n        isShown: true,\n        extraBreadcrumbs: [\n          {\n            position: 'before',\n            label: 'Payment',\n            routerLink: '/payments',\n          },\n        ],\n      },\n    ],\n  },\n  argTypes: {\n    items: {\n      items: {\n        type: 'object',\n        properties: {\n          notClickable: { type: 'boolean' },\n          label: { type: 'string' },\n          routerLink: { type: 'string' },\n          isShown: { type: 'boolean' },\n          extraBreadcrumbs: {\n            type: 'array',\n            items: {\n              type: 'object',\n              properties: {\n                label: { type: 'string' },\n                routerLink: { type: 'string' },\n                isShown: { type: 'boolean' },\n                position: { type: 'string' },\n              },\n            },\n          },\n        },\n      },\n    },\n    ngOnInit: { table: { disable: true }, control: false },\n    isShown: { table: { disable: true }, control: false },\n    _checkEmpty: { table: { disable: true }, control: false },\n    _checkHiddenBreadcrumb: { table: { disable: true }, control: false },\n    _createBreadcrumbs: { table: { disable: true }, control: false },\n    _getRecursiveKey: { table: { disable: true }, control: false },\n  } as Meta<AppBreadcrumbComponent>['argTypes'],\n};\n\nexport default meta;\ntype Story = StoryObj<AppBreadcrumbComponent>;\n\nexport const Default: Story = {\n  args: {\n    items: [\n      {\n        notClickable: false,\n        label: 'Home',\n        routerLink: '/home',\n        isShown: true,\n        extraBreadcrumbs: [\n          {\n            label: 'Payment',\n            routerLink: '/payments',\n            isShown: true,\n            position: 'after',\n          },\n        ],\n      },\n      {\n        notClickable: false,\n        label: 'Payment',\n        routerLink: '/payments',\n        isShown: true,\n        extraBreadcrumbs: [\n          {\n            position: 'before',\n            label: 'Payment',\n            routerLink: '/payments',\n          },\n        ],\n      },\n    ],\n  },\n};\n",
             "assetsDirs": [],
             "styleUrlsData": "",
             "stylesData": "",
@@ -15002,6 +15002,16 @@
                 "defaultValue": "{}"
             },
             {
+                "name": "Default",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/ui-components-lib/src/lib/ico-moon-icon/ico-moon.story.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  args: {\n    iconName: 'font-icon-plus',\n    iconClass: 'text-2xl text-primary',\n    iconPathCount: 0,\n  },\n}"
+            },
+            {
                 "name": "Dual",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
@@ -15039,7 +15049,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Meta<AppBreadcrumbComponent>",
-                "defaultValue": "{\n  title: 'MyLibrary/Breadcrumb',\n  component: AppBreadcrumbComponent,\n  tags: ['autodocs'],\n  decorators: [\n    applicationConfig({\n      providers: [\n        provideRouter(storyRoutes),\n        {\n          provide: ActivatedRouteSnapshot,\n          useValue: {\n            children: [\n              {\n                data: {\n                  breadcrumb: 'Home',\n                  notClickableBreadcrumb: false,\n                  isShown: true,\n                  extraBreadcrumbs: [],\n                },\n              },\n            ],\n\n          }\n        }\n      ],\n    }),\n    moduleMetadata({\n      imports: [AppBreadcrumbComponent],\n    }),\n  ],\n  args: {\n    items: [\n      {\n        notClickable: false,\n        label: 'Home',\n        routerLink: '/home',\n        isShown: true,\n        extraBreadcrumbs: [\n          {\n            label: 'Payment',\n            routerLink: '/payments',\n            isShown: true,\n            position: 'after',\n          },\n        ],\n      },\n      {\n        notClickable: false,\n        label: 'Payment',\n        routerLink: '/payments',\n        isShown: true,\n        extraBreadcrumbs: [\n          {\n            position: 'before',\n            label: 'Payment',\n            routerLink: '/payments',\n          },\n        ],\n      },\n    ],\n  },\n  argTypes: {\n    items: {\n      items: {\n        type: 'object',\n        properties: {\n          notClickable: { type: 'boolean' },\n          label: { type: 'string' },\n          routerLink: { type: 'string' },\n          isShown: { type: 'boolean' },\n          extraBreadcrumbs: {\n            type: 'array',\n            items: {\n              type: 'object',\n              properties: {\n                label: { type: 'string' },\n                routerLink: { type: 'string' },\n                isShown: { type: 'boolean' },\n                position: { type: 'string' },\n              },\n            },\n          },\n        },\n      },\n    },\n    ngOnInit: { table: { disable: true }, control: false },\n    isShown: { table: { disable: true }, control: false },\n    _checkEmpty: { table: { disable: true }, control: false },\n    _checkHiddenBreadcrumb: { table: { disable: true }, control: false },\n    _createBreadcrumbs: { table: { disable: true }, control: false },\n    _getRecursiveKey: { table: { disable: true }, control: false },\n  } as Meta<AppBreadcrumbComponent>['argTypes'],\n}"
+                "defaultValue": "{\n  title: 'MyLibrary/Breadcrumb',\n  component: AppBreadcrumbComponent,\n  tags: ['autodocs'],\n  decorators: [\n    applicationConfig({\n      providers: [\n        provideRouter(storyRoutes),\n        {\n          provide: ActivatedRouteSnapshot,\n          useValue: {\n            children: [\n              {\n                data: {\n                  breadcrumb: 'Home',\n                  notClickableBreadcrumb: true,\n                  isShown: true,\n                  extraBreadcrumbs: [],\n                },\n              },\n            ],\n          }\n        }\n      ],\n    }),\n    moduleMetadata({\n      imports: [AppBreadcrumbComponent],\n    }),\n  ],\n  args: {\n    items: [\n      {\n        notClickable: false,\n        label: 'Home',\n        routerLink: '/home',\n        isShown: true,\n        extraBreadcrumbs: [\n          {\n            label: 'Payment',\n            routerLink: '/payments',\n            isShown: true,\n            position: 'after',\n          },\n        ],\n      },\n      {\n        notClickable: false,\n        label: 'Payment',\n        routerLink: '/payments',\n        isShown: true,\n        extraBreadcrumbs: [\n          {\n            position: 'before',\n            label: 'Payment',\n            routerLink: '/payments',\n          },\n        ],\n      },\n    ],\n  },\n  argTypes: {\n    items: {\n      items: {\n        type: 'object',\n        properties: {\n          notClickable: { type: 'boolean' },\n          label: { type: 'string' },\n          routerLink: { type: 'string' },\n          isShown: { type: 'boolean' },\n          extraBreadcrumbs: {\n            type: 'array',\n            items: {\n              type: 'object',\n              properties: {\n                label: { type: 'string' },\n                routerLink: { type: 'string' },\n                isShown: { type: 'boolean' },\n                position: { type: 'string' },\n              },\n            },\n          },\n        },\n      },\n    },\n    ngOnInit: { table: { disable: true }, control: false },\n    isShown: { table: { disable: true }, control: false },\n    _checkEmpty: { table: { disable: true }, control: false },\n    _checkHiddenBreadcrumb: { table: { disable: true }, control: false },\n    _createBreadcrumbs: { table: { disable: true }, control: false },\n    _getRecursiveKey: { table: { disable: true }, control: false },\n  } as Meta<AppBreadcrumbComponent>['argTypes'],\n}"
             },
             {
                 "name": "meta",
@@ -15080,6 +15090,16 @@
                 "deprecationMessage": "",
                 "type": "Meta<DualCalendarComponent>",
                 "defaultValue": "{\n  title: 'MyLibrary/dualCalendar',\n  component: DualCalendarComponent,\n  tags: ['autodocs'],\n  argTypes: {},\n  decorators: [\n    moduleMetadata({\n      imports: [\n        NgbDatepickerModule,\n        FormsModule,\n        ReactiveFormsModule,\n        DatePickerModule,\n        FloatLabelModule,\n        HijriCalendarComponent,\n        DatePickerSwitcherComponent,\n        TranslatePipe,\n        GregorianCalendarComponent,\n      ],\n      providers: [{ provide: NgbCalendar, useClass: NgbCalendarIslamicUmalqura }],\n    }),\n  ],\n}"
+            },
+            {
+                "name": "meta",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/ui-components-lib/src/lib/ico-moon-icon/ico-moon.story.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Meta<IcoMoonIconComponent>",
+                "defaultValue": "{\n  title: 'MyLibrary/Icons',\n  component: IcoMoonIconComponent,\n  tags: ['autodocs'],\n  decorators: [\n    moduleMetadata({\n      imports: [CommonModule, IcoMoonIconComponent],\n    }),\n  ],\n  args: {\n    iconName: 'font-icon-plus',\n    iconClass: 'text-2xl text-primary',\n    iconPathCount: 0,\n  },\n  argTypes: {\n    iconName: {\n      control: 'text',\n      description: 'The name of the icon',\n    },\n    iconClass: {\n      control: 'text',\n      description: 'The class of the icon',\n    },\n    iconPathCount: {\n      control: 'number',\n      description: 'The number of paths in the icon',\n    },\n  } as Meta<IcoMoonIconComponent>['argTypes'],\n}"
             },
             {
                 "name": "MONTHS_GREGORIAN",
@@ -15574,6 +15594,17 @@
                 "subtype": "typealias",
                 "rawtype": "StoryObj<DualCalendarComponent>",
                 "file": "projects/ui-components-lib/src/lib/dual-calender/dual-calendar.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "kind": 184
+            },
+            {
+                "name": "Story",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
+                "rawtype": "StoryObj<IcoMoonIconComponent>",
+                "file": "projects/ui-components-lib/src/lib/ico-moon-icon/ico-moon.story.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "description": "",
@@ -16083,7 +16114,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Meta<AppBreadcrumbComponent>",
-                    "defaultValue": "{\n  title: 'MyLibrary/Breadcrumb',\n  component: AppBreadcrumbComponent,\n  tags: ['autodocs'],\n  decorators: [\n    applicationConfig({\n      providers: [\n        provideRouter(storyRoutes),\n        {\n          provide: ActivatedRouteSnapshot,\n          useValue: {\n            children: [\n              {\n                data: {\n                  breadcrumb: 'Home',\n                  notClickableBreadcrumb: false,\n                  isShown: true,\n                  extraBreadcrumbs: [],\n                },\n              },\n            ],\n\n          }\n        }\n      ],\n    }),\n    moduleMetadata({\n      imports: [AppBreadcrumbComponent],\n    }),\n  ],\n  args: {\n    items: [\n      {\n        notClickable: false,\n        label: 'Home',\n        routerLink: '/home',\n        isShown: true,\n        extraBreadcrumbs: [\n          {\n            label: 'Payment',\n            routerLink: '/payments',\n            isShown: true,\n            position: 'after',\n          },\n        ],\n      },\n      {\n        notClickable: false,\n        label: 'Payment',\n        routerLink: '/payments',\n        isShown: true,\n        extraBreadcrumbs: [\n          {\n            position: 'before',\n            label: 'Payment',\n            routerLink: '/payments',\n          },\n        ],\n      },\n    ],\n  },\n  argTypes: {\n    items: {\n      items: {\n        type: 'object',\n        properties: {\n          notClickable: { type: 'boolean' },\n          label: { type: 'string' },\n          routerLink: { type: 'string' },\n          isShown: { type: 'boolean' },\n          extraBreadcrumbs: {\n            type: 'array',\n            items: {\n              type: 'object',\n              properties: {\n                label: { type: 'string' },\n                routerLink: { type: 'string' },\n                isShown: { type: 'boolean' },\n                position: { type: 'string' },\n              },\n            },\n          },\n        },\n      },\n    },\n    ngOnInit: { table: { disable: true }, control: false },\n    isShown: { table: { disable: true }, control: false },\n    _checkEmpty: { table: { disable: true }, control: false },\n    _checkHiddenBreadcrumb: { table: { disable: true }, control: false },\n    _createBreadcrumbs: { table: { disable: true }, control: false },\n    _getRecursiveKey: { table: { disable: true }, control: false },\n  } as Meta<AppBreadcrumbComponent>['argTypes'],\n}"
+                    "defaultValue": "{\n  title: 'MyLibrary/Breadcrumb',\n  component: AppBreadcrumbComponent,\n  tags: ['autodocs'],\n  decorators: [\n    applicationConfig({\n      providers: [\n        provideRouter(storyRoutes),\n        {\n          provide: ActivatedRouteSnapshot,\n          useValue: {\n            children: [\n              {\n                data: {\n                  breadcrumb: 'Home',\n                  notClickableBreadcrumb: true,\n                  isShown: true,\n                  extraBreadcrumbs: [],\n                },\n              },\n            ],\n          }\n        }\n      ],\n    }),\n    moduleMetadata({\n      imports: [AppBreadcrumbComponent],\n    }),\n  ],\n  args: {\n    items: [\n      {\n        notClickable: false,\n        label: 'Home',\n        routerLink: '/home',\n        isShown: true,\n        extraBreadcrumbs: [\n          {\n            label: 'Payment',\n            routerLink: '/payments',\n            isShown: true,\n            position: 'after',\n          },\n        ],\n      },\n      {\n        notClickable: false,\n        label: 'Payment',\n        routerLink: '/payments',\n        isShown: true,\n        extraBreadcrumbs: [\n          {\n            position: 'before',\n            label: 'Payment',\n            routerLink: '/payments',\n          },\n        ],\n      },\n    ],\n  },\n  argTypes: {\n    items: {\n      items: {\n        type: 'object',\n        properties: {\n          notClickable: { type: 'boolean' },\n          label: { type: 'string' },\n          routerLink: { type: 'string' },\n          isShown: { type: 'boolean' },\n          extraBreadcrumbs: {\n            type: 'array',\n            items: {\n              type: 'object',\n              properties: {\n                label: { type: 'string' },\n                routerLink: { type: 'string' },\n                isShown: { type: 'boolean' },\n                position: { type: 'string' },\n              },\n            },\n          },\n        },\n      },\n    },\n    ngOnInit: { table: { disable: true }, control: false },\n    isShown: { table: { disable: true }, control: false },\n    _checkEmpty: { table: { disable: true }, control: false },\n    _checkHiddenBreadcrumb: { table: { disable: true }, control: false },\n    _createBreadcrumbs: { table: { disable: true }, control: false },\n    _getRecursiveKey: { table: { disable: true }, control: false },\n  } as Meta<AppBreadcrumbComponent>['argTypes'],\n}"
                 }
             ],
             "projects/ui-components-lib/src/lib/app-button/button.stories.ts": [
@@ -16150,6 +16181,28 @@
                     "deprecationMessage": "",
                     "type": "Meta<ConfirmationDialogComponent>",
                     "defaultValue": "{\n  title: 'MyLibrary/ConfirmationDialog',\n  component: ConfirmationDialogComponent,\n  tags: ['autodocs'],\n  argTypes: {},\n  decorators: [\n    moduleMetadata({\n      imports: [\n        AppButtonComponent,\n        AvatarModule,\n        DynamicDialogModule,\n        DynamicFormComponent,\n        TranslatePipe,\n      ],\n      providers: [\n        DialogService,\n        DynamicDialogStyle,\n        DynamicDialogConfig,\n        DynamicDialogRef,\n        TranslateService,\n      ],\n    }),\n  ],\n}"
+                }
+            ],
+            "projects/ui-components-lib/src/lib/ico-moon-icon/ico-moon.story.ts": [
+                {
+                    "name": "Default",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/ui-components-lib/src/lib/ico-moon-icon/ico-moon.story.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  args: {\n    iconName: 'font-icon-plus',\n    iconClass: 'text-2xl text-primary',\n    iconPathCount: 0,\n  },\n}"
+                },
+                {
+                    "name": "meta",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/ui-components-lib/src/lib/ico-moon-icon/ico-moon.story.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Meta<IcoMoonIconComponent>",
+                    "defaultValue": "{\n  title: 'MyLibrary/Icons',\n  component: IcoMoonIconComponent,\n  tags: ['autodocs'],\n  decorators: [\n    moduleMetadata({\n      imports: [CommonModule, IcoMoonIconComponent],\n    }),\n  ],\n  args: {\n    iconName: 'font-icon-plus',\n    iconClass: 'text-2xl text-primary',\n    iconPathCount: 0,\n  },\n  argTypes: {\n    iconName: {\n      control: 'text',\n      description: 'The name of the icon',\n    },\n    iconClass: {\n      control: 'text',\n      description: 'The class of the icon',\n    },\n    iconPathCount: {\n      control: 'number',\n      description: 'The number of paths in the icon',\n    },\n  } as Meta<IcoMoonIconComponent>['argTypes'],\n}"
                 }
             ],
             "projects/ui-components-lib/src/lib/dual-calender/dual-calendar.stories.ts": [
@@ -17145,6 +17198,19 @@
                     "subtype": "typealias",
                     "rawtype": "StoryObj<DualCalendarComponent>",
                     "file": "projects/ui-components-lib/src/lib/dual-calender/dual-calendar.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 184
+                }
+            ],
+            "projects/ui-components-lib/src/lib/ico-moon-icon/ico-moon.story.ts": [
+                {
+                    "name": "Story",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "StoryObj<IcoMoonIconComponent>",
+                    "file": "projects/ui-components-lib/src/lib/ico-moon-icon/ico-moon.story.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "description": "",
@@ -18258,6 +18324,36 @@
                 "name": "IcoMoonIconComponent",
                 "coveragePercent": 0,
                 "coverageCount": "0/4",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/ui-components-lib/src/lib/ico-moon-icon/ico-moon.story.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Default",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/ui-components-lib/src/lib/ico-moon-icon/ico-moon.story.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "meta",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/ui-components-lib/src/lib/ico-moon-icon/ico-moon.story.ts",
+                "type": "type alias",
+                "linktype": "miscellaneous",
+                "linksubtype": "typealias",
+                "name": "Story",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
                 "status": "low"
             },
             {
