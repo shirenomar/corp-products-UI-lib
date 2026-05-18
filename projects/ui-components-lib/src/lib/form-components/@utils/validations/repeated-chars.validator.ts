@@ -1,5 +1,7 @@
 import { AbstractControl, ValidationErrors, ValidatorFn } from '@angular/forms';
 
+const WHITESPACE_REGEX = /\s/;
+
 export function maxRepeatedCharsValidator(maxRepeats = 3): ValidatorFn {
   return (control: AbstractControl): ValidationErrors | null => {
     const value = control.value;
@@ -7,11 +9,15 @@ export function maxRepeatedCharsValidator(maxRepeats = 3): ValidatorFn {
     if (!value) return null;
 
     const str = value.toString();
-
     let count = 1;
+    let prevChar: string | null = null;
 
-    for (let i = 1; i < str.length; i++) {
-      if (str[i] === str[i - 1]) {
+    for (const char of str) {
+      if (WHITESPACE_REGEX.test(char)) {
+        continue;
+      }
+
+      if (prevChar !== null && char === prevChar) {
         count++;
         if (count > maxRepeats) {
           return { maxRepeatedChars: { maxRepeats } };
@@ -19,6 +25,8 @@ export function maxRepeatedCharsValidator(maxRepeats = 3): ValidatorFn {
       } else {
         count = 1;
       }
+
+      prevChar = char;
     }
 
     return null;
