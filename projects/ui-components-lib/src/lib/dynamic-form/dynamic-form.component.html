@@ -9,6 +9,8 @@
 
       @case (fieldType.DATE_PICKER) {
       <stc-date-picker [minDate]="inputsMap[inputName]?.dateRange?.min" [maxDate]="inputsMap[inputName]?.dateRange?.max"
+        [disabledDates]="inputsMap[inputName].disabledDates || []"
+        [disabledDays]="inputsMap[inputName].disabledDays || []"
         [id]="inputsMap[inputName].inputId" [control]="getFormControl(inputName, formGroup)" [name]="inputName"
         [label]="inputsMap[inputName].label" [placeholder]="inputsMap[inputName].placeholder || ''"
         [hint]="inputsMap[inputName].hint"

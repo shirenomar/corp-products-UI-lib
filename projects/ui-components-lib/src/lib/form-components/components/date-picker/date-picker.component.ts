@@ -32,6 +32,8 @@ export class DatePickerComponent extends BaseInputComponent implements AfterView
   @Input() isTimeOnly: boolean = false;
   @Input() minDate: Date | undefined | null;
   @Input() maxDate: Date | undefined | null;
+  @Input() disabledDates: Date[] = [];
+  @Input() disabledDays: number[] = []; // 0 = Sunday, 1 = Monday, ..., 6 = Saturday
   @Input() hourFormat: '12' | '24' = '12';
   @Input() appendTo = 'body'
   nowTime = new Date();
