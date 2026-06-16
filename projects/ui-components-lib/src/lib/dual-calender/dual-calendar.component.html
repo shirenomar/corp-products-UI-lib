@@ -20,12 +20,13 @@
     </div>
     @if(mode === 'gregorian') {
     <app-gregorian-calendar [model]="gregorianModel" [language]="currentLang()"
-      (dateSelected)="onSelectGregorian($event)">
+      [disabledDays]="disabledDays" (dateSelected)="onSelectGregorian($event)">
     </app-gregorian-calendar>
     }
 
     @if(mode === 'hijri') {
-    <app-hijri-calendar [model]="hijriModel" [language]="currentLang()" (dateSelected)="onSelectHijri($event)">
+    <app-hijri-calendar [model]="hijriModel" [language]="currentLang()"
+      [disabledDays]="disabledDays" (dateSelected)="onSelectHijri($event)">
     </app-hijri-calendar>
     }
   </div>
