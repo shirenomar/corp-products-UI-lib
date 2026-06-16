@@ -1,6 +1,6 @@
 import { AbstractControl, ValidationErrors, ValidatorFn } from '@angular/forms';
 
-const WHITESPACE_REGEX = /\s/;
+const IGNORED_CHARS_REGEX = /[\s\d]/; // Whitespace and digits
 
 export function maxRepeatedCharsValidator(maxRepeats = 3): ValidatorFn {
   return (control: AbstractControl): ValidationErrors | null => {
@@ -13,7 +13,7 @@ export function maxRepeatedCharsValidator(maxRepeats = 3): ValidatorFn {
     let prevChar: string | null = null;
 
     for (const char of str) {
-      if (WHITESPACE_REGEX.test(char)) {
+      if (IGNORED_CHARS_REGEX.test(char)) {
         continue;
       }
 
