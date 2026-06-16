@@ -1,4 +1,5 @@
 import { Component, inject, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 import { NavigationStart, Router } from '@angular/router';
 import { TranslatePipe } from '@ngx-translate/core';
 import { AvatarModule } from 'primeng/avatar';
@@ -12,7 +13,7 @@ import {
 import { filter, Subscription } from 'rxjs';
 import { AppButtonComponent } from '../app-button/app-button.component';
 import { DynamicFormComponent } from '../dynamic-form/dynamic-form.component';
-import { DynamicFormData } from '../dynamic-form/dynamic-form.interface';
+import { DynamicFormData, FileUploadState } from '../dynamic-form/dynamic-form.interface';
 
 @Component({
   selector: 'app-confirm-dialog',
@@ -37,12 +38,28 @@ export class ConfirmationDialogComponent extends DynamicDialogRef implements OnI
   private readonly _subscription = new Subscription();
   dialogFormData: DynamicFormData;
   uploadedFile: any;
+  documentId: string | null = null;
+  uploadState: FileUploadState = { isUploading: false, documentId: null, hasFile: false };
+
+  get hasFileUpload(): boolean {
+    return !!this.dialogFormData?.fileUpload;
+  }
+
+  get isConfirmDisabled(): boolean {
+    if (this.dialogFormData?.formGroup?.invalid) {
+      return true;
+    }
+    if (this.hasFileUpload && (this.uploadState.isUploading || !this.uploadState.documentId)) {
+      return true;
+    }
+    return false;
+  }
 
   ngOnDestroy(): void {
     this._subscription.unsubscribe();
   }
+
   ngOnInit() {
-    // closing when navigating back from the browser
     this._subscription.add(
       this.router.events.pipe(filter((event) => event instanceof NavigationStart)).subscribe(() => {
         if (this.dynamicDialogConfig) {
@@ -50,15 +67,23 @@ export class ConfirmationDialogComponent extends DynamicDialogRef implements OnI
         }
       })
     );
-    this.dialogFormData = this.dynamicDialogConfig.data?.inputForm;
-  }
-  submit() {
-    // we should pass submitted data when using form dialog
-    // const submitData = { submitted: true, data: this.dialogFormData?.formGroup?.value };
-    // this._ref.close(this.dynamicDialogConfig.data.inputForm ? submitData : true);
-    if(this.uploadedFile) {
-      this._ref.close({isSubmitted: true, file: this.uploadedFile});
 
+    const inputForm = this.dynamicDialogConfig.data?.inputForm;
+    const fileUpload = inputForm?.fileUpload ?? this.dynamicDialogConfig.data?.fileUpload;
+
+    this.dialogFormData = {
+      ...inputForm,
+      formGroup: inputForm?.formGroup ?? new FormGroup({}),
+      inputsMap: inputForm?.inputsMap ?? {},
+      fileUpload,
+    };
+  }
+
+  submit() {
+    if (this.documentId) {
+      this._ref.close({ isSubmitted: true, documentId: this.documentId });
+    } else if (this.uploadedFile) {
+      this._ref.close({ isSubmitted: true, file: this.uploadedFile });
     } else {
       this._ref.close(true);
     }
@@ -67,9 +92,24 @@ export class ConfirmationDialogComponent extends DynamicDialogRef implements OnI
   override close() {
     this._ref.close(false);
   }
+
   onPopFilesUploaded(file: any) {
-    this.uploadedFile = file
+    if (file?.documentId) {
+      this.documentId = file.documentId;
+    } else {
+      this.uploadedFile = file;
+    }
   }
-  onFileDeleted(file: any) {
+
+  onFileDeleted() {
+    this.documentId = null;
+    this.uploadedFile = null;
+  }
+
+  onUploadStateChange(state: FileUploadState) {
+    this.uploadState = state;
+    if (state.documentId) {
+      this.documentId = state.documentId;
+    }
   }
 }

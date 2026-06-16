@@ -1,0 +1,23 @@
+.confirmation-dialog {
+  .dialog-wrapper {
+    padding: 0.5rem;
+  }
+
+  &__content {
+    text-align: center;
+  }
+
+  &__message {
+    font-weight: 600;
+  }
+
+  &__hint {
+    color: #6b7280;
+  }
+
+  &__actions {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+  }
+}

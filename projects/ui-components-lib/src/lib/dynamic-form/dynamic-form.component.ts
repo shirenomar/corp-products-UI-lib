@@ -1,6 +1,6 @@
-import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges } from '@angular/core';
-import { FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { NgClass } from '@angular/common';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
+import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
 import { CheckboxModule } from 'primeng/checkbox';
 import { LocalizedLabelPipe } from '../../pipes/translate-key.pipe';
@@ -17,13 +17,19 @@ import {
   ValidationErrorsPipe,
 } from '../form-components';
 import { DualCalendarComponent } from './../dual-calender/dual-calendar.component';
-import { DynamicFormData, FormFieldTypeEnum, InputsMap } from './dynamic-form.interface';
+import {
+  DynamicFormData,
+  FileUploadConfig,
+  FileUploadState,
+  FormFieldTypeEnum,
+  InputsMap,
+} from './dynamic-form.interface';
 
 @Component({
   selector: 'app-dynamic-form',
   standalone: true,
   imports: [
-    CommonModule,
+    NgClass,
     ReactiveFormsModule,
     DatePickerComponent,
     ValidationErrorsPipe,
@@ -41,9 +47,8 @@ import { DynamicFormData, FormFieldTypeEnum, InputsMap } from './dynamic-form.in
   templateUrl: './dynamic-form.component.html',
   styleUrl: './dynamic-form.component.scss',
 })
-export class DynamicFormComponent implements OnInit {
+export class DynamicFormComponent implements OnInit, OnChanges {
   @Input({ required: true }) dynamicFormData: DynamicFormData;
-  // Generic field change outputs (optional for consumers)
   @Output() selectButtonChange = new EventEmitter<{ name: string; value: any }>();
   @Output() selectChange = new EventEmitter<{ name: string; event: any }>();
   @Output() selectClicked = new EventEmitter<{ name: string; event: any }>();
@@ -52,11 +57,18 @@ export class DynamicFormComponent implements OnInit {
   @Output() autoCompleteSelect = new EventEmitter<{ name: string; event: any }>();
   @Output() popUpFilesUploaded = new EventEmitter<any>();
   @Output() fileDeleted = new EventEmitter<{ fileId: string; isNew: boolean }>();
+  @Output() uploadStateChange = new EventEmitter<FileUploadState>();
+
   inputsNames: string[] = [];
   formGroup: FormGroup;
   inputsMap: InputsMap;
+  standaloneFileControl = new FormControl<string | null>(null);
   readonly fieldType = FormFieldTypeEnum;
   getFormControl = FormUtils.getFormControl;
+
+  get fileUploadConfig(): FileUploadConfig | undefined {
+    return this.dynamicFormData?.fileUpload;
+  }
 
   ngOnInit(): void {
     this.updateFormState();
@@ -74,14 +86,31 @@ export class DynamicFormComponent implements OnInit {
     this.inputsNames = Object.keys(this.inputsMap || {});
   }
 
-  getAcceptedTypes(): string {
-    return FileExtentions.toString();
+  getAcceptedTypes(fileUpload?: FileUploadConfig): string {
+    return fileUpload?.acceptedTypes ?? FileExtentions.toString();
+  }
+
+  getMaxFileSize(fileUpload?: FileUploadConfig): number {
+    return fileUpload?.maxFileSize ?? 262144000;
+  }
+
+  getFileUploadConfig(inputName: string): FileUploadConfig | undefined {
+    return this.inputsMap[inputName]?.fileUpload ?? this.dynamicFormData?.fileUpload;
+  }
+
+  hasUploadFileField(): boolean {
+    return this.inputsNames.some((name) => this.inputsMap[name].fieldType === FormFieldTypeEnum.UPLOAD_FILE);
   }
 
   onFilesUploaded(file: any) {
     this.popUpFilesUploaded.emit(file);
   }
+
   onFileDeleted(file: any) {
     this.fileDeleted.emit(file);
+  }
+
+  onUploadStateChange(state: FileUploadState) {
+    this.uploadStateChange.emit(state);
   }
 }

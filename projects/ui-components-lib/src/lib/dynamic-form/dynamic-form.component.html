@@ -119,9 +119,16 @@
         [variant]="inputsMap[inputName].variant || 'over'" [allowedDomains]="inputsMap[inputName]?.allowedDomains" />
       }
       @case(fieldType.UPLOAD_FILE) {
-      <app-file-management #fileManager #groupFileManager [maxFileSize]="262144000" [maxConcurrentUploads]="1"
-        [allowPreview]="true" [acceptedTypes]="getAcceptedTypes()" (filesUploaded)="onFilesUploaded($event)"
-        [control]="getFormControl(inputName, formGroup)" (fileDeleted)="onFileDeleted($event)" />
+      <app-file-management #fileManager #groupFileManager
+        [maxFileSize]="getMaxFileSize(getFileUploadConfig(inputName))"
+        [maxConcurrentUploads]="1"
+        [allowPreview]="true"
+        [acceptedTypes]="getAcceptedTypes(getFileUploadConfig(inputName))"
+        [uploadFn]="getFileUploadConfig(inputName)?.uploadFn"
+        (filesUploaded)="onFilesUploaded($event)"
+        (uploadStateChange)="onUploadStateChange($event)"
+        [control]="getFormControl(inputName, formGroup)"
+        (fileDeleted)="onFileDeleted($event)" />
       }
       }
     </div>

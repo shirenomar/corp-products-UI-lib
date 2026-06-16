@@ -1,5 +1,4 @@
 <div class="file-management">
-  <!-- Drop Zone -->
   @if (showDropZone()) {
     <div
       class="drop-zone upload-container"
@@ -28,25 +27,51 @@
     </div>
   }
 
-  <!-- Hidden file input (always present for programmatic access) -->
   <input
     #fileInput
     type="file"
     [accept]="acceptedTypes()"
-    multiple
+    [multiple]="!uploadFn()"
     hidden
     (change)="onFileInputChange($event)"
   />
 
-  @if(uploadedFile().length) {
-    @for(file of uploadedFile() ; track file) {
-      <div class="uploaded-files "  >
-         <p>{{file.name}}</p>
-         <i class="pi pi-trash" style="font-size: 1.5rem; color: #f00" (click)="deleteFile()"></i>
+  @for (file of newFiles(); track file.id) {
+    <div class="uploaded-files">
+      <div class="file-details">
+        <p class="file-name">{{ file.fileName }}</p>
+        @if (file.status === UploadStatus.UPLOADING) {
+          <span class="upload-percentage">{{ file.progress ?? 0 }}%</span>
+        } @else if (file.status === UploadStatus.SUCCESS) {
+          <i class="pi pi-check-circle success-icon"></i>
+        } @else if (file.status === UploadStatus.FAILED) {
+          <span class="upload-error-text">{{ file.error }}</span>
+        }
+      </div>
+      <i
+        class="pi pi-trash delete-icon"
+        [class.disabled]="file.status === UploadStatus.UPLOADING"
+        (click)="file.status !== UploadStatus.UPLOADING && onDeleteFile(file)"
+      ></i>
+    </div>
+    @if (file.status === UploadStatus.UPLOADING || (file.progress && file.progress > 0)) {
+      <p-progressBar [value]="file.progress ?? 0" [showValue]="false" styleClass="upload-progress-bar"></p-progressBar>
+    }
+  }
+
+  @if (!uploadFn() && uploadedFile().length) {
+    @for (file of uploadedFile(); track file.name) {
+      <div class="uploaded-files">
+        <p>{{ file.name }}</p>
+        <i class="pi pi-trash delete-icon" (click)="deleteFile()"></i>
       </div>
     }
   }
 
-  <!-- Files Table -->
-
+  @if (uploadErrorMessage) {
+    <div class="upload-error">
+      <i class="pi pi-exclamation-circle"></i>
+      <span>{{ uploadErrorMessage }}</span>
+    </div>
+  }
 </div>

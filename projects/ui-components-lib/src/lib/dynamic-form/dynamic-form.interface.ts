@@ -1,5 +1,15 @@
 import { FormGroup } from '@angular/forms';
+import { Observable } from 'rxjs';
 import { LabelValue } from '../form-components';
+import { FileUploadResponse, FileUploadState } from '../file-management/interfaces/file.interface';
+
+export type { FileUploadResponse, FileUploadState };
+
+export interface FileUploadConfig {
+  uploadFn: (file: File) => Observable<FileUploadResponse>;
+  acceptedTypes?: string;
+  maxFileSize?: number;
+}
 
 export type InputType = 'text' | 'textarea' | 'number';
 export type InputContentType = 'text' | 'email' | 'number';
@@ -67,6 +77,9 @@ export interface InputsMapData {
   minLengthToSearch?: number;
   delay?: number;
   allowedDomains?: string[] | undefined;
+
+  // File upload
+  fileUpload?: FileUploadConfig;
 }
 
 export interface InputsMap {
@@ -80,6 +93,7 @@ export interface DynamicFormData {
   title?: string;
   isReadOnlyForm?: boolean;
   formValidationErrorsKeys?: string[];
+  fileUpload?: FileUploadConfig;
 }
 
 export interface DateRangeInterface {
