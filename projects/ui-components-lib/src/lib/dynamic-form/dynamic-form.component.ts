@@ -4,7 +4,7 @@ import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
 import { CheckboxModule } from 'primeng/checkbox';
 import { LocalizedLabelPipe } from '../../pipes/translate-key.pipe';
-import { FileExtentions } from '../file-management/consts/accept-file-types';
+import { FileExtentions, formatFileExtensionsForAccept } from '../file-management/consts/accept-file-types';
 import { FileManagementComponent } from '../file-management/file-management.component';
 import {
   AutoCompleteComponent,
@@ -87,7 +87,10 @@ export class DynamicFormComponent implements OnInit, OnChanges {
   }
 
   getAcceptedTypes(fileUpload?: FileUploadConfig): string {
-    return fileUpload?.acceptedTypes ?? FileExtentions.toString();
+    if (fileUpload?.acceptedTypes) {
+      return fileUpload.acceptedTypes;
+    }
+    return formatFileExtensionsForAccept(FileExtentions);
   }
 
   getMaxFileSize(fileUpload?: FileUploadConfig): number {

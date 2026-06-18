@@ -54,9 +54,6 @@
         (click)="file.status !== UploadStatus.UPLOADING && onDeleteFile(file)"
       ></i>
     </div>
-    @if (file.status === UploadStatus.UPLOADING || (file.progress && file.progress > 0)) {
-      <p-progressBar [value]="file.progress ?? 0" [showValue]="false" styleClass="upload-progress-bar"></p-progressBar>
-    }
   }
 
   @if (!uploadFn() && uploadedFile().length) {

@@ -12,7 +12,6 @@ import {
 import { CommonModule } from '@angular/common';
 import { TranslatePipe } from '@ngx-translate/core';
 import { ButtonModule } from 'primeng/button';
-import { ProgressBar } from 'primeng/progressbar';
 import { TooltipModule } from 'primeng/tooltip';
 import { finalize, Observable, Subscription } from 'rxjs';
 
@@ -29,7 +28,7 @@ import { BaseInputComponent } from '../form-components/components/base-input.com
 
 @Component({
   selector: 'app-file-management',
-  imports: [CommonModule, TranslatePipe, ButtonModule, TooltipModule, FileSizePipe, ProgressBar],
+  imports: [CommonModule, TranslatePipe, ButtonModule, TooltipModule, FileSizePipe],
   templateUrl: './file-management.component.html',
   styleUrl: './file-management.component.scss',
 })
@@ -353,6 +352,10 @@ export class FileManagementComponent extends BaseInputComponent implements OnDes
       }
       if (type.endsWith('/*')) {
         return fileType.startsWith(type.replace('/*', '/'));
+      }
+      // bare extension without dot (e.g. "pdf" from FileExtentions.join)
+      if (!type.includes('/')) {
+        return fileExt === `.${type}`;
       }
       return fileType === type;
     });

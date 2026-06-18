@@ -13,7 +13,7 @@ import {
 import { filter, Subscription } from 'rxjs';
 import { AppButtonComponent } from '../app-button/app-button.component';
 import { DynamicFormComponent } from '../dynamic-form/dynamic-form.component';
-import { DynamicFormData, FileUploadState } from '../dynamic-form/dynamic-form.interface';
+import { DynamicFormData, FileUploadState, FormFieldTypeEnum } from '../dynamic-form/dynamic-form.interface';
 
 @Component({
   selector: 'app-confirm-dialog',
@@ -42,7 +42,14 @@ export class ConfirmationDialogComponent extends DynamicDialogRef implements OnI
   uploadState: FileUploadState = { isUploading: false, documentId: null, hasFile: false };
 
   get hasFileUpload(): boolean {
-    return !!this.dialogFormData?.fileUpload;
+    return !!this.dialogFormData?.fileUpload || this.hasFileUploadField();
+  }
+
+   hasFileUploadField(): boolean {
+    const inputsMap = this.dialogFormData?.inputsMap ?? {};
+    return Object.values(inputsMap).some(
+      (field) => field.fieldType === FormFieldTypeEnum.UPLOAD_FILE && !!field.fileUpload?.uploadFn
+    );
   }
 
   get isConfirmDisabled(): boolean {
@@ -81,7 +88,11 @@ export class ConfirmationDialogComponent extends DynamicDialogRef implements OnI
 
   submit() {
     if (this.documentId) {
-      this._ref.close({ isSubmitted: true, documentId: this.documentId });
+      this._ref.close({
+        isSubmitted: true,
+        documentId: this.documentId,
+        data: this.dialogFormData?.formGroup?.value,
+      });
     } else if (this.uploadedFile) {
       this._ref.close({ isSubmitted: true, file: this.uploadedFile });
     } else {
