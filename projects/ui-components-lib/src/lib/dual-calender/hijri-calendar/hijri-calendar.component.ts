@@ -24,6 +24,7 @@ import { DynamicHijriI18n } from '../services/islamic-i18n.service';
 export class HijriCalendarComponent  implements OnChanges   {
   @Input() model!: NgbDateStruct;
   @Input() disabledDays: number[] = []; // 0 = Sunday, 1 = Monday, ..., 6 = Saturday
+  @Input() disabledDates: Date[] = [];
   @Output() dateSelected = new EventEmitter<NgbDateStruct>();
   @Input() language: 'ar' | 'en' = 'en';
   renderer = inject(Renderer2)
@@ -65,9 +66,22 @@ ngAfterViewInit() {
   }
 
   isDisabled = (date: NgbDateStruct): boolean => {
-    if (!this.disabledDays || this.disabledDays.length === 0) return false;
     const ngbDate = new NgbDate(date.year, date.month, date.day);
     const gregDate = this.calendar.toGregorian(ngbDate);
-    return this.disabledDays.includes(gregDate.getDay());
+
+    if (this.disabledDays?.length && this.disabledDays.includes(gregDate.getDay())) {
+      return true;
+    }
+
+    if (this.disabledDates?.length) {
+      return this.disabledDates.some(
+        (d) =>
+          d.getFullYear() === gregDate.getFullYear() &&
+          d.getMonth() === gregDate.getMonth() &&
+          d.getDate() === gregDate.getDate()
+      );
+    }
+
+    return false;
   };
 }

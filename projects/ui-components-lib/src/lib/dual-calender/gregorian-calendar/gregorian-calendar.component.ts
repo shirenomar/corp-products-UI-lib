@@ -24,6 +24,7 @@ import { DynamicGregorianI18n } from './../services/gregorian-i18n.service';
 export class GregorianCalendarComponent implements OnChanges {
   @Input() model!: NgbDateStruct;
   @Input() disabledDays: number[] = []; // 0 = Sunday, 1 = Monday, ..., 6 = Saturday
+  @Input() disabledDates: Date[] = [];
   @Output() dateSelected = new EventEmitter<NgbDateStruct>();
   renderer = inject(Renderer2)
   @Input() language: 'ar' | 'en' = 'en';
@@ -63,8 +64,22 @@ export class GregorianCalendarComponent implements OnChanges {
   }
 
   isDisabled = (date: NgbDateStruct): boolean => {
-    if (!this.disabledDays || this.disabledDays.length === 0) return false;
-    const jsDate = new Date(date.year, date.month - 1, date.day);
-    return this.disabledDays.includes(jsDate.getDay());
+    if (this.disabledDays?.length) {
+      const jsDate = new Date(date.year, date.month - 1, date.day);
+      if (this.disabledDays.includes(jsDate.getDay())) {
+        return true;
+      }
+    }
+
+    if (this.disabledDates?.length) {
+      return this.disabledDates.some(
+        (d) =>
+          d.getFullYear() === date.year &&
+          d.getMonth() + 1 === date.month &&
+          d.getDate() === date.day
+      );
+    }
+
+    return false;
   };
 }

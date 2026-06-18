@@ -70,6 +70,7 @@ export class DualCalendarComponent implements OnInit , OnChanges , OnDestroy {
   hijriModel!: NgbDateStruct;
   @Input() currentLang = signal<'ar' | 'en'>('ar');
   @Input() disabledDays: number[] = []; // 0 = Sunday, 1 = Monday, ..., 6 = Saturday
+  @Input() disabledDates: Date[] = [];
   @Output() gregorianUTC = new EventEmitter<string>();
   @Output() onClose = new EventEmitter<boolean>();
 

@@ -5,6 +5,7 @@
       @switch (inputsMap[inputName].fieldType) {
       @case (fieldType.HIJRI_DATE_PICKER) {
       <app-dual-calendar [control]="getFormControl(inputName, formGroup)"
+        [disabledDates]="inputsMap[inputName].disabledDates || []"
         [disabledDays]="inputsMap[inputName].disabledDays || []"></app-dual-calendar>
       }
 
