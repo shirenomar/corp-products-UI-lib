@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, inject, signal, ViewEncapsulation } from '@angular/core';
 
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { delay, Observable, of } from 'rxjs';
 
 import { DialogService } from 'primeng/dynamicdialog';
 import { SideBar } from './side-bar/side-bar';
@@ -500,6 +501,11 @@ export class App {
       rowSize: 'half',
       showIcon: true,
       variant: 'in',
+      fileUpload: {
+        uploadFn: (file) => this.mockFileUpload(file),
+        acceptedTypes: '.pdf,.doc,.docx,.jpg,.png',
+        maxFileSize: 10485760,
+      },
     },
     comment: {
       label: 'follow_up.comment',
@@ -519,6 +525,65 @@ export class App {
     title: 'Confirm Action',
     isReadOnlyForm: false,
   };
+
+  dialogFileUploadFormGroup = new FormGroup({
+    document: new FormControl<string | null>(null),
+    comment: new FormControl<string>('', [Validators.required]),
+  });
+
+  dialogFileUploadInputsMap: InputsMap = {
+    document: {
+      label: 'Upload Document',
+      fieldType: FormFieldTypeEnum.UPLOAD_FILE,
+      inputId: 'dlg-document',
+      rowSize: 'full',
+      fileUpload: {
+        uploadFn: (file) => this.mockFileUpload(file),
+        acceptedTypes: '.pdf,.doc,.docx',
+        maxFileSize: 10485760,
+      },
+    },
+    comment: {
+      label: 'Comment',
+      fieldType: FormFieldTypeEnum.INPUT,
+      inputId: 'dlg-comment',
+      rowSize: 'full',
+      inputType: 'textarea',
+      placeholder: 'Add a comment',
+      variant: 'in',
+      rows: 3,
+    },
+  };
+
+  mockFileUpload(file: File): Observable<{ documentId: string }> {
+    console.log('Mock upload:', file.name, file.type, file.size);
+    return of({ documentId: `doc-${Date.now()}` }).pipe(delay(1500));
+  }
+
+  openConfirmWithFileUpload() {
+    this.confirmationDialogService
+      .open({
+        header: 'Upload Document',
+        message: 'Please upload a PDF document to confirm this action.',
+        hint: 'Accepted: PDF, DOC, DOCX (max 10MB). Upload starts immediately on file selection.',
+        confirmBtnLabel: 'Confirm',
+        cancelBtnLabel: 'Cancel',
+        confirmBtnId: 'confirm-file-upload',
+        cancelBtnId: 'cancel-file-upload',
+        inputForm: {
+          formGroup: this.dialogFileUploadFormGroup,
+          inputsMap: this.dialogFileUploadInputsMap,
+        },
+      })
+      .subscribe((result) => {
+        if (result?.isSubmitted) {
+          console.log('File upload confirmed. documentId:', result.documentId, 'form:', this.dialogFileUploadFormGroup.value);
+        } else {
+          console.log('File upload dialog canceled');
+        }
+      });
+  }
+
   openCancelFollowUp() {
     this.confirmationDialogService
       .open({
