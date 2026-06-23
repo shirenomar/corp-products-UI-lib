@@ -94,6 +94,36 @@
     white-space: nowrap;
   }
 
+  .file-size {
+    font-size: 0.75rem;
+    color: #6b7280;
+  }
+
+  .upload-status {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+
+    &.uploading {
+      color: var(--p-orange-500, #f59e0b);
+      
+      .upload-percentage {
+        color: inherit;
+      }
+    }
+
+    &.success {
+      color: #16a34a;
+
+      .success-icon {
+        color: inherit;
+        font-size: 1rem;
+      }
+    }
+  }
+
   .upload-percentage {
     font-size: 0.875rem;
     font-weight: 500;

@@ -21,6 +21,14 @@
     "gregorian": "الميلادي",
     "hijri": "الهجري"
   },
+  "file": {
+    "drag_drop_files": "اسحب الملفات وأفلتها هنا",
+    "browse": "تصفح",
+    "max_size_hint": "الحد الأقصى للحجم",
+    "accepted_types": "الأنواع المقبولة",
+    "uploading": "جاري التحميل",
+    "uploaded": "تم التحميل"
+  },
   "VALIDATION": {
     "required": "هذا الحقل مطلوب",
     "email": "يرجى إدخال عنوان بريد إلكتروني صالح",
