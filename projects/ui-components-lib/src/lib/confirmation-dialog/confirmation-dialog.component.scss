@@ -1,10 +1,21 @@
+.confirmation-dialog-wrapper {
+  .p-dialog-header {
+    justify-content: space-between;
+  }
+
+  .p-dialog-title {
+    text-align: start;
+    flex: 1;
+  }
+}
+
 .confirmation-dialog {
   .dialog-wrapper {
     padding: 0.5rem;
   }
 
   &__content {
-    text-align: center;
+    text-align: start;
   }
 
   &__message {
@@ -19,5 +30,9 @@
     display: flex;
     justify-content: center;
     gap: 0.5rem;
+  }
+
+  .dynamic-form {
+    text-align: start;
   }
 }
