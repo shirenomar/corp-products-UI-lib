@@ -1,0 +1,26 @@
+.alert-dialog-wrapper {
+  .p-dialog-header {
+    justify-content: space-between;
+  }
+
+  .p-dialog-title {
+    text-align: start;
+    flex: 1;
+  }
+}
+
+.alert-dialog {
+  &__content {
+    text-align: start;
+  }
+
+  &__message {
+    font-weight: 600;
+  }
+
+  &__actions {
+    display: flex;
+    justify-content: end;
+    gap: 0.5rem;
+  }
+}

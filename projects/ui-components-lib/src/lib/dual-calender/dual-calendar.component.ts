@@ -1,6 +1,12 @@
 import { Component, effect, ElementRef, EventEmitter, HostListener, inject, Input, OnChanges, OnDestroy, OnInit, Output, Renderer2, signal, SimpleChanges, ViewChild, ViewEncapsulation } from '@angular/core';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { NgbCalendar, NgbDateStruct, NgbCalendarIslamicUmalqura, NgbDatepickerModule, NgbDate } from '@ng-bootstrap/ng-bootstrap';
+import {
+  NgbCalendar,
+  NgbDateStruct,
+  NgbCalendarIslamicUmalqura,
+  NgbDatepickerModule,
+  NgbDate,
+} from '@ng-bootstrap/ng-bootstrap';
 import { HijriCalendarComponent } from './hijri-calendar/hijri-calendar.component';
 import { GregorianCalendarComponent } from './gregorian-calendar/gregorian-calendar.component';
 import { FloatLabelModule } from 'primeng/floatlabel';
@@ -11,20 +17,23 @@ import '@angular/localize/init';
 import { getGregorianMonthName, getHijriMonthName } from './utils/date-i18n.utils';
 import { formatDate } from '@angular/common';
 import { DateFormats } from '../../enums/date-formatter';
-import { TranslatePipe } from '@ngx-translate/core';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
+import { Subscription } from 'rxjs';
 @Component({
   selector: 'app-dual-calendar',
   animations: [
     trigger('slideDown', [
       state('closed', style({
-        height: '0px',
-        opacity: 0,
-        overflow: 'hidden'
+          height: '0px',
+          opacity: 0,
+          overflow: 'hidden',
+          pointerEvents: 'none',
       })),
       state('open', style({
-        height: '*',
-        opacity: 1,
-        overflow: 'hidden'
+          height: '*',
+          opacity: 1,
+        overflow: 'hidden',
+        pointerEvents: 'auto',
       })),
       transition('closed <=> open', [
         animate('300ms ease')
@@ -33,7 +42,6 @@ import { TranslatePipe } from '@ngx-translate/core';
   ],
   imports: [
     NgbDatepickerModule,
-    FormsModule,
     FormsModule,
     ReactiveFormsModule,
     DatePickerModule,
@@ -61,31 +69,57 @@ export class DualCalendarComponent implements OnInit , OnChanges , OnDestroy {
   mode: 'gregorian' | 'hijri' = 'gregorian';
   gregorianModel!: NgbDateStruct;
   hijriModel!: NgbDateStruct;
-  @Input() currentLang = signal<'ar' | 'en'>('ar');
+  @Input() lang: 'ar' | 'en' | undefined = undefined;
+  @Input() disabledDays: number[] = [];
+  @Input() disabledDates: Date[] = [];
   @Output() gregorianUTC = new EventEmitter<string>();
   @Output() onClose = new EventEmitter<boolean>();
 
-  gregorianUTCValue  = ''
-  @Input() isShown =  false;
+  currentLang = signal<'ar' | 'en'>('ar');
+  gregorianUTCValue = '';
+  @Input() isShown = false;
   @Input() appedToBody = false;
   @ViewChild('calendarContainer') calendarContainer!: ElementRef;
   hijriCal = new NgbCalendarIslamicUmalqura();
   renderer = inject(Renderer2);
+  private hostEl = inject(ElementRef);
+  private translateService = inject(TranslateService);
+  private langSubscription?: Subscription;
 
   constructor() {
     effect(() => {
-      this.currentLang(); // 👈 track signal
-      this.setDate(this.gregorianUTCValue)
+      this.currentLang();
+      this.setDate(this.gregorianUTCValue);
     });
   }
+
   ngOnChanges(changes: SimpleChanges): void {
+    if (changes['lang']?.currentValue) {
+      this.currentLang.set(changes['lang'].currentValue);
+    }
     if (changes['isShown']?.currentValue) {
       this.wrapperVisible();
-    }else {
+      setTimeout(() => this.positionCalendar());
+    } else {
       this.wrapperHidden();
     }
   }
+
   ngOnInit() {
+    if (this.lang) {
+      this.currentLang.set(this.lang);
+    } else {
+      const initialLang = this.translateService.getCurrentLang() || this.translateService.getFallbackLang();
+      if (initialLang === 'en' || initialLang === 'ar') {
+        this.currentLang.set(initialLang);
+      }
+      this.langSubscription = this.translateService.onLangChange.subscribe(({ lang }) => {
+        if (!this.lang && (lang === 'en' || lang === 'ar')) {
+          this.currentLang.set(lang);
+        }
+      });
+    }
+
     this.setDate(this.control?.value);
   }
 
@@ -121,6 +155,30 @@ export class DualCalendarComponent implements OnInit , OnChanges , OnDestroy {
     this.renderer.setStyle(this.calendarWrapper.nativeElement, 'visibility', 'hidden');
   }
 
+  private positionCalendar(): void {
+    if (!this.calendarWrapper) return;
+    const anchor = this.hostEl.nativeElement.previousElementSibling || this.hostEl.nativeElement;
+    const triggerRect = anchor.getBoundingClientRect();
+    const el = this.calendarWrapper.nativeElement;
+    const calendarHeight = el.scrollHeight || 370;
+    const calendarWidth = el.scrollWidth || 375;
+    const spaceBelow = window.innerHeight - triggerRect.bottom;
+    const spaceAbove = triggerRect.top;
+
+    if (spaceBelow >= calendarHeight || spaceBelow >= spaceAbove) {
+      el.style.top = `${triggerRect.bottom}px`;
+      el.style.bottom = 'auto';
+    } else {
+      el.style.bottom = `${window.innerHeight - triggerRect.top}px`;
+      el.style.top = 'auto';
+    }
+
+    let left = triggerRect.right - calendarWidth;
+    if (left < 8) left = 8;
+    if (left + calendarWidth > window.innerWidth - 8) left = window.innerWidth - calendarWidth - 8;
+    el.style.left = `${left}px`;
+  }
+
   setDate(value: string | null) {
     if (!value) return;
 
@@ -139,7 +197,7 @@ export class DualCalendarComponent implements OnInit , OnChanges , OnDestroy {
   @HostListener('document:click', ['$event'])
   onDocumentClick(event: MouseEvent) {
     event.stopPropagation()
-    if (!this.calendarContainer) return;
+    if (!this.calendarContainer || !this.isShown) return;
     const clickedInside = this.calendarContainer.nativeElement.contains(event.target);
     this.onClose.emit(!clickedInside)
     if (!clickedInside) {
@@ -194,6 +252,7 @@ export class DualCalendarComponent implements OnInit , OnChanges , OnDestroy {
     this.isShown = isOpen;
     if(isOpen) {
       this.wrapperVisible();
+      setTimeout(() => this.positionCalendar());
     } else {
       this.wrapperHidden();
     }
@@ -212,6 +271,7 @@ export class DualCalendarComponent implements OnInit , OnChanges , OnDestroy {
   }
 
   ngOnDestroy(): void {
+    this.langSubscription?.unsubscribe();
     if (this.appedToBody && this.calendarWrapper) {
       this.renderer.removeChild(document.body, this.calendarWrapper.nativeElement);
     }

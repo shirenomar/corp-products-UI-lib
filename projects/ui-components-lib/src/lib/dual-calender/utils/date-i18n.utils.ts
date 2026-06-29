@@ -1,6 +1,6 @@
 export const WEEKDAYS = {
   ar: ['ن', 'ث', 'ر', 'خ', 'ج', 'س', 'ح'],
-  en: ['M', 'T', 'W', 'T', 'F', 'S', 'S']
+  en: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
 };
 
 export const MONTHS_GREGORIAN = {

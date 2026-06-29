@@ -14,14 +14,15 @@
         {{ dynamicDialogConfig.data.hint }}
       </p>
       }
-      @if (dynamicDialogConfig.data.inputForm) {
-      <app-dynamic-form [dynamicFormData]="dialogFormData"  (popUpFilesUploaded)="onPopFilesUploaded($event)" (fileDeleted)="onFileDeleted($event)" ></app-dynamic-form>
+      @if (dynamicDialogConfig.data.inputForm || hasFileUpload) {
+      <app-dynamic-form [dynamicFormData]="dialogFormData" (popUpFilesUploaded)="onPopFilesUploaded($event)"
+        (fileDeleted)="onFileDeleted()" (uploadStateChange)="onUploadStateChange($event)"></app-dynamic-form>
       }
     </div>
     }
     <div class="confirmation-dialog__actions flex gap-2 mt-4">
       <app-button [title]="dynamicDialogConfig.data?.confirmLabel || ('actions.confirm' | translate)"
-        [disabled]="!!(dialogFormData && dialogFormData.formGroup?.invalid)" [severity]="'primary'"
+        [disabled]="isConfirmDisabled" [severity]="'primary'"
         [id]="dynamicDialogConfig.data.confirmBtnId" [icon]="dynamicDialogConfig.data.confirmBtnIcon || ''"
         [label]="dynamicDialogConfig.data.confirmBtnLabel"
         [iconPos]="dynamicDialogConfig.data.confirmBtnPosition || 'left'" [styleClass]="'confirmation-btn'"

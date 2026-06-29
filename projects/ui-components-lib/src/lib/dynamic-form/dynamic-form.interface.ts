@@ -1,7 +1,17 @@
 import { FormGroup } from '@angular/forms';
+import { Observable } from 'rxjs';
 import { LabelValue } from '../form-components';
+import { FileUploadResponse, FileUploadState } from '../file-management/interfaces/file.interface';
 
-export type InputType = 'text' | 'textarea';
+export type { FileUploadResponse, FileUploadState };
+
+export interface FileUploadConfig {
+  uploadFn: (file: File) => Observable<FileUploadResponse>;
+  acceptedTypes?: string;
+  maxFileSize?: number;
+}
+
+export type InputType = 'text' | 'textarea' | 'number';
 export type InputContentType = 'text' | 'email' | 'number';
 
 export interface Dropdown<T = unknown> {
@@ -31,6 +41,8 @@ export interface InputsMapData {
   minlength?: number;
   // Date
   dateRange?: DateRangeInterface;
+  disabledDates?: Date[];
+  disabledDays?: number[]; // 0 = Sunday, 1 = Monday, ..., 6 = Saturday
   isTimeOnly?: boolean;
   showIcon?: boolean;
   withoutTime?: boolean;
@@ -65,6 +77,9 @@ export interface InputsMapData {
   minLengthToSearch?: number;
   delay?: number;
   allowedDomains?: string[] | undefined;
+
+  // File upload
+  fileUpload?: FileUploadConfig;
 }
 
 export interface InputsMap {
@@ -78,6 +93,7 @@ export interface DynamicFormData {
   title?: string;
   isReadOnlyForm?: boolean;
   formValidationErrorsKeys?: string[];
+  fileUpload?: FileUploadConfig;
 }
 
 export interface DateRangeInterface {

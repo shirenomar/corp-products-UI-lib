@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-inferrable-types */
 import { NgClass } from '@angular/common';
-import { Component, EventEmitter, Input, Output, ViewEncapsulation } from '@angular/core';
+import { AfterViewInit, Component, EventEmitter, Input, Output, ViewEncapsulation } from '@angular/core';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ValidationErrorsPipe } from '../../@utils/validations';
 import { DatePicker, DatePickerModule } from 'primeng/datepicker';
@@ -25,13 +25,15 @@ import { DateFormats } from '../../../../enums/date-formatter';
   styleUrl: './date-picker.component.scss',
   encapsulation: ViewEncapsulation.None,
 })
-export class DatePickerComponent extends BaseInputComponent {
+export class DatePickerComponent extends BaseInputComponent implements AfterViewInit {
   @Input() showIcon: boolean = false;
   @Input() showClear: boolean = false;
   @Input() basicInput!: boolean;
   @Input() isTimeOnly: boolean = false;
   @Input() minDate: Date | undefined | null;
   @Input() maxDate: Date | undefined | null;
+  @Input() disabledDates: Date[] = [];
+  @Input() disabledDays: number[] = []; // 0 = Sunday, 1 = Monday, ..., 6 = Saturday
   @Input() hourFormat: '12' | '24' = '12';
   @Input() appendTo = 'body'
   nowTime = new Date();
@@ -40,12 +42,11 @@ export class DatePickerComponent extends BaseInputComponent {
   @Input() variant: 'in' | 'over' | 'on' = 'over';
   @Input() withoutTime: boolean = false;
   innerControl = new FormControl<Date | null>(null);
-
   constructor() {
     super();
   }
 
-  override ngOnInit() {
+  ngAfterViewInit(): void {
     if (typeof this.control?.value === 'string') {
       const date = new Date(this.control.value);
       if (date) {
@@ -54,9 +55,9 @@ export class DatePickerComponent extends BaseInputComponent {
     }
 
     this.control.valueChanges.subscribe((value) => {
+      this.innerControl.setValue(new Date(value), { emitEvent: false });
       if (!value) this.innerControl.reset();
     });
-
   }
 
   selectCurrentTime(e: any) {
@@ -78,10 +79,10 @@ export class DatePickerComponent extends BaseInputComponent {
   }
 
   onDateChange(value: Date): void {
-  if (!value) return;
+    if (!value) return;
     const dateValue = value instanceof Date ? value : new Date(value);
     const formattedDate = this.withoutTime ?
-    DateHandler.formatDate(dateValue.toISOString(), DateFormats.DATE_ONLY) : DateHandler.getUTCDateTimeFromJsDate(dateValue);
+      DateHandler.formatDate(dateValue.toISOString(), DateFormats.DATE_ONLY) : DateHandler.getUTCDateTimeFromJsDate(dateValue);
     this.control.setValue(formattedDate, { emitEvent: true });
   }
 }

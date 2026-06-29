@@ -1,6 +1,5 @@
 import { inject, Injectable } from '@angular/core';
-import { TranslateService } from '@ngx-translate/core';
-import { InterpolationParameters } from '@ngx-translate/core';
+import { InterpolationParameters, TranslateService } from '@ngx-translate/core';
 import { BasicErrorKeysEnum, ErrorsWithValuesKeysEnum } from './error-keys.enum';
 
 @Injectable({
@@ -21,7 +20,7 @@ export class FormValidationService {
     if (this.isErrorWithValueKey(errorKey)) {
       return this.getErrorWithValueMessage(
         errorKey as keyof typeof ErrorsWithValuesKeysEnum,
-        errorValue
+        errorValue,
       );
     }
 
@@ -40,7 +39,7 @@ export class FormValidationService {
 
   private getErrorWithValueMessage(
     errorKey: keyof typeof ErrorsWithValuesKeysEnum,
-    errorValue: any
+    errorValue: any,
   ): string {
     const messages: Record<keyof typeof ErrorsWithValuesKeysEnum, (value: any) => string> = {
       minlength: (val) =>
@@ -53,6 +52,11 @@ export class FormValidationService {
           requiredLength: val?.requiredLength,
           actualLength: val?.actualLength,
         }),
+      maxRepeatedChars: (val) =>
+        this.getTranslation(ErrorsWithValuesKeysEnum.maxRepeatedChars, {
+          maxRepeats: val?.maxRepeats,
+        }),
+
       min: (val) => this.getTranslation(ErrorsWithValuesKeysEnum.min, { min: val?.min }),
       max: (val) => this.getTranslation(ErrorsWithValuesKeysEnum.max, { max: val?.max }),
       maxSize: (val) =>
@@ -61,6 +65,7 @@ export class FormValidationService {
         this.getTranslation(ErrorsWithValuesKeysEnum.maxFiles, { size: val?.requiredLength }),
       allowedTypes: (val) =>
         this.getTranslation(ErrorsWithValuesKeysEnum.allowedTypes, { types: val?.join(', ') }),
+      emailDomain: () => this.getTranslation(ErrorsWithValuesKeysEnum.emailDomain),
     };
 
     return messages[errorKey](errorValue);

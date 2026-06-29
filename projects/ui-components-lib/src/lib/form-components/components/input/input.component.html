@@ -30,23 +30,38 @@
     <p-inputicon>
       <i [class]="iconClass"></i>
     </p-inputicon>
-    <input pInputText [id]="inputId" type="text" [placeholder]="placeholder" [formControl]="control" [readonly]="readonly"
+    <input pInputText [id]="inputId" type="text" [placeholder]="placeholder" [formControl]="control"
+      [readonly]="readonly"
       [class]="
           'w-full border border-[' + defaultColor + '] rounded-none focus:outline-[' + defaultColor + '] focus:border-[' + defaultColor + '] hover:border-[' + defaultColor + '] disabled:opacity-50'"
       [ngClass]="{ 'p-invalid ng-dirty ng-invalid': isInvalid, 'basic-style': basicInput, 'no-style':noStyle}" />
     @if (canClear && control.value) {
     <p-inputIcon (click)="clearInput()">
       <i class="pi pi-times cursor-pointer text-sm text-gray-400 hover:text-gray-600"></i>
-      </p-inputIcon>
+    </p-inputIcon>
     }
 
   </p-iconfield>
   }
+  @case ('number'){
+  <p-floatlabel [variant]="variant">
+    <p-inputnumber [id]="inputId" [showButtons]="true" inputId="minmax-buttons" [showClear]="true"
+      [formControl]="control" [readonly]="readonly" [maxlength]="maxLength" [class]="
+        'w-full border border-[' + defaultColor + '] rounded-none focus:outline-[' + defaultColor + '] focus:border-[' + defaultColor + '] hover:border-[' + defaultColor + '] disabled:opacity-50'
+        " [disabled]="disabled" [name]="name" [ngStyle]="{'direction': inputDirection || 'inherit'}" class="w-full"
+      [ngClass]="{ 'p-invalid ng-dirty ng-invalid': isInvalid, 'basic-style': basicInput, 'no-style':noStyle}" />
+    <label [for]="inputId">
+      {{ label }}
+      @if (required) {
+      <span [class.text-required]="required">*</span>
+      }
+    </label>
+  </p-floatlabel>
+  }
   @default {
   <p-floatlabel [variant]="variant">
     <!-- <input pInputText id="value2" [(ngModel)]="value2" [invalid]="!value2" autocomplete="off" /> -->
-    <input [id]="inputId" [type]="'text-float-label'" [formControl]="control" [readonly]="readonly" [pSize]="size"
-      [class]="
+    <input [id]="inputId" [type]="type" [formControl]="control" [readonly]="readonly" [pSize]="size" [class]="
         'w-full border border-[' + defaultColor + '] rounded-none focus:outline-[' + defaultColor + '] focus:border-[' + defaultColor + '] hover:border-[' + defaultColor + '] disabled:opacity-50'
         " [disabled]="disabled" [name]="name" pInputText [ngStyle]="{'direction': inputDirection || 'inherit'}"
       class="w-full"
