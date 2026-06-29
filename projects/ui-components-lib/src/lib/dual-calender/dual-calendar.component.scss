@@ -1,6 +1,12 @@
 .calendar-wrapper {
   max-width: 375px;
   padding: 15px;
+  position: fixed;
+  z-index: 9999;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  background-color: #fff;
+  border-radius: 4px;
+  overflow: hidden;
 
   .ngb-dp-header {
     .ngb-dp-arrow.ngb-dp-arrow-next {
@@ -128,22 +134,10 @@
   position: relative;
 }
 
-.calendar-wrapper {
-  position: absolute;
-  top: 100%;
-  left: 0;
-  z-index: 50;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-  background-color: #fff;
-  border-radius: 4px;
-  overflow: hidden;
-}
-
 .ngb-datepicker {
   width: 100%;
 
-  .ngb-dp-month {
-  }
+  .ngb-dp-month {}
 }
 
 .custom-day {
@@ -241,7 +235,7 @@
   }
 }
 
-.ngb-datepicker-navigation-select > .form-select {
+.ngb-datepicker-navigation-select>.form-select {
   font-size: 14px;
   font-weight: bold;
 }

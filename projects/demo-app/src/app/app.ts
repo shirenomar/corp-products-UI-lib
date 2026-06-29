@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, inject, signal, ViewEncapsulation } from '@angular/core';
 
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { delay, Observable, of } from 'rxjs';
 
 import { DialogService } from 'primeng/dynamicdialog';
 import { SideBar } from './side-bar/side-bar';
@@ -14,6 +15,7 @@ import {
   BottomSheetComponent,
   BreadcrumbItem,
   ConfirmationDialogService,
+  DatePickerComponent,
   dateRangeValidator,
   DropdownMenuItem,
   DualCalendarComponent,
@@ -22,6 +24,7 @@ import {
   emailStcValidator,
   FormFieldTypeEnum,
   InputsMap,
+  maxRepeatedCharsValidator,
   saudiPhoneValidator,
 } from '@corp-products/ui-components';
 import { ConfirmationDialogComponent } from './../../../ui-components-lib/src/lib/confirmation-dialog/confirmation-dialog.component';
@@ -65,6 +68,7 @@ import { allowedDomains } from './email-stc-domains.const';
     DualCalendarComponent,
     CommonModule,
     AppDropdownMenuComponent,
+    DatePickerComponent
   ],
   providers: [DialogService, ConfirmationDialogService],
   templateUrl: './app.html',
@@ -131,9 +135,11 @@ export class App {
   ];
 
   sidebarDynamicService = inject(DynamicSidebarService);
+  testDate : FormControl<any> = new FormControl({ value: new Date().toISOString(), disabled: false }, []);
 
   sideBarData: SidebarConfig = SidebarConfigDefaults;
-  dateControl: FormControl<any> = new FormControl({ value: null, disabled: false }, []);
+  dateControl: FormControl<any> = new FormControl({ value: new Date(), disabled: false }, []);
+  dateControl2: FormControl<any> = new FormControl({ value: new Date().toISOString(), disabled: false }, []);
   inputControl: FormControl<any> = new FormControl('', [Validators.required]);
   selectControl: FormControl<any> = new FormControl(null, []);
   dualControl: FormControl<any> = new FormControl(null);
@@ -175,7 +181,7 @@ export class App {
   // Dynamic form demo config and state
   dynamicFormGroup = new FormGroup(
     {
-      startDate: new FormControl<Date | null>(new Date(), [Validators.required]),
+      startDate: new FormControl<any>((new Date()).toISOString(), [Validators.required]),
       endDate: new FormControl<Date | null>(null, [Validators.required]),
       hijriDate: new FormControl<Date | null>(null),
       file: new FormControl<null>(null),
@@ -184,6 +190,7 @@ export class App {
       role: new FormControl<any>(null, [Validators.required]),
       status: new FormControl<string | null>(null),
       notify: new FormControl<boolean>(false),
+      subject: new FormControl<string>('', [Validators.required, maxRepeatedCharsValidator(3)]),
       assignee: new FormControl<Array<any>>(
         [],
         [Validators.required, emailStcValidator(allowedDomains)],
@@ -191,9 +198,17 @@ export class App {
     },
     { validators: [dateRangeValidator('startDate', 'endDate')] },
   );
+
+  patchStartDate(){
+    this.dynamicFormGroup.get('startDate')?.setValue(new Date());
+  }
   showCalender() {
     this.isCalendarOpen = !this.isCalendarOpen;
     console.log('date selected ', this.dualControl.value);
+  }
+
+  changeDate() {
+    this.testDate.setValue(new Date(Date.now() + 24 * 60 * 60 * 1000));
   }
   selectedDate(selectedDate: string) {
     console.log('date selected ', selectedDate);
@@ -215,8 +230,8 @@ export class App {
       fieldType: FormFieldTypeEnum.INPUT,
       inputId: 'df-phone',
       rowSize: 'half',
-      inputType: 'text',
-      contentType: 'text',
+      inputType: 'number',
+      //contentType: 'number',
       placeholder: 'Enter Saudi phone number',
       variant: 'in',
     },
@@ -275,6 +290,16 @@ export class App {
       optionValue: 'code',
       showClear: true,
       filter: false,
+      variant: 'in',
+    },
+    subject: {
+      label: 'Subject',
+      fieldType: FormFieldTypeEnum.INPUT,
+      inputId: 'df-subject',
+      rowSize: 'full',
+      inputType: 'text',
+      contentType: 'text',
+      placeholder: 'Enter subject',
       variant: 'in',
     },
     status: {
@@ -476,6 +501,11 @@ export class App {
       rowSize: 'half',
       showIcon: true,
       variant: 'in',
+      fileUpload: {
+        uploadFn: (file) => this.mockFileUpload(file),
+        acceptedTypes: '.pdf,.doc,.docx,.jpg,.png',
+        maxFileSize: 10485760,
+      },
     },
     comment: {
       label: 'follow_up.comment',
@@ -495,6 +525,65 @@ export class App {
     title: 'Confirm Action',
     isReadOnlyForm: false,
   };
+
+  dialogFileUploadFormGroup = new FormGroup({
+    document: new FormControl<string | null>(null),
+    comment: new FormControl<string>('', [Validators.required]),
+  });
+
+  dialogFileUploadInputsMap: InputsMap = {
+    document: {
+      label: 'Upload Document',
+      fieldType: FormFieldTypeEnum.UPLOAD_FILE,
+      inputId: 'dlg-document',
+      rowSize: 'full',
+      fileUpload: {
+        uploadFn: (file) => this.mockFileUpload(file),
+        acceptedTypes: '.pdf,.doc,.docx',
+        maxFileSize: 10485760,
+      },
+    },
+    comment: {
+      label: 'Comment',
+      fieldType: FormFieldTypeEnum.INPUT,
+      inputId: 'dlg-comment',
+      rowSize: 'full',
+      inputType: 'textarea',
+      placeholder: 'Add a comment',
+      variant: 'in',
+      rows: 3,
+    },
+  };
+
+  mockFileUpload(file: File): Observable<{ documentId: string }> {
+    console.log('Mock upload:', file.name, file.type, file.size);
+    return of({ documentId: `doc-${Date.now()}` }).pipe(delay(1500));
+  }
+
+  openConfirmWithFileUpload() {
+    this.confirmationDialogService
+      .open({
+        header: 'Upload Document',
+        message: 'Please upload a PDF document to confirm this action.',
+        hint: 'Accepted: PDF, DOC, DOCX (max 10MB). Upload starts immediately on file selection.',
+        confirmBtnLabel: 'Confirm',
+        cancelBtnLabel: 'Cancel',
+        confirmBtnId: 'confirm-file-upload',
+        cancelBtnId: 'cancel-file-upload',
+        inputForm: {
+          formGroup: this.dialogFileUploadFormGroup,
+          inputsMap: this.dialogFileUploadInputsMap,
+        },
+      })
+      .subscribe((result) => {
+        if (result?.isSubmitted) {
+          console.log('File upload confirmed. documentId:', result.documentId, 'form:', this.dialogFileUploadFormGroup.value);
+        } else {
+          console.log('File upload dialog canceled');
+        }
+      });
+  }
+
   openCancelFollowUp() {
     this.confirmationDialogService
       .open({

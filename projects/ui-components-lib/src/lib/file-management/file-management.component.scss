@@ -49,24 +49,6 @@
   }
 }
 
-.uploaded-files {
-  background-color: #F3F3F7;
-  border: 1px solid #DFE0E6;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 15px;
-  margin-bottom: 10px;
-  .pi-trash {
-    cursor: pointer;
-  }
-
-  p {
-    margin-block-start: 0;
-    margin-block-end: 0;
-  }
-}
-
 .upload-container {
   background-color: #F3F3F7;
   padding: 15px;
@@ -86,4 +68,96 @@
       margin-bottom: 10px;
     }
   }
+}
+
+.uploaded-files {
+  background-color: #F3F3F7;
+  border: 1px solid #DFE0E6;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px;
+  margin-bottom: 10px;
+
+  .file-details {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    flex: 1;
+    min-width: 0;
+  }
+
+  .file-name {
+    margin: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .file-size {
+    font-size: 0.75rem;
+    color: #6b7280;
+  }
+
+  .upload-status {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+
+    &.uploading {
+      color: var(--p-orange-500, #f59e0b);
+      
+      .upload-percentage {
+        color: inherit;
+      }
+    }
+
+    &.success {
+      color: #16a34a;
+
+      .success-icon {
+        color: inherit;
+        font-size: 1rem;
+      }
+    }
+  }
+
+  .upload-percentage {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--primary-color, #3b82f6);
+  }
+
+  .success-icon {
+    color: #22c55e;
+    font-size: 1.25rem;
+  }
+
+  .upload-error-text {
+    color: #ef4444;
+    font-size: 0.875rem;
+  }
+
+  .delete-icon {
+    cursor: pointer;
+    font-size: 1.5rem;
+    color: #f00;
+    flex-shrink: 0;
+
+    &.disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+  }
+}
+
+.upload-error {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #ef4444;
+  font-size: 0.875rem;
+  margin-top: 0.5rem;
 }
