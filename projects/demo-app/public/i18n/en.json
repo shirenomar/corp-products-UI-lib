@@ -36,6 +36,7 @@
     "maxlength": "Maximum length is {{requiredLength}} characters",
     "pattern": "Please match the requested format",
     "numbersOnly": "Only numbers are allowed",
+    "notOnlySpaces": "This field cannot contain only spaces",
     "invalidSaudiPhoneNumber": "Please enter a valid Saudi phone number",
     "MAX_REPEATED_CHARS": "No more than {{maxRepeats}} repeated characters are allowed"
   }

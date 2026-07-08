@@ -36,6 +36,7 @@
     "maxlength": "الحد الأقصى للطول هو {{requiredLength}} حرفًا",
     "pattern": "يرجى مطابقة التنسيق المطلوب",
     "numbersOnly": "يسمح بالأرقام فقط",
+    "notOnlySpaces": "لا يمكن أن يحتوي هذا الحقل على مسافات فقط",
     "invalidSaudiPhoneNumber": "يرجى إدخال رقم هاتف سعودي صالح",
     "MAX_REPEATED_CHARS": "لا يُسمح بأكثر من {{maxRepeats}} أحرف متكررة"
   }
