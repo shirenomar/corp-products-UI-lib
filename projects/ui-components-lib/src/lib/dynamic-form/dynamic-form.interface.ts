@@ -68,6 +68,7 @@ export interface InputsMapData {
   multiple?: boolean;
   showClear?: boolean;
   checkmark?: boolean;
+  scrollHeight?: string;
   filterBy?: string;
   selectedItemsLabel?: string;
   optionTemplate?: OptionTemplateConfig; // Custom template config for rendering options with image, main text, and subtext
