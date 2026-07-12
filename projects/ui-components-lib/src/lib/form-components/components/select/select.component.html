@@ -8,7 +8,7 @@
       [optionValue]="optionValue" [options]="options" [showToggleAll]="false" [placeholder]="placeholder"
       [emptyMessage]="emptyMessage || ('shared.no_results_found'|translate)" [readonly]="readonly"
       [showClear]="showClear" [scrollHeight]="scrollHeight" (onClear)="onMultiSelectClear()" class="w-full" [size]="size"
-      [selectedItemsLabel]="selectedItemsLabel || ('shared.Items_Selected'| translate: {count: '{0}'})" [class]="
+      [selectedItemsLabel]="(selectedItemsLabel || 'shared.Items_Selected') | translate" [class]="
         'w-full border border-[' + defaultColor + '] rounded-none focus:outline-[' + defaultColor + '] focus:border-[' + defaultColor + '] hover:border-[' + defaultColor + '] disabled:opacity-50'
         " (onChange)="onChange($event)" [ngClass]="{ 'basic-style': basicInput }">
 
