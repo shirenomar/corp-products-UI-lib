@@ -53,6 +53,7 @@ export class SelectComponent extends BaseInputComponent {
   @Input() selectAllLabel: string;
   @Input() dataKey!: string;
   @Input() size: 'small' | 'large' = 'small';
+  @Input() scrollHeight = '200px';
   @Input() appendTo = '';
 
   @Input() selectedItemsLabel!: string;
