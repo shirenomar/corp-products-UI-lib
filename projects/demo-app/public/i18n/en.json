@@ -9,7 +9,7 @@
   },
   "shared": {
     "no_results_found": "No results found",
-    "Items_Selected": "{{count}} Items Selected"
+    "Items_Selected": "{0} Items Selected"
   },
   "forms": {
     "config": {
