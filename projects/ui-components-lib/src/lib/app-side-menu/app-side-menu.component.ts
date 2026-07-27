@@ -13,7 +13,6 @@ import { NgClass } from "@angular/common";
 export class AppSideMenuComponent implements OnInit {
   @Input() isOpen!: boolean;
   menuItems: SideMenuItem[] = BASE_SIDE_MENU_ITEMS;
-  //permissionsService = inject(PermissionsService);
   filteredMenu: SideMenuItem[];
 
   ngOnInit(): void {
@@ -21,7 +20,6 @@ export class AppSideMenuComponent implements OnInit {
       if (!item.permissionKey) {
         return true;
       }
-      //  return this.permissionsService.checkKeyHasPermission(item.permissionKey as UserPermissionsEnum, PermissionsActions.VIEW);
       return;
     });
   }

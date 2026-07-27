@@ -17,27 +17,6 @@ export class AppHeaderComponent {
   @Output() createButtonClicked = new EventEmitter();
   @Output() toggleMenu = new EventEmitter<boolean>();
   @Input() userInfo: any;
-  items: MenuItem[] | undefined = [
-    {
-      items: [
-        {
-          label: 'خــــروج',
-          command: () => this.logout(),
-        },
-      ],
-    },
-  ];
-  // UserPermissionsEnum = UserPermissionsEnum;
-  // PermissionsActions = PermissionsActions;
-
-  logout(): void {
-    // this.authService
-    //   .logoutFromSSO()
-    //   .pipe(
-    //     finalize(() => {
-    //       this.authService.clearAuth();
-    //     })
-    //   )
-    //   .subscribe();
-  }
+  // ! items should be an input
+  items: MenuItem[] | undefined ;
 }
