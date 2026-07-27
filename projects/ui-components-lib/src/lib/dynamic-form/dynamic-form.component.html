@@ -4,11 +4,15 @@
     <div [ngClass]="inputsMap[inputName].rowSize">
       @switch (inputsMap[inputName].fieldType) {
       @case (fieldType.HIJRI_DATE_PICKER) {
-      <app-dual-calendar [control]="getFormControl(inputName, formGroup)"></app-dual-calendar>
+      <app-dual-calendar [control]="getFormControl(inputName, formGroup)"
+        [disabledDates]="inputsMap[inputName].disabledDates || []"
+        [disabledDays]="inputsMap[inputName].disabledDays || []"></app-dual-calendar>
       }
 
       @case (fieldType.DATE_PICKER) {
       <stc-date-picker [minDate]="inputsMap[inputName]?.dateRange?.min" [maxDate]="inputsMap[inputName]?.dateRange?.max"
+        [disabledDates]="inputsMap[inputName].disabledDates || []"
+        [disabledDays]="inputsMap[inputName].disabledDays || []"
         [id]="inputsMap[inputName].inputId" [control]="getFormControl(inputName, formGroup)" [name]="inputName"
         [label]="inputsMap[inputName].label" [placeholder]="inputsMap[inputName].placeholder || ''"
         [hint]="inputsMap[inputName].hint"
@@ -33,7 +37,7 @@
         [contentType]="inputsMap[inputName].contentType || 'text'" [rows]="inputsMap[inputName].rows || 2"
         [cols]="inputsMap[inputName].cols || 20" [autoResize]="inputsMap[inputName].autoResize ?? false"
         [prefix]="inputsMap[inputName].prefix || ''" [size]="inputsMap[inputName].size || 'small'"
-        [variant]="inputsMap[inputName].variant || 'over'">
+        [variant]="inputsMap[inputName].variant || 'over'" [maxLength]="inputsMap[inputName].maxLength || null">
         @if(inputsMap[inputName].maxLength){
         <span class="text-xs text-gray-700">
           {{ (getFormControl(inputName, formGroup).value?.length || 0) }}
@@ -45,31 +49,33 @@
       @case (fieldType.SELECT) {
       <ng-template #optionTpl let-item>
         @if (inputsMap[inputName].optionTemplate) {
-          <div class="flex items-center gap-3">
-            @if (inputsMap[inputName].optionTemplate!.imageKey && item[inputsMap[inputName].optionTemplate!.imageKey!]) {
-              <img [src]="item[inputsMap[inputName].optionTemplate!.imageKey!]"
-                   [alt]="item[inputsMap[inputName].optionTemplate!.mainTextKey]"
-                   class="w-8 h-8 rounded-full object-cover flex-shrink-0" />
+        <div class="flex items-center gap-3">
+          @if (inputsMap[inputName].optionTemplate!.imageKey && item[inputsMap[inputName].optionTemplate!.imageKey!]) {
+          <img [src]="item[inputsMap[inputName].optionTemplate!.imageKey!]"
+            [alt]="item[inputsMap[inputName].optionTemplate!.mainTextKey]"
+            class="w-8 h-8 rounded-full object-cover flex-shrink-0" />
+          }
+          <div class="flex flex-col min-w-0">
+            <span class="font-medium truncate">{{ item[inputsMap[inputName].optionTemplate!.mainTextKey] }}</span>
+            @if (inputsMap[inputName].optionTemplate!.subTextKey &&
+            item[inputsMap[inputName].optionTemplate!.subTextKey!]) {
+            <span class="text-sm text-gray-500 truncate">{{ item[inputsMap[inputName].optionTemplate!.subTextKey!]
+              }}</span>
             }
-            <div class="flex flex-col min-w-0">
-              <span class="font-medium truncate">{{ item[inputsMap[inputName].optionTemplate!.mainTextKey] }}</span>
-              @if (inputsMap[inputName].optionTemplate!.subTextKey && item[inputsMap[inputName].optionTemplate!.subTextKey!]) {
-                <span class="text-sm text-gray-500 truncate">{{ item[inputsMap[inputName].optionTemplate!.subTextKey!] }}</span>
-              }
-            </div>
           </div>
+        </div>
         }
       </ng-template>
       <ng-template #selectedTpl let-item>
         @if (inputsMap[inputName].optionTemplate) {
-          <div class="flex items-center gap-2">
-            @if (inputsMap[inputName].optionTemplate!.imageKey && item[inputsMap[inputName].optionTemplate!.imageKey!]) {
-              <img [src]="item[inputsMap[inputName].optionTemplate!.imageKey!]"
-                   [alt]="item[inputsMap[inputName].optionTemplate!.mainTextKey]"
-                   class="w-6 h-6 rounded-full object-cover flex-shrink-0" />
-            }
-            <span class="truncate">{{ item[inputsMap[inputName].optionTemplate!.mainTextKey] }}</span>
-          </div>
+        <div class="flex items-center gap-2">
+          @if (inputsMap[inputName].optionTemplate!.imageKey && item[inputsMap[inputName].optionTemplate!.imageKey!]) {
+          <img [src]="item[inputsMap[inputName].optionTemplate!.imageKey!]"
+            [alt]="item[inputsMap[inputName].optionTemplate!.mainTextKey]"
+            class="w-6 h-6 rounded-full object-cover flex-shrink-0" />
+          }
+          <span class="truncate">{{ item[inputsMap[inputName].optionTemplate!.mainTextKey] }}</span>
+        </div>
         }
       </ng-template>
       <stc-select [control]="getFormControl(inputName, formGroup)" [id]="inputsMap[inputName].inputId"
@@ -82,6 +88,7 @@
         : (inputsMap[inputName]?.optionLabel || 'label')" [optionValue]="inputsMap[inputName]?.optionValue || ''"
         [filter]="inputsMap[inputName].filter || false" [multiple]="inputsMap[inputName].multiple || false"
         [showClear]="inputsMap[inputName].showClear || false" [checkmark]="inputsMap[inputName].checkmark ?? true"
+        [scrollHeight]="inputsMap[inputName].scrollHeight || '200px'"
         [filterBy]="inputsMap[inputName].filterBy || ''"
         [selectedItemsLabel]="inputsMap[inputName].selectedItemsLabel || ''"
         [size]="inputsMap[inputName].size || 'small'" [variant]="inputsMap[inputName].variant || 'over'"
@@ -111,13 +118,19 @@
         [minLengthToSearch]="inputsMap[inputName].minLengthToSearch || 2" [delay]="inputsMap[inputName].delay || 300"
         (onSearch)="autoCompleteSearch.emit({ name: inputName, query: $event })"
         (selectOption)="autoCompleteSelect.emit({ name: inputName, event: $event })"
-        [variant]="inputsMap[inputName].variant || 'over'"
-        [allowedDomains]="inputsMap[inputName]?.allowedDomains" />
+        [variant]="inputsMap[inputName].variant || 'over'" [allowedDomains]="inputsMap[inputName]?.allowedDomains" />
       }
       @case(fieldType.UPLOAD_FILE) {
-      <app-file-management #fileManager #groupFileManager [maxFileSize]="262144000" [maxConcurrentUploads]="1"
-        [allowPreview]="true" [acceptedTypes]="getAcceptedTypes()" (filesUploaded)="onFilesUploaded($event)"
-        [control]="getFormControl(inputName, formGroup)" (fileDeleted)="onFileDeleted($event)" />
+      <app-file-management #fileManager #groupFileManager
+        [maxFileSize]="getMaxFileSize(getFileUploadConfig(inputName))"
+        [maxConcurrentUploads]="1"
+        [allowPreview]="true"
+        [acceptedTypes]="getAcceptedTypes(getFileUploadConfig(inputName))"
+        [uploadFn]="getFileUploadConfig(inputName)?.uploadFn"
+        (filesUploaded)="onFilesUploaded($event)"
+        (uploadStateChange)="onUploadStateChange($event)"
+        [control]="getFormControl(inputName, formGroup)"
+        (fileDeleted)="onFileDeleted($event)" />
       }
       }
     </div>

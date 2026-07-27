@@ -1,3 +1,7 @@
+import { FileUploadConfig } from '../dynamic-form/dynamic-form.interface';
+
+export type { FileUploadConfig, FileUploadResponse } from '../dynamic-form/dynamic-form.interface';
+
 export interface ConfirmationDialogData {
   header: string;
   message: string;
@@ -10,4 +14,5 @@ export interface ConfirmationDialogData {
   hint?: string;
   inputForm?: any;
   breakpoints?: any;
+  fileUpload?: FileUploadConfig;
 }

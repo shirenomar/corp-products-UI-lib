@@ -13,26 +13,36 @@ import {
 import { TranslatePipe } from '@ngx-translate/core';
 import { AlertDialogService } from './alert-dialog.service';
 import { Component } from '@angular/core';
+import { ButtonStyle } from 'primeng/button';
 
 @Component({
   selector: 'dialog-wrapper',
-  template: `<button (click)="open()">Show Dialog</button>`,
+  template: `<app-button label="Open Alert Dialog" severity="primary"  (click)="open()"></app-button>`,
+  standalone: true,
+  imports: [AppButtonComponent],
 })
 class DialogWrapper {
   constructor(private dialogService: AlertDialogService) {}
   open() {
-    this.dialogService.open({ header: 'Hello!', message: 'Hello Hello' });
+    this.dialogService.open({
+      header: 'Hello!',
+      message: 'Hello Hello',
+      cancelBtnLabel: 'Close',
+    });
   }
 }
 
 const meta: Meta<DialogWrapper> = {
   title: 'MyLibrary/AlertDialog',
   component: DialogWrapper,
+  subcomponents: { AlertDialogComponent },
   tags: ['autodocs'],
   decorators: [
     moduleMetadata({
-      imports: [AppButtonComponent, AvatarModule, DynamicDialogModule, TranslatePipe],
+      imports: [AppButtonComponent, AvatarModule, DynamicDialogModule,AppButtonComponent, TranslatePipe],
       providers: [
+        DynamicDialogStyle,
+        ButtonStyle,
         AlertDialogService,
         DialogService,
         { provide: DynamicDialogConfig, useValue: { data: { title: 'Alert' } } },

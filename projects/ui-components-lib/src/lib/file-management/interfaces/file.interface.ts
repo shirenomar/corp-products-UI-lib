@@ -1,3 +1,14 @@
+export interface FileUploadResponse {
+  documentId: string;
+  [key: string]: any;
+}
+
+export interface FileUploadState {
+  isUploading: boolean;
+  documentId: string | null;
+  hasFile: boolean;
+}
+
 export interface AttachmentFile {
   id: string;
   fileName: string;
