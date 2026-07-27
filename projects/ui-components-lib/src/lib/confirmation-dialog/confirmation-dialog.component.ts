@@ -45,7 +45,7 @@ export class ConfirmationDialogComponent extends DynamicDialogRef implements OnI
     return !!this.dialogFormData?.fileUpload || this.hasFileUploadField();
   }
 
-   hasFileUploadField(): boolean {
+  hasFileUploadField(): boolean {
     const inputsMap = this.dialogFormData?.inputsMap ?? {};
     return Object.values(inputsMap).some(
       (field) => field.fieldType === FormFieldTypeEnum.UPLOAD_FILE && !!field.fileUpload?.uploadFn
@@ -56,7 +56,7 @@ export class ConfirmationDialogComponent extends DynamicDialogRef implements OnI
     if (this.dialogFormData?.formGroup?.invalid) {
       return true;
     }
-    if (this.hasFileUpload && (this.uploadState.isUploading || !this.uploadState.documentId)) {
+    if (this.uploadState.isUploading) {
       return true;
     }
     return false;
