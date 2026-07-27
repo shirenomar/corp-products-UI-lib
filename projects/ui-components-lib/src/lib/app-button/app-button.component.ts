@@ -6,9 +6,7 @@ import { Button, ButtonModule, ButtonStyle } from 'primeng/button';
   selector: 'app-button',
   standalone: true,
   encapsulation: ViewEncapsulation.None,
-  styleUrl: './app-button.component.scss',
   templateUrl: './app-button.component.html',
   providers: [ButtonStyle],
 })
-export class AppButtonComponent extends Button {
-}
+export class AppButtonComponent extends Button {}

@@ -26,6 +26,27 @@
           "options": {
             "tsConfig": "projects/ui-components-lib/tsconfig.spec.json"
           }
+        },
+        "storybook": {
+          "builder": "@storybook/angular:start-storybook",
+          "options": {
+            "configDir": "projects/ui-components-lib/.storybook",
+            "browserTarget": "ui-components-lib:build",
+            "compodoc": true,
+            "compodocArgs": ["-e", "json", "-d", "projects/ui-components-lib"],
+            "port": 6006,
+            "styles": ["node_modules/primeicons/primeicons.css"]
+          }
+        },
+        "build-storybook": {
+          "builder": "@storybook/angular:build-storybook",
+          "options": {
+            "configDir": "projects/ui-components-lib/.storybook",
+            "browserTarget": "ui-components-lib:build",
+            "compodoc": true,
+            "compodocArgs": ["-e", "json", "-d", "projects/ui-components-lib"],
+            "outputDir": "dist/storybook/ui-components-lib"
+          }
         }
       }
     },

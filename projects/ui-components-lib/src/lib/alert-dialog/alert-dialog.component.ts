@@ -7,7 +7,7 @@ import {
   DynamicDialogConfig,
   DynamicDialogModule,
   DynamicDialogRef,
-  DynamicDialogStyle
+  DynamicDialogStyle,
 } from 'primeng/dynamicdialog';
 import { AppButtonComponent } from '../app-button';
 @Component({
@@ -16,12 +16,7 @@ import { AppButtonComponent } from '../app-button';
   styleUrls: ['./alert-dialog.component.scss'],
   encapsulation: ViewEncapsulation.None,
   standalone: true,
-  imports: [
-    AppButtonComponent,
-    AvatarModule,
-    DynamicDialogModule,
-    TranslatePipe,
-  ],
+  imports: [AppButtonComponent, AvatarModule, DynamicDialogModule, TranslatePipe],
   providers: [DynamicDialogStyle],
 })
 export class AlertDialogComponent extends DynamicDialogRef implements OnInit {
@@ -32,10 +27,10 @@ export class AlertDialogComponent extends DynamicDialogRef implements OnInit {
 
   ngOnInit() {
     this.router.events.pipe(takeUntilDestroyed(this._destroyRef)).subscribe(() => {
-      if (this.dynamicDialogConfig) {
-        this._ref.close(false);
-      }
-    })
+      //if (this.dynamicDialogConfig) {
+      //  this._ref.close(false);
+      //}
+    });
   }
 
   override close() {
