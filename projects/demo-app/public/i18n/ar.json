@@ -9,7 +9,7 @@
   },
   "shared": {
     "no_results_found": "لا توجد نتائج",
-    "Items_Selected": "تم اختيار {{count}} عناصر"
+    "Items_Selected": "تم اختيار {0} عناصر"
   },
   "forms": {
     "config": {

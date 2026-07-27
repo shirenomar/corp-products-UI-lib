@@ -88,6 +88,7 @@
         : (inputsMap[inputName]?.optionLabel || 'label')" [optionValue]="inputsMap[inputName]?.optionValue || ''"
         [filter]="inputsMap[inputName].filter || false" [multiple]="inputsMap[inputName].multiple || false"
         [showClear]="inputsMap[inputName].showClear || false" [checkmark]="inputsMap[inputName].checkmark ?? true"
+        [scrollHeight]="inputsMap[inputName].scrollHeight || '200px'"
         [filterBy]="inputsMap[inputName].filterBy || ''"
         [selectedItemsLabel]="inputsMap[inputName].selectedItemsLabel || ''"
         [size]="inputsMap[inputName].size || 'small'" [variant]="inputsMap[inputName].variant || 'over'"
