@@ -7,7 +7,9 @@
     "build": "ng build ui-components-lib --configuration production",
     "watch": "ng build ui-components-lib --watch --configuration development",
     "test": "ng test",
-    "storybook": "npx compodoc -p projects/ui-components-lib/tsconfig.lib.json -e json -d . && ng run ui-components-lib:storybook"
+    "storybook": "npx compodoc -p projects/ui-components-lib/tsconfig.lib.json -e json -d . && ng run ui-components-lib:storybook",
+    "build-storybook": "npx compodoc -p projects/ui-components-lib/tsconfig.lib.json -e json -d . && ng run ui-components-lib:build-storybook",
+    "deploy:storybook": "npm run build-storybook"
   },
   "prettier": {
     "printWidth": 100,

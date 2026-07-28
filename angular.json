@@ -45,7 +45,8 @@
             "browserTarget": "ui-components-lib:build",
             "compodoc": true,
             "compodocArgs": ["-e", "json", "-d", "projects/ui-components-lib"],
-            "outputDir": "dist/storybook/ui-components-lib"
+            "outputDir": "dist/storybook/ui-components-lib",
+            "styles": ["node_modules/primeicons/primeicons.css"]
           }
         }
       }
