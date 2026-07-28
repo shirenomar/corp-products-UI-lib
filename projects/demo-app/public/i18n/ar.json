@@ -3,9 +3,11 @@
   "WELCOME": "أهلا",
   "actions": {
     "save": "حفظ",
+    "save_and_more": "حفظ والمزيد",
     "cancel": "الغاء",
     "submit": "تقديم",
-    "close": "إغلاق"
+    "close": "إغلاق",
+    "create": "إنشاء"
   },
   "shared": {
     "no_results_found": "لا توجد نتائج",

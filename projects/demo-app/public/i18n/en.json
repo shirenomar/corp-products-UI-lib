@@ -3,9 +3,11 @@
   "WELCOME": "Welcome",
   "actions": {
     "save": "Save",
+    "save_and_more": "Save and more",
     "cancel": "Cancel",
     "submit": "Submit",
-    "close": "Close"
+    "close": "Close",
+    "create": "Create"
   },
   "shared": {
     "no_results_found": "No results found",
