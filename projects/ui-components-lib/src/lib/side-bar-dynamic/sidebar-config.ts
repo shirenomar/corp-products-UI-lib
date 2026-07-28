@@ -29,7 +29,7 @@ export interface SidebarConfig {
 }
 
 export const SidebarConfigDefaults: SidebarConfig = {
-  title: "",
+  title: "asd",
   show: true,
   visible: true,
   closable: true,

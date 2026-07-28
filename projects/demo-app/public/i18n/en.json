@@ -3,6 +3,7 @@
   "WELCOME": "Welcome",
   "actions": {
     "save": "Save",
+    "save_and_more": "Save and more",
     "cancel": "Cancel",
     "submit": "Submit",
     "close": "Close",

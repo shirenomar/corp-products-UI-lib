@@ -3,6 +3,7 @@
   "WELCOME": "أهلا",
   "actions": {
     "save": "حفظ",
+    "save_and_more": "حفظ والمزيد",
     "cancel": "الغاء",
     "submit": "تقديم",
     "close": "إغلاق",
