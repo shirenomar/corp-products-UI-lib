@@ -13,7 +13,7 @@ const meta:  Meta<UserInfoComponent>  = {
   ],
   args: {
     profileImage: 'https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png',
-    name: 'John Doe',
+    name: 'Mahmoud Sobhy',
   },
   argTypes: {
     profileImage: { control: 'text' },
