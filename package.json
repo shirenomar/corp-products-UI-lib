@@ -4,7 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve --port 4210",
-    "build": "ng build",
+    "build": "ng build ui-components-lib --configuration production",
     "watch": "ng build ui-components-lib --watch --configuration development",
     "test": "ng test",
     "storybook": "npx compodoc -p projects/ui-components-lib/tsconfig.lib.json -e json -d . && ng run ui-components-lib:storybook"
