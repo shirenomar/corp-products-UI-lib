@@ -2,8 +2,18 @@
 <div class="confirmation-dialog">
   <div class="dialog-wrapper">
     @if (dynamicDialogConfig.data) {
+     @if (dynamicDialogConfig.data.showHeader) {
+      <div class="confirmation-dialog__header my-4 flex items-center">
+        <h3 class="text-xl mb-2">
+          {{ dynamicDialogConfig.data.header }}
+        </h3>
+        @if (dynamicDialogConfig.data.closeBtn) {
+        <app-button (click)="close()" icon="font-icon-close" [severity]="'secondary'" variant="text" />
+        }
+      </div>
+     }
     <div class="confirmation-dialog__content my-4">
-      @if (dynamicDialogConfig.data.dialogIcon) {
+      @if (dynamicDialogConfig.data.dialogIcon && !dynamicDialogConfig.data.showHeader) {
       <em [class]="dynamicDialogConfig.data.dialogIcon"></em>
       }
       <p class="confirmation-dialog__message text-xl mb-2">

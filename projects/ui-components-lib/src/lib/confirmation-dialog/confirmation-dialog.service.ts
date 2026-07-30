@@ -16,7 +16,7 @@ export class ConfirmationDialogService {
       data,
       header: data.header,
       showHeader: true,
-      width: '600px',
+      width: data.width || '600px',
       closable: true,
       modal: true,
       styleClass: 'confirmation-dialog-wrapper',
