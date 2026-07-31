@@ -1,4 +1,4 @@
-import { NgClass, NgStyle } from '@angular/common';
+import { NgClass, NgStyle, NgTemplateOutlet } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { TranslatePipe } from '@ngx-translate/core';
@@ -20,6 +20,7 @@ import { BaseInputComponent } from '../base-input.component';
     Textarea,
     ValidationErrorsPipe,
     NgClass,
+    NgTemplateOutlet,
     NgStyle,
     TranslatePipe,
     FloatLabelModule,
@@ -43,6 +44,7 @@ export class InputComponent extends BaseInputComponent {
   @Input() noStyle!: boolean;
   @Input() canClear!: boolean;
   @Input() hideOptionalLabel: boolean;
+  @Input() floatLabel: boolean = true;
   @Input() inputDirection: 'ltr' | 'rtl' | 'inherit' = 'inherit';
   @Input() variant: 'in' | 'over' | 'on' = 'over';
   @Input() defaultColor = '#DFE0E6';
