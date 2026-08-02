@@ -61,4 +61,4 @@ For more information on using the Angular CLI, including detailed command refere
 
 
 ## Changes that will affect other projects
-size in <stc-input
+size and hideOptionalLabel in <stc-input

@@ -43,7 +43,7 @@ export class InputComponent extends BaseInputComponent {
   @Input() basicInput!: boolean;
   @Input() noStyle!: boolean;
   @Input() canClear!: boolean;
-  @Input() hideOptionalLabel: boolean;
+  @Input() hideOptionalLabel: boolean = false;
   @Input() floatLabel: boolean = true;
   @Input() inputDirection: 'ltr' | 'rtl' | 'inherit' = 'inherit';
   @Input() variant: 'in' | 'over' | 'on' = 'over';

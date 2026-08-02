@@ -33,9 +33,9 @@
             <span [class.text-red-700]="isInvalid" class="text-required">*</span>
           }
         </label>
-        <!-- @else if (!hideOptionalLabel) {
-          <span span class="optional-label">{{'forms.config.optional' | translate}}</span>
-        } -->
+        @if (!hideOptionalLabel && !required) {
+          <span class="absolute top-[6px] left-0 text-[10px] text-gray-400">{{'forms.config.optional' | translate}}</span>
+        }
       </div>
     }
     <ng-container *ngTemplateOutlet="inputTemplate"></ng-container>
@@ -43,7 +43,7 @@
 
   <!-- DYNAMIC PREFIX -->
   @if (prefix) {
-    <span class="absolute font-bold text-[16px] left-[25px]" [ngClass]="floatLabel ? 'top-[40px]' : 'bottom-[12px]'">
+    <span class="absolute font-bold text-[16px] left-[25px] top-[40px]" >
       {{ prefix }}
     </span>
   }
