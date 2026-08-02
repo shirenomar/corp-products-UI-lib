@@ -1,83 +1,92 @@
 <div class="field flex flex-col gap-2 my-3 relative">
-
-  @if(multiple) {
-  <p-floatLabel [variant]="variant">
-
-    <p-multiselect [disabled]="disabled" [filterBy]="filterBy" [filter]="filter" [formControl]="control" [id]="inputId"
-      [name]="name" [ngClass]="{ 'p-invalid ng-dirty ng-invalid': isInvalid }" [optionLabel]="optionLabel"
-      [optionValue]="optionValue" [options]="options" [showToggleAll]="false" [placeholder]="placeholder"
-      [emptyMessage]="emptyMessage || ('shared.no_results_found'|translate)" [readonly]="readonly"
-      [showClear]="showClear" [scrollHeight]="scrollHeight" (onClear)="onMultiSelectClear()" class="w-full" [size]="size"
-      [selectedItemsLabel]="(selectedItemsLabel || 'shared.Items_Selected') | translate" [class]="
-        'w-full border border-[' + defaultColor + '] rounded-none focus:outline-[' + defaultColor + '] focus:border-[' + defaultColor + '] hover:border-[' + defaultColor + '] disabled:opacity-50'
-        " (onChange)="onChange($event)" [ngClass]="{ 'basic-style': basicInput }">
-
-      @if (selectAllLabel) {
-      <ng-template #filter>
-        <p-checkbox binary="true" [(ngModel)]="allSelectd" (onChange)="toggleAll($event)" inputId="toggleAll">
-        </p-checkbox>
-        <span>{{selectAllLabel}}</span>
-      </ng-template>
-      }
-
-      @if(optionTemplate){
-      <ng-template let-item #item>
-        <ng-container [ngTemplateOutletContext]="{ $implicit: item }" [ngTemplateOutlet]="optionTemplate" />
-      </ng-template>
-      }
-
-
-
-
-
-    </p-multiselect>
-    <label [for]="inputId">
-      {{ label }}
-      @if (required) {
-      <span [class.text-required]="required">*</span>
-      }
-    </label>
-
-  </p-floatLabel>
-
+  <!-- FLOATING / STANDARDCONTAINER ROUTER -->
+  @if (floatLabel) {
+    <p-floatlabel [variant]="variant">
+      <ng-container *ngTemplateOutlet="inputTemplate"></ng-container>
+      <label [for]="inputId">
+        {{ label }}
+        @if (required) {
+          <span [class.text-required]="required">*</span>
+        }
+      </label>
+    </p-floatlabel>
   } @else {
-  <p-floatLabel [variant]="variant">
-    <p-select [appendTo]="appendTo" [dataKey]="dataKey" [checkmark]="checkmark" [disabled]="disabled" [editable]="editable"
-      [filterBy]="filterBy" [filter]="filter" [formControl]="control" [id]="inputId" [name]="name"
-      [ngClass]="{ 'p-invalid ng-dirty ng-invalid': isInvalid }"
-      [emptyMessage]="emptyMessage || ('shared.no_results_found'|translate)" [optionLabel]="optionLabel"
-      [optionValue]="optionValue" [options]="options" [placeholder]="placeholder" [readonly]="readonly"
-      [showClear]="showClear" [scrollHeight]="scrollHeight" [size]="size" class="w-full" [class]="
-        'w-full border border-[' + defaultColor + '] rounded-none focus:outline-[' + defaultColor + '] focus:border-[' + defaultColor + '] hover:border-[' + defaultColor + '] disabled:opacity-50'
-        " (onChange)="onChange($event)" (click)="clicked.emit($event)" [ngClass]="{ 'basic-style': basicInput }">
-
-      @if (optionTemplate) {
-      <ng-template let-item pTemplate="item">
-        <ng-container [ngTemplateOutletContext]="{ $implicit: item }" [ngTemplateOutlet]="optionTemplate" />
-      </ng-template>
-      }
-      @if (selectedItemTemplate) {
-      <ng-template let-item pTemplate="selectedItem">
-        <ng-container [ngTemplateOutletContext]="{ $implicit: item }" [ngTemplateOutlet]="selectedItemTemplate" />
-      </ng-template>
-      }
-    </p-select>
-    <label [for]="inputId">
-      {{ label }}
-      @if (required) {
-      <span [class.text-required]="required">*</span>
-      }
-    </label>
-  </p-floatLabel>
+    @if (label) {
+      <div class="flex items-center justify-between gap-2">
+        <label [for]="inputId">
+          {{ label }}
+          @if (required) {
+            <span [class.text-red-700]="isInvalid" class="text-required">*</span>
+          }
+        </label>
+        @if (!required) {
+          <span class="absolute top-[6px] left-0 text-[10px] text-gray-400">{{'forms.config.optional' | translate}}</span>
+        }
+      </div>
+    }
+    <ng-container *ngTemplateOutlet="inputTemplate"></ng-container>
   }
 
+  <!-- HINTS -->
   @if (hint) {
-  <small class="p-mt-1">{{ hint }}</small>
-  } @if (isInvalid && (control.dirty || control.touched)) {
-  <small class="p-error">
-    @for (error of control.errors | validationErrors; track error) {
-    {{ error }}<br />
-    }
-  </small>
+    <small class="p-mt-1">{{ hint }}</small>
+  }
+
+  <!-- ERRORS -->
+  @if (isInvalid && (control.dirty || control.touched)) {
+    <small class="p-error">
+      @for (error of control.errors | validationErrors; track error) {
+        {{ error }}<br>
+      }
+    </small>
   }
 </div>
+
+<ng-template #inputTemplate>
+  @if(multiple) {
+  <p-multiselect [disabled]="disabled" [filterBy]="filterBy" [filter]="filter" [formControl]="control" [id]="inputId"
+    [name]="name" [ngClass]="{ 'p-invalid ng-dirty ng-invalid': isInvalid }" [optionLabel]="optionLabel"
+    [optionValue]="optionValue" [options]="options" [showToggleAll]="false" [placeholder]="placeholder"
+    [emptyMessage]="emptyMessage || ('shared.no_results_found'|translate)" [readonly]="readonly"
+    [showClear]="showClear" [scrollHeight]="scrollHeight" (onClear)="onMultiSelectClear()" class="w-full" [size]="size"
+    [selectedItemsLabel]="(selectedItemsLabel || 'shared.Items_Selected') | translate" [class]="
+      'w-full border border-[' + defaultColor + '] rounded-none focus:outline-[' + defaultColor + '] focus:border-[' + defaultColor + '] hover:border-[' + defaultColor + '] disabled:opacity-50'
+      " (onChange)="onChange($event)" [ngClass]="{ 'basic-style': basicInput }">
+
+    @if (selectAllLabel) {
+    <ng-template #filter>
+      <p-checkbox binary="true" [(ngModel)]="allSelectd" (onChange)="toggleAll($event)" inputId="toggleAll">
+      </p-checkbox>
+      <span>{{selectAllLabel}}</span>
+    </ng-template>
+    }
+
+    @if(optionTemplate){
+    <ng-template let-item #item>
+      <ng-container [ngTemplateOutletContext]="{ $implicit: item }" [ngTemplateOutlet]="optionTemplate" />
+    </ng-template>
+    }
+  </p-multiselect>
+  } @else {
+  <p-select [appendTo]="appendTo" [dataKey]="dataKey" [checkmark]="checkmark" [disabled]="disabled" [editable]="editable"
+    [filterBy]="filterBy" [filter]="filter" [formControl]="control" [id]="inputId" [name]="name"
+    [ngClass]="{ 'p-invalid ng-dirty ng-invalid': isInvalid }"
+    [emptyMessage]="emptyMessage || ('shared.no_results_found'|translate)" [optionLabel]="optionLabel"
+    [optionValue]="optionValue" [options]="options" [placeholder]="placeholder" [readonly]="readonly"
+    [showClear]="showClear" [scrollHeight]="scrollHeight" [size]="size" class="w-full" [class]="
+      'w-full border border-[' + defaultColor + '] rounded-none focus:outline-[' + defaultColor + '] focus:border-[' + defaultColor + '] hover:border-[' + defaultColor + '] disabled:opacity-50'
+      " (onChange)="onChange($event)" (click)="clicked.emit($event)" [ngClass]="{ 'basic-style': basicInput }">
+
+    @if (optionTemplate) {
+    <ng-template let-item pTemplate="item">
+      <ng-container [ngTemplateOutletContext]="{ $implicit: item }" [ngTemplateOutlet]="optionTemplate" />
+    </ng-template>
+    }
+    @if (selectedItemTemplate) {
+    <ng-template let-item pTemplate="selectedItem">
+      <ng-container [ngTemplateOutletContext]="{ $implicit: item }" [ngTemplateOutlet]="selectedItemTemplate" />
+    </ng-template>
+    }
+  </p-select>
+  }
+</ng-template>
