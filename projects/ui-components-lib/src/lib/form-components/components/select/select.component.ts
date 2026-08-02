@@ -52,7 +52,8 @@ export class SelectComponent extends BaseInputComponent {
   @Input() filterBy!: string;
   @Input() selectAllLabel: string;
   @Input() dataKey!: string;
-  @Input() size: 'small' | 'large' = 'small';
+  @Input() floatLabel: boolean = true;
+  @Input() size?: 'small' | 'large';
   @Input() scrollHeight = '200px';
   @Input() appendTo = '';
 
