@@ -1,0 +1,47 @@
+.p-dialog-title {
+  @apply text-black-5;
+}
+.confirmation-dialog__message {
+  @apply text-[#687078] text-xl;
+}
+
+.confirmation-dialog__hint {
+  @apply pb-4 text-[#424B53] text-base;
+}
+
+.confirmation-dialog .dynamic-form {
+  @apply mt-4;
+}
+
+.confirmation-dialog .confirmation-dialog__actions {
+  @apply pt-7 !justify-start;
+  @media (max-width: 640px) {
+    @apply flex-col;
+    button {
+      @apply w-full;
+    }
+  }
+}
+
+.alert-dialog__message {
+  @apply text-black-5 text-lg;
+}
+
+.alert-dialog__actions {
+  @apply pt-7;
+  @media (max-width: 640px) {
+    @apply flex-col;
+    button {
+      @apply w-full;
+    }
+  }
+}
+
+.p-dialog-header-actions .p-button-text.p-button-secondary,
+.p-dialog-header-close {
+  @apply h-9 w-9 rounded bg-[var(--gray-6)] text-[var(--gray-900)];
+}
+
+.p-dialog-header.p-custom-header {
+  @apply px-0;
+}

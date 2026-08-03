@@ -1,0 +1,50 @@
+.height-70-input {
+  input {
+    @apply h-[70px];
+  }
+}
+
+.textarea-counter-field .field,
+.dynamic-form__content stc-input .field:has(textarea) {
+  display: grid !important;
+  grid-template-columns: max-content minmax(0, 1fr);
+  column-gap: 0.5rem;
+
+  textarea {
+    grid-column: 1 / -1;
+  }
+}
+
+.textarea-counter-field .p-mt-1,
+.textarea-counter-field .p-error {
+  grid-row: 2;
+}
+
+.dynamic-form__content stc-input .field:has(textarea) {
+  > .flex.items-center.justify-between.gap-2 {
+    display: contents !important;
+  }
+
+  textarea {
+    grid-row: 2;
+  }
+
+  > .flex.items-center.justify-between.gap-2 > label {
+    grid-column: 1 / -1;
+    grid-row: 1;
+  }
+
+  > .flex.items-center.justify-between.gap-2 > .text-xs,
+  .p-mt-1 {
+    grid-column: 1;
+    grid-row: 3;
+    margin-top: 0.25rem;
+    white-space: nowrap;
+  }
+
+  .p-error {
+    grid-column: 2;
+    grid-row: 3;
+    margin-top: 0.25rem;
+  }
+}

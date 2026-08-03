@@ -1,0 +1,7 @@
+.no-border-select {
+  .p-select {
+    @apply border-0 shadow-none bg-gray-6;
+    width: 40ch;
+    max-width: 16rem;
+  }
+}

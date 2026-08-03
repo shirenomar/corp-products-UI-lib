@@ -1,0 +1,16 @@
+// fonts
+@font-face {
+  font-family: 'STCForward-Regular';
+  src: url('../../fonts/STCForward-Regular.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'STCForward-Medium';
+  src: url('../../fonts/STCForward-Medium.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'STCForward-Bold';
+  src: url('../../fonts/STCForward-Bold.woff2') format('woff2');
+}
+body {
+  font-family: 'STCForward-Regular', sans-serif;
+}

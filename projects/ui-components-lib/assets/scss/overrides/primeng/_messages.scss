@@ -1,0 +1,6 @@
+.p-message-secondary {
+  outline-color: white !important;
+  .p-message-content {
+    @apply bg-white;
+  }
+}

@@ -1,0 +1,7 @@
+.p-button-icon-only.p-button-secondary {
+  @apply bg-gray-5 text-secondary;
+
+  &:not(:disabled):hover {
+    @apply bg-secondary text-white;
+  }
+}
