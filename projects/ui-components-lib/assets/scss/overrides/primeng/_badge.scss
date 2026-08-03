@@ -1,0 +1,16 @@
+.p-badge {
+  @apply font-bold !rounded-full;
+  --p-badge-min-width: 22px;
+  --p-badge-height: 22px;
+
+  &.p-badge-secondary {
+    --p-badge-secondary-background: var(--gray-25);
+    --p-badge-secondary-color: var(--gray-dark);
+  }
+
+  &.badge-sm {
+    --p-badge-min-width: 14px;
+    --p-badge-height: 14px;
+    --p-badge-font-size: 8px;
+  }
+}

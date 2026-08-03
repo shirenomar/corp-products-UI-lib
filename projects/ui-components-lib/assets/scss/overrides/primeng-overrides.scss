@@ -1,0 +1,57 @@
+:root {
+  // global primary color variables
+  --p-primary-color: #ff375e !important;
+  --p-primary-hover-color: #fa6b87 !important;
+
+  // form field variables
+  --p-input-border-radius: 2px !important;
+  --p-select-border-radius: 2px !important;
+  --p-textarea-border-radius: 2px !important;
+  --p-checkbox-border-radius: 2px !important;
+  --p-form-field-focus-border-color: #777 !important;
+
+  // button variables
+  --p-button-border-radius: 2px !important;
+  --p-button-outlined-primary-border-color: #ff375e !important;
+  --p-button-outlined-primary-hover-background: #fdb9c75b !important;
+  --p-button-text-primary-hover-background: #ff375e0d !important;
+  --p-button-secondary-hover-background: #ff375e !important;
+  --p-button-text-secondary-color: #ff375e !important;
+  --p-button-secondary-hover-color: #fff !important;
+  --p-button-secondary-color: #181d27 !important;
+  --p-button-border-radius: 2px !important;
+  --p-button-secondary-background: #f5f5f5 !important;
+  --p-button-padding-x: 1rem !important;
+  --p-button-padding-y: 0.75rem !important;
+  --p-button-outlined-contrast-border-color: var(--p-surface-300) !important;
+  --p-button-outlined-contrast-color: var(--p-surface-700) !important;
+  // dialog variables
+
+  --p-dialog-title-font-size: 2rem !important;
+  --p-dialog-border-radius: 8px !important;
+  --p-dialog-title-font-weight: 400 !important;
+
+  --p-toggleswitch-border-radius: 2px !important;
+  --p-toggleswitch-handle-border-radius: 2px !important;
+}
+
+.no-scrollbar {
+  scrollbar-width: none;
+  /* Firefox */
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+  /* Chrome, Safari */
+}
+
+.filter-form {
+  .p-inputtext,
+  .p-multiselect,
+  .p-select {
+    @apply h-10 rounded-sm;
+  }
+  .p-select-label {
+    align-self: center;
+  }
+}

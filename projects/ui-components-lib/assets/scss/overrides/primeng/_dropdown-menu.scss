@@ -1,0 +1,55 @@
+.dropdown-menu-button {
+  .p-button {
+    @apply h-10 flex whitespace-nowrap !important;
+
+    &:not(:disabled):active {
+      background: var(--p-button-primary-hover-background);
+    }
+  }
+  &.attachments-manage-files-button {
+    .p-button {
+      @apply w-full min-w-0 max-w-full px-2 text-sm !important;
+    }
+
+    .p-button-label {
+      @apply truncate;
+    }
+  }
+}
+
+.p-popover {
+  box-shadow: none;
+  &:is(.purple-menu) {
+    @apply bg-primary text-white text-sm mt-2;
+    li:not(:last-child) {
+      @apply border-b-2 border-purple-700;
+    }
+  }
+  &:is(.white-menu) {
+    @apply mt-1;
+    li {
+      @apply text-gray-950;
+      justify-content: start;
+    }
+  }
+  border-radius: 1px;
+  margin-top: 20px;
+  &::before,
+  &::after {
+    display: none;
+  }
+  .p-popover-content {
+    @apply p-0;
+    width: auto;
+    min-width: unset;
+
+    ul {
+      li {
+        @apply py-3 p-3;
+        &:hover {
+          @apply bg-purple-light2;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,38 @@
+.p-drawer-left,
+.p-drawer-right {
+  width: 30rem !important;
+}
+
+/* PrimeNG Drawer RTL direction + easing */
+[dir='ltr'] {
+  /* If drawer is rendered as "left", visually treat it as "right" in RTL */
+  .p-drawer.p-drawer-left {
+    left: auto !important;
+    right: 0 !important;
+  }
+
+  /* Closed/enter-from state should be offscreen to the right */
+  .p-drawer.p-drawer-left:not(.p-drawer-open),
+  .p-drawer.p-drawer-left.p-drawer-enter-from,
+  .p-drawer.p-drawer-left.p-drawer-leave-to {
+    transform: translateX(-100%);
+  }
+
+  /* Open/enter-to state at rest */
+  .p-drawer.p-drawer-left.p-drawer-open,
+  .p-drawer.p-drawer-left.p-drawer-enter-to,
+  .p-drawer.p-drawer-left.p-drawer-leave-from {
+    transform: translateX(0);
+  }
+}
+
+/* Smooth open/close easing */
+.p-drawer {
+  transition: transform 250ms ease-in-out;
+  will-change: transform;
+}
+
+.p-drawer-mask {
+  transition: opacity 250ms ease-in-out;
+  will-change: opacity;
+}
