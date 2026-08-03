@@ -1,0 +1,287 @@
+@use './assets/colors'; // Custom global styles
+@use 'primeicons/primeicons';
+@use './assets/iconsFont/style';
+@use './assets/scss/global-style';
+@import './assets/scss/overrides/index';
+/* You can add global styles to this file, and also import other style files */
+@tailwind base; // Tailwind's base styles
+@tailwind components; // Tailwind's component styles
+@tailwind utilities; // Tailwind's utility classes
+
+
+body {
+  background-color: var(--gray-50);
+}
+
+// Fix for ngx-extended-pdf-viewer scroll
+html.cdk-global-scrollblock,
+body.cdk-global-scrollblock,
+html.p-overflow-hidden,
+body.p-overflow-hidden {
+  padding-right: 0 !important;
+  margin-right: 0 !important;
+  overflow: hidden !important;
+}
+
+* {
+  box-sizing: border-box !important;
+}
+
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  /* Makes scrollbar thinner */
+  scrollbar-color: #888 #f1f1f1;
+  /* Thumb color | Track color */
+}
+
+/* Chrome, Edge, Safari */
+*::-webkit-scrollbar {
+  width: 3px;
+  /* vertical scrollbar */
+  height: 3px;
+  /* horizontal scrollbar */
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #888;
+  border-radius: 10px;
+}
+
+*::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+:root {
+  --p-highlight-background: var(--p-surface-100) !important;
+  --p-highlight-focus-background: var(--p-surface-100) !important;
+  --p-highlight-focus-color: var(--p-surface-800) !important;
+  --p-highlight-color: var(--p-surface-800) !important;
+}
+
+.p-paginator-page.p-paginator-page-selected {
+  // @apply bg-rose text-light_purple;
+}
+
+.p-floatlabel:has(.p-inputwrapper-focus) label {
+  color: #687078 !important;
+}
+
+.p-drawer {
+  &.p-drawer-sm {
+    width: clamp(28rem, 100vw, 30rem);
+  }
+
+  &.p-drawer-lg {
+    width: clamp(43rem, 58vw, 58rem);
+  }
+
+  &.p-drawer-xl {
+    width: clamp(calc(100vw - 330px), 70vw, 200px);
+  }
+}
+
+.p-toast-message {
+  --p-toast-border-radius: 2px;
+  border: none !important;
+
+  &.p-toast-message-success {
+    border-inline-start: 4px solid #62cf95 !important;
+    background-color: #0e8345 !important;
+
+    .p-toast-message-icon {
+      border: 1px solid #fff;
+      padding: 2px;
+    }
+  }
+
+  &.p-toast-message-error {
+    background-color: var(--p-toast-error-color) !important;
+  }
+
+  .p-toast-message-content {
+    --p-toast-content-padding: 1rem;
+    --p-toast-content-gap: 1rem;
+    min-height: 56px;
+  }
+
+  .p-toast-summary {
+    color: #fff !important;
+    font-size: 12px;
+  }
+
+  .p-toast-detail:empty {
+    display: none;
+  }
+
+  .p-toast-message-icon {
+    color: #fff;
+    --p-toast-icon-size: 1.25rem;
+  }
+}
+
+.p-checkbox .p-checkbox-box {
+  @apply border border-gray-300 bg-white transition-all;
+}
+
+.p-checkbox.p-highlight .p-checkbox-box,
+.p-checkbox.p-checkbox-checked .p-checkbox-box {
+  @apply border-purple-900 bg-purple-900 text-white;
+}
+
+.p-drawer {
+  gap: 1rem;
+
+  .p-drawer-header,
+  .p-drawer-content,
+  .p-drawer-footer {
+    padding: 1.25rem;
+  }
+
+  .p-drawer-header {
+    font-weight: 600;
+    padding-bottom: 0;
+    color: #1e252d;
+  }
+
+  .p-drawer-content {
+    padding-block: 0;
+  }
+
+  .p-drawer-footer {
+    padding-top: 0;
+  }
+
+  .p-button {
+    border-radius: 4px !important;
+  }
+
+  .p-drawer-close-button .p-button {
+    background-color: #fafafa;
+    color: #1e252d;
+    height: 36px;
+    width: 36px;
+  }
+}
+
+.p-button {
+  &.p-button-outlined.p-button-danger {
+    border-color: #dfe0e6;
+  }
+}
+
+.p-select-dropdown {
+  --p-select-dropdown-color: black;
+}
+
+.tag-button .p-tag {
+  @apply rounded-sm text-sm p-2 min-w-[6.875rem] h-10 bg-transparent border border-[--gray-25] cursor-pointer;
+  --p-tag-icon-size: 16px;
+  color: #181d27;
+
+  &.tag-selected {
+    background-color: #ead1ff;
+    color: #430075;
+  }
+}
+
+.p-breadcrumb {
+  padding: unset !important;
+
+  .p-breadcrumb-item-label {
+    @apply text-light_red;
+    font-size: 12px;
+  }
+}
+
+.filter-input {
+  .p-inputicon {
+    color: black;
+    font-size: 20px;
+    z-index: auto;
+  }
+
+  .p-inputtext,
+  &.p-select {
+    height: 48px;
+    border-radius: 2px;
+  }
+
+  .p-inputtext {
+    --p-inputtext-border-color: #dfe0e6;
+  }
+
+  &.p-select {
+    --p-select-border-color: #dfe0e6;
+    padding-inline-end: 12px;
+    --p-icon-size: 14px;
+
+    .p-select-label {
+      padding-inline-end: 8px;
+    }
+
+    .p-select-dropdown {
+      --p-select-dropdown-width: 1rem;
+    }
+
+    .p-select-clear-icon {
+      inset-inline-end: 36px;
+      color: inherit;
+    }
+  }
+}
+
+/* ===== Global Scrollbar Override ===== */
+
+/* Chrome, Edge, Safari, Opera */
+*::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+/* Remove the up/down arrows */
+*::-webkit-scrollbar-button {
+  display: none;
+  height: 0;
+  width: 0;
+}
+
+*::-webkit-scrollbar-track {
+  background: #f0f0f0;
+}
+
+*::-webkit-scrollbar-thumb {
+  background: #ffff;
+  border-radius: 8px;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+}
+
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  // scrollbar-color: #ffff #f0f0f0;
+}
+
+/* Remove ALL scrollbar buttons (up/down/left/right) */
+*::-webkit-scrollbar-button,
+*::-webkit-scrollbar-button:single-button,
+*::-webkit-scrollbar-button:start,
+*::-webkit-scrollbar-button:end,
+*::-webkit-scrollbar-button:vertical:start,
+*::-webkit-scrollbar-button:vertical:end,
+*::-webkit-scrollbar-button:horizontal:start,
+*::-webkit-scrollbar-button:horizontal:end {
+  display: none !important;
+  height: 0 !important;
+  width: 0 !important;
+  background: none !important;
+}
+
+.scroll-width-none {
+  scrollbar-width: none;
+}
+.p-datepicker-panel,
+.p-overlay-panel {
+  z-index: 9999 !important;
+}

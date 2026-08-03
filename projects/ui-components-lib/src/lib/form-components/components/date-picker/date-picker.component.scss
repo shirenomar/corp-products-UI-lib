@@ -19,7 +19,7 @@ stc-date-picker.w-full .field,
 stc-date-picker.w-full .p-floatlabel,
 stc-date-picker.w-full .p-datepicker,
 stc-date-picker.w-full .p-inputtext {
-  @apply w-full;
+  width: 100%;
 }
 stc-date-picker  input {
   width: 100%

@@ -1,0 +1,6 @@
+/* App styles lock page scroll for the shell; Storybook needs document scroll. */
+html,
+body {
+  overflow: auto !important;
+  height: auto !important;
+}

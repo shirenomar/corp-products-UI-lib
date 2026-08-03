@@ -1,4 +1,6 @@
 .tabs-container {
+  @apply h-full;
+
   &.full-width {
     .p-tabs .p-tablist-tab-list .p-tab {
       @apply flex-grow flex justify-center max-w-[50%];
@@ -14,13 +16,12 @@
       }
 
       .p-tab {
-        @apply text-sm text-gray-400 font-normal text-[16px] border-b-[4px] border-transparent z-[2];
+        @apply text-sm text-gray-400 font-normal text-[14px] tracking-[0px] border-b-[2.4px] border-transparent z-[2] px-1;
 
         &:not(.p-tab-active) {
           app-ico-moon-card {
             @apply grayscale;
           }
-
         }
       }
     }
@@ -29,8 +30,12 @@
       @apply hidden;
     }
 
-    .p-tabpanels.p-component {
-      @apply mt-5 rounded-lg;
+    .p-tabpanels {
+      @apply p-0 h-full;
+
+      &.p-component {
+        @apply mt-5 rounded-lg;
+      }
     }
   }
 
@@ -41,7 +46,7 @@
 
         .p-tab {
           &.p-tab-active {
-            @apply text-primary border-primary;
+            @apply border-purple-200 text-purple-dark;
           }
         }
       }
@@ -49,15 +54,34 @@
   }
 
   &.primary_light {
-    .p-tabs {
-      .p-tablist-tab-list {
-        .p-tab {
-          @apply rounded-t-lg text-[14px];
+    /* target only the first-level p-tabs under .primary_light */
+    > .p-tabs {
+      @apply h-full;
 
-          &.p-tab-active {
-            @apply bg-purple-800/5 font-semibold text-primary border-primary;
+      .p-tablist-tab-list {
+        &:after {
+          display: none;
+        }
+      }
+
+      > .p-tablist {
+        @apply px-[10px] py-[5px] border-0 rounded;
+
+        > .p-tablist-content > .p-tablist-tab-list {
+          @apply flex gap-1 h-[100%] border-0;
+
+          > .p-tab {
+            @apply rounded-[2px] text-[14px] border-0 py-[10px] flex items-center px-2 text-sm;
+
+            &.p-tab-active {
+              @apply bg-purple-800/5 font-semibold text-primary;
+            }
           }
         }
+      }
+
+      > .p-tabpanels {
+        @apply mt-2;
       }
     }
   }
@@ -79,13 +103,16 @@
       }
     }
   }
+  p-tablist {
+    overflow: initial;
+  }
 }
 
 [dir='rtl'] {
-  .p-tabs .p-tablist{
-    .p-iconwrapper {
-      @apply rotate-180;
-    }
+  .p-tabs .p-tablist {
+    // .p-iconwrapper {
+    //   @apply rotate-180deg;
+    // }
 
     .p-tablist-next-button {
       @apply right-auto left-0;
@@ -97,7 +124,7 @@
   }
 }
 
-// TODO : CHECK
-// .p-tabpanels.p-component {
-//   @apply mt-5 rounded-[1.5rem];
-// }
+::ng-deep .p-tabview-panel {
+  max-height: 400px;
+  overflow-y: auto;
+}

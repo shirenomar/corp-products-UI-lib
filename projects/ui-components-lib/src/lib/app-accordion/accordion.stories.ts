@@ -15,7 +15,7 @@ const meta: Meta<AppAccordionComponent> = {
     }),
   ],
   args: {
-    iconName: 'people',
+    iconName: 'plus',
     iconClass: 'text-[24px] text-secondary',
     iconPathCount: 1,
     title: 'Accordion Title',
@@ -37,7 +37,7 @@ type Story = StoryObj<AppAccordionComponent>;
 
 export const Default: Story = {
   args: {
-    iconName: 'people',
+    iconName: 'plus',
     iconClass: 'text-[24px] text-secondary',
     iconPathCount: 1,
     title: 'Accordion Title',

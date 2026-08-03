@@ -1,0 +1,22 @@
+.p-tooltip {
+  @apply z-50 rounded-none;
+
+  .p-tooltip-text {
+    @apply bg-white text-gray-dark text-13;
+  }
+  .p-tooltip-arrow {
+    background-color: var(--bs-white) !important;
+    border-top-color: white !important;
+    border-bottom-color: white !important;
+  }
+}
+
+/* app-rasel-tag: tooltip is appendTo body */
+.p-tooltip.rasel-tag-tooltip .p-tooltip-text {
+  box-sizing: border-box;
+  width: max-content;
+  min-width: 0;
+  max-width: min(22rem, 90vw);
+  white-space: normal;
+  word-break: break-word;
+}

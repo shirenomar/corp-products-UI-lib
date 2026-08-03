@@ -1,0 +1,120 @@
+@use './utilities/fonts';
+@use './utilities/reset';
+
+[routerLink] {
+  @apply cursor-pointer;
+}
+
+.empty-state {
+  @apply flex flex-col justify-center items-center gap-2;
+
+  .empty-icon {
+    @apply text-gray-600;
+    font-size: 24px;
+  }
+
+  p {
+    @apply text-black-20;
+  }
+}
+
+[dir='rtl'] {
+  .p-datepicker-prev-button,
+  .p-datepicker-next-button {
+    transform: scaleX(-1);
+  }
+}
+
+.dashboard-card {
+  @apply bg-white p-6 rounded flex flex-col gap-4;
+
+  &__title {
+    font-size: 24px;
+    @apply text-black-10 font-bold;
+  }
+
+  &__content {
+    @apply h-full rounded border border-gray-25;
+
+    &-header {
+      @apply p-5 flex items-center gap-4;
+
+      &-icon {
+        @apply text-24 text-white;
+      }
+    }
+
+    &-body {
+      @apply p-5 flex flex-col gap-5;
+    }
+  }
+
+  &__item {
+    @apply inline-flex gap-2;
+
+    &-icon {
+      @apply text-20 text-gray-600;
+    }
+
+    &-content {
+      @apply flex flex-col gap-2.5;
+
+      &-title {
+        @apply text-md text-gray-700;
+      }
+
+      &-value {
+        @apply text-20 text-black-5 leading-none;
+      }
+    }
+  }
+
+  .group-date,
+  .filter-date {
+    // .p-tabs {
+    //   min-width: 256px;
+    // }
+
+    .p-tablist-tab-list {
+      @apply border-none gap-3;
+    }
+
+    .p-tablist-nav-button {
+      @apply shadow-none border border-solid border-gray-200 text-purple-dark;
+    }
+
+    .tag-button {
+      @apply whitespace-nowrap px-[1px];
+
+      .p-tag {
+        --p-tag-font-weight: 400;
+        @apply h-12 min-w-0 px-4 text-gray-700 border-gray-200;
+
+        &.tag-selected {
+          @apply border-purple-600;
+        }
+      }
+    }
+  }
+
+  .filter-date .date-range {
+    .p-datepicker-input {
+      border-inline-end: 0;
+      border-start-end-radius: 0 !important;
+      border-end-end-radius: 0 !important;
+      min-width: 256px;
+      @apply min-h-12 rounded-sm text-black-5 bg-transparent border-gray-8 shadow-none pe-0;
+    }
+    .p-datepicker-dropdown {
+      --p-datepicker-dropdown-width: 4rem;
+      @apply bg-transparent border-gray-8 text-24 text-black-200;
+    }
+  }
+
+  .bg-purple-4 .filter-date .date-range {
+    .p-datepicker-dropdown,
+    .p-datepicker-input {
+      @apply text-white;
+    }
+  }
+}

@@ -1,0 +1,19 @@
+.p-accordionpanel {
+  @apply border rounded !border-solid border-gray-25 mb-3 !important;
+}
+
+.p-accordionheader {
+  @apply border-gray-25 transition-all duration-300 ease-in-out !important;
+}
+
+.p-accordion-panel:hover {
+  @apply border-solid !important;
+}
+
+.p-accordionheader[aria-expanded='false'] {
+  @apply border-b-0 !important;
+}
+
+.p-accordionheader[aria-expanded='true'] {
+  @apply border-b border-solid border-gray-25 !important;
+}

@@ -1,0 +1,10 @@
+.p-floatlabel-in {
+  //This is affect on global style for all inputs like auto complete please don`t add fixed height
+  //@apply h-[56px] !important;
+  .p-component {
+    @apply h-full !important;
+  }
+  .p-select .p-select-label {
+    @apply pt-[24px] pb-[8px] !important;
+  }
+}
