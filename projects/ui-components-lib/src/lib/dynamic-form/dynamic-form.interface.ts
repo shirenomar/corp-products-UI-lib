@@ -45,6 +45,7 @@ export interface InputsMapData {
   disabledDays?: number[]; // 0 = Sunday, 1 = Monday, ..., 6 = Saturday
   isTimeOnly?: boolean;
   showIcon?: boolean;
+  floatLabel?: boolean;
   withoutTime?: boolean;
   //select button
   selectButtonOptions?: LabelValue<any>[];
