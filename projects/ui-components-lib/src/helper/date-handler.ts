@@ -1,4 +1,4 @@
-import { DateTime, DateTimeMaybeValid, DateTimeOptions, LocaleOptions } from 'luxon';
+import { DateTime, DateTimeOptions, LocaleOptions } from 'luxon';
 import { DateFormats, TimeFormats } from '../enums/date-formatter';
 
 export class DateHandler {
@@ -26,7 +26,7 @@ export class DateHandler {
   static getDateTimeFromISO(
     date: string,
     dateTimeOptions: DateTimeOptions = {}
-  ): DateTime<true> | DateTime<false> {
+  ): DateTime {
     return DateTime.fromISO(date, dateTimeOptions);
   }
 
@@ -58,7 +58,7 @@ export class DateHandler {
     return DateTime.utc().toISO();
   }
 
-  static getDateFromJsDate(date: Date): DateTimeMaybeValid {
+  static getDateFromJsDate(date: Date): DateTime {
     return DateTime.fromJSDate(date);
   }
 

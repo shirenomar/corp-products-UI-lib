@@ -1,6 +1,5 @@
 import {NgClass, NgComponentOutlet} from "@angular/common";
 import {Component, inject, Injector, OnDestroy, OnInit} from '@angular/core';
-import {PrimeTemplate} from "primeng/api";
 import {Drawer} from "primeng/drawer";
 import { Location } from '@angular/common';
 import {TranslatePipe} from "@ngx-translate/core";
@@ -13,7 +12,7 @@ import { createCustomInjector, SIDEBAR_DATA } from "./side-bar-utils";
   templateUrl: "./side-bar-dynamic.component.html",
   styleUrls: ["./side-bar-dynamic.component.scss"],
   standalone: true,
-  imports: [Drawer, NgClass, NgComponentOutlet, PrimeTemplate, DataInjectorPipe, AppButtonComponent, TranslatePipe]
+  imports: [Drawer, NgClass, NgComponentOutlet, DataInjectorPipe, AppButtonComponent, TranslatePipe]
 })
 export class SideBarDynamicComponent implements OnInit, OnDestroy {
   dynamicSidebarService = inject(DynamicSidebarService);

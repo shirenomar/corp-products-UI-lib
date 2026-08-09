@@ -1,13 +1,12 @@
 import { NgClass, NgTemplateOutlet } from "@angular/common";
 import { Component, EventEmitter, Input, Output, TemplateRef, ViewEncapsulation } from "@angular/core";
-import { PrimeTemplate } from "primeng/api";
 import { Drawer } from "primeng/drawer";
 import { TooltipModule } from "primeng/tooltip";
 
 @Component({
   selector: "app-side-bar",
   standalone: true,
-  imports: [PrimeTemplate, Drawer, NgClass, NgTemplateOutlet, TooltipModule],
+  imports: [Drawer, NgClass, NgTemplateOutlet, TooltipModule],
   templateUrl: "./side-bar.component.html",
   styleUrl: "./side-bar.component.scss",
   encapsulation: ViewEncapsulation.None

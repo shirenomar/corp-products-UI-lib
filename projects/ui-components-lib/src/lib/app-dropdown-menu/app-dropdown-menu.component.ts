@@ -4,14 +4,14 @@ import { Popover } from 'primeng/popover';
 import { DropdownMenuItem } from './app-dropdown-menu';
 import {Router} from '@angular/router';
 import {AppButtonIconPos, AppButtonSeverity} from '../app-button';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslatePipe } from '@ngx-translate/core';
 import {NgClass} from "@angular/common";
 import {MenuPopupTextColorPipe} from "./menu-popup.pipe";
 
 @Component({
   selector: "app-dropdown-menu",
   standalone: true,
-  imports: [AppButtonComponent, Popover, TranslateModule, NgClass, MenuPopupTextColorPipe],
+  imports: [AppButtonComponent, Popover, TranslatePipe, NgClass, MenuPopupTextColorPipe],
   templateUrl: "./app-dropdown-menu.component.html",
   styleUrl: "./app-dropdown-menu.component.scss",
   encapsulation: ViewEncapsulation.None

@@ -5,6 +5,7 @@ import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ValidationErrorsPipe } from '../../@utils/validations';
 import { DatePicker, DatePickerModule } from 'primeng/datepicker';
 import { FloatLabelModule } from 'primeng/floatlabel';
+import type { AppendTo } from 'primeng/types/shared';
 import { BaseInputComponent } from '../base-input.component';
 import { DateHandler } from '../../../../helper/date-handler';
 import { DateFormats } from '../../../../enums/date-formatter';
@@ -35,7 +36,7 @@ export class DatePickerComponent extends BaseInputComponent implements AfterView
   @Input() disabledDates: Date[] = [];
   @Input() disabledDays: number[] = []; // 0 = Sunday, 1 = Monday, ..., 6 = Saturday
   @Input() hourFormat: '12' | '24' = '12';
-  @Input() appendTo = 'body'
+  @Input() appendTo: AppendTo = 'body';
   nowTime = new Date();
   @Input() selectionMode: 'single' | 'range' = 'single';
   @Output() onAfterClearDate = new EventEmitter<void>();

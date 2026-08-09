@@ -2,14 +2,14 @@
   [closable]="sidebarConfig.closable" [closeOnEscape]="sidebarConfig.closeOnEscape"
   [dismissible]="sidebarConfig.dismissible" [ngClass]="{ show: sidebarConfig.show }" [position]="'left'" appendTo="body"
   id="main-drawer"
-  styleClass="p-drawer-{{ sidebarConfig.sidebarSize }} custom-content bg-white {{ sidebarConfig.styleClass }}">
-  <ng-template pTemplate="header">{{ sidebarConfig.title }}</ng-template>
-  <ng-template pTemplate="content">
+  [styleClass]="'p-drawer-' + sidebarConfig.sidebarSize + ' custom-content bg-white ' + sidebarConfig.styleClass">
+  <ng-template #header>{{ sidebarConfig.title }}</ng-template>
+  <ng-template #content>
     <ng-container [ngComponentOutletInjector]="dynamicSidebarService.contentComponentData | dataInjector"
       [ngComponentOutlet]="dynamicSidebarService.contentComponentRef"></ng-container>
   </ng-template>
   @if (sidebarConfig.showSaveBtn || sidebarConfig.showSaveAndMoreBtn || sidebarConfig.showCancelBtn) {
-  <ng-template pTemplate="footer">
+  <ng-template #footer>
     <section class="flex justify-between bg-gray-200 py-4" id="sidebar-footer">
       <div class="flex gap-2">
         @if (sidebarConfig.showSaveBtn) {

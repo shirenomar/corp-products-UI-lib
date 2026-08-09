@@ -1,7 +1,7 @@
 <div class="field flex flex-col gap-2 my-3 relative">
 
   @if(multiple) {
-  <p-floatLabel [variant]="variant">
+  <p-floatlabel [variant]="variant">
 
     <p-multiselect [disabled]="disabled" [filterBy]="filterBy" [filter]="filter" [formControl]="control" [id]="inputId"
       [name]="name" [ngClass]="{ 'p-invalid ng-dirty ng-invalid': isInvalid }" [optionLabel]="optionLabel"
@@ -38,10 +38,10 @@
       }
     </label>
 
-  </p-floatLabel>
+  </p-floatlabel>
 
   } @else {
-  <p-floatLabel [variant]="variant">
+  <p-floatlabel [variant]="variant">
     <p-select [appendTo]="appendTo" [dataKey]="dataKey" [checkmark]="checkmark" [disabled]="disabled" [editable]="editable"
       [filterBy]="filterBy" [filter]="filter" [formControl]="control" [id]="inputId" [name]="name"
       [ngClass]="{ 'p-invalid ng-dirty ng-invalid': isInvalid }"
@@ -52,12 +52,12 @@
         " (onChange)="onChange($event)" (click)="clicked.emit($event)" [ngClass]="{ 'basic-style': basicInput }">
 
       @if (optionTemplate) {
-      <ng-template let-item pTemplate="item">
+      <ng-template let-item #item>
         <ng-container [ngTemplateOutletContext]="{ $implicit: item }" [ngTemplateOutlet]="optionTemplate" />
       </ng-template>
       }
       @if (selectedItemTemplate) {
-      <ng-template let-item pTemplate="selectedItem">
+      <ng-template let-item #selectedItem>
         <ng-container [ngTemplateOutletContext]="{ $implicit: item }" [ngTemplateOutlet]="selectedItemTemplate" />
       </ng-template>
       }
@@ -68,7 +68,7 @@
       <span [class.text-required]="required">*</span>
       }
     </label>
-  </p-floatLabel>
+  </p-floatlabel>
   }
 
   @if (hint) {

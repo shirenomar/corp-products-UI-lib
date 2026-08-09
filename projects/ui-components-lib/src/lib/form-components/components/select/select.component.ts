@@ -9,11 +9,11 @@ import {
 } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TranslatePipe } from '@ngx-translate/core';
-import { PrimeTemplate } from 'primeng/api';
 import { CheckboxModule } from 'primeng/checkbox';
 import { FloatLabelModule } from 'primeng/floatlabel';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { Select, SelectChangeEvent } from 'primeng/select';
+import type { AppendTo } from 'primeng/types/shared';
 import { ValidationErrorsPipe } from '../../@utils/validations';
 import { BaseInputComponent } from '../base-input.component';
 
@@ -26,7 +26,6 @@ import { BaseInputComponent } from '../base-input.component';
     ReactiveFormsModule,
     NgClass,
     NgTemplateOutlet,
-    PrimeTemplate,
     ValidationErrorsPipe,
     MultiSelectModule,
     FloatLabelModule,
@@ -54,7 +53,7 @@ export class SelectComponent extends BaseInputComponent {
   @Input() dataKey!: string;
   @Input() size: 'small' | 'large' = 'small';
   @Input() scrollHeight = '200px';
-  @Input() appendTo = '';
+  @Input() appendTo: AppendTo;
 
   @Input() selectedItemsLabel!: string;
   @Input() basicInput!: boolean;

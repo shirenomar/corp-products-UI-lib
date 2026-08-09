@@ -36,9 +36,9 @@
           'w-full border border-[' + defaultColor + '] rounded-none focus:outline-[' + defaultColor + '] focus:border-[' + defaultColor + '] hover:border-[' + defaultColor + '] disabled:opacity-50'"
       [ngClass]="{ 'p-invalid ng-dirty ng-invalid': isInvalid, 'basic-style': basicInput, 'no-style':noStyle}" />
     @if (canClear && control.value) {
-    <p-inputIcon (click)="clearInput()">
+    <p-inputicon (click)="clearInput()">
       <i class="pi pi-times cursor-pointer text-sm text-gray-400 hover:text-gray-600"></i>
-    </p-inputIcon>
+    </p-inputicon>
     }
 
   </p-iconfield>

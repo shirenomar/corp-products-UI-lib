@@ -7,11 +7,11 @@
   [position]="'bottom'"
   appendTo="body"
   >
-  <ng-template pTemplate="header">
+  <ng-template #header>
     <div class="band"></div>
   </ng-template>
   @if (contentTemplate) {
-    <ng-template pTemplate="content">
+    <ng-template #content>
       <ng-container *ngTemplateOutlet="contentTemplate"></ng-container>
     </ng-template>
   }

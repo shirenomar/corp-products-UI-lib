@@ -6,14 +6,14 @@
     <p-auto-complete (keydown)="onKeyDown($event)"  (onBlur)="onBlur($event)" (completeMethod)="search($event)" (onSelect)="onSelect($event)" [delay]="delay"
       [disabled]="disabled" [formControl]="control" [id]="inputId" fluid [typeahead]="typeAhead"
       [inputStyleClass]="'reset-default-styles w-full' + (basicInput ? ' basic-style': ' ')"
-      [minLength]="minLengthToSearch" [name]="name" [ngClass]="{ 'p-invalid ng-dirty ng-invalid': isInvalid}"
-      [placeholder]="placeholder" [styleClass]="'w-full'" multiple [suggestions]="items">
-      <ng-template let-item pTemplate="item">
+      [minQueryLength]="minLengthToSearch" [name]="name" [ngClass]="{ 'p-invalid ng-dirty ng-invalid': isInvalid}"
+      [placeholder]="placeholder" class="w-full" multiple [suggestions]="items">
+      <ng-template let-item #item>
         @if (selectedItemTemplate) {
         <ng-container [ngTemplateOutletContext]="{ $implicit: item }" [ngTemplateOutlet]="selectedItemTemplate" />
         }
       </ng-template>
-      <ng-template let-item pTemplate="selectedItem">
+      <ng-template let-item #selectedItem>
         <span [class.text-red]="isItemInvalid(item)">
           {{ item }}
         </span>

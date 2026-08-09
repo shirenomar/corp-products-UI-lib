@@ -3,7 +3,7 @@ import { Component, inject, Input, model, OnInit, ViewEncapsulation } from '@ang
 import { TabsModule } from 'primeng/tabs';
 import { AppTabs } from './app-tab.interface';
 import { IcoMoonIconComponent } from '../ico-moon-icon/ico-moon-icon.component';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslatePipe } from '@ngx-translate/core';
 import { ActivatedRoute, NavigationEnd, Router, RouterLink, RouterOutlet } from '@angular/router';
 import { filter } from 'rxjs';
 import { BadgeModule } from 'primeng/badge';
@@ -18,7 +18,7 @@ import { BadgeModule } from 'primeng/badge';
     RouterLink,
     RouterOutlet,
     IcoMoonIconComponent,
-    TranslateModule,
+    TranslatePipe,
     BadgeModule,
   ],
   templateUrl: './app-tabs.component.html',

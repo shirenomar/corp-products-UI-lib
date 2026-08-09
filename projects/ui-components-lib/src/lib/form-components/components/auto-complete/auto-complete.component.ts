@@ -2,7 +2,6 @@ import { JsonPipe, NgClass, NgIf, NgTemplateOutlet } from '@angular/common';
 import { Component, EventEmitter, Input, Output, TemplateRef, ViewEncapsulation } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { TranslatePipe } from '@ngx-translate/core';
-import { PrimeTemplate } from 'primeng/api';
 import {
   AutoComplete,
   AutoCompleteCompleteEvent,
@@ -19,7 +18,6 @@ import { emailStcValidator } from '../../@utils/validations/email-stc.validator'
   imports: [
     ReactiveFormsModule,
     AutoComplete,
-    PrimeTemplate,
     NgIf,
     NgTemplateOutlet,
     NgClass,

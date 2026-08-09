@@ -9,15 +9,15 @@
   [ngClass]="{ show: show }"
   [position]="'left'"
   appendTo="body"
-  styleClass="p-drawer-{{ sidebarSize }} custom-content bg-white {{ styleClass }}">
-  <ng-template pTemplate="header">
+  [styleClass]="'p-drawer-' + sidebarSize + ' custom-content bg-white ' + styleClass">
+  <ng-template #header>
     <p class="truncate" [pTooltip]="title">{{ title }}</p>
   </ng-template>
   @if (contentTemplate) {
-    <ng-template pTemplate="content">
+    <ng-template #content>
       <ng-container *ngTemplateOutlet="contentTemplate"></ng-container>
     </ng-template>
-    <ng-template pTemplate="footer">
+    <ng-template #footer>
       <ng-container *ngTemplateOutlet="footerTemplate"></ng-container>
     </ng-template>
   }

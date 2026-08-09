@@ -1,11 +1,11 @@
 import { Component, Input } from "@angular/core";
 import {SlicePipe} from "@angular/common";
-import { TranslateModule } from "@ngx-translate/core";
+import { TranslatePipe } from "@ngx-translate/core";
 
 @Component({
   selector: "app-read-more",
   standalone: true,
-  imports: [TranslateModule, SlicePipe],
+  imports: [TranslatePipe, SlicePipe],
   templateUrl: "./read-more.component.html",
   styleUrl: "./read-more.component.scss"
 })
