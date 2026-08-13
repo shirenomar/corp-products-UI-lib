@@ -45,6 +45,8 @@ export class AutoCompleteComponent extends BaseInputComponent {
   @Input() typeAhead: boolean = false;
   @Input() allowSpaces: boolean = false;
   @Input() taggable: boolean = true;
+  @Input() multiple: boolean = true;
+  @Input() floatLabel: boolean = true;
   @Input() variant: 'in' | 'over' | 'on' = 'over';
   @Input() allowedDomains: string[] | undefined = [];
   constructor() {

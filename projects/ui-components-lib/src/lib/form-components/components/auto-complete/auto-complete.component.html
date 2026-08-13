@@ -1,40 +1,65 @@
 <div class="field flex flex-col gap-2 my-3 relative">
-  @if (!required) {
-  <span class="absolute top-[6px] left-0 text-[10px] text-gray-400">{{'forms.config.optional' | translate}}</span>
-  }
-  <p-floatlabel [variant]="variant" class="autoComplete">
-    <p-auto-complete (keydown)="onKeyDown($event)"  (onBlur)="onBlur($event)" (completeMethod)="search($event)" (onSelect)="onSelect($event)" [delay]="delay"
-      [disabled]="disabled" [formControl]="control" [id]="inputId" fluid [typeahead]="typeAhead"
-      [inputStyleClass]="'reset-default-styles w-full' + (basicInput ? ' basic-style': ' ')"
-      [minLength]="minLengthToSearch" [name]="name" [ngClass]="{ 'p-invalid ng-dirty ng-invalid': isInvalid}"
-      [placeholder]="placeholder" [styleClass]="'w-full'" multiple [suggestions]="items">
-      <ng-template let-item pTemplate="item">
-        @if (selectedItemTemplate) {
-        <ng-container [ngTemplateOutletContext]="{ $implicit: item }" [ngTemplateOutlet]="selectedItemTemplate" />
-        }
-      </ng-template>
-      <ng-template let-item pTemplate="selectedItem">
-        <span [class.text-red]="isItemInvalid(item)">
-          {{ item }}
-        </span>
-      </ng-template>
-    </p-auto-complete>
-    <label [for]="inputId">
-      {{ label }}
-      @if (required) {
-      <span [class.text-red]="isInvalid">*</span>
-      }
-    </label>
-  </p-floatlabel>
-  @if (hint) {
-  <small class="p-mt-1">{{ hint }}</small>
-  }
-  @if (isInvalid && (control.dirty || control.touched)) {
-  <small class="p-error">
-    @for (error of control.errors | validationErrors; track error) {
-    {{ error }}<br>
+  <!-- FLOATING / STANDARDCONTAINER ROUTER -->
+  @if (floatLabel) {
+    @if (!required) {
+        <span class="absolute top-[6px] left-0 text-[10px] text-gray-400">{{'forms.config.optional' | translate}}</span>
     }
-  </small>
+    <p-floatlabel [variant]="variant"  class="autoComplete">
+      <ng-container *ngTemplateOutlet="inputTemplate"></ng-container>
+      <label [for]="inputId">
+        {{ label }}
+        @if (required) {
+        <span [class.text-required]="required">*</span>
+        }
+      </label>
+    </p-floatlabel>
+  } @else {
+    @if (label) {
+      <div class="flex items-center justify-between gap-2">
+        <label [for]="inputId">
+          {{ label }}
+          @if (required) {
+            <span [class.text-red-700]="isInvalid" class="text-required">*</span>
+          }
+        </label>
+        @if (!required) {
+          <span class="absolute top-[6px] left-0 text-[10px] text-gray-400">{{'forms.config.optional' | translate}}</span>
+        }
+      </div>
+    }
+    <ng-container *ngTemplateOutlet="inputTemplate"></ng-container>
   }
 
+  <!-- HINTS -->
+  @if (hint) {
+    <small class="p-mt-1">{{ hint }}</small>
+  }
+
+  <!-- ERRORS -->
+  @if (isInvalid && (control.dirty || control.touched)) {
+    <small class="p-error">
+      @for (error of control.errors | validationErrors; track error) {
+        {{ error }}<br>
+      }
+    </small>
+  }
 </div>
+
+<ng-template #inputTemplate>
+  <p-auto-complete (keydown)="onKeyDown($event)"  (onBlur)="onBlur($event)" (completeMethod)="search($event)" (onSelect)="onSelect($event)" [delay]="delay"
+    [disabled]="disabled" [formControl]="control" [id]="inputId" fluid [typeahead]="typeAhead"
+    [inputStyleClass]="'reset-default-styles w-full' + (basicInput ? ' basic-style': ' ')"
+    [minLength]="minLengthToSearch" [name]="name" [ngClass]="{ 'p-invalid ng-dirty ng-invalid': isInvalid}"
+    [placeholder]="placeholder" [styleClass]="'w-full'" [multiple]="multiple" [suggestions]="items">
+    <ng-template let-item pTemplate="item">
+      @if (selectedItemTemplate) {
+      <ng-container [ngTemplateOutletContext]="{ $implicit: item }" [ngTemplateOutlet]="selectedItemTemplate" />
+      }
+    </ng-template>
+    <ng-template let-item pTemplate="selectedItem">
+      <span [class.text-red]="isItemInvalid(item)">
+        {{ item }}
+      </span>
+    </ng-template>
+  </p-auto-complete>
+</ng-template>
