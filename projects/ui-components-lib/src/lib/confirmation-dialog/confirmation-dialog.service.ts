@@ -15,7 +15,7 @@ export class ConfirmationDialogService {
     const ref: DynamicDialogRef | null = this.dialogService.open(ConfirmationDialogComponent, {
       data,
       header: data.header,
-      showHeader: true,
+      showHeader: false,
       width: data.width || '600px',
       closable: true,
       modal: true,
