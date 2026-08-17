@@ -43,6 +43,10 @@ export class AutoCompleteComponent extends BaseInputComponent {
   @Input() delay = 300; // default value
   @Input() basicInput!: boolean;
   @Input() typeAhead: boolean = false;
+  @Input() allowSpaces: boolean = false;
+  @Input() taggable: boolean = true;
+  @Input() multiple: boolean = true;
+  @Input() floatLabel: boolean = true;
   @Input() variant: 'in' | 'over' | 'on' = 'over';
   @Input() allowedDomains: string[] | undefined = [];
   constructor() {
@@ -58,13 +62,15 @@ export class AutoCompleteComponent extends BaseInputComponent {
   }
 
   onKeyDown(event: KeyboardEvent) {
-    if (!['Enter', 'Tab', ' '].includes(event.key)) return;
+    const targetKeys = this.allowSpaces ? ['Enter'] : ['Enter', 'Tab', ' '];
+    if (!targetKeys.includes(event.key) || !this.taggable) return;
     event.preventDefault();
     const input = event.target as HTMLInputElement;
     this.addValueFromInput(input);
   }
 
   onBlur(event: Event) {
+    if (!this.taggable) return;
     const input = event.target as HTMLInputElement;
     this.addValueFromInput(input);
   }

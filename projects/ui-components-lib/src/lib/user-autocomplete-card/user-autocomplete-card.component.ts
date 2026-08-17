@@ -18,4 +18,10 @@ export class UserAutocompleteCardComponent {
   onDelete() {
     this.delete.emit(this.userData);
   }
+  onImageError(event: Event): void {
+    const target = event.target as HTMLImageElement | null;
+    if (target) {
+      target.src = 'assets/images/user-placeholder.jpg';
+    }
+  }
 }

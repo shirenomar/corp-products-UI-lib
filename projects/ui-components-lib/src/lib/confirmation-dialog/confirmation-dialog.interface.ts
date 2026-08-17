@@ -10,7 +10,11 @@ export interface ConfirmationDialogData {
   cancelBtnLabel?: string;
   confirmBtnLabel?: string;
   confirmBtnIcon?: string;
+  confirmBtnSeverity?: string;
   confirmBtnPosition?: string;
+  width?: string;
+  showHeader?: boolean;
+  closeBtn?: boolean;
   hint?: string;
   inputForm?: any;
   breakpoints?: any;

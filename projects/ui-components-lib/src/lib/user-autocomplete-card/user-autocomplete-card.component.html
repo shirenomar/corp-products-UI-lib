@@ -1,6 +1,7 @@
 <div class="flex gap-2 items-center justify-between p-4 rounded mb-4 border border-dotted border-gray-300 bg-gray-100">
   <div class="flex gap-4 items-center">
-    <img [alt]="userData.name" [src]="userData.profileImage" class="rounded-full object-cover w-[48px] h-[48px]" />
+    <img [alt]="userData.name" [src]="userData.profileImage" class="rounded-full object-cover w-[48px] h-[48px]"
+      (error)="onImageError($event)"/>
     <div class="flex flex-col justify-end">
       <h4 class="font-bold text-[12px] text-gray-800 truncate max-w-[135px] dir-ltr">
         {{ userData.name }}
@@ -14,7 +15,7 @@
   </div>
   @if (showDeleteAction){
     <div class="flex gap-1 flex-nowrap">
-      <app-button (clickEmitter)="onDelete()" [rounded]="true" [size]="'large'" [text]="true" icon="font-icon-trash"/>
+      <app-button (click)="onDelete()" [rounded]="true" [size]="'large'" [text]="true" icon="font-icon-trash"/>
     </div>
   }
 </div>

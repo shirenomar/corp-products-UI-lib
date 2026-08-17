@@ -10,31 +10,31 @@
   </ng-template>
   @if (sidebarConfig.showSaveBtn || sidebarConfig.showSaveAndMoreBtn || sidebarConfig.showCancelBtn) {
   <ng-template pTemplate="footer">
-    <section class="flex justify-between bg-gray-200 py-4" id="sidebar-footer">
+    <section class="flex justify-between bg-gray-200" id="sidebar-footer">
       <div class="flex gap-2">
         @if (sidebarConfig.showSaveBtn) {
-        <app-button (clickEmitter)="dynamicSidebarService.submit(true)"
+        <app-button (click)="dynamicSidebarService.submit(true)"
           [disabled]="dynamicSidebarService.isButtonDisabled()"
           [icon]="sidebarConfig!.actions!.save!.icon || 'font-icon-plus'"
           [iconPos]="sidebarConfig!.actions!.save!.iconPos || 'right'"
-          [styleClass]="sidebarConfig!.actions!.save!.style || 'danger'"
-          [title]="sidebarConfig!.actions!.save!.title || ('actions.save' | translate)"
+          [severity]="sidebarConfig!.actions!.save!.style || 'danger'"
+          [label]="sidebarConfig!.actions!.save!.title || ('actions.save' | translate)"
           [variant]="sidebarConfig!.actions!.save!.variant" />
         }
         @if (sidebarConfig.showSaveAndMoreBtn) {
-        <app-button (clickEmitter)="dynamicSidebarService.submit()"
+        <app-button (click)="dynamicSidebarService.submit()"
           [disabled]="dynamicSidebarService.isButtonDisabled()"
           [icon]="sidebarConfig!.actions!.saveAndMore!.icon || 'font-icon-plus'"
           [iconPos]="sidebarConfig!.actions!.saveAndMore!.iconPos || 'right'"
-          [styleClass]="sidebarConfig!.actions!.saveAndMore!.style || 'danger'"
-          [title]="sidebarConfig!.actions!.saveAndMore!.title || ('actions.save_and_and_more' | translate)"
+          [severity]="sidebarConfig!.actions!.saveAndMore!.style || 'danger'"
+          [label]="sidebarConfig!.actions!.saveAndMore!.title || ('actions.save_and_and_more' | translate)"
           [variant]="sidebarConfig!.actions!.saveAndMore!.variant" />
 
         }
       </div>
       @if (sidebarConfig.showCancelBtn) {
-      <app-button (clickEmitter)="dynamicSidebarService.cancel()" [styleClass]="'secondary'"
-        [title]="'actions.cancel' | translate" />
+      <app-button (click)="dynamicSidebarService.cancel()" [severity]="'secondary'"
+        [label]="'actions.cancel' | translate" />
       }
     </section>
   </ng-template>

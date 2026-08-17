@@ -93,6 +93,11 @@ export class ConfirmationDialogComponent extends DynamicDialogRef implements OnI
         documentId: this.documentId,
         data: this.dialogFormData?.formGroup?.value,
       });
+    } else if (this.dialogFormData?.formGroup?.value) {
+      this._ref.close({
+        isSubmitted: true,
+        data: this.dialogFormData?.formGroup?.value,
+      });
     } else if (this.uploadedFile) {
       this._ref.close({ isSubmitted: true, file: this.uploadedFile });
     } else {

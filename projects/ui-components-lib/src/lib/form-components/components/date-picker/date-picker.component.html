@@ -1,40 +1,66 @@
 <div class="field flex flex-col gap-2 my-3 relative">
-  <p-floatlabel [variant]="variant">
-    <p-datepicker [selectionMode]="selectionMode" [disabled]="disabled" [formControl]="innerControl"
-      (onSelect)="onDateChange($event)" [iconDisplay]="'input'" [showClear]="showClear" (onClear)="afterClearDate()"
-      [inputId]="inputId" [inputStyleClass]="'reset-default-styles ' + (basicInput ? 'basic-style' : '')"
-      [ngClass]="{ 'p-invalid ng-dirty ng-invalid': isInvalid }" [placeholder]="placeholder ? placeholder : undefined"
-      [showIcon]="showIcon" [class]="'w-full'" [appendTo]="appendTo" [timeOnly]="isTimeOnly" [hourFormat]="hourFormat"
-      [minDate]="minDate" [maxDate]="maxDate" [disabledDates]="disabledDates" [disabledDays]="disabledDays">
-      @if (isTimeOnly) {
-      <ng-template #inputicon let-clickCallBack="clickCallBack">
-        <i class="text-[18px] font-icon-time-clock" (click)="clickCallBack($event)"></i>
-      </ng-template>
-      <ng-template pTemplate="footer">
-        <div class="p-datepicker-buttonbar">
-          <button pButton type="button" class="p-button-text" (click)="selectCurrentTime($event)">الان
-          </button>
-          <button pButton type="button" class="p-button-text" (click)="clearButtonClick($event)"> الغاء</button>
-        </div>
-      </ng-template>
-      }
-    </p-datepicker>
-
-    <label [for]="inputId">
-      {{ label }}
-      @if (required) {
-      <span [class.text-required]="required">*</span>
-      }
-    </label>
-  </p-floatlabel>
-  @if (hint) {
-  <small class="p-mt-1">{{ hint }}</small>
-  }
-  @if (isInvalid && (control.dirty || control.touched)) {
-  <small class="p-error">
-    @for (error of control.errors | validationErrors; track error) {
-    {{ error }}<br>
+  <!-- FLOATING / STANDARDCONTAINER ROUTER -->
+  @if (floatLabel) {
+    <p-floatlabel [variant]="variant">
+      <ng-container *ngTemplateOutlet="inputTemplate"></ng-container>
+      <label [for]="inputId">
+        {{ label }}
+        @if (required) {
+        <span [class.text-required]="required">*</span>
+        }
+      </label>
+    </p-floatlabel>
+  } @else {
+    @if (label) {
+      <div class="flex items-center justify-between gap-2">
+        <label [for]="inputId">
+          {{ label }}
+          @if (required) {
+            <span [class.text-red-700]="isInvalid" class="text-required">*</span>
+          }
+        </label>
+        @if (!required) {
+          <span class="absolute top-[6px] left-0 text-[10px] text-gray-400">{{'forms.config.optional' | translate}}</span>
+        }
+      </div>
     }
-  </small>
+    <ng-container *ngTemplateOutlet="inputTemplate"></ng-container>
+  }
+
+  <!-- HINTS -->
+  @if (hint) {
+    <small class="p-mt-1">{{ hint }}</small>
+  }
+
+  <!-- ERRORS -->
+  @if (isInvalid && (control.dirty || control.touched)) {
+    <small class="p-error">
+      @for (error of control.errors | validationErrors; track error) {
+        {{ error }}<br>
+      }
+    </small>
   }
 </div>
+
+<ng-template #inputTemplate>
+  <p-datepicker [selectionMode]="selectionMode" [disabled]="disabled" [formControl]="innerControl"
+    (onSelect)="onDateChange($event)" [iconDisplay]="'input'" [showClear]="showClear" (onClear)="afterClearDate()"
+    [inputId]="inputId" [inputStyleClass]="'reset-default-styles ' + (basicInput ? 'basic-style' : '')"
+    [ngClass]="{ 'p-invalid ng-dirty ng-invalid': isInvalid }" [placeholder]="placeholder ? placeholder : undefined"
+    [showIcon]="showIcon"  (onBlur)="onBlur()" [class]="'w-full'" [appendTo]="appendTo" [timeOnly]="isTimeOnly" [hourFormat]="hourFormat"
+    [minDate]="minDate" [maxDate]="maxDate" [disabledDates]="disabledDates" [disabledDays]="disabledDays">
+    @if (isTimeOnly) {
+    <ng-template #inputicon let-clickCallBack="clickCallBack">
+      <i class="text-[18px] font-icon-time-clock" (click)="clickCallBack($event)"></i>
+    </ng-template>
+    <ng-template pTemplate="footer">
+      <div class="p-datepicker-buttonbar">
+        <button pButton type="button" class="p-button-text" (click)="selectCurrentTime($event)">الان
+        </button>
+        <button pButton type="button" class="p-button-text" (click)="clearButtonClick($event)"> الغاء</button>
+      </div>
+    </ng-template>
+    }
+  </p-datepicker>
+
+</ng-template>
