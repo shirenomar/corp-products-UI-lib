@@ -1,7 +1,7 @@
 <div class="calender-content"   #calendarContainer>
   @if(isDatePickerShow) {
     <stc-date-picker-switcher [variant]="'in'" [label]="label" id="dateId" (openCalender)="showCalender($event)"
-    [control]="control" [formattedDate]='selectedDate'  >
+    [control]="control" [formattedDate]='selectedDate' (manualCommit)="onManualDateInput($event)">
     </stc-date-picker-switcher>
   }
 
