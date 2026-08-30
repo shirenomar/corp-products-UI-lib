@@ -15,6 +15,7 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
 import { DatePickerSwitcherComponent } from './date-picker-switcher/date-picker-switcher.component';
 import '@angular/localize/init';
 import { getGregorianMonthName, getHijriMonthName } from './utils/date-i18n.utils';
+import { parseManualDateInput } from './utils/parse-manual-date-input';
 import { formatDate } from '@angular/common';
 import { DateFormats } from '../../enums/date-formatter';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
@@ -192,7 +193,7 @@ export class DualCalendarComponent implements OnInit , OnChanges , OnDestroy {
     };
 
     // 🔥 Reuse existing logic
-    this.onSelectGregorian(ngbDate);
+    this.onSelectGregorian(ngbDate, { closeCalendar: false });
   }
   @HostListener('document:click', ['$event'])
   onDocumentClick(event: MouseEvent) {
@@ -209,7 +210,7 @@ export class DualCalendarComponent implements OnInit , OnChanges , OnDestroy {
     return new NgbDate(d.year, d.month, d.day);
   }
 
-  onSelectGregorian(date: NgbDateStruct) {
+  onSelectGregorian(date: NgbDateStruct, options: { closeCalendar?: boolean } = { closeCalendar: true }) {
     this.gregorianModel = date;
     // Convert to NgbDate
     const jsDate = new Date(date.year, date.month - 1, date.day);
@@ -225,11 +226,13 @@ export class DualCalendarComponent implements OnInit , OnChanges , OnDestroy {
     }; // datepicker
 
     this.selectedDate = this.formatHijri(this.structToNgbDate(this.hijriModel)); //input
-    this.isShown = false;
-    this.wrapperHidden();
+    if (options.closeCalendar) {
+      this.isShown = false;
+      this.wrapperHidden();
+    }
   }
 
-  onSelectHijri(date: NgbDateStruct) {
+  onSelectHijri(date: NgbDateStruct, options: { closeCalendar?: boolean } = { closeCalendar: true }) {
     this.hijriModel = date;
     const ngbDate = this.structToNgbDate(date);
     const greg = this.hijriCal.toGregorian(ngbDate);
@@ -243,9 +246,36 @@ export class DualCalendarComponent implements OnInit , OnChanges , OnDestroy {
      this.gregorianUTCValue = this.withTime ? isoUTC : formatDate(jsDate, DateFormats.DATE_ONLY, 'en');
     this.gregorianUTC.emit(this.gregorianUTCValue);
     this.selectedDate = this.formatHijri(ngbDate);
-    this.isShown = false;
-    this.wrapperHidden();
-    this.onClose.emit(true)
+    if (options.closeCalendar) {
+      this.isShown = false;
+      this.wrapperHidden();
+      this.onClose.emit(true);
+    }
+  }
+
+  onManualDateInput(raw: string) {
+    debugger;
+    if (!raw) {
+      return;
+    }
+
+    const previousGregorian = this.gregorianModel
+      ? new Date(this.gregorianModel.year, this.gregorianModel.month - 1, this.gregorianModel.day)
+      : null;
+    const parsed = parseManualDateInput(raw, this.currentLang(), previousGregorian);
+    if (!parsed) {
+      this.control.setValue(this.selectedDate, { emitEvent: false });
+      return;
+    }
+
+    this.onSelectGregorian(
+      {
+        year: parsed.getFullYear(),
+        month: parsed.getMonth() + 1,
+        day: parsed.getDate(),
+      },
+      { closeCalendar: false }
+    );
   }
 
   showCalender(isOpen: boolean) {

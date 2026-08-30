@@ -1,8 +1,9 @@
 <div class="field flex flex-col gap-2 my-3 relative">
-  <p-floatlabel  [variant]="variant">
+  <p-floatlabel [variant]="variant">
     <p-iconfield>
-      <input [id]="inputId" [type]="'text-float-label'" [formControl]="control" [readonly]="true"
-        (focus)="openCalendar(true)" (click)="openCalendar(true)" [pSize]="'small'" [class]="
+      <input [id]="inputId" type="text" [formControl]="control"
+        (focus)="onInputFocus()" (blur)="onManualCommit()" (keydown.enter)="onManualCommit($event)"
+        [pSize]="'small'" [class]="
         'w-full border border-[' + defaultColor + '] rounded-none focus:outline-[' + defaultColor + '] focus:border-[' + defaultColor + '] hover:border-[' + defaultColor + '] disabled:opacity-50'
         " [disabled]="disabled" [name]="name" pInputText class="w-full"
         [ngClass]="{ 'p-invalid ng-dirty ng-invalid': isInvalid, 'basic-style': basicInput, 'no-style':noStyle}" />
