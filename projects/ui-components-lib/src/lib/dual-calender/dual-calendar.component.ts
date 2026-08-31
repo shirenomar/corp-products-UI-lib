@@ -17,6 +17,7 @@ import '@angular/localize/init';
 import { getGregorianMonthName, getHijriMonthName } from './utils/date-i18n.utils';
 import { formatDate } from '@angular/common';
 import { DateFormats } from '../../enums/date-formatter';
+import { DateHandler } from '../../helper/date-handler';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
 @Component({
@@ -78,6 +79,8 @@ export class DualCalendarComponent implements OnInit , OnChanges , OnDestroy {
   currentLang = signal<'ar' | 'en'>('ar');
   gregorianUTCValue = '';
   @Input() isShown = false;
+  @Input() allowManualInput = false;
+  @Input() showClear = false;
   @Input() appedToBody = false;
   @ViewChild('calendarContainer') calendarContainer!: ElementRef;
   hijriCal = new NgbCalendarIslamicUmalqura();
@@ -246,6 +249,67 @@ export class DualCalendarComponent implements OnInit , OnChanges , OnDestroy {
     this.isShown = false;
     this.wrapperHidden();
     this.onClose.emit(true)
+  }
+
+  onManualDateEntered(text: string): void {
+    const typed = (text ?? '').trim();
+
+    if (typed === this.selectedDate) return;
+
+    if (!typed) {
+      this.clearManualDate();
+      return;
+    }
+
+    this.control.markAsDirty();
+    this.control.markAsTouched();
+
+    const parsed = DateHandler.parseFlexibleDate(typed);
+
+    if (!parsed) {
+      this.rejectManualDate('invalidDateFormat');
+      return;
+    }
+
+    if (!this.isDateAllowed(parsed)) {
+      this.rejectManualDate('dateNotAllowed');
+      return;
+    }
+
+    this.onSelectGregorian({
+      year: parsed.getFullYear(),
+      month: parsed.getMonth() + 1,
+      day: parsed.getDate(),
+    });
+    this.control.setValue(this.selectedDate, { emitEvent: false });
+  }
+
+  onClearDate(): void {
+    this.clearManualDate();
+    this.control.markAsDirty();
+    this.control.markAsTouched();
+  }
+
+  private clearManualDate(): void {
+    this.selectedDate = '';
+    this.gregorianUTCValue = '';
+    this.gregorianUTC.emit('');
+  }
+
+  private rejectManualDate(errorKey: string): void {
+    this.gregorianUTCValue = '';
+    this.gregorianUTC.emit('');
+    this.control.setErrors({ ...(this.control.errors ?? {}), [errorKey]: true });
+  }
+
+  private isDateAllowed(date: Date): boolean {
+    if (this.disabledDays?.includes(date.getDay())) return false;
+    return !this.disabledDates?.some(
+      (disabled) =>
+        disabled.getFullYear() === date.getFullYear() &&
+        disabled.getMonth() === date.getMonth() &&
+        disabled.getDate() === date.getDate()
+    );
   }
 
   showCalender(isOpen: boolean) {

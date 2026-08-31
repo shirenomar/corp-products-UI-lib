@@ -5,6 +5,7 @@ export enum DateFormats {
   DATE_TIME_SEMI = "yyyy/MM/dd - hh:mm a",
   DATE = "dd MMMM yyyy",
   DATE_TWO = "yyyy/MM/dd",
+  DATE_DMY = "dd/MM/yyyy",
   DAY_ONLY = "cccc",
   TIME_ONLY = "hh:mm",
   AM_PM = "a",
