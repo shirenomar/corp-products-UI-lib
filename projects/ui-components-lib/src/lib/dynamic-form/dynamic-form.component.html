@@ -6,6 +6,7 @@
       @case (fieldType.HIJRI_DATE_PICKER) {
       <app-dual-calendar [control]="getFormControl(inputName, formGroup)"
         [disabledDates]="inputsMap[inputName].disabledDates || []"
+        [allowManualInput]="inputsMap[inputName].allowManualInput || false"
         [disabledDays]="inputsMap[inputName].disabledDays || []"></app-dual-calendar>
       }
 
@@ -20,6 +21,7 @@
         [disabled]="inputsMap[inputName].disabled || false" [variant]="inputsMap[inputName].variant || 'over'"
         [showIcon]="inputsMap[inputName].showIcon !== false" [isTimeOnly]="inputsMap[inputName].isTimeOnly || false"
         [withoutTime]="inputsMap[inputName].withoutTime || false"
+        [allowManualInput]="inputsMap[inputName].allowManualInput || false"
         [showClear]="inputsMap[inputName].showClear || true" />
       }
       @case (fieldType.SELECT_BUTTON) {

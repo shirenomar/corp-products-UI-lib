@@ -41,6 +41,7 @@ export interface InputsMapData {
   minlength?: number;
   // Date
   dateRange?: DateRangeInterface;
+  allowManualInput?: boolean;
   disabledDates?: Date[];
   disabledDays?: number[]; // 0 = Sunday, 1 = Monday, ..., 6 = Saturday
   isTimeOnly?: boolean;

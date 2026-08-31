@@ -46,6 +46,35 @@ export class DateHandler {
     );
   }
 
+  private static readonly FLEXIBLE_DATE_FORMATS: string[] = [
+    DateFormats.DATE_DMY,
+    'd/M/yyyy',
+    'dd-MM-yyyy',
+    'd-M-yyyy',
+    'dd.MM.yyyy',
+    'd.M.yyyy',
+    'ddMMyyyy',
+    'dd/MM/yy',
+  ];
+
+  static parseFlexibleDate(input: string): Date | null {
+    const normalized = (input ?? '')
+      .trim()
+
+    if (!normalized) {
+      return null;
+    }
+
+    for (const format of this.FLEXIBLE_DATE_FORMATS) {
+      const parsed = DateTime.fromFormat(normalized, format);
+      if (parsed.isValid) {
+        return parsed.toJSDate();
+      }
+    }
+
+    return null;
+  }
+
   static getUTCDateTime(date: string): string {
     return this.getDateTimeFromISO(date)?.toUTC()?.toISO() as string;
   }

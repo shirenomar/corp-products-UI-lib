@@ -14,6 +14,8 @@ export enum BasicErrorKeysEnum {
   default = 'DEFAULT',
   numbersOnly = 'NUMBERS_ONLY',
   invalidSaudiPhoneNumber = 'INVALID_SAUDI_PHONE_NUMBER',
+  invalidDateFormat = 'INVALID_DATE_FORMAT',
+  dateNotAllowed = 'DATE_NOT_ALLOWED',
 }
 export enum ErrorsWithValuesKeysEnum {
   minlength = 'MIN_LENGTH',

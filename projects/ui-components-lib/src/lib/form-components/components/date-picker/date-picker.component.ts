@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-inferrable-types */
 import { NgClass } from '@angular/common';
-import { AfterViewInit, Component, EventEmitter, Input, Output, ViewEncapsulation } from '@angular/core';
+import { AfterViewInit, Component, EventEmitter, Input, Output, ViewChild, ViewEncapsulation } from '@angular/core';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ValidationErrorsPipe } from '../../@utils/validations';
 import { DatePicker, DatePickerModule } from 'primeng/datepicker';
@@ -41,6 +41,8 @@ export class DatePickerComponent extends BaseInputComponent implements AfterView
   @Output() onAfterClearDate = new EventEmitter<void>();
   @Input() variant: 'in' | 'over' | 'on' = 'over';
   @Input() withoutTime: boolean = false;
+  @Input() allowManualInput: boolean = false;
+  @ViewChild(DatePicker) private datePicker?: DatePicker;
   innerControl = new FormControl<Date | null>(null);
   constructor() {
     super();
@@ -76,6 +78,48 @@ export class DatePickerComponent extends BaseInputComponent implements AfterView
   afterClearDate() {
     this.control.reset();
     this.onAfterClearDate.emit();
+  }
+
+  onManualInputCommit(): void {
+    if (!this.allowManualInput || this.isTimeOnly || this.selectionMode !== 'single') {
+      return;
+    }
+
+    const typed = (this.datePicker?.inputfieldViewChild?.nativeElement?.value ?? '').trim();
+
+    if (!typed) {
+      if (this.control.value) {
+        this.control.setValue(null);
+        this.control.markAsDirty();
+        this.control.markAsTouched();
+      }
+      return;
+    }
+
+    this.control.markAsDirty();
+    this.control.markAsTouched();
+
+    const parsed = DateHandler.parseFlexibleDate(typed);
+
+    if (!parsed) {
+      this.rejectManualInput('invalidDateFormat');
+      return;
+    }
+
+    if (this.datePicker && !this.datePicker.isValidSelection(parsed)) {
+      this.rejectManualInput('dateNotAllowed');
+      return;
+    }
+
+    this.datePicker?.updateModel(parsed);
+    this.datePicker?.updateInputfield();
+    this.datePicker?.updateUI();
+    this.onDateChange(parsed);
+  }
+
+  private rejectManualInput(errorKey: string): void {
+    this.control.setValue(null, { emitEvent: false });
+    this.control.setErrors({ ...(this.control.errors ?? {}), [errorKey]: true });
   }
 
   onDateChange(value: Date): void {

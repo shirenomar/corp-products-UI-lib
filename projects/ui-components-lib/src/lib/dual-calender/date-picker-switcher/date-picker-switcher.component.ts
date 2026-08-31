@@ -44,7 +44,11 @@ export class DatePickerSwitcherComponent extends BaseInputComponent  implements 
   @Input() variant: 'in' | 'over' | 'on' = 'over';
   @Input() defaultColor = '#DFE0E6'
   @Input() formattedDate = '';
+  @Input() allowManualInput = false;
+  @Input() showClear = false;
   @Output() openCalender = new EventEmitter<boolean>();
+  @Output() manualDateEntered = new EventEmitter<string>();
+  @Output() clearDate = new EventEmitter<void>();
   constructor( ) {
     super();
   }
@@ -65,5 +69,15 @@ export class DatePickerSwitcherComponent extends BaseInputComponent  implements 
   openCalendar(isOpen: boolean) {
     this.openCalender.emit(isOpen)
 
+  }
+
+  clearValue() {
+    this.control.setValue(null);
+    this.clearDate.emit();
+  }
+
+  onManualCommit() {
+    if (!this.allowManualInput) return;
+    this.manualDateEntered.emit(this.control.value ?? '');
   }
 }

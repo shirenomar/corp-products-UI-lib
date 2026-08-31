@@ -6,6 +6,22 @@
   cursor: pointer;
 }
 
+.switcher-clear-icon {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  inset-inline-end: 2.25rem;
+  z-index: 1;
+  cursor: pointer;
+  font-size: 0.875rem;
+  line-height: 1;
+  color: #9ca3af;
+}
+
+.switcher-clear-icon:hover {
+  color: #4b5563;
+}
+
 /* Hide default calendar inside panel */
 
 .my-custom-datepicker-panel {
