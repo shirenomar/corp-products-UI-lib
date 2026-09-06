@@ -68,7 +68,7 @@ import { allowedDomains } from './email-stc-domains.const';
     DualCalendarComponent,
     CommonModule,
     AppDropdownMenuComponent,
-    DatePickerComponent
+    DatePickerComponent,
   ],
   providers: [DialogService, ConfirmationDialogService],
   templateUrl: './app.html',
@@ -135,11 +135,17 @@ export class App {
   ];
 
   sidebarDynamicService = inject(DynamicSidebarService);
-  testDate : FormControl<any> = new FormControl({ value: new Date().toISOString(), disabled: false }, []);
+  testDate: FormControl<any> = new FormControl(
+    { value: new Date().toISOString(), disabled: false },
+    [],
+  );
 
   sideBarData: SidebarConfig = SidebarConfigDefaults;
   dateControl: FormControl<any> = new FormControl({ value: new Date(), disabled: false }, []);
-  dateControl2: FormControl<any> = new FormControl({ value: new Date().toISOString(), disabled: false }, []);
+  dateControl2: FormControl<any> = new FormControl(
+    { value: new Date().toISOString(), disabled: false },
+    [],
+  );
   inputControl: FormControl<any> = new FormControl('', [Validators.required]);
   selectControl: FormControl<any> = new FormControl(null, []);
   dualControl: FormControl<any> = new FormControl(null);
@@ -181,7 +187,7 @@ export class App {
   // Dynamic form demo config and state
   dynamicFormGroup = new FormGroup(
     {
-      startDate: new FormControl<any>((new Date()).toISOString(), [Validators.required]),
+      startDate: new FormControl<any>(new Date().toISOString(), [Validators.required]),
       endDate: new FormControl<Date | null>(null, [Validators.required]),
       hijriDate: new FormControl<Date | null>(null),
       file: new FormControl<null>(null),
@@ -190,7 +196,7 @@ export class App {
       role: new FormControl<any>(null, [Validators.required]),
       status: new FormControl<string | null>(null),
       notify: new FormControl<boolean>(false),
-      subject: new FormControl<string>('', [Validators.required, maxRepeatedCharsValidator(3)]),
+      subject: new FormControl<string>('', [Validators.required, maxRepeatedCharsValidator(2)]),
       assignee: new FormControl<Array<any>>(
         [],
         [Validators.required, emailStcValidator(allowedDomains)],
@@ -199,7 +205,7 @@ export class App {
     { validators: [dateRangeValidator('startDate', 'endDate')] },
   );
 
-  patchStartDate(){
+  patchStartDate() {
     this.dynamicFormGroup.get('startDate')?.setValue(new Date());
   }
   showCalender() {
@@ -577,7 +583,12 @@ export class App {
       })
       .subscribe((result) => {
         if (result?.isSubmitted) {
-          console.log('File upload confirmed. documentId:', result.documentId, 'form:', this.dialogFileUploadFormGroup.value);
+          console.log(
+            'File upload confirmed. documentId:',
+            result.documentId,
+            'form:',
+            this.dialogFileUploadFormGroup.value,
+          );
         } else {
           console.log('File upload dialog canceled');
         }
