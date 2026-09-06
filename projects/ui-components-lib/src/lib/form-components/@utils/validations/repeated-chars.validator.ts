@@ -14,6 +14,10 @@ export function maxRepeatedCharsValidator(maxRepeats = 3): ValidatorFn {
 
     for (const char of str) {
       if (IGNORED_CHARS_REGEX.test(char)) {
+        if (/\s/.test(char)) {
+          count = 1;
+          prevChar = null;
+        }
         continue;
       }
 
