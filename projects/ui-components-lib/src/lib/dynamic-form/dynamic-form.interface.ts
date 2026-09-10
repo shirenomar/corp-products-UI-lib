@@ -59,6 +59,10 @@ export interface InputsMapData {
   prefix?: string;
   size?: 'small' | 'large';
   variant?: 'in' | 'over' | 'on';
+  canClear?: boolean;
+
+  // Icon field
+  iconClass?: string;
 
   // Select dropdown
   selectOptions?: unknown[]; // Array of objects or primitives
@@ -123,4 +127,5 @@ export enum FormFieldTypeEnum {
   HIJRI_DATE_PICKER = 'hijri-date',
   UPLOAD_FILE = 'upload-file',
   CHECKBOX = 'checkbox',
+  ICON_FIELD = 'icon-field',
 }
