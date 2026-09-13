@@ -10,6 +10,7 @@ export * from './lib/app-accordion/app-accordion.component';
 export * from './lib/dynamic-form/dynamic-form.interface';
 export * from './lib/dynamic-form/dynamic-form.component';
 export * from './lib/form-components';
+export * from './lib/form-components/components/auto-complete/auto-complete.component';
 export * from './lib/user-autocomplete-card/user-autocomplete-card.component';
 export * from './lib/app-breadcrumb/app-breadcrumb.component';
 export * from './lib/app-breadcrumb/app-breadcrumb.interface';

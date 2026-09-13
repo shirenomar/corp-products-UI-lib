@@ -201,6 +201,7 @@ export class App {
         [],
         [Validators.required, emailStcValidator(allowedDomains)],
       ),
+      search: new FormControl<string>(''),
     },
     { validators: [dateRangeValidator('startDate', 'endDate')] },
   );
@@ -333,6 +334,16 @@ export class App {
       variant: 'in',
       placeholder: 'Type to search users',
       allowedDomains: allowedDomains,
+    },
+    search: {
+      label: 'Search',
+      fieldType: FormFieldTypeEnum.ICON_FIELD,
+      inputId: 'df-search',
+      rowSize: 'full',
+      placeholder: 'Search',
+      iconClass: 'pi pi-search',
+      canClear: true,
+      variant: 'in',
     },
   };
 
