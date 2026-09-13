@@ -6,7 +6,7 @@
       [ngClass]="{ 'p-invalid ng-dirty ng-invalid': isInvalid }" [placeholder]="placeholder ? placeholder : undefined"
       [showIcon]="showIcon" [class]="'w-full'" [appendTo]="appendTo" [timeOnly]="isTimeOnly" [hourFormat]="hourFormat"
       [minDate]="minDate" [maxDate]="maxDate" [disabledDates]="disabledDates" [disabledDays]="disabledDays"
-      [keepInvalid]="allowManualInput" (onBlur)="onManualInputCommit()" (keydown.enter)="onManualInputCommit()">
+      [keepInvalid]="allowManualInput" (change)="onManualInputCommit()" (keydown.enter)="onManualInputCommit()">
       @if (isTimeOnly) {
       <ng-template #inputicon let-clickCallBack="clickCallBack">
         <i class="text-[18px] font-icon-time-clock" (click)="clickCallBack($event)"></i>
