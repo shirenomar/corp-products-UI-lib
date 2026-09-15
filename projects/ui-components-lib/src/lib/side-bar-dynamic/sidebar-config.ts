@@ -21,6 +21,7 @@ export interface SidebarConfig {
   showCancelBtn: boolean;
   showSaveBtn: boolean;
   showSaveAndMoreBtn: boolean;
+  position?: "left" | "right";
   actions?: {
     cancel?: SidebarActionConfig;
     save?: SidebarActionConfig;

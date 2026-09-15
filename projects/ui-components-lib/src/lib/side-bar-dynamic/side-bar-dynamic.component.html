@@ -1,6 +1,6 @@
 <p-drawer (onHide)="dynamicSidebarService.close()" [(visible)]="sidebarConfig.visible"
   [closable]="sidebarConfig.closable" [closeOnEscape]="sidebarConfig.closeOnEscape"
-  [dismissible]="sidebarConfig.dismissible" [ngClass]="{ show: sidebarConfig.show }" [position]="'left'" appendTo="body"
+  [dismissible]="sidebarConfig.dismissible" [ngClass]="{ show: sidebarConfig.show }" [position]="sidebarConfig.position || 'left'" appendTo="body"
   id="main-drawer"
   styleClass="p-drawer-{{ sidebarConfig.sidebarSize }} custom-content bg-white {{ sidebarConfig.styleClass }}">
   <ng-template pTemplate="header">{{ sidebarConfig.title }}</ng-template>
