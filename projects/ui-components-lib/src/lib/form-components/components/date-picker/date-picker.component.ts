@@ -8,6 +8,7 @@ import { FloatLabelModule } from 'primeng/floatlabel';
 import { BaseInputComponent } from '../base-input.component';
 import { DateHandler } from '../../../../helper/date-handler';
 import { DateFormats } from '../../../../enums/date-formatter';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'stc-date-picker',
@@ -20,6 +21,7 @@ import { DateFormats } from '../../../../enums/date-formatter';
     DatePickerModule,
     ValidationErrorsPipe,
     FloatLabelModule,
+    TranslateModule,
   ],
   templateUrl: './date-picker.component.html',
   styleUrl: './date-picker.component.scss',

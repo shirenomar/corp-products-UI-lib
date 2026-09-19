@@ -38,5 +38,7 @@
     "numbersOnly": "يسمح بالأرقام فقط",
     "invalidSaudiPhoneNumber": "يرجى إدخال رقم هاتف سعودي صالح",
     "MAX_REPEATED_CHARS": "لا يُسمح بأكثر من {{maxRepeats}} أحرف متكررة"
-  }
+  },
+  "now": "الان",
+  "cancel": "الغاء"
 }

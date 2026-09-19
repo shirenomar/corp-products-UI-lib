@@ -38,5 +38,7 @@
     "numbersOnly": "Only numbers are allowed",
     "invalidSaudiPhoneNumber": "Please enter a valid Saudi phone number",
     "MAX_REPEATED_CHARS": "No more than {{maxRepeats}} repeated characters are allowed"
-  }
+  },
+  "now": "Now",
+  "cancel": "Cancel"
 }
