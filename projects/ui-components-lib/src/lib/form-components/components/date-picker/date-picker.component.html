@@ -13,9 +13,12 @@
       </ng-template>
       <ng-template pTemplate="footer">
         <div class="p-datepicker-buttonbar">
-          <button pButton type="button" class="p-button-text" (click)="selectCurrentTime($event)">الان
+          <button pButton type="button" class="p-button-text" (click)="selectCurrentTime($event)">
+            {{ 'now' | translate }}
           </button>
-          <button pButton type="button" class="p-button-text" (click)="clearButtonClick($event)"> الغاء</button>
+          <button pButton type="button" class="p-button-text" (click)="clearButtonClick($event)"> 
+            {{ 'cancel' | translate }}
+          </button>
         </div>
       </ng-template>
       }
