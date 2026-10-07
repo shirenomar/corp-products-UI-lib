@@ -73,6 +73,7 @@ export class DualCalendarComponent implements OnInit , OnChanges , OnDestroy {
   @Input() lang: 'ar' | 'en' | undefined = undefined;
   @Input() disabledDays: number[] = [];
   @Input() disabledDates: Date[] = [];
+  @Input() maxDate: Date | null = null;
   @Output() gregorianUTC = new EventEmitter<string>();
   @Output() onClose = new EventEmitter<boolean>();
 
@@ -303,6 +304,7 @@ export class DualCalendarComponent implements OnInit , OnChanges , OnDestroy {
   }
 
   private isDateAllowed(date: Date): boolean {
+    if (this.maxDate && DateHandler.isAfterDay(date, this.maxDate)) return false;
     if (this.disabledDays?.includes(date.getDay())) return false;
     return !this.disabledDates?.some(
       (disabled) =>

@@ -75,6 +75,10 @@ export class DateHandler {
     return null;
   }
 
+  static isAfterDay(date: Date, limit: Date): boolean {
+    return DateTime.fromJSDate(date).startOf('day') > DateTime.fromJSDate(limit).startOf('day');
+  }
+
   static getUTCDateTime(date: string): string {
     return this.getDateTimeFromISO(date)?.toUTC()?.toISO() as string;
   }

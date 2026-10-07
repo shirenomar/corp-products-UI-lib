@@ -8,6 +8,7 @@ import {
 } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
 import { DynamicGregorianI18n } from './../services/gregorian-i18n.service';
+import { DateHandler } from '../../../helper/date-handler';
 
 @Component({
   selector: "app-gregorian-calendar",
@@ -25,6 +26,7 @@ export class GregorianCalendarComponent implements OnChanges {
   @Input() model!: NgbDateStruct;
   @Input() disabledDays: number[] = []; // 0 = Sunday, 1 = Monday, ..., 6 = Saturday
   @Input() disabledDates: Date[] = [];
+  @Input() maxDate: Date | null = null;
   @Output() dateSelected = new EventEmitter<NgbDateStruct>();
   renderer = inject(Renderer2)
   @Input() language: 'ar' | 'en' = 'en';
@@ -64,6 +66,10 @@ export class GregorianCalendarComponent implements OnChanges {
   }
 
   isDisabled = (date: NgbDateStruct): boolean => {
+    if (this.maxDate && DateHandler.isAfterDay(new Date(date.year, date.month - 1, date.day), this.maxDate)) {
+      return true;
+    }
+
     if (this.disabledDays?.length) {
       const jsDate = new Date(date.year, date.month - 1, date.day);
       if (this.disabledDays.includes(jsDate.getDay())) {
