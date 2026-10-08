@@ -9,6 +9,7 @@ import {
 } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
 import { DynamicHijriI18n } from '../services/islamic-i18n.service';
+import { DateHandler } from '../../../helper/date-handler';
 
 @Component({
   selector: "app-hijri-calendar",
@@ -25,6 +26,7 @@ export class HijriCalendarComponent  implements OnChanges   {
   @Input() model!: NgbDateStruct;
   @Input() disabledDays: number[] = []; // 0 = Sunday, 1 = Monday, ..., 6 = Saturday
   @Input() disabledDates: Date[] = [];
+  @Input() maxDate: Date | null = null;
   @Output() dateSelected = new EventEmitter<NgbDateStruct>();
   @Input() language: 'ar' | 'en' = 'en';
   renderer = inject(Renderer2)
@@ -68,6 +70,10 @@ ngAfterViewInit() {
   isDisabled = (date: NgbDateStruct): boolean => {
     const ngbDate = new NgbDate(date.year, date.month, date.day);
     const gregDate = this.calendar.toGregorian(ngbDate);
+
+    if (this.maxDate && DateHandler.isAfterDay(gregDate, this.maxDate)) {
+      return true;
+    }
 
     if (this.disabledDays?.length && this.disabledDays.includes(gregDate.getDay())) {
       return true;

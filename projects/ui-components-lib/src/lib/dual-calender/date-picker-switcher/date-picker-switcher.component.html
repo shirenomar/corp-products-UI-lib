@@ -1,7 +1,7 @@
-<div class="field flex flex-col gap-2 my-3 relative">
+<div class="field flex flex-col gap-2 my-3 relative" [class.switcher-with-hint]="showHint" [class.switcher-locked]="isLocked">
   <p-floatlabel  [variant]="variant">
     <p-iconfield>
-      <input [id]="inputId" [type]="'text-float-label'" [formControl]="control" [readonly]="!allowManualInput"
+      <input [id]="inputId" [type]="'text-float-label'" [formControl]="control" [readonly]="!allowManualInput || isLocked"
         (focus)="openCalendar(true)" (click)="openCalendar(true)" (blur)="onManualCommit()"
         (keydown.enter)="onManualCommit()" [pSize]="'small'" [class]="
         'w-full border border-[' + defaultColor + '] rounded-none focus:outline-[' + defaultColor + '] focus:border-[' + defaultColor + '] hover:border-[' + defaultColor + '] disabled:opacity-50'
@@ -17,6 +17,10 @@
       <i class="pi pi-times switcher-clear-icon" (click)="clearValue()"></i>
       }
       <p-inputicon class="pi pi-calendar calendar-icon" (click)="openCalendar(true)" />
+      @if (showHint) {
+      <i class="pi pi-info-circle switcher-hint-icon" [pTooltip]="manualInputHint" tooltipPosition="bottom"
+        appendTo="body"></i>
+      }
     </p-iconfield>
   </p-floatlabel>
 
@@ -30,4 +34,12 @@
     }
   </small>
   }
+
+  <ng-template #manualInputHint>
+    <div>{{ 'calender.manual_input_hint' | translate }}</div>
+    <div>{{ 'calender.accepted_examples' | translate }}</div>
+    @for (example of manualInputExamples; track example) {
+    <div>{{ example }}</div>
+    }
+  </ng-template>
 </div>

@@ -1,4 +1,4 @@
-import { NgClass } from '@angular/common';
+import { formatDate, NgClass } from '@angular/common';
 import {  Component, EventEmitter, Input, OnChanges, Output, SimpleChanges, ViewEncapsulation } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TranslatePipe } from '@ngx-translate/core';
@@ -9,6 +9,7 @@ import { BaseInputComponent } from '../../form-components/components/base-input.
 import { InputText } from 'primeng/inputtext';
 import { IconFieldModule } from 'primeng/iconfield';
 import { InputIconModule } from 'primeng/inputicon';
+import { TooltipModule } from 'primeng/tooltip';
 
 @Component({
   selector: 'stc-date-picker-switcher',
@@ -22,6 +23,7 @@ import { InputIconModule } from 'primeng/inputicon';
     ValidationErrorsPipe,
     TranslatePipe,
     FloatLabelModule,
+    TooltipModule,
     InputIconModule,
     IconFieldModule
   ],
@@ -49,6 +51,8 @@ export class DatePickerSwitcherComponent extends BaseInputComponent  implements 
   @Output() openCalender = new EventEmitter<boolean>();
   @Output() manualDateEntered = new EventEmitter<string>();
   @Output() clearDate = new EventEmitter<void>();
+  manualInputExamples = ['dd/MM/yyyy', 'dd-MM-yyyy', 'dd.MM.yyyy', 'dd/MM/yy', 'ddMMyyyy']
+    .map((format) => formatDate(new Date(), format, 'en'));
   constructor( ) {
     super();
   }
@@ -66,7 +70,16 @@ export class DatePickerSwitcherComponent extends BaseInputComponent  implements 
     this.control.setValue(null);
   }
 
+  get showHint(): boolean {
+    return this.allowManualInput && !this.disabled;
+  }
+
+  get isLocked(): boolean {
+    return this.allowManualInput && this.showClear && !!this.formattedDate;
+  }
+
   openCalendar(isOpen: boolean) {
+    if (isOpen && this.isLocked) return;
     this.openCalender.emit(isOpen)
 
   }

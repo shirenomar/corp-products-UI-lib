@@ -6,7 +6,8 @@
   cursor: pointer;
 }
 
-.switcher-clear-icon {
+.switcher-clear-icon,
+.switcher-hint-icon {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
@@ -18,8 +19,30 @@
   color: #9ca3af;
 }
 
+.switcher-hint-icon {
+  inset-inline-end: var(--p-form-field-padding-x, 0.75rem);
+  cursor: default;
+}
+
+.switcher-with-hint .calendar-icon {
+  inset-inline-end: 2.25rem;
+}
+
+.switcher-with-hint .switcher-clear-icon {
+  inset-inline-end: 3.75rem;
+}
+
+.switcher-with-hint .p-iconfield .p-inputtext:not(:last-child) {
+  padding-inline-end: 5.25rem;
+}
+
 .switcher-clear-icon:hover {
   color: #4b5563;
+}
+
+.switcher-locked .p-inputtext,
+.switcher-locked .calendar-icon {
+  cursor: default;
 }
 
 /* Hide default calendar inside panel */
