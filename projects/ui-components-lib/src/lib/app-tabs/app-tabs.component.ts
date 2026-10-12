@@ -1,25 +1,29 @@
-import { CommonModule } from '@angular/common';
+import { NgTemplateOutlet } from '@angular/common';
 import { Component, inject, Input, model, OnInit, ViewEncapsulation } from '@angular/core';
-import { TabsModule } from 'primeng/tabs';
-import { AppTabs } from './app-tab.interface';
-import { IcoMoonIconComponent } from '../ico-moon-icon/ico-moon-icon.component';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslatePipe } from '@ngx-translate/core';
+import { Badge } from 'primeng/badge';
+import { Tab, TabList, TabPanel, TabPanels, Tabs } from 'primeng/tabs';
 import { ActivatedRoute, NavigationEnd, Router, RouterLink, RouterOutlet } from '@angular/router';
 import { filter } from 'rxjs';
-import { BadgeModule } from 'primeng/badge';
+import { IcoMoonIconComponent } from '../ico-moon-icon/ico-moon-icon.component';
+import { AppTabs } from './app-tab.interface';
 
 @Component({
   selector: 'app-tabs',
   standalone: true,
   encapsulation: ViewEncapsulation.None,
   imports: [
-    CommonModule,
-    TabsModule,
+    NgTemplateOutlet,
+    Tabs,
+    TabList,
+    Tab,
+    TabPanels,
+    TabPanel,
+    Badge,
+    TranslatePipe,
     RouterLink,
     RouterOutlet,
     IcoMoonIconComponent,
-    TranslateModule,
-    BadgeModule,
   ],
   templateUrl: './app-tabs.component.html',
   styleUrl: './app-tabs.component.scss',
