@@ -6,7 +6,7 @@
   [closeOnEscape]="closeOnEscape"
   [dismissible]="dismissible"
   (onHide)="handleClose()"
-  [position]="'left'"
+  [position]="position || 'left'"
   [styleClass]="'p-drawer-' + sidebarSize + ' custom-content bg-white ' + styleClass"
 >
   <ng-template pTemplate="header">
