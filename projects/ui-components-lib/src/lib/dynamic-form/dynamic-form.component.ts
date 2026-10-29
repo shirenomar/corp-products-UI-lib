@@ -1,7 +1,6 @@
 import { NgClass } from '@angular/common';
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { TranslateModule } from '@ngx-translate/core';
 import { CheckboxModule } from 'primeng/checkbox';
 import { LocalizedLabelPipe } from '../../pipes/translate-key.pipe';
 import { FileExtentions, formatFileExtensionsForAccept } from '../file-management/consts/accept-file-types';
@@ -33,7 +32,6 @@ import {
     ReactiveFormsModule,
     DatePickerComponent,
     ValidationErrorsPipe,
-    TranslateModule,
     SelectButtonComponent,
     DualCalendarComponent,
     InputComponent,
