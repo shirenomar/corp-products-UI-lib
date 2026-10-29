@@ -48,6 +48,7 @@ export class DatePickerSwitcherComponent extends BaseInputComponent  implements 
   @Input() formattedDate = '';
   @Input() allowManualInput = false;
   @Input() showClear = false;
+  @Input() isOpen = false;
   @Output() openCalender = new EventEmitter<boolean>();
   @Output() manualDateEntered = new EventEmitter<string>();
   @Output() clearDate = new EventEmitter<void>();

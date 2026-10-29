@@ -16,7 +16,7 @@
       @if (showClear && control.value && !disabled) {
       <i class="pi pi-times switcher-clear-icon" (click)="clearValue()"></i>
       }
-      <p-inputicon class="pi pi-calendar calendar-icon" (click)="openCalendar(true)" />
+      <p-inputicon class="pi pi-calendar calendar-icon" (click)="openCalendar(!isOpen)" />
       @if (showHint) {
       <i class="pi pi-info-circle switcher-hint-icon" [pTooltip]="manualInputHint" tooltipPosition="bottom"
         appendTo="body"></i>

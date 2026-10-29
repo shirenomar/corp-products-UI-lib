@@ -3,7 +3,7 @@
     <stc-date-picker-switcher [variant]="'in'" [label]="label" id="dateId" (openCalender)="showCalender($event)"
     [control]="control" [formattedDate]='selectedDate' [allowManualInput]="allowManualInput"
     (manualDateEntered)="onManualDateEntered($event)"
-    [showClear]="showClear" (clearDate)="onClearDate()"  >
+    [showClear]="showClear" [isOpen]="isShown" (clearDate)="onClearDate()"  >
     </stc-date-picker-switcher>
   }
 
