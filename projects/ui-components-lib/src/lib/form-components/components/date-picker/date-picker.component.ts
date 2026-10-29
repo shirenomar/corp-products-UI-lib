@@ -90,7 +90,7 @@ export class DatePickerComponent extends BaseInputComponent implements AfterView
     const typed = (this.datePicker?.inputfieldViewChild?.nativeElement?.value ?? '').trim();
 
     if (!typed) {
-      if (this.control.value) {
+      if (this.control.value || this.control.errors) {
         this.control.setValue(null);
         this.control.markAsDirty();
         this.control.markAsTouched();
