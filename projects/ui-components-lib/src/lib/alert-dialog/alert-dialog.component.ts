@@ -24,7 +24,7 @@ import { AppButtonComponent } from '../app-button';
   ],
   providers: [DynamicDialogStyle],
 })
-export class AlertDialogComponent extends DynamicDialogRef implements OnInit {
+export class AlertDialogComponent implements OnInit {
   private readonly router = inject(Router);
   readonly dynamicDialogConfig = inject(DynamicDialogConfig);
   private readonly _destroyRef = inject(DestroyRef);
@@ -38,7 +38,7 @@ export class AlertDialogComponent extends DynamicDialogRef implements OnInit {
     })
   }
 
-  override close() {
+  close() {
     this._ref.close(false);
   }
 }

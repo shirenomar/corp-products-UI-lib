@@ -30,7 +30,7 @@ import { DynamicFormData, FileUploadState, FormFieldTypeEnum } from '../dynamic-
   ],
   providers: [DialogService, DynamicDialogStyle],
 })
-export class ConfirmationDialogComponent extends DynamicDialogRef implements OnInit, OnDestroy {
+export class ConfirmationDialogComponent implements OnInit, OnDestroy {
   router = inject(Router);
   dialogService = inject(DialogService);
   dynamicDialogConfig = inject(DynamicDialogConfig);
@@ -100,7 +100,7 @@ export class ConfirmationDialogComponent extends DynamicDialogRef implements OnI
     }
   }
 
-  override close() {
+  close() {
     this._ref.close(false);
   }
 
