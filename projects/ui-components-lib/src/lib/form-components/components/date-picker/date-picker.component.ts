@@ -1,6 +1,14 @@
 /* eslint-disable @typescript-eslint/no-inferrable-types */
 import { NgClass } from '@angular/common';
-import { AfterViewInit, Component, EventEmitter, Input, Output, ViewChild, ViewEncapsulation } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+  ViewChild,
+  ViewEncapsulation,
+} from '@angular/core';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ValidationErrorsPipe } from '../../@utils/validations';
 import { DatePicker, DatePickerModule } from 'primeng/datepicker';
@@ -37,7 +45,7 @@ export class DatePickerComponent extends BaseInputComponent implements AfterView
   @Input() disabledDates: Date[] = [];
   @Input() disabledDays: number[] = []; // 0 = Sunday, 1 = Monday, ..., 6 = Saturday
   @Input() hourFormat: '12' | '24' = '12';
-  @Input() appendTo = 'body'
+  @Input() appendTo = 'body';
   nowTime = new Date();
   @Input() selectionMode: 'single' | 'range' = 'single';
   @Output() onAfterClearDate = new EventEmitter<void>();
@@ -68,13 +76,18 @@ export class DatePickerComponent extends BaseInputComponent implements AfterView
     if (this.withoutTime) {
       const d = new Date();
       this.control.setValue(d.toISOString().split('T')[0]);
+      this.datePicker?.hideOverlay();
       return;
     }
-    this.control.setValue(this.nowTime);
+    const now = new Date();
+    this.nowTime = now;
+    this.innerControl.setValue(now);
+    this.control.setValue(now);
+    this.datePicker?.hideOverlay();
   }
 
   clearButtonClick(e: any) {
-    this.control.setValue(null);
+    this.datePicker?.hideOverlay();
   }
 
   afterClearDate() {
@@ -127,8 +140,9 @@ export class DatePickerComponent extends BaseInputComponent implements AfterView
   onDateChange(value: Date): void {
     if (!value) return;
     const dateValue = value instanceof Date ? value : new Date(value);
-    const formattedDate = this.withoutTime ?
-      DateHandler.formatDate(dateValue.toISOString(), DateFormats.DATE_ONLY) : DateHandler.getUTCDateTimeFromJsDate(dateValue);
+    const formattedDate = this.withoutTime
+      ? DateHandler.formatDate(dateValue.toISOString(), DateFormats.DATE_ONLY)
+      : DateHandler.getUTCDateTimeFromJsDate(dateValue);
     this.control.setValue(formattedDate, { emitEvent: true });
   }
 }
