@@ -87,8 +87,6 @@ export class DatePickerComponent extends BaseInputComponent implements AfterView
   }
 
   clearButtonClick(e: any) {
-    this.control.setValue(null);
-    this.innerControl.setValue(null);
     this.datePicker?.hideOverlay();
   }
 
